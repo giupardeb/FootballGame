@@ -1,0 +1,37 @@
+1. installa git (se non lo hai già fatto)
+2. clona la repository
+    git clone https://github.com/giupardeb/FootballGame.git
+
+3. adesso sei "connesso alla repository"
+primo esempio. crea un file qualsiasi TEXT.TXT
+per aggiungerlo al progetto:
+
+4. git add TEXT.TXT
+5. git commit -m "Hei, questo è un file a caso"
+6. git push
+
+7. per controllare lo stato della tua repository: 
+git status
+
+8. Tuttavia tu non sei l'unico nella repository, quindi
+prima di inserire un file devi sempre controllare che qualcun'altro
+non abbia fatto dei cambiamenti.
+Ecco che devi fare un operazione di pull
+9. git pull
+10. tieni in considerazione che quest'operazione può verificarsi in un conflitto
+tra files. I conflitti d'interessi devono essere risolti manualmente. 
+A quanto pare puoi usare mergetool. 
+
+Io l'ho configurato così:
+
+git config --global merge.tool emacs
+git config --global mergetool.emacs.cmd 'emacs --merge --result="$MERGED" "$LOCAL" "$(if test -f "$BASE"; then echo "$BASE"; else echo "$LOCAL"; fi)" "$REMOTE"'
+git config --global mergetool.emacs.trustExitCode true
+
+Ma forse non è il modo migliore.
+In ogni caso, per fare un merging poi devi solo eseguire:
+
+git mergetool
+
+
+Maggiori informazioni a: http://learn.github.com/p/setup.html 
