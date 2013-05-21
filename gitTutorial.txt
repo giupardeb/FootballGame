@@ -24,14 +24,17 @@ A quanto pare puoi usare mergetool.
 
 Io l'ho configurato così:
 
-git config --global merge.tool emacs
-git config --global mergetool.emacs.cmd 'emacs --merge --result="$MERGED" "$LOCAL" "$(if test -f "$BASE"; then echo "$BASE"; else echo "$LOCAL"; fi)" "$REMOTE"'
-git config --global mergetool.emacs.trustExitCode true
+git config --global merge.tool vimdiff 
+
+// vimdiff dovrebbe essere installato già con vim
+// è utile per visualizzare due file in contemporanea
 
 Ma forse non è il modo migliore.
 In ogni caso, per fare un merging poi devi solo eseguire:
 
-git mergetool
+git mergetool // Fai il merging
+git mergetool -t vimdiff
 
 
 Maggiori informazioni a: http://learn.github.com/p/setup.html 
+Informazioni su mergetool: http://gitguru.com/2009/02/22/integrating-git-with-a-visual-merge-tool/
