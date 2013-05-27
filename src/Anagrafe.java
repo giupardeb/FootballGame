@@ -1,25 +1,21 @@
 public class Anagrafe{
-	private String nome;
 	private String cognome;
-	private byte età;
+	private byte eta;
 	private String provenienza;
 	
-	public Anagrafe (String nome, String cognome, byte età, String provenienza){
-		this.nome = nome;
+	public Anagrafe (String cognome, byte eta, String provenienza){
 		this.cognome = cognome;
-		this.età = età;
+		this.eta = eta;
 		this.provenienza = provenienza;
 	}
 	
-	public String GetNome(){
-		return nome;
-	}
+
 	public String GetCognome(){
 		return cognome;
 	}
 	
 	public byte GetEta(){
-		return età;
+		return eta;
 	}
 	
 	public String GetProvenienza(){
@@ -27,6 +23,6 @@ public class Anagrafe{
 	}
 	
 	public String toString(){
-		return "Nome: "+ nome + "Cognome: "+cognome+ "Età: "+età+"Provenienza: "+provenienza;
+		return "Cognome: "+cognome+ "eta: "+eta+"Provenienza: "+provenienza;
 	}
 }

@@ -1,22 +1,98 @@
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 public class Campionato 
 {
+	Squadra squadra;
+	
+	SquadraAvversaria squadre[] = new SquadraAvversaria [18];
+	
+	//DatabaseGiocatori db = new DatabaseGiocatori();
+	
+	//Giocatore vett[] = db.InizializzaDataBase();
+	public Campionato(String miasquadra) //la squadra che l'utente sceglie viene decisa nel main.. tanto per fargli fare qualcosa dal main.. 
+	{
+		
+	//	squadra = db.getSquadraMia(miasquadra,vett);
+		
+	//	for(int i=0; i<squadre.length;i++)
+		//	squadre[i] = db.getSquadra(vett);
+		
+		
+		System.out.println("1.Vedere la classifica attuale");
+		System.out.println("2.Gioca una partita");
+		System.out.println("3.Calciomercato");
+		System.out.println("4.Esci");
+		
+		int scelta = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
+		
+		switch(scelta){
+		
+		case 1: System.out.println("Metodo CLASSIFICA");
+		break;
+		
+		case 2: System.out.println("Metodo partita");
+		break;
+		
+		case 3: System.out.println("1. acquista");
+				System.out.println("2.scambio");
+				
+				int scelta1 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
+				switch(scelta1){
+				
+				case 1: System.out.println("1.Attaccante");
+						System.out.println("2.Centrocampista");
+						System.out.println("3.Difensore");
+						System.out.println("4.Portiere");
+						int scelta2 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
+						switch(scelta2){
+						
+						case 1: Giocatore [] giocatoridavisualizzare = VisualizzaGiocatori("Attacante");
+								for(int i=0; i<giocatoridavisualizzare.length;i++){
+									System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE PARLARNE ASSIEME
+								}
+								String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la squadra appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+								 String	giocatoresquadra [] = sceltagiocatore.split(",");
+								squadra.acquisto(giocatoresquadra[0], s1);
+								
 
-	Squadra [] partec = new Squadra [16];
-	Squadra [][] camp;
-
-    public Campionato(Squadra [] p) {
-    	partec=p;
-    	camp = new Squadra[4][];
-    	camp[0] = new Squadra [16];
-    	camp[1] = new Squadra [8];
-    	camp[2] = new Squadra [4];
-    	camp[3] = new Squadra [2];
-
-		for(int i=0;i<16;i++){
-			camp[0][i] = partec[i];
+						
+						
+						
+						}
+				break;
+				
+				case 2: System.out.println("Metodo scambio");
+				break;
+				
+				}
+		break;
+		
+		case 4: System.out.println("esci dal gioco");
+		
+		
 		}
-    }
-	public Squadra partita (Squadra a,Squadra b){
+
+	}
+	
+	
+	
+	
+	private Giocatore [] VisualizzaGiocatori(String ruolo){
+		ArrayList <Giocatore> giocatoridavisualizzare = null;
+		for(int z=0; z<squadre.length;z++){
+			for(Giocatore i : ((SquadraAvversaria)squadre[z]).getGiocatori())
+			if(i.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(i);
+		}
+		
+		return (Giocatore[]) giocatoridavisualizzare.toArray();
+		
+	}
+	
+	
+	
+	/*public Squadra partita (Squadra a,Squadra b){
 
 		boolean vinto;
 	   	Giocatore provvC = new Giocatore ();
@@ -161,5 +237,5 @@ public class Campionato
 				System.out.println("Parata del portiere della squadra 2");
 		}
 
-    }
+    }*/
 }
