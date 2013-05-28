@@ -23,7 +23,7 @@ public class parseFromCSV {
 		String currentLine;
 		while ((currentLine = br.readLine()) != null) {
 			// TODO aggiungere giocatore ad arraylist di giocatori
-			Object player = giocatore(currentLine);
+			Giocatore player = giocatore(currentLine);
 		}
 		br.close();
 	}
@@ -33,22 +33,82 @@ public class parseFromCSV {
 	private static final String ATTACCANTE = "Attaccante";
 	private static final String DIFENSORE = "Difensore";
 
-	// TODO Questo tornerˆ Giocatore e non Object
-	private static Object giocatore(String line) {
+	// TODO Questo tornerï¿½ Giocatore e non Object
+	private static Giocatore giocatore(String line) {
 		String[] giocatoreString = line.split(",");
 		
 		String ruolo = giocatoreString[0]; // Difensore, Centrocampista, Attaccante o Portiere
 		
-		String nome = giocatoreString[1];
+			String nome = giocatoreString[1];
+			String squadra = giocatoreString[2];
+			String nazionalita = giocatoreString[3];
+			byte velocita = Byte.parseByte(giocatoreString[4]);
+			byte resistenza = Byte.parseByte(giocatoreString[5]);
+			byte forza = Byte.parseByte(giocatoreString[6]);
+			byte morale = Byte.parseByte(giocatoreString[7]);
+			byte eta = Byte.parseByte(giocatoreString[8]);
+			byte condizione = Byte.parseByte(giocatoreString[9]);
+			byte tecnica = Byte.parseByte(giocatoreString[10]);
+			byte aggressivita = Byte.parseByte(giocatoreString[11]);
+			byte creativita = Byte.parseByte(giocatoreString[12]);
+			byte decisione = Byte.parseByte(giocatoreString[13]);
+			byte carisma = Byte.parseByte(giocatoreString[14]);
+			String posizione = giocatoreString[15];
+			byte giocoDiSquadra = Byte.parseByte(giocatoreString[16]);
+			boolean essenziale = Boolean.parseBoolean(giocatoreString[17]);
+			byte mediaVoti = Byte.parseByte(giocatoreString[18]);
+			
+			if(ruolo == CENTROCAMPISTA || ruolo == ATTACCANTE || ruolo == DIFENSORE){
+				byte cross = Byte.parseByte(giocatoreString[19]);
+				byte dribling = Byte.parseByte(giocatoreString[20]);
+				byte colpoDiTesta = Byte.parseByte(giocatoreString[21]);
+				byte passaggio = Byte.parseByte(giocatoreString[22]);
+				byte tiro = Byte.parseByte(giocatoreString[23]);
+				byte contrasto = Byte.parseByte(giocatoreString[24]);
+				byte movimento = Byte.parseByte(giocatoreString[25]);
+				byte abilitaDifesa = Byte.parseByte(giocatoreString[26]);
+				byte abilitaAttacco = Byte.parseByte(giocatoreString[27]);
+				byte abilitaCentrcampo = Byte.parseByte(giocatoreString[28]);
+				byte valoreGenerale = Byte.parseByte(giocatoreString[29]);
+				double valoreMercato = Double.parseDouble(giocatoreString[30]);
+			}
+			else{
+				byte dotiAeree = Byte.parseByte(giocatoreString[19]);
+				byte agilita = Byte.parseByte(giocatoreString[20]);
+				byte comunicazione = Byte.parseByte(giocatoreString[21]);
+				byte bloccareTiro = Byte.parseByte(giocatoreString[22]);
+				byte calciare = Byte.parseByte(giocatoreString[23]);
+				byte riflessi = Byte.parseByte(giocatoreString[24]);
+				byte rimessa = Byte.parseByte(giocatoreString[25]);
+				byte valoreGenerale = Byte.parseByte(giocatoreString[26]);
+				double valoreMercato = Double.parseDouble(giocatoreString[27]);
+			}
+		
+		
 		// TODO - per ogni caratteristica! 
 		// TODO casting per (byte)'s e booleans 
 		
 		// Giocatore giocatore = null;
 		if (ruolo == CENTROCAMPISTA) {
-			// giocatore = new centrocampista(....)
+			 giocatore = new Centrocampista(....);
 		} else {
 			// TODO - per ogni ruolo
+			if(ruolo == PORTIERE){
+				giocatore = new Portiere(...);
+			}
+			else {
+				if (ruolo == ATTACCANTE){
+					giocatore = new Attaccante(...);
+				}
+				else{
+					if(ruolo == DIFENSORE){
+						giocatore = new Difensore(..);
+					}
+				}
+			}
 		}
+		
+	
 		
 		// TODO return giocatore;
 		return null;
