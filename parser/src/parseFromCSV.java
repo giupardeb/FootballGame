@@ -90,19 +90,19 @@ public class parseFromCSV {
 		
 		// Giocatore giocatore = null;
 		if (ruolo == CENTROCAMPISTA) {
-			 giocatore = new Centrocampista(....);
+			 giocatore = new Centrocampista(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
 		} else {
 			// TODO - per ogni ruolo
 			if(ruolo == PORTIERE){
-				giocatore = new Portiere(...);
+				 giocatore = new Portiere(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,dotiAeree,agilita,comunicazione,bloccareTiro,calciare,riflessi,rimessa,valoreGenerale,valoreMercato);
 			}
 			else {
 				if (ruolo == ATTACCANTE){
-					giocatore = new Attaccante(...);
+			 		giocatore = new Attaccante(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
 				}
 				else{
 					if(ruolo == DIFENSORE){
-						giocatore = new Difensore(..);
+			 			giocatore = new Difensore(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
 					}
 				}
 			}
