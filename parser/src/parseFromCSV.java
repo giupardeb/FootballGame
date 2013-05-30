@@ -17,14 +17,17 @@ public class parseFromCSV {
 		}
 	}
 	
-	// TODO Return list giocatori
-	Giocatori vett[] = new Giocatore [568];
-	int i=0;
-	private static Giocaroi[] read(String fileName)  throws IOException  {
+	// NOTE
+	// Non so se utilizzi questo file, quindi ti faccio notare che qui c'era un errore di sintassi
+	// In pratica non tornavi Giocatori[] ma qualcos'altro.
+	private static Giocatori[] read(String fileName)  throws IOException  {
+		// Ha più senso avere queste due linee dentro
+		Giocatori vett[] = new Giocatore [568];
+		int i = 0; // TIP: usa degli spazi invece di i=0. il codice è più leggibile.
+
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String currentLine;
 		while ((currentLine = br.readLine()) != null) {
-			// TODO aggiungere giocatore ad arraylist di giocatori
 			Giocatore player = giocatore(currentLine);
 			vett[i++] = player;
 		}
@@ -92,29 +95,54 @@ public class parseFromCSV {
 		// TODO - per ogni caratteristica! 
 		// TODO casting per (byte)'s e booleans 
 		
-		// Giocatore giocatore = null;
+		// NOTE devi definire il giocatore, altrimenti non lo puoi ritornare.
+		// Inoltre ti ho aggiustato un pò gli else if, così il codice è + leggibile
+		Giocatore giocatore = null;
 		if (ruolo == CENTROCAMPISTA) {
-			 giocatore = new Centrocampista(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
-		} else {
-			// TODO - per ogni ruolo
-			if(ruolo == PORTIERE){
-				 giocatore = new Portiere(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,dotiAeree,agilita,comunicazione,bloccareTiro,calciare,riflessi,rimessa,valoreGenerale,valoreMercato);
-			}
-			else {
-				if (ruolo == ATTACCANTE){
-			 		giocatore = new Attaccante(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
-				}
-				else{
-					if(ruolo == DIFENSORE){
-			 			giocatore = new Difensore(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,abilitaCentrcampo,valoreGenerale,valoreMercato);
-					}
-				}
-			}
+			 giocatore = new Centrocampista(nome, squadra, nazionalita, 
+			 								velocita, resistenza, forza, 
+			 								morale, eta, condizione, 
+			 								tecnica, aggressivita, creativita, 
+			 								decisione, carisma, posizione, 
+			 								giocoDiSquadra, essenziale, mediaVoti, 
+			 								cross, dribling, colpoDiTesta, 
+			 								passaggio, tiro, contrasto, 
+			 								movimento, abilitaDifesa, abilitaAttacco, 
+			 								abilitaCentrcampo, valoreGenerale, valoreMercato);
+		} else if(ruolo == PORTIERE) {
+			giocatore = new Portiere(nome, squadra, nazionalita, 
+									velocita, resistenza, forza, 
+									morale, eta, condizione, 
+									tecnica, aggressivita, creativita, 
+									decisione, carisma, posizione, 
+									giocoDiSquadra, essenziale, mediaVoti, 
+									dotiAeree, agilita, comunicazione, 
+									bloccareTiro, calciare, riflessi, 
+									rimessa, valoreGenerale, valoreMercato);
+		} else if (ruolo == ATTACCANTE) {
+			giocatore = new Attaccante(nome, squadra, nazionalita, 
+									velocita, resistenza, forza, 
+									morale, eta, condizione, 
+									tecnica, aggressivita, creativita, 
+									decisione, carisma, posizione, 
+									giocoDiSquadra, essenziale, mediaVoti, 
+									cross, dribling, colpoDiTesta, 
+									passaggio, tiro, contrasto, 
+									movimento, abilitaDifesa, abilitaAttacco, 
+									abilitaCentrcampo, valoreGenerale, valoreMercato);
+		} else if(ruolo == DIFENSORE) {
+			 giocatore = new Difensore(nome, squadra, nazionalita, 
+			 						velocita, resistenza, forza, 
+			 						morale, eta, condizione, 
+			 						tecnica, aggressivita, creativita, 
+			 						decisione, carisma, posizione, 
+			 						giocoDiSquadra, essenziale, mediaVoti, 
+			 						cross, dribling, colpoDiTesta, 
+			 						passaggio, tiro, contrasto, 
+			 						movimento, abilitaDifesa, abilitaAttacco, 
+			 						abilitaCentrcampo, valoreGenerale, valoreMercato);
 		}
 		
-	
-		
-		// TODO return giocatore;
 		return giocatore;
 	}
 
