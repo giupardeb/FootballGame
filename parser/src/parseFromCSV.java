@@ -18,14 +18,18 @@ public class parseFromCSV {
 	}
 	
 	// TODO Return list giocatori
-	private static void read(String fileName)  throws IOException  {
+	Giocatori vett[] = new Giocatore [568];
+	int i=0;
+	private static Giocaroi[] read(String fileName)  throws IOException  {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String currentLine;
 		while ((currentLine = br.readLine()) != null) {
 			// TODO aggiungere giocatore ad arraylist di giocatori
 			Giocatore player = giocatore(currentLine);
+			vett[i++] = player;
 		}
 		br.close();
+		return vett;
 	}
 	
 	private static final String CENTROCAMPISTA = "Centrocampista";
@@ -111,7 +115,7 @@ public class parseFromCSV {
 	
 		
 		// TODO return giocatore;
-		return null;
+		return giocatore;
 	}
 
 }
