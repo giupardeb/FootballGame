@@ -13,8 +13,7 @@ abstract public class  Squadra{
 	int golfatti;
 	int golsubiti;
 	int punti;
-	//MODIFICTO  14 MAGGIO ORE 18:00
-
+		
 	int totalepronostico; //serve per il pronostico, sara la somma dei gol fatti, subiti, vittorie sconfitte, pareggi + le abilita totali di difesa,attacco,centrocampo
 	int abilitaDifesa; //serve per il pronostico
 	int abilitaCentrocampo; //serve per il pronostico
@@ -23,12 +22,11 @@ abstract public class  Squadra{
 	
 	
 	//Costruttore di Squadra!!!
-	public Squadra(ArrayList <Giocatore> vett,/*double budget,*/ String nome){
-			miasquadra = vett;//aggiunta con array dinamici
-			//this.budget = budget;
+	public Squadra(ArrayList <Giocatore> vett, String nome){
+		    miasquadra = vett;//aggiunta con array dinamici
 			this.nome = nome;
 			totalepronostico = 0;
-			//MODIFICTO  14 MAGGIO ORE 18:00
+			
 			
 			/*non faccio altro che mettere nelle variabili abilita,  tutte le abilita specifiche di ogni giocatore alla fine le variabili abilita
 			 * avranno la somma di tutte le abilita dei giocatori (difensori attaccanti centrocampisi)
@@ -134,10 +132,6 @@ abstract public class  Squadra{
     }
 	
 	
-	
-	public ArrayList<Giocatore> getGiocatori() {
-		return miasquadra;
-	}
 	
 	abstract public void scambio(String Cognomes, String Cognomes1, Squadra s1);
 	abstract public void acquisto(String Cognome,Squadra s1);

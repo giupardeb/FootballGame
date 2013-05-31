@@ -126,19 +126,50 @@ public class SquadraAvversaria extends Squadra{
 		
 		if(i!=null){
 			if(i instanceof Portiere){
-				g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
+				g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
+									i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),
+									i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),
+									i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),
+									i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),
+									((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),
+									((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),
+									((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
 			
 			}
 			else if(i instanceof Difensore){
-				g1 = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),((Difensore) i).getValoreMercato());
+				g1 = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
+									i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),
+									i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),
+									i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),
+									i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),
+									((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),
+									((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),
+									((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),
+									((Difensore) i).getValoreMercato());
 				
 			}
 			else if(i instanceof Centrocampista){
-				g1 = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),((Centrocampista) i).getValoreGenerale(),((Centrocampista) i).getValoreMercato());
+				g1 = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
+										 i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),
+										 i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),
+										 i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),
+										 i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),
+										 ((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),
+										 ((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),
+										 ((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),
+										 ((Centrocampista) i).getValoreGenerale(),((Centrocampista) i).getValoreMercato());
 				
 			}
 			else if (i instanceof Attaccante){
-				g1 = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),((Attaccante) i).getValoreGenerale(),((Attaccante) i).getValoreMercato());
+				g1 = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
+									 i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),
+									 i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),
+									 i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),
+									 i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),
+									 ((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),
+									 ((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),
+									 ((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),
+									 ((Attaccante) i).getValoreGenerale(),((Attaccante) i).getValoreMercato());
 				
 			}
 			if(this.GetBudget()>g1.getValoreMercato()){

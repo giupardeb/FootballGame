@@ -125,7 +125,9 @@ public void acquisto(String Cognome,Squadra s1){ // miasquadra acquista Cognome 
 	
 	if(i!=null){
 		if(i instanceof Portiere){
-			g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
+			g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
+							   i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),
+							   i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
 		
 		}
 		else if(i instanceof Difensore){
