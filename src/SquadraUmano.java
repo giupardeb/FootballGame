@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -10,104 +11,56 @@ public class SquadraUmano extends Squadra{
 	}
 	
 public void scambio (String Cognomes, String Cognomes1, Squadra s1){ //Cognomes viene scambiato con Cognomes1 dalla squadra s1
+		int i = Search(Cognomes);
+		int j = Search(Cognomes1);
 		
-		boolean esistes = false;
-		boolean esistes1 = false;
-		
-		Giocatore g1=null;
-		Giocatore g2=null;
-				for( Giocatore i : s1.GetSquadra()){
-					if(i.GetAnagrafe().GetCognome().equalsIgnoreCase(Cognomes1)){
-						esistes = true;
-						if(i instanceof Portiere){
-							g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if(i instanceof Difensore){
-							g1 = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if(i instanceof Centrocampista){
-							g1 = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),((Centrocampista) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if (i instanceof Attaccante){
-							g1 = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),((Attaccante) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						
-					}
-				}
-				
-			    for(Giocatore i : this.GetSquadra()){
-			    	if(i.GetAnagrafe().GetCognome().equalsIgnoreCase(Cognomes)){
-						esistes1 = true;
-						if(i instanceof Portiere){
-							g2 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if(i instanceof Difensore){
-							g2 = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if(i instanceof Centrocampista){
-							g2 = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),((Centrocampista) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						else if (i instanceof Attaccante){
-							g2 = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),((Attaccante) i).getValoreGenerale(),i.getValoreMercato());
-							break;
-						}
-						
-					}
-				}
-			    if(esistes && esistes1){
+			    if(i!=-1 && j!=-1){
 			    	
-			    		if(g1 instanceof Difensore){
-			    			if(((Difensore)g1).getDotiRuolo()>((Difensore)g2).getDotiRuolo()){
+			    		if(db.giocatori[i] instanceof Difensore){
+			    			if(((Difensore)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
 			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(g1);
-			    					s1.GetSquadra().add(g2);
-			    					g1.setNomeSquadra(this.GetNomeSquadra());
-			    					g2.setNomeSquadra(s1.GetNomeSquadra());
+			    					this.GetSquadra().add(db.giocatori[i]);
+			    					s1.GetSquadra().add(db.giocatori[j]);
+			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+			    					db.giocatori[j].setNomeSquadra(s1.GetNomeSquadra());
 
-			    			    	this.GetSquadra().remove(g2);
-			    			    	s1.GetSquadra().remove(g1);	
+			    			    	this.GetSquadra().remove(db.giocatori[j]);
+			    			    	s1.GetSquadra().remove(db.giocatori[i]);	
 			    			    	System.out.println("Scambio effettuato con successo!");
 			    				}
 			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
 			    			}
 			    			else System.out.println("La squadra ha rifiutato l'offerta");
 			    		}
-			    		else if(g1 instanceof Centrocampista){
-			    			if(((Centrocampista)g1).getDotiRuolo()>((Difensore)g2).getDotiRuolo()){
+			    		else if(db.giocatori[i] instanceof Centrocampista){
+			    			if(((Centrocampista)db.giocatori[i]).getDotiRuolo()>((Centrocampista)db.giocatori[j]).getDotiRuolo()){
 			    				
 			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(g1);
-			    					s1.GetSquadra().add(g2);
-			    					g1.setNomeSquadra(this.GetNomeSquadra());
-			    					g2.setNomeSquadra(s1.GetNomeSquadra());
+			    					this.GetSquadra().add(db.giocatori[i]);
+			    					s1.GetSquadra().add(db.giocatori[j]);
+			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+			    					db.giocatori[j].setNomeSquadra(s1.GetNomeSquadra());
 
-			    			    	this.GetSquadra().remove(g2);
-			    			    	s1.GetSquadra().remove(g1);	
+			    			    	this.GetSquadra().remove(db.giocatori[j]);
+			    			    	s1.GetSquadra().remove(db.giocatori[i]);	
 			    			    	System.out.println("Scambio effettuato con successo!");
 			    				}
 			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
 			    			}
 			    			else System.out.println("La squadra ha rifiutato l'offerta");
 			    		}
-			    		else if(g1 instanceof Attaccante){
-			    			if(((Attaccante)g1).getDotiRuolo()>((Attaccante)g2).getDotiRuolo()){
+			    		else if(db.giocatori[i] instanceof Attaccante){
+			    			if(((Attaccante)db.giocatori[i]).getDotiRuolo()>((Attaccante)db.giocatori[j]).getDotiRuolo()){
 			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(g1);
-			    					s1.GetSquadra().add(g2);
-			    					g1.setNomeSquadra(this.GetNomeSquadra());
-			    					g2.setNomeSquadra(s1.GetNomeSquadra());
+			    					this.GetSquadra().add(db.giocatori[i]);
+			    					s1.GetSquadra().add(db.giocatori[j]);
+			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+			    					db.giocatori[j].setNomeSquadra(s1.GetNomeSquadra());
 
-			    			    	this.GetSquadra().remove(g2);
-			    			    	s1.GetSquadra().remove(g1);	
+			    			    	this.GetSquadra().remove(db.giocatori[j]);
+			    			    	s1.GetSquadra().remove(db.giocatori[i]);	
 			    			    	System.out.println("Scambio effettuato con successo!");
-			    				}
+			    			    }
 			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
 			    			}
 			    			else System.out.println("La squadra ha rifiutato l'offerta");
@@ -119,112 +72,119 @@ public void scambio (String Cognomes, String Cognomes1, Squadra s1){ //Cognomes 
 
 public void acquisto(String Cognome,Squadra s1){ // miasquadra acquista Cognome da s1
 	
-	Giocatore g1 = null;
-	Giocatore i = Search(s1,Cognome);
+	int i = Search(Cognome); 
 	
-	
-	if(i!=null){
-		if(i instanceof Portiere){
-			g1 = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),
-							   i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),
-							   i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
+	Scanner tastiera = new Scanner (System.in);
+	if(i!=-1){
 		
-		}
-		else if(i instanceof Difensore){
-			g1 = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),((Difensore) i).getValoreMercato());
+		if(this.GetBudget()>db.giocatori[i].getValoreMercato()){
+			float offerta = 0;
+			System.out.print("inserisci offerta");
 			
-		}
-		else if(i instanceof Centrocampista){
-			g1 = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),((Centrocampista) i).getValoreGenerale(),((Centrocampista) i).getValoreMercato());
-			
-		}
-		else if (i instanceof Attaccante){
-			g1 = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),((Attaccante) i).getValoreGenerale(),((Attaccante) i).getValoreMercato());
-			
-		}
-		if(this.GetBudget()>g1.getValoreMercato()){
-			if(((Math.random()*10)+1)>6){
-				
-				this.SetBudgetRemove(g1.getValoreMercato());
-				g1.setNomeSquadra(this.GetNomeSquadra());
-				this.GetSquadra().add(g1);
+			offerta = tastiera.nextFloat(); //offerta immessa dall'utente
+			if(offerta > db.giocatori[i].getValoreMercato() ){
+				if(db.giocatori[i].getEssenziale() == false){
+					
+					if(((int)(Math.random()*10)+1)>4){
+						
+						this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
+						db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+						this.GetSquadra().add(db.giocatori[i]);
 
-				s1.SetBudgetAdd(g1.getValoreMercato());
-				s1.GetSquadra().remove(i); 
-				
-				System.out.print("il giocatore ha accettato l'offerta!");
+						s1.SetBudgetAdd(db.giocatori[i].getValoreMercato());
+						s1.GetSquadra().remove(db.giocatori[i]); 
+						System.out.print("il giocatore ha accettato l'offerta!");
+					}
+					else System.out.print("il giocatore ha rifiutato l'offerta");
+				}
+				else{
+					double denaroBastardo=((db.giocatori[i].getValoreMercato()*75)/100)+db.giocatori[i].getValoreMercato();
+					System.out.println("La squadra: " + db.giocatori[i].getSquadra() + "non ha accettato l' offerta.");
+					System.out.println("Ma ti ha proposto una controfferta: " + denaroBastardo + " accettare? si /no ");
+					
+					String scelta = tastiera.nextLine();
+					if(scelta.equalsIgnoreCase("si")){
+						if(this.GetBudget()>denaroBastardo){
+							
+							this.SetBudgetRemove(denaroBastardo);
+							//	s1.GetSquadra().get(i).setNomeSquadra(this.GetNomeSquadra());
+								db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+								this.GetSquadra().add(db.giocatori[i]);
+
+								s1.SetBudgetAdd(denaroBastardo);
+								s1.GetSquadra().remove(db.giocatori[i]); 
+								System.out.print("il giocatore ha accettato l'offerta!");
+							
+						}
+						else System.out.print("Non hai il Budget sufficente per acquistare il giocatore!");
+					}
+					else System.out.print("Giocatore non Acquistato");
+				}
+			 }
+			else {
+				if(offerta>CalcPercent(offerta)){
+					if((int)((Math.random()*10)+1)==9){
+						
+						this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
+					//	s1.GetSquadra().get(i).setNomeSquadra(this.GetNomeSquadra());
+						db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+						this.GetSquadra().add(db.giocatori[i]);
+
+						s1.SetBudgetAdd(db.giocatori[i].getValoreMercato());
+						s1.GetSquadra().remove(db.giocatori[i]); 
+						System.out.print("il giocatore ha accettato l'offerta!");
+					}
+					else System.out.print("il giocatore ha rifiutato l'offerta");
+				}
+				else System.out.print("Hai fatto un offerta minore del prezzo di mercato del giocatore ");
 			}
-			else System.out.print("il giocatore ha rifiutato l'offerta");
-			
 		 }
 		else System.out.print("Non hai il Budget sufficente per acquistare il giocatore!");
 	}
 	else System.out.println("Giocatore non esistente nella Squadra");
-		
+	tastiera.close();
+
 }
 
+private double CalcPercent(double offerta){
+	double sconto = offerta * 70 /100;
+	return offerta-sconto;
+}
 
+// Parlarne con simo!!!
 public Giocatore[] OrganizzaSquadra(){
-	Giocatore array[] = new Giocatore [11];
-	int j=0;
+	Giocatore array[] = new Giocatore [15];
+	ArrayList <Giocatore> arrayusiliario = new ArrayList <Giocatore>();
 	System.out.println("Organizza la tua squadra: ");
-
+	int j = 0;
 	for(Giocatore i : this.GetSquadra()){
-		System.out.println(j+1 + " " + i.GetAnagrafe());
+		System.out.println(j+1 + ". " + i.GetAnagrafe()+i.getValoreGenerale()+i.getRuolo());
+		arrayusiliario.add(db.giocatori[Search(i.GetAnagrafe().GetCognome())]); //chiedere a simo se si può fare
 		j++;
-		
 	}
-	Giocatore arrayusiliario[] = new Giocatore [j];
-	int f=0;
-	for(Giocatore i : this.GetSquadra()){
-		if(i instanceof Portiere){
-			arrayusiliario[f] = new Portiere (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Portiere) i).getDotiAeree(),((Portiere) i).getAgilita(),((Portiere) i).getComunicazione(),((Portiere) i).getBloccareTiri(),((Portiere) i).getCalciare(),((Portiere) i).getRiflessi(),((Portiere) i).getRimessa(),((Portiere) i).getValoreGenerale(),((Portiere) i).getValoreMercato());
-		
-		}
-		else if(i instanceof Difensore){
-			arrayusiliario[f] = new Difensore (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Difensore) i).getCross(),((Difensore) i).getDribling(),((Difensore) i).getColpoDiTesta(),((Difensore) i).getPassaggio(),((Difensore) i).getTiro(),((Difensore) i).getContrasto(),((Difensore) i).getMovimento(),((Difensore) i).getAbilitaDifesa(),((Difensore) i).getAbilitaAttacco(),((Difensore) i).getAbilitaCentrocampo(),((Difensore) i).getValoreGenerale(),((Difensore) i).getValoreMercato());
-			
-		}
-		else if(i instanceof Centrocampista){
-			arrayusiliario[f] = new Centrocampista (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Centrocampista) i).getCross(),((Centrocampista) i).getDribling(),((Centrocampista) i).getColpoDiTesta(),((Centrocampista) i).getPassaggio(),((Centrocampista) i).getTiro(),((Centrocampista) i).getContrasto(),((Centrocampista) i).getMovimento(),((Centrocampista) i).getAbilitaDifesa(),((Centrocampista) i).getAbilitaAttacco(),((Centrocampista) i).getAbilitaCentrocampo(),((Centrocampista) i).getValoreGenerale(),((Centrocampista) i).getValoreMercato());
-			
-		}
-		else if (i instanceof Attaccante){
-			arrayusiliario[f] = new Attaccante (i.GetAnagrafe().GetCognome(),i.GetAnagrafe().GetProvenienza(),i.getSquadra(),i.getVelocita(),i.getResistenza(),i.getForza(),i.getMorale(),i.GetAnagrafe().GetEta(),i.getCondizione(),i.getTecnica(),i.getAggressivita(),i.getCreativita(),i.getDecisione(),i.getCarisma(),i.getRuolo(),i.getGiocoDiSquadra(),i.getEssenziale(),i.getMediaVoti(),((Attaccante) i).getCross(),((Attaccante) i).getDribling(),((Attaccante) i).getColpoDiTesta(),((Attaccante) i).getPassaggio(),((Attaccante) i).getTiro(),((Attaccante) i).getContrasto(),((Attaccante) i).getMovimento(),((Attaccante) i).getAbilitaDifesa(),((Attaccante) i).getAbilitaAttacco(),((Attaccante) i).getAbilitaCentrocampo(),((Attaccante) i).getValoreGenerale(),((Attaccante) i).getValoreMercato());
-			
-		}			f++;
-	}
-	if(arrayusiliario.length<14) System.out.println("non puoi organizzarti la squadra poichè hai meno di 15 giocatori, prova ad acquistare qualcuno"); //eventualmente metodo acquista
+	
+	if(j<14) System.out.println("non puoi organizzarti la squadra poichè hai meno di 15 giocatori, prova ad acquistare qualcuno"); //eventualmente metodo acquista
 	else{
-		//MODIFICTO  14 MAGGIO ORE 18:00
-
-		//dobbiamo decidere se l'array che andra a formare il campo di gioco sara ordinato oppure no, CHE FARE????? ooooks
 		
-		//MODIFICTO  14 MAGGIO ORE 18:00
-
 		for(int i=0;i<14;i++){
-			String elemento = JOptionPane.showInputDialog("inserire il numero corrispondente al giocatore desiderato nell'ordine(P,4D,4C,2A): ");
-			int h = Integer.parseInt(elemento);
-			if(h==1){
-				array[i] = arrayusiliario[i]; 
-			}
-			else if(h>1&&h<=5){
-				array[i] = arrayusiliario[i];
-			}
-			else if(h>5 && h<=9){
-				array[i] = arrayusiliario[i];
-			}
-			else if(h>9 && h<=11){
-				array[i] = arrayusiliario[i];
-			}
-			else if(h==12)array[i] = arrayusiliario[i];
-			else if(h==13)array[i] = arrayusiliario[i];
-			else if(h==14)array[i] = arrayusiliario[i];
+			String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti far giocare: ")); //input da finestra
+			int z = Search(sceltagiocatore); 
+			array[i] = db.giocatori[z];
+		
 		}
 	}
 	
 	
 	return array;
  }
+
+private int Search(String Cognome){
+	for(int i = 0; i<db.giocatori.length;i++){
+		if(db.giocatori[i].GetAnagrafe().GetCognome().equalsIgnoreCase(Cognome)){
+			return i;
+		 }
+	}
+	return -1;
+}
 
 }
