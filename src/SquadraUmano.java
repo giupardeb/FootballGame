@@ -157,15 +157,23 @@ public Giocatore[] OrganizzaSquadra(){
 	ArrayList <Giocatore> arrayusiliario = new ArrayList <Giocatore>();
 	System.out.println("Organizza la tua squadra: ");
 	int j = 0;
+
+	// NOTE - non usare i, ma giocatore.
+	// i viene usato, generalmente, come contatore
+	// qui invece i è il singolo giocatore
 	for(Giocatore i : this.GetSquadra()){
 		System.out.println(j+1 + ". " + i.GetAnagrafe()+i.getValoreGenerale()+i.getRuolo());
 		arrayusiliario.add(db.giocatori[Search(i.GetAnagrafe().GetCognome())]); //chiedere a simo se si può fare
 		j++;
 	}
 	
+
+	// NOTE - invece di usare j, puoi semplicemente usare arrayusiliaro.size()
+	// inoltre usa una costante invece di 14 ed è meglio usare 15 (ha più senso).
+	// e scrivi: arrayusiliaro.size() < 15 (MIN_GIOCATORY_PER_MERCATO)
 	if(j<14) System.out.println("non puoi organizzarti la squadra poichè hai meno di 15 giocatori, prova ad acquistare qualcuno"); //eventualmente metodo acquista
 	else{
-		
+		// NOTE - perché 14 e non tutta la squadra?
 		for(int i=0;i<14;i++){
 			String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti far giocare: ")); //input da finestra
 			int z = Search(sceltagiocatore); 

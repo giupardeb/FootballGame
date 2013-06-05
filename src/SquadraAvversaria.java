@@ -7,6 +7,9 @@ import java.util.Random;
 
 
 public class SquadraAvversaria extends Squadra{
+
+    // NOTE - questi limiti non dovrebbero essere imposti anche alla squadra umana quando fa il mercato?
+    // okay, vedo che tutti gli scambi sono fatti a caso e senza interazione dell'utente
 	private static final int MINCENTROCAMPISTI = 4;
 	private static final int MINPORTIERI = 2;
 	private static final int MINATTACCANTI = 4;
@@ -21,81 +24,152 @@ public class SquadraAvversaria extends Squadra{
 	}
 	
 	// PARLARNE CON SIMO
-	
 	public void scambio (SquadraAvversaria[] s1,SquadraUmano squadrautente){ 
 		int i = SearchIndiceGiocatoreNomeSquadra(this.GetNomeSquadra()); //indice del giocatore che vorrei dal database
-		int j = SearchIndiceGiocatoreMia(this.GetSquadra());//indice giocatore che vorrei scambiare (è nella mia squadra)
+		int j = SearchIndiceGiocatoreMia(this.GetSquadra()); //indice giocatore che vorrei scambiare (è nella mia squadra)
     	int indicesquadraavversaria = SearchSquadra(s1,i);
 
-					    	
-			    		if(db.giocatori[i] instanceof Difensore){
-			    			if(((Difensore)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
-			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(db.giocatori[i]);
-			    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-			    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+		    // NOTE - Avevi indentato di 12 spazi, mentre è buon uso indentare sempre di 4 spazi alla volta (o 1 tab)
+            // Il codice sotto non lo controllo ma ti faccio notare una cosa: c'è lo stesso codice 4-5 volte. 
+            // usa un metodo e chiami il metodo.
+            /*
 
-			    			    	this.GetSquadra().remove(db.giocatori[j]);
-			    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
-			    			    	System.out.println("Scambio effettuato con successo!");
-			    				}
-			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
-			    			}
-			    			else System.out.println("La squadra ha rifiutato l'offerta");
-			    		}
-			    		else if(db.giocatori[i] instanceof Centrocampista){
-			    			if(((Centrocampista)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
-			    				
-			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(db.giocatori[i]);
-			    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-			    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+                if(((RUOLO)db.giocatori[i]).getDotiRuolo()>((RUOLO)db.giocatori[j]).getDotiRuolo()){
+                    if((int)(Math.random()*5)+1<3){
+                        this.GetSquadra().add(db.giocatori[i]);
+                        s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
+                        db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+                        db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
 
-			    			    	this.GetSquadra().remove(db.giocatori[j]);
-			    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
-			    			    	System.out.println("Scambio effettuato con successo!");
-			    				}
-			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
-			    			}
-			    			else System.out.println("La squadra ha rifiutato l'offerta");
-			    		}
-			    		else if(db.giocatori[i] instanceof Attaccante){
-			    			if(((Attaccante)db.giocatori[i]).getDotiRuolo()>((Attaccante)db.giocatori[j]).getDotiRuolo()){
-			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(db.giocatori[i]);
-			    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-			    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+                        this.GetSquadra().remove(db.giocatori[j]);
+                        s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);   
+                        System.out.println("Scambio effettuato con successo!");
+                    }
+                    else System.out.println("Il giocatore ha rifiutato l'offerta");
+                }
+                else System.out.println("La squadra ha rifiutato l'offerta");
 
-			    			    	this.GetSquadra().remove(db.giocatori[j]);
-			    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
-			    			    	System.out.println("Scambio effettuato con successo!");
-			    				}
-			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
-			    			}
-			    			else System.out.println("La squadra ha rifiutato l'offerta");
-			    		}
-			    		else{
-			    			if(((Portiere)db.giocatori[i]).getDotiRuolo()>((Portiere)db.giocatori[j]).getDotiRuolo()){
-			    				if((int)(Math.random()*5)+1<3){
-			    					this.GetSquadra().add(db.giocatori[i]);
-			    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-			    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-			    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+                */	
 
-			    			    	this.GetSquadra().remove(db.giocatori[j]);
-			    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
-			    			    	System.out.println("Scambio effettuato con successo!");
-			    				}
-			    				else System.out.println("Il giocatore ha rifiutato l'offerta");
-			    			}
-			    			else System.out.println("La squadra ha rifiutato l'offerta");
-			    		}
+                /* puoi mettere il codice su in un metodo del tipo
+                    private void A (Class<? extends Giocatore> clazz, altri parametri) {
+                          if((clazz.cast(db.giocatori[i])).getDotiRuolo()>(clazz.cast(db.giocatori[j])).getDotiRuolo()){
+                            .....
+                            }
+                    }
+                */
+                /*
+
+                Per capire un pò meglio questo esempio di polimorfismo ti metto di seguito del codice che ho appena scritto:
+
+                public static void main(String[] args) {
+                Gioc difensore = new Dif();
+                Gioc difensore1 = new Dif();
+                Gioc attaccante = new Attac();
+                Gioc attaccante1 = new Attac();
+
+                Gioc[] giocatori = new Gioc[4];
+                giocatori[0] = difensore;
+                giocatori[1] = difensore1;
+                giocatori[2] = attaccante;
+                giocatori[3] = attaccante1;
+
+                testArrayGiocatori(giocatori);
+            }
+
+            public static void testArrayGiocatori(Gioc[] giocatori) {
+                for(Gioc singleGiocatore:giocatori) {
+                    C(singleGiocatore.getClass(), singleGiocatore);
+                }
+            }
+            
+            public static <T> void C(Class<? extends Gioc> clazz, Gioc singleGiocatore) {
+                // cast
+                singleGiocatore = clazz.cast(singleGiocatore);
+                singleGiocatore.print();
+
+            }
+
+            Dove Gio, Dif e Attac sono delle semplici classi che contengono un metodo chiamato print e che stampa il nome della classe
+
+            Quando si esegue il codice su il risultato è:
+                Difensore
+                Difensore
+                Attaccante
+                Attaccante
+            
+            Questo a dimostrazione che l'operazione di cast è avvenuta con successo.
+            */
+    		if(db.giocatori[i] instanceof Difensore){
+    			if(((Difensore)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
+    				if((int)(Math.random()*5)+1<3){
+    					this.GetSquadra().add(db.giocatori[i]);
+    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
+    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+
+    			    	this.GetSquadra().remove(db.giocatori[j]);
+    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
+    			    	System.out.println("Scambio effettuato con successo!");
+    				}
+    				else System.out.println("Il giocatore ha rifiutato l'offerta");
+    			}
+    			else System.out.println("La squadra ha rifiutato l'offerta");
+    		}
+    		else if(db.giocatori[i] instanceof Centrocampista){
+    			if(((Centrocampista)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
+    				
+    				if((int)(Math.random()*5)+1<3){
+    					this.GetSquadra().add(db.giocatori[i]);
+    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
+    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+
+    			    	this.GetSquadra().remove(db.giocatori[j]);
+    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
+    			    	System.out.println("Scambio effettuato con successo!");
+    				}
+    				else System.out.println("Il giocatore ha rifiutato l'offerta");
+    			}
+    			else System.out.println("La squadra ha rifiutato l'offerta");
+    		}
+    		else if(db.giocatori[i] instanceof Attaccante){
+    			if(((Attaccante)db.giocatori[i]).getDotiRuolo()>((Attaccante)db.giocatori[j]).getDotiRuolo()){
+    				if((int)(Math.random()*5)+1<3){
+    					this.GetSquadra().add(db.giocatori[i]);
+    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
+    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+
+    			    	this.GetSquadra().remove(db.giocatori[j]);
+    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
+    			    	System.out.println("Scambio effettuato con successo!");
+    				}
+    				else System.out.println("Il giocatore ha rifiutato l'offerta");
+    			}
+    			else System.out.println("La squadra ha rifiutato l'offerta");
+    		}
+    		else{
+    			if(((Portiere)db.giocatori[i]).getDotiRuolo()>((Portiere)db.giocatori[j]).getDotiRuolo()){
+    				if((int)(Math.random()*5)+1<3){
+    					this.GetSquadra().add(db.giocatori[i]);
+    					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
+    					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
+    					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+
+    			    	this.GetSquadra().remove(db.giocatori[j]);
+    			    	s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
+    			    	System.out.println("Scambio effettuato con successo!");
+    				}
+    				else System.out.println("Il giocatore ha rifiutato l'offerta");
+    			}
+    			else System.out.println("La squadra ha rifiutato l'offerta");
+    		}
 	}
 ///////////////////////////////////////////////****************************************/////////////////////////////////////////////	
 	
+
+    // NOTE - lo stesso discorso di su. Hai tanto codice che è uguale tranne per poche cose. Riduci! 
 	public void acquisto(SquadraAvversaria[] s1,SquadraUmano squadrautente){ 
 		String ruolodaacquistare = "";
 		if(GetTotaleDifensori()<MINDIFENSORI) ruolodaacquistare = "difensore";
@@ -281,7 +355,7 @@ public class SquadraAvversaria extends Squadra{
 			}
 			else{
 				if(g.getValoreGenerale()>=60 && g.getValoreGenerale()<90){
-					 percent = g.getValoreMercato()*50/100;
+					 percent = g.getValoreMercato()*50/100;  // NOTE - costanti !!!!
 
 				}
 				else  percent = g.getValoreMercato()*60/100;
@@ -292,7 +366,7 @@ public class SquadraAvversaria extends Squadra{
 	
 
 	//PARLARE CON SIMONE
-	
+	// NOTE - qui non so che cosa devo controllare. Al solito, usa le costanti!!!!
 	public Giocatore[] OrganizzaSquadra(){
 		Giocatore array[] = new Giocatore [15];
 		int j = 0;
