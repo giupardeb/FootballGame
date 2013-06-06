@@ -409,7 +409,7 @@ public class SquadraAvversaria extends Squadra{
 					}
 				}
 			}
-			array[z] = db.giocatori[indicegiocatoremigliore];
+			array[z] = db.giocatori[indicegiocatoremigliore]; // OCCCHIO CHE POTREBBE GENERARTI UNA ECEZZIONE
 		}
 		return array;
 	}
