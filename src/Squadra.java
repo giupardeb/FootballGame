@@ -25,7 +25,7 @@ abstract public class  Squadra{
 
 	//Costruttore di Squadra!!!
 	public Squadra(ArrayList <Giocatore> vett, String nome){
-		miasquadra = vett;//aggiunta con array dinamici
+		miasquadra.addAll(vett);//aggiunta con array dinamici
 		this.nome = nome;
 		totalepronostico = 0;
 
@@ -33,7 +33,7 @@ abstract public class  Squadra{
 		/*non faccio altro che mettere nelle variabili abilita,  tutte le abilita specifiche di ogni giocatore alla fine le variabili abilita
 		 * avranno la somma di tutte le abilita dei giocatori (difensori attaccanti centrocampisi)
 		 * ciò è utile per il pronostico*/
-		int d=0,c=0,a=0; 
+		int d = 0,c = 0,a = 0; 
 		double b=0; // calcolare il budget
 		for(Giocatore i : miasquadra){
 			if(i instanceof Difensore) {
@@ -60,9 +60,13 @@ abstract public class  Squadra{
 				b+=((Attaccante)i).getValoreMercato();
 			}
 		}
-		abilitaDifesa/=d;
-		abilitaCentrocampo/=c;
-		abilitaAttacco/=a;
+		if(abilitaDifesa == 0) abilitaDifesa = 0;
+		else abilitaDifesa/=d;
+		if(abilitaCentrocampo == 0)	abilitaCentrocampo = 0;
+		else abilitaCentrocampo/=c;
+
+		if(abilitaAttacco == 0) abilitaAttacco = 0;
+		else abilitaCentrocampo/=a;
 		this.budget = b + (double)(Math.random()*1000)+1;
 
 	}

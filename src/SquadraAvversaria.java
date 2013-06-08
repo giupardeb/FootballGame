@@ -115,33 +115,6 @@ public class SquadraAvversaria extends Squadra{
 			j = SearchIndiceGiocatoreMia(this.GetSquadra());
 			TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
 		}
-
-		//SIMONE, C'è bisogno di considerare i casi in cui il giocatore è un difensore, att, etc etc? controlla anche per lo scambio in SquadraUmano
-
-		/*if(db.giocatori[i] instanceof Difensore)
-			TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
-			/*	if(((Difensore)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
-				if((int)(Math.random()*5)+1<3){
-					this.GetSquadra().add(db.giocatori[i]);
-					s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-					db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
-
-					this.GetSquadra().remove(db.giocatori[j]);
-					s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);	
-					System.out.println("Scambio effettuato con successo!");
-				}
-				else System.out.println("Il giocatore ha rifiutato l'offerta");
-			}
-			else System.out.println("La squadra ha rifiutato l'offerta");
-
-		else if(db.giocatori[i] instanceof Centrocampista)
-			TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
-
-			else if(db.giocatori[i] instanceof Attaccante)
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
-			else
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);*/
 	}
 	///////////////////////////////////////////////****************************************/////////////////////////////////////////////	
 
@@ -172,12 +145,7 @@ public class SquadraAvversaria extends Squadra{
 						db.giocatori[i].getValoreMercato()+"€"+ "Accetti? ","Attenzione",dialogResult);
 
 				if(dialogResult == JOptionPane.YES_OPTION)
-					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.giocatori[i].getValoreMercato());
-				/*this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
-					db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-					this.GetSquadra().add(db.giocatori[i]);
-					squadrautente.SetBudgetAdd(db.giocatori[i].getValoreMercato());
-					squadrautente.GetSquadra().remove(db.giocatori[i]);*/   				
+					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.giocatori[i].getValoreMercato());				
 				else
 				{
 					double offerta = 0;
@@ -193,16 +161,7 @@ public class SquadraAvversaria extends Squadra{
 						int indicesquadraavversaria = SearchSquadra(s1,i);
 						if(this.GetBudget()>db.giocatori[i].getValoreMercato())
 							if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-
 								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
-						/*if(((Math.random()*10)+1)>6)
-								{
-									this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
-									db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-									this.GetSquadra().add(db.giocatori[i]);
-									s1[indicesquadraavversaria].SetBudgetAdd(db.giocatori[i].getValoreMercato());
-									s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);
-								}*/
 							else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
 								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
 
@@ -220,14 +179,7 @@ public class SquadraAvversaria extends Squadra{
 				if(this.GetBudget()>db.giocatori[i].getValoreMercato()) 
 					if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
-				/*if(((Math.random()*10)+1)>6)
-						{
-							this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
-							db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-							this.GetSquadra().add(db.giocatori[i]);
-							s1[indicesquadraavversaria].SetBudgetAdd(db.giocatori[i].getValoreMercato());
-							s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);
-						}*/
+
 					else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
 
@@ -244,14 +196,6 @@ public class SquadraAvversaria extends Squadra{
 			if(this.GetBudget()>db.giocatori[i].getValoreMercato())
 				if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
-			/*if(((Math.random()*10)+1)>6)
-					{
-						this.SetBudgetRemove(db.giocatori[i].getValoreMercato());
-						db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-						this.GetSquadra().add(db.giocatori[i]);
-						s1[indicesquadraavversaria].SetBudgetAdd(db.giocatori[i].getValoreMercato());
-						s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);
-					}*/
 
 				else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
 					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
@@ -284,9 +228,6 @@ public class SquadraAvversaria extends Squadra{
 		return percent;
 	}
 
-
-	//PARLARE CON SIMONE
-	// NOTE - qui non so che cosa devo controllare.
 	public Giocatore[] OrganizzaSquadra(){
 		Giocatore array[] = new Giocatore [15];
 		int j = 0;

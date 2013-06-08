@@ -130,14 +130,14 @@ class Portiere extends Giocatore
 		media = (byte)(media/18);
 	}
 
-	/*
 
 	public String toString()
 	{
-		return(super.toString() + "\n" + "Statistiche specifiche: " + "\n" + "Doti aeree: " + getDotiAeree() + "\n" + "agilita: " + getagilita() + "\n" + "Comunicazione: " + getComunicazione() + "\n" + "Bloccaggio tiri: " + getBloccareTiri() + "\n" + "Calciare" + getCalciare() + "\n" + "Riflessi: " + getRiflessi() + "\n" + "Rimessa" + getRimessa() + "\n");
+		return(super.toString() + "\n" + "Statistiche specifiche: " + "\n" + "Doti aeree: " + getDotiAeree() + "\n" + "agilita: " + 
+				getAgilita() + "\n" + "Comunicazione: " + getComunicazione() + "\n" + "Bloccaggio tiri: " + getBloccareTiri() + "\n" + "Calciare" + 
+				getCalciare() + "\n" + "Riflessi: " + getRiflessi() + "\n" + "Rimessa" + getRimessa() + "\n");
 	}
 
-	 */
 
 	//METODI!
 

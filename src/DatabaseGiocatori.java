@@ -85,7 +85,7 @@ public class DatabaseGiocatori {
 
 
 
-	private static Giocatore giocatore(String line) {
+	private Giocatore giocatore(String line) {
 		String[] giocatoreString = line.split(",");
 
 		String ruolo = giocatoreString[0]; // Difensore, Centrocampista, Attaccante o Portiere
@@ -132,7 +132,7 @@ public class DatabaseGiocatori {
 		byte riflessi = INITIALISE;
 		byte rimessa = INITIALISE;
 
-		if(ruolo == CENTROCAMPISTA || ruolo == ATTACCANTE || ruolo == DIFENSORE){
+		if(ruolo.equalsIgnoreCase(CENTROCAMPISTA) || ruolo.equalsIgnoreCase(ATTACCANTE) || ruolo.equalsIgnoreCase(DIFENSORE)){
 			cross = Byte.parseByte(giocatoreString[19]);
 			dribling = Byte.parseByte(giocatoreString[20]);
 			colpoDiTesta = Byte.parseByte(giocatoreString[21]);
@@ -166,7 +166,7 @@ public class DatabaseGiocatori {
 		// Inoltre ti ho aggiustato un pò gli else if, così il codice è + leggibile
 
 		Giocatore giocatore = null;
-		if (ruolo == CENTROCAMPISTA) {
+		if (ruolo.equalsIgnoreCase(CENTROCAMPISTA)) {
 			giocatore = new Centrocampista(nome, squadra, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
@@ -177,7 +177,7 @@ public class DatabaseGiocatori {
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 
 					abilitaCentrcampo, valoreGenerale, valoreMercato);
-		} else if(ruolo == PORTIERE) {
+		} else if(ruolo.equalsIgnoreCase(PORTIERE)) {
 			giocatore = new Portiere(nome, squadra, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
@@ -187,7 +187,7 @@ public class DatabaseGiocatori {
 					dotiAeree, agilita, comunicazione, 
 					bloccareTiro, calciare, riflessi, 
 					rimessa, valoreGenerale, valoreMercato);
-		} else if (ruolo == ATTACCANTE) {
+		} else if (ruolo.equalsIgnoreCase(ATTACCANTE)) {
 			giocatore = new Attaccante(nome, squadra, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
@@ -198,7 +198,7 @@ public class DatabaseGiocatori {
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 
 					abilitaCentrcampo, valoreGenerale, valoreMercato);
-		} else if(ruolo == DIFENSORE) {
+		} else if(ruolo.equalsIgnoreCase(DIFENSORE)) {
 			giocatore = new Difensore(nome, squadra, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 

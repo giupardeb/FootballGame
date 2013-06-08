@@ -18,32 +18,8 @@ public class SquadraUmano extends Squadra{
 		int i = Search(Cognomes);
 		int j = Search(Cognomes1);
 
-		if(i!=INITIALISE && j!=INITIALISE){
-
-			if(db.giocatori[i] instanceof Difensore){
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,s1);
-
-				/*if(((Difensore)db.giocatori[i]).getDotiRuolo()>((Difensore)db.giocatori[j]).getDotiRuolo()){
-					if((int)(Math.random()*5)+1<3){
-						this.GetSquadra().add(db.giocatori[i]);
-						s1.GetSquadra().add(db.giocatori[j]);
-						db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-						db.giocatori[j].setNomeSquadra(s1.GetNomeSquadra());
-						this.GetSquadra().remove(db.giocatori[j]);
-						s1.GetSquadra().remove(db.giocatori[i]);	
-						System.out.println("Scambio effettuato con successo!");
-					}
-					else System.out.println("Il giocatore ha rifiutato l'offerta");
-				}
-				else System.out.println("La squadra ha rifiutato l'offerta");*/
-			}
-			else if(db.giocatori[i] instanceof Centrocampista){
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,s1);
-			}
-			else if(db.giocatori[i] instanceof Attaccante){
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,s1);
-			}
-		}
+		if(i!=INITIALISE && j!=INITIALISE)
+			TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,s1);
 	}
 
 
