@@ -10,14 +10,22 @@ public class DatabaseGiocatori {
 	private static final String ATTACCANTE = "Attaccante";
 	private static final String DIFENSORE = "Difensore";
 	ArrayList <String> squadrecreate = new ArrayList<String>();
-	
-	private static final int NUMERO_SQUADRE = 19;
-	String squadreesistenti[] = new String [NUMERO_SQUADRE]; 
+	String squadreesistenti[] = new String [20];
 
-	public static Giocatore giocatori[];	
+	public Giocatore giocatori[];
 
+
+
+
+
+
+
+	///////////////////////////////////////////////////****////////////////////////////////////////////////	
 	//crea il database
+
 	public DatabaseGiocatori(){
+
+
 		squadreesistenti[0] = "Atalanta";
 		squadreesistenti[1] = "Catania";
 		squadreesistenti[2] = "Parma";
@@ -32,11 +40,16 @@ public class DatabaseGiocatori {
 		squadreesistenti[11] = "Roma";
 		squadreesistenti[12] = "Sampdoria";
 		squadreesistenti[13] = "Genoa";		
-		squadreesistenti[14] = "Siene";
+		squadreesistenti[14] = "Siena";
 		squadreesistenti[15] = "Udinese";
 		squadreesistenti[16] = "Bologna";
 		squadreesistenti[17] = "Fiorentina";
 		squadreesistenti[18] = "Napoli";
+		squadreesistenti[19] = "Torino";
+
+
+
+
 
 		try{
 			giocatori = read("database.csv");
@@ -48,16 +61,14 @@ public class DatabaseGiocatori {
 
 	}
 
-	/**
-	 * Legge un file csv contenente tutti i giocatori e i loro dati. 
-	 * @param fileName (esempio: "giocatori.csv")
-	 * @return array di giocatori
-	 * @throws IOException
-	 */
+
+
+
+
 	private  Giocatore[] read(String fileName)  throws IOException  {
 		// Ha più senso avere queste due linee dentro
 		ArrayList <Giocatore> players  = new ArrayList<Giocatore>();
-		int i = 0; // TIP: usa degli spazi invece di i=0. il codice è più leggibile.
+		int i = 0; 
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String currentLine;
@@ -66,7 +77,7 @@ public class DatabaseGiocatori {
 			players.add(player);
 		}
 		br.close();
-		return (Giocatore[]) players.toArray(); //che ne pensi di sta cosa SIMO? 
+		return players.toArray(new Giocatore[players.size()]); 
 	}
 
 
@@ -74,11 +85,6 @@ public class DatabaseGiocatori {
 
 
 
-	/**
-	 * Data una string, il seguente metodo ritorna un oggetto giocatore 
-	 * @param line
-	 * @return giocatore
-	 */
 	private static Giocatore giocatore(String line) {
 		String[] giocatoreString = line.split(",");
 
@@ -219,34 +225,25 @@ public class DatabaseGiocatori {
 
 	}
 
-	/**
-	 * Dato il nome di una squadra, ritorna i suoi giocatori
-	 * @param nomeSquadra
-	 * @return giocatori di una squadra
-	 */
-	private ArrayList <Giocatore> GetGiocatori(String nomeSquadra){
+	private ArrayList <Giocatore> GetGiocatori(String nome){
 		ArrayList <Giocatore> squadra = new ArrayList <Giocatore>();
-		for(int i = 0; i<giocatori.length;i++)
-			if(giocatori[i].getSquadra().equalsIgnoreCase(nomeSquadra)) squadra.add(giocatori[i]);
+		for(int i = 0; i<giocatori.length; i++)
+			if(giocatori[i].getSquadra().equalsIgnoreCase(nome)) squadra.add(giocatori[i]);
 
 		return squadra;
 
 	}
 
-	/**
-	 * Crea una squadra
-	 * @return squadra
-	 */
 	public SquadraAvversaria CreaSquadre(){
 		String nomesquadradacreare = "";
 		for(int i = 0; i<squadreesistenti.length;i++)
 			for(String j : squadrecreate)
-				if(!(squadreesistenti[i].equalsIgnoreCase(j))) nomesquadradacreare = j;
-
+				if((squadreesistenti[i].equalsIgnoreCase(j))) nomesquadradacreare = j; //restituisce un boolean?
 
 		squadrecreate.add(nomesquadradacreare);
 
 		SquadraAvversaria squadra = new SquadraAvversaria(GetGiocatori(nomesquadradacreare),nomesquadradacreare);
 		return squadra;
+
 	}
 }

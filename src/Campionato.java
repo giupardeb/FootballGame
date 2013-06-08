@@ -6,49 +6,49 @@ import javax.swing.JOptionPane;
 public class Campionato 
 {
 	SquadraUmano squadra;
-	
+
 	SquadraAvversaria squadre[] = new SquadraAvversaria [18];
-	
+
 	DatabaseGiocatori db = new DatabaseGiocatori();
-	
+
 	boolean continua = false;
-	
-	
+
+
 	public Campionato(String miasquadra) //la squadra che l'utente sceglie viene decisa nel main.. tanto per fargli fare qualcosa dal main.. 
 	{
-		
+
 		squadra = db.CreaSquadra(miasquadra);
-		
-		for(int i=0; i<squadre.length;i++)
+
+		for(int i = 0; i<squadre.length; i++)
 			squadre[i] = db.CreaSquadre();
-		
-		
+
+
 		System.out.println("1.Vedere la classifica attuale");
 		System.out.println("2.Gioca una partita");
 		System.out.println("3.Calciomercato");
 		System.out.println("4.Esci");
-		
+
 		int scelta = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
-		
+
 		switch(scelta){
-		
+
 		case 1: System.out.println("Metodo CLASSIFICA");
 		break;
-		
+
 		case 2: System.out.println("Metodo partita");
 		break;
-		
+
 		case 3: 
 			//inserire un ciclo in maniera tale che le squadre avversarie facciano il calciomercato e controllino se è meglio effettuare uno
 			//scambio oppure un' acquisto
-			
+
 			System.out.println("1. acquista");
 			System.out.println("2.scambio");
 			Giocatore [] giocatoridavisualizzare = null;
-				
+
 			int scelta1 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
 			switch(scelta1){
-				
+
 			case 1:
 				System.out.println("1.Attaccante");
 				System.out.println("2.Centrocampista");
@@ -56,129 +56,129 @@ public class Campionato
 				System.out.println("4.Portiere");
 				int scelta2 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
 				switch(scelta2){
-						
+
 				case 1: 
-					 giocatoridavisualizzare = VisualizzaGiocatori("Attacante");
+					giocatoridavisualizzare = VisualizzaGiocatori("Attacante");
 					for(int i=0; i<giocatoridavisualizzare.length;i++){
 						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE PARLARNE ASSIEME
 					}
 					do{
-						 String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
-						 String	giocatoresquadra [] = sceltagiocatore.split(",");
-						 squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
-						 System.out.println("Vuoi acquistare ancora? si o no: ");
-						 System.out.print("inserisci offerta");
-						 Scanner tastiera = new Scanner (System.in);
-						 String ricontinua = tastiera.nextLine(); //continua ad acquistare
-						 tastiera.close();
-						 if(ricontinua.equalsIgnoreCase("si")) continua = true;
-						}
+						String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+						String	giocatoresquadra [] = sceltagiocatore.split(",");
+						squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
+						System.out.println("Vuoi acquistare ancora? si o no: ");
+						System.out.print("inserisci offerta");
+						Scanner tastiera = new Scanner (System.in);
+						String ricontinua = tastiera.nextLine(); //continua ad acquistare
+						tastiera.close();
+						if(ricontinua.equalsIgnoreCase("si")) continua = true;
+					}
 					while(continua == true);
-				break;
-						
+					break;
+
 				case 2:	
-					 giocatoridavisualizzare = VisualizzaGiocatori("Centrocampista");
+					giocatoridavisualizzare = VisualizzaGiocatori("Centrocampista");
 					for(int i=0; i<giocatoridavisualizzare.length;i++){
 						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE PARLARNE ASSIEME
 					}
 					do{
-						 String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
-						 String	giocatoresquadra [] = sceltagiocatore.split(",");
-						 squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
-						 System.out.println("Vuoi acquistare ancora? si o no: ");
-						 System.out.print("inserisci offerta");
-						 Scanner tastiera = new Scanner (System.in);
-						 String ricontinua = tastiera.nextLine(); //continua ad acquistare
-						 tastiera.close();
-						 if(ricontinua.equalsIgnoreCase("si")) continua = true;
-						}
+						String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+						String	giocatoresquadra [] = sceltagiocatore.split(",");
+						squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
+						System.out.println("Vuoi acquistare ancora? si o no: ");
+						System.out.print("inserisci offerta");
+						Scanner tastiera = new Scanner (System.in);
+						String ricontinua = tastiera.nextLine(); //continua ad acquistare
+						tastiera.close();
+						if(ricontinua.equalsIgnoreCase("si")) continua = true;
+					}
 					while(continua == true);
-				break;
-				
+					break;
+
 				case 3:
 					giocatoridavisualizzare = VisualizzaGiocatori("Difensore");
 					for(int i=0; i<giocatoridavisualizzare.length;i++){
 						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE PARLARNE ASSIEME
 					}
 					do{
-						 String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
-						 String	giocatoresquadra [] = sceltagiocatore.split(",");
-						 squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
-						 System.out.println("Vuoi acquistare ancora? si o no: ");
-						 System.out.print("inserisci offerta");
-						 Scanner tastiera = new Scanner (System.in);
-						 String ricontinua = tastiera.nextLine(); //continua ad acquistare
-						 tastiera.close();
-						 if(ricontinua.equalsIgnoreCase("si")) continua = true;
-						}
+						String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+						String	giocatoresquadra [] = sceltagiocatore.split(",");
+						squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
+						System.out.println("Vuoi acquistare ancora? si o no: ");
+						System.out.print("inserisci offerta");
+						Scanner tastiera = new Scanner (System.in);
+						String ricontinua = tastiera.nextLine(); //continua ad acquistare
+						tastiera.close();
+						if(ricontinua.equalsIgnoreCase("si")) continua = true;
+					}
 					while(continua == true);
-				break;
-				
+					break;
+
 				case 4:
 					giocatoridavisualizzare = VisualizzaGiocatori("Portiere");
 					for(int i=0; i<giocatoridavisualizzare.length;i++){
 						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE PARLARNE ASSIEME
 					}
 					do{
-						 String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
-						 String	giocatoresquadra [] = sceltagiocatore.split(",");
-						 squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
-						 System.out.println("Vuoi acquistare ancora? si o no: ");
-						 System.out.print("inserisci offerta");
-						 Scanner tastiera = new Scanner (System.in);
-						 String ricontinua = tastiera.nextLine(); //continua ad acquistare
-						 tastiera.close();
-						 if(ricontinua.equalsIgnoreCase("si")) continua = true;
-						}
+						String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+						String	giocatoresquadra [] = sceltagiocatore.split(",");
+						squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
+						System.out.println("Vuoi acquistare ancora? si o no: ");
+						System.out.print("inserisci offerta");
+						Scanner tastiera = new Scanner (System.in);
+						String ricontinua = tastiera.nextLine(); //continua ad acquistare
+						tastiera.close();
+						if(ricontinua.equalsIgnoreCase("si")) continua = true;
+					}
 					while(continua == true);
-				break;
-						
+					break;
+
 				}
 				break;
-				
-				case 2: System.out.println("Metodo scambio");
-				break;
-				
-				}
-		break;
-		
+
+			case 2: System.out.println("Metodo scambio");
+			break;
+
+			}
+			break;
+
 		case 4: System.out.println("esci dal gioco");
-		
-		
+
+
 		}
 
 	}
-	
-	
+
+
 	private int SearchSquadra(String nome){
 		for(int i = 0; i<squadre.length;i++)
 			if (squadre[i].GetNomeSquadra().equalsIgnoreCase(nome)) return i;
 		return -1;
-		
+
 	}
-	
+
 	private Giocatore [] VisualizzaGiocatori(String ruolo){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z=0; z<squadre.length;z++){
 			for(Giocatore i : ((SquadraAvversaria)squadre[z]).GetSquadra())
-			if(i.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(i);
+				if(i.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(i);
 		}
-		
+
 		return (Giocatore[]) giocatoridavisualizzare.toArray();
-		
+
 	}
-	
-	
-	
+
+
+
 	/*public Squadra partita (Squadra a,Squadra b){
 
 		boolean vinto;
 	   	Giocatore provvC = new Giocatore ();
        	Giocatore provvCavv = new Giocatore ();
        	Giocatore provvA = new Giocatore ();
-       	
-       	
-       	
+
+
+
 	    a.arrg[5].pallasi();
 	    provvC = a.arrg[5].cntrcaso(a.arrg[6],a.arrg[7]);
 	    //calcio d'inizio squadra A
