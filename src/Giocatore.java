@@ -21,7 +21,11 @@ abstract public class Giocatore
 	 
 	
 	
-	Giocatore(String cognome,String squadra,String nazionalita,byte velocita,byte resistenza,byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,boolean essenziale,byte mediaVoti,byte valoreGenerale,double valoreMercato) 
+	Giocatore(String cognome,String squadra,String nazionalita,byte velocita,
+			byte resistenza,byte forza,byte morale,byte eta,byte condizione,
+			byte tecnica,byte aggressivita,byte creativita,byte decisione,
+			byte carisma,String posizione,byte giocoDiSquadra,boolean essenziale,
+			byte mediaVoti,byte valoreGenerale,double valoreMercato) 
 	{
 		anagrafe = new Anagrafe(cognome,eta,nazionalita);
 		this.squadra=squadra;
@@ -48,11 +52,6 @@ abstract public class Giocatore
 	
 	public Anagrafe GetAnagrafe(){
 		return anagrafe;
-	}
-	
-	public String getSquadra()
-	{
-		return(squadra);
 	}
 	
 	public byte getVelocita()
@@ -93,6 +92,10 @@ abstract public class Giocatore
 	public byte getAggressivita()
 	{
 		return(aggressivita);
+	}
+	
+	public String getSquadra(){
+		return squadra;
 	}
 	
 	public byte getCreativita()
@@ -141,98 +144,89 @@ abstract public class Giocatore
 	
 	public void setNomeSquadra(String parola)
 	{
-		squadra=parola;
+		squadra = parola;
 	}
 	
 	public void setvelocita(byte valore)
 	{
-		velocita+=valore;
+		velocita += valore;
 		
-		if(velocita>=100)
-			velocita=100;
+		if(velocita >= 100)
+			velocita = 100;
 	}
 	
 	public void setResistenza(byte valore)
 	{
-		resistenza+=valore;
+		resistenza += valore;
 		
-		if(resistenza>=100)
-			resistenza=100;
+		if(resistenza >= 100)
+			resistenza = 100;
 		
 	}
 	
 	public void setForza(byte valore)
 	{
-		forza+=valore;
+		forza += valore;
 		
-		if(forza>=100)
-			forza=100;
+		if(forza >= 100)
+			forza = 100;
 		
 	}
 	
 	public void setMorale(byte valore)
 	{
-		morale+=valore;
+		morale += valore;
 		
-		if(morale>=100)
-			morale=100;
+		if(morale >= 100)
+			morale = 100;
 	}
-	
-	/*public void seteta()  //come fai a creare un metodo set senza passaggio di parametri??=??
-	 * forse hai voluto mettere ciò per far si che il giocatore diventi più grande durante il gioco? se è così non è meglio
-	 * metterlo nel metodo crescita??
-	{
-		eta++;
-		if(eta>=40)
-			System.out.println("Attenzione!!! Giocatore prossimo al ritiro");
-	}*/
 	
 	public void setCondizione(byte valore)
 	{
-		condizione+=valore;
+		condizione += valore;
 		
-		if(condizione>=100)
-			condizione=100;
+		if(condizione >= 100)
+			condizione = 100;
 	}
 	
 	public void setTecnica(byte valore)
 	{
-		tecnica+=valore;
+		tecnica += valore;
 		
-		if(tecnica>=100)
-			tecnica=100;
+		if(tecnica >= 100)
+			tecnica = 100;
 	}
 	
 	public void setaggressivita(byte valore)
 	{
-		aggressivita+=valore;
+		aggressivita += valore;
 		
-		if(aggressivita>=100)
-			aggressivita=100;
+		if(aggressivita >= 100)
+			aggressivita = 100;
 	}
 	
 	public void setcreativita(byte valore)
 	{
-		creativita+=valore;
+		creativita += valore;
 		
-		if(creativita>=100)
-			creativita=100;
+		if(creativita >= 100)
+			creativita = 100;
 	}
 	
 	public void setDecisione(byte valore)
 	{
-		decisione+=valore;
+		decisione += valore;
 		
-		if(creativita>=100)
-			creativita=100;
+		if(decisione >= 100)
+			decisione = 100;
 	}
 	
 	public void setCarisma(byte valore) 
 	{
-		carisma+=valore;
+		carisma += valore;
 		
-		if(carisma>=100)
-			carisma=100;
+		if(carisma >= 100)
+			carisma = 100;
 	}
 	
 	public void setPosizione(byte valore)  //posizione nella matrice??
@@ -242,32 +236,32 @@ abstract public class Giocatore
 			
 	public void setGiocoDiSquadra(byte valore)
 	{
-		giocoDiSquadra+=valore;
+		giocoDiSquadra += valore;
 		
-		if(giocoDiSquadra>=100)
-			giocoDiSquadra=100;
+		if(giocoDiSquadra >= 100)
+			giocoDiSquadra = 100;
 	}
 	
 	
 	public void setEssenziale(boolean valore)
 	{
-		essenziale=valore;
+		essenziale = valore;
 	}
 	
 	public void setMediaVoti(double mediaVoti, int contatore)
 	{
-		mediaVoti/=contatore;
+		mediaVoti /= contatore;
 		
 	}
 	
 	public void setValoreMercato(double denaro)
 	{
-		if(denaro<=10000.01f)
+		if(denaro <= 10000.01f)
 		{
 			System.out.println("Valore Giocatore troppo basso il valore è rimasto invariato");
 		}
 		else 
-			valoreMercato=(byte)denaro;
+			valoreMercato = (byte)denaro;
 	}
 	
 	/*
@@ -280,7 +274,7 @@ abstract public class Giocatore
 	
 	abstract public void Crescita(byte valore);
 	abstract public int getDotiRuolo();
-	abstract public Giocatore SearchBestPlayer(Giocatore array[],int k);
+	//abstract public Giocatore SearchBestPlayer(Giocatore array[],int k);
 }
 
 

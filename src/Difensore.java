@@ -11,7 +11,7 @@ class Difensore extends AltriRuoli
 		int a=0;
 	}
 	
-public Giocatore SearchBestPlayer(Giocatore array[],int k){
+/*public Giocatore SearchBestPlayer(Giocatore array[],int k){
 		
 		Difensore tmp = this; //oggetto chiamante è un difensore
 		double sommatmp = 0;
@@ -19,7 +19,7 @@ public Giocatore SearchBestPlayer(Giocatore array[],int k){
 		double somma;
 	//	boolean trovato = false;
 		
-		for(int i=k+1; i<array.length/* && trovato !=true*/;i++){
+		for(int i=k+1; i<array.length/* && trovato !=true;i++){
 			if(array[i] instanceof Difensore ){
 				 somma = ((Difensore)array[i]).getValoreGenerale();
 				if((sommatmp<somma) && (this.getCondizione()<array[i].getCondizione())) {
@@ -30,7 +30,7 @@ public Giocatore SearchBestPlayer(Giocatore array[],int k){
 		}
 		return tmp;
 		
-	}
+	}*/
 
 
 	public int getDotiRuolo(){

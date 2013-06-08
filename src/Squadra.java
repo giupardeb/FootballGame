@@ -4,6 +4,10 @@ import java.util.*;
 
 
 abstract public class  Squadra{
+	private final int RandomNumber = 10;
+	private final int RandomNumber1 = 2;
+
+	static DatabaseGiocatori db = new DatabaseGiocatori();
 	String nome;
 	private double budget;
 	private ArrayList <Giocatore> miasquadra = new ArrayList<Giocatore>();
@@ -18,8 +22,6 @@ abstract public class  Squadra{
 	int abilitaDifesa; //serve per il pronostico
 	int abilitaCentrocampo; //serve per il pronostico
 	int abilitaAttacco; //serve per il pronostico
-	//FINE MODIFICA
-
 
 	//Costruttore di Squadra!!!
 	public Squadra(ArrayList <Giocatore> vett, String nome){
@@ -64,40 +66,40 @@ abstract public class  Squadra{
 		this.budget = b + (double)(Math.random()*1000)+1;
 
 	}
+
 	//serve per il pronostico, sara la somma dei gol fatti, subiti, vittorie sconfitte, pareggi + le abilita totali di difesa,attacco,centrocampo
 	public void setTotalePronostico(){
 		totalepronostico = (getVittorie()+ getPareggi()-getSconfitte()+getGolFatti()-getGolSubiti() + getAbilitaCentrocampo()+getAbilitaAttacco()+getAbilitaDifesa());
 	}
 
-	private int getAbilitaDifesa() {
+	public int getAbilitaDifesa() {
 		return abilitaDifesa;
 	}
-	private int getAbilitaAttacco() {
+	public int getAbilitaAttacco() {
 		return abilitaAttacco;
 	}
-	private int getAbilitaCentrocampo() {
+	public int getAbilitaCentrocampo() {
 		return abilitaCentrocampo;
 	}
 
-	//FINE MODIFICA
-
-	private int getGolSubiti() {
+	public int getGolSubiti() {
 		return golsubiti;
 	}
 
-	private int getGolFatti() {
+	public int getGolFatti() {
 		return golfatti;
 	}
 
-	private int getSconfitte() {
+	public int getSconfitte() {
 		return sconfitte;
 	}
 
-	private int getPareggi() {
+	public int getPareggi() {
 		return pareggi;
 	}
 
-	private int getVittorie() {
+
+	public int getVittorie() {
 		return vittorie;
 	}
 
@@ -114,14 +116,6 @@ abstract public class  Squadra{
 	}
 
 
-	// XXX - Aggiunto da Simon
-	public ArrayList <Giocatore> getGiocatori() {
-		// TODO
-		return null;
-	}
-	
-	//MODIFICTO  14 MAGGIO ORE 18:00
-
 	public int getTotalePronostico(){
 		return totalepronostico;
 	}
@@ -137,32 +131,45 @@ abstract public class  Squadra{
 		golsubiti++;
 	}
 
-
-
-	abstract public void scambio(String Cognomes, String Cognomes1, Squadra s1);
-	abstract public void acquisto(String Cognome,Squadra s1);
+	//	abstract public void scambio(String Cognomes, String Cognomes1, Squadra s1);
+	//	abstract public void acquisto(String Cognome,Squadra s1);
 	abstract public Giocatore[] OrganizzaSquadra();
 	//CREDO CHE CREARE IL METODO VENDITA SIA INUTILE... DATO CHE ABBIAMO ACQUISTI CHE IN UN CERTO SENSO GUARDANDOLA DAL 
 	//PUNTO DI VISTA DELLA SQUADRAS1 È UNA VENDITA..
 
 	///////////////////////////////////////////////****************************************/////////////////////////////////////////////	
 
+	public void trasferimento(Class<? extends Squadra> clazz){
 
-
-	protected Giocatore Search(Squadra s,String Cognome){
-		for(Giocatore i : s.GetSquadra()){
-			if(i.GetAnagrafe().GetCognome().equalsIgnoreCase(Cognome)){
-				return i;
-			}
-		}
-		return null;
 	}
-
+	
+	
 	///////////////////////////////////////////////////************************************/////////////////////////////////////
 
 
 	public ArrayList<Giocatore> GetSquadra(){
 		return miasquadra;
+	}
+	public int GetTotaleDifensori(){
+		int d = 0;
+		for(Giocatore i : GetSquadra()) if (i instanceof Difensore) d++;
+		return d;
+	}
+
+	public int GetTotaleCentrocampisti(){
+		int d = 0;
+		for(Giocatore i : GetSquadra()) if (i instanceof Centrocampista) d++;
+		return d;
+	}
+	public int GetTotalePortieri(){
+		int d = 0;
+		for(Giocatore i : GetSquadra()) if (i instanceof Portiere) d++;
+		return d;
+	}
+	public int GetTotaleAttaccanti(){
+		int d = 0;
+		for(Giocatore i : GetSquadra()) if (i instanceof Attaccante) d++;
+		return d;
 	}
 
 	public double GetBudget(){
@@ -182,37 +189,36 @@ abstract public class  Squadra{
 	public void Pronostico(Squadra a, SquadraAvversaria b){
 		if(a.getTotalePronostico() == 0){
 			if(b.getTotalePronostico() == 0){
-				int rdm = (int)(Math.random()*10);
+				int rdm = (int)(Math.random()*RandomNumber);
 				if(rdm <5) System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 				else System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 			}
 			else {
-				int fortuna = (int)(Math.random()*2);
-				int rdm = (int)(Math.random()*10)+fortuna;
+				int fortuna = (int)(Math.random()*RandomNumber1);
+				int rdm = (int)(Math.random()*RandomNumber)+fortuna;
 				if(rdm <=3) System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 				else System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 			}
 		}
 		else if (b.getTotalePronostico() == 0){
 
-			int fortuna = (int)(Math.random()*2);
-			int rdm = (int)(Math.random()*10)+fortuna;
+			int fortuna = (int)(Math.random()*RandomNumber1);
+			int rdm = (int)(Math.random()*RandomNumber)+fortuna;
 			if(rdm <=3) System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 			else System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 		}
 		else if(a.getTotalePronostico()<b.getTotalePronostico()){
-			int fortuna = (int)(Math.random()*2);
-			int rdm = (int)(Math.random()*10)+fortuna;
+			int fortuna = (int)(Math.random()*RandomNumber1);
+			int rdm = (int)(Math.random()*RandomNumber)+fortuna;
 			if(rdm <=3) System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 			else System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 		}
 		else{
-			int fortuna = (int)(Math.random()*2);
-			int rdm = (int)(Math.random()*10)+fortuna;
+			int fortuna = (int)(Math.random()*RandomNumber1);
+			int rdm = (int)(Math.random()*RandomNumber)+fortuna;
 			if(rdm <=3) System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 			else System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 		}
 	}
-	//MODIFICTO  14 MAGGIO ORE 18:00
 
 }
