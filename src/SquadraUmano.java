@@ -66,7 +66,8 @@ public class SquadraUmano extends Squadra{
 	}
 
 	private double CalcPercent(double valoremercato){
-		double sconto = valoremercato * 20 /100;
+		double sconto = 0;
+		sconto = valoremercato * 20 /100;
 		return valoremercato-sconto;
 	}
 
@@ -90,7 +91,7 @@ public class SquadraUmano extends Squadra{
 		if(arrayusiliario.size()<MIN_GIOCATORY_PER_MERCATO) System.out.println("non puoi organizzarti la squadra poichè hai meno di 15 giocatori, prova ad acquistare qualcuno"); //eventualmente metodo acquista
 		else{
 			// NOTE - perché 14 e non tutta la squadra?
-			for(int i=0;i<MIN_GIOCATORY_PER_MERCATO;i++){
+			for(int i = 0;i<MIN_GIOCATORY_PER_MERCATO;i++){
 				String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti far giocare: ")); //input da finestra
 				int z = Search(sceltagiocatore); 
 				array[i] = db.giocatori[z];

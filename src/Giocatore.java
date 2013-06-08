@@ -230,9 +230,9 @@ abstract public class Giocatore
 	}
 
 	public void setPosizione(byte valore)  //posizione nella matrice??
-			{
+	{
 
-			}
+	}
 
 	public void setGiocoDiSquadra(byte valore)
 	{

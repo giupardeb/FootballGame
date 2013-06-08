@@ -121,7 +121,7 @@ public class SquadraAvversaria extends Squadra{
 
 	// NOTE - lo stesso discorso di su. Hai tanto codice che è uguale tranne per poche cose. Riduci! 
 	public void acquisto(SquadraAvversaria[] s1,SquadraUmano squadrautente){ 
-		String ruolodaacquistare = "";
+		String ruolodaacquistare = new String ("");
 		if(GetTotaleDifensori()<MINDIFENSORI) ruolodaacquistare = "difensore";
 		else if(GetTotaleCentrocampisti()<MINCENTROCAMPISTI) ruolodaacquistare = "centrcampista";
 		else if(GetTotaleAttaccanti()<MINATTACCANTI) ruolodaacquistare = "attaccante";

@@ -9,17 +9,18 @@ public class Campionato
 
 	SquadraAvversaria squadre[] = new SquadraAvversaria [18];
 
-	DatabaseGiocatori db = new DatabaseGiocatori();
+	DatabaseGiocatori db;
 
 	boolean continua = false;
 
 
 	public Campionato(String miasquadra) //la squadra che l'utente sceglie viene decisa nel main.. tanto per fargli fare qualcosa dal main.. 
 	{
+		db = new DatabaseGiocatori();
 		squadra = db.CreaSquadra(miasquadra);
 
 		for(int i = 0; i<squadre.length; i++)
-			squadre[i] = db.CreaSquadre();
+			squadre[i] = db.CreaSquadre(miasquadra);
 
 
 		System.out.println("1.Vedere la classifica attuale");
@@ -59,7 +60,7 @@ public class Campionato
 				case 1: 
 					giocatoridavisualizzare = VisualizzaGiocatori("Attacante");
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
-						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE
+						System.out.println(i+". "+giocatoridavisualizzare[i]); 
 
 					Trasferimento();
 					//do{
@@ -81,7 +82,7 @@ public class Campionato
 				case 2:
 					giocatoridavisualizzare = VisualizzaGiocatori("Centrocampista");
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
-						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE
+						System.out.println(i+". "+giocatoridavisualizzare[i]); 
 
 					Trasferimento();
 
@@ -90,15 +91,14 @@ public class Campionato
 				case 3:
 					giocatoridavisualizzare = VisualizzaGiocatori("Difensore");
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
-						System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE
+						System.out.println(i+". "+giocatoridavisualizzare[i]);
 
 					Trasferimento();
 					break;
 
 				case 4: giocatoridavisualizzare = VisualizzaGiocatori("Portiere");
 				for(int i = 0; i<giocatoridavisualizzare.length;i++)
-					System.out.println(i+". "+giocatoridavisualizzare[i]); //SISTEMARE IL TOSTRING NELLA CLASSE GIOCATORE
-
+					System.out.println(i+". "+giocatoridavisualizzare[i]);
 				Trasferimento();
 				break;
 
@@ -125,13 +125,10 @@ public class Campionato
 
 	private Giocatore [] VisualizzaGiocatori(String ruolo){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
-		for(int z=0; z<squadre.length;z++){
-			for(Giocatore i : ((SquadraAvversaria)squadre[z]).GetSquadra())
-				if(i.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(i);
-		}
-
+		for(int z = 0; z<squadre.length;z++)
+			for(Giocatore giocatore : ((SquadraAvversaria)squadre[z]).GetSquadra())
+				if(giocatore.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(giocatore);
 		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
-
 	}
 
 	private void Trasferimento(){

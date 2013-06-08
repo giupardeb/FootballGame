@@ -14,17 +14,10 @@ public class DatabaseGiocatori {
 
 	public Giocatore giocatori[];
 
-
-
-
-
-
-
 	///////////////////////////////////////////////////****////////////////////////////////////////////////	
 	//crea il database
 
 	public DatabaseGiocatori(){
-
 
 		squadreesistenti[0] = "Atalanta";
 		squadreesistenti[1] = "Catania";
@@ -68,7 +61,6 @@ public class DatabaseGiocatori {
 	private  Giocatore[] read(String fileName)  throws IOException  {
 		// Ha più senso avere queste due linee dentro
 		ArrayList <Giocatore> players  = new ArrayList<Giocatore>();
-		int i = 0; 
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String currentLine;
@@ -158,10 +150,6 @@ public class DatabaseGiocatori {
 			valoreMercato = Double.parseDouble(giocatoreString[27]);
 		}
 
-
-		// TODO - per ogni caratteristica! 
-		// TODO casting per (byte)'s e booleans 
-
 		// NOTE devi definire il giocatore, altrimenti non lo puoi ritornare.
 		// Inoltre ti ho aggiustato un pò gli else if, così il codice è + leggibile
 
@@ -224,7 +212,7 @@ public class DatabaseGiocatori {
 		return squadraMia;
 
 	}
-
+//NON AGGIUNGE I GIOCATORI!!!!
 	private ArrayList <Giocatore> GetGiocatori(String nome){
 		ArrayList <Giocatore> squadra = new ArrayList <Giocatore>();
 		for(int i = 0; i<giocatori.length; i++)
@@ -234,16 +222,15 @@ public class DatabaseGiocatori {
 
 	}
 
-	public SquadraAvversaria CreaSquadre(){
-		String nomesquadradacreare = "";
+	public SquadraAvversaria CreaSquadre(String squadrautente){
+		String nomesquadradacreare = new String("");
 		for(int i = 0; i<squadreesistenti.length;i++)
 			for(String j : squadrecreate)
-				if((squadreesistenti[i].equalsIgnoreCase(j))) nomesquadradacreare = j; //restituisce un boolean?
+				if(!(squadreesistenti[i].equalsIgnoreCase(squadrautente))) nomesquadradacreare = j;
 
 		squadrecreate.add(nomesquadradacreare);
 
 		SquadraAvversaria squadra = new SquadraAvversaria(GetGiocatori(nomesquadradacreare),nomesquadradacreare);
 		return squadra;
-
 	}
 }

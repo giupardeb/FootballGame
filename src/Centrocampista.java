@@ -5,7 +5,7 @@ class Centrocampista extends AltriRuoli
 			boolean essenziale,byte mediaVoti,byte cross,byte dribling,byte colpoDiTesta,byte passaggio, byte tiro, byte contrasto, 
 			byte movimento, byte abilitaDifesa,byte abilitaAttacco,byte abilitaCentrocampo,byte valoreGenerale,double valoreMercato)
 	{
-		super(cognome,nazionalita,squadra,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,
+		super(cognome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,
 				giocoDiSquadra,essenziale,mediaVoti,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,
 				abilitaCentrocampo,valoreGenerale,valoreMercato);
 	}
