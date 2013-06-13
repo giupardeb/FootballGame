@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +10,8 @@ public class DatabaseGiocatori {
 	private static final String PORTIERE = "Portiere";
 	private static final String ATTACCANTE = "Attaccante";
 	private static final String DIFENSORE = "Difensore";
-	ArrayList <String> squadrecreate = new ArrayList<String>();
-	String squadreesistenti[] = new String [20];
+	Stack<String> squadreesistenti = new Stack<String>();
+
 
 	public Giocatore giocatori[];
 
@@ -19,30 +20,28 @@ public class DatabaseGiocatori {
 
 	public DatabaseGiocatori(){
 
-		squadreesistenti[0] = "Atalanta";
-		squadreesistenti[1] = "Catania";
-		squadreesistenti[2] = "Parma";
-		squadreesistenti[3] = "Chievoverona";
-		squadreesistenti[4] = "Inter";
-		squadreesistenti[5] = "Milan";
-		squadreesistenti[6] = "Juventus";
-		squadreesistenti[7] = "Palermo";
-		squadreesistenti[8] = "Cagliari";
-		squadreesistenti[9] = "Pescara";
-		squadreesistenti[10] = "Lazio";
-		squadreesistenti[11] = "Roma";
-		squadreesistenti[12] = "Sampdoria";
-		squadreesistenti[13] = "Genoa";		
-		squadreesistenti[14] = "Siena";
-		squadreesistenti[15] = "Udinese";
-		squadreesistenti[16] = "Bologna";
-		squadreesistenti[17] = "Fiorentina";
-		squadreesistenti[18] = "Napoli";
-		squadreesistenti[19] = "Torino";
+		//Sto creando una pila, in maniera tale da facilitarmi il compito di creare le squadre avversarie.
 
-
-
-
+		squadreesistenti.push("Atalanta");
+		squadreesistenti.push("Catania");
+		squadreesistenti.push("Parma");
+		squadreesistenti.push("Chievo");
+		squadreesistenti.push("Inter");
+		squadreesistenti.push("Milan");
+		squadreesistenti.push("Juventus");
+		squadreesistenti.push("Palermo");
+		squadreesistenti.push("Cagliari");
+		squadreesistenti.push("Pescara");
+		squadreesistenti.push("Lazio");
+		squadreesistenti.push("Roma");
+		squadreesistenti.push("Sampdoria");
+		squadreesistenti.push("Genoa");
+		squadreesistenti.push("Siena");
+		squadreesistenti.push("Udinese");
+		squadreesistenti.push("Bologna");
+		squadreesistenti.push("Fiorentina");
+		squadreesistenti.push("Napoli");
+		squadreesistenti.push("Torino");
 
 		try{
 			giocatori = read("database.csv");
@@ -206,13 +205,12 @@ public class DatabaseGiocatori {
 
 
 	public SquadraUmano CreaSquadra(String nome) {
-		squadrecreate.add(nome);
 
 		SquadraUmano squadraMia = new SquadraUmano(GetGiocatori(nome),nome);
 		return squadraMia;
 
 	}
-//NON AGGIUNGE I GIOCATORI!!!!
+
 	private ArrayList <Giocatore> GetGiocatori(String nome){
 		ArrayList <Giocatore> squadra = new ArrayList <Giocatore>();
 		for(int i = 0; i<giocatori.length; i++)
@@ -223,14 +221,13 @@ public class DatabaseGiocatori {
 	}
 
 	public SquadraAvversaria CreaSquadre(String squadrautente){
-		String nomesquadradacreare = new String("");
-		for(int i = 0; i<squadreesistenti.length;i++)
-			for(String j : squadrecreate)
-				if(!(squadreesistenti[i].equalsIgnoreCase(squadrautente))) nomesquadradacreare = j;
+		String nomesquadradacreare = new String(squadreesistenti.pop());
+		if(!(nomesquadradacreare.equalsIgnoreCase(squadrautente))){
+			SquadraAvversaria squadra = new SquadraAvversaria(GetGiocatori(nomesquadradacreare),nomesquadradacreare);
+			return squadra;
+		}
+		return null;
 
-		squadrecreate.add(nomesquadradacreare);
 
-		SquadraAvversaria squadra = new SquadraAvversaria(GetGiocatori(nomesquadradacreare),nomesquadradacreare);
-		return squadra;
 	}
 }

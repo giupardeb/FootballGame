@@ -19,8 +19,10 @@ public class Campionato
 		db = new DatabaseGiocatori();
 		squadra = db.CreaSquadra(miasquadra);
 
-		for(int i = 0; i<squadre.length; i++)
+		for(int i = 0; i<squadre.length; i++){
 			squadre[i] = db.CreaSquadre(miasquadra);
+			if(squadre[i] == null) i--;
+		}
 
 
 		System.out.println("1.Vedere la classifica attuale");
@@ -56,9 +58,8 @@ public class Campionato
 				System.out.println("4.Portiere");
 				int scelta2 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
 				switch(scelta2){
-
 				case 1: 
-					giocatoridavisualizzare = VisualizzaGiocatori("Attacante");
+					giocatoridavisualizzare = VisualizzaGiocatori("Attaccante");
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
 						System.out.println(i+". "+giocatoridavisualizzare[i]); 
 
@@ -126,7 +127,7 @@ public class Campionato
 	private Giocatore [] VisualizzaGiocatori(String ruolo){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z = 0; z<squadre.length;z++)
-			for(Giocatore giocatore : ((SquadraAvversaria)squadre[z]).GetSquadra())
+			for(Giocatore giocatore : squadre[z].GetSquadra())
 				if(giocatore.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(giocatore);
 		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
 	}
