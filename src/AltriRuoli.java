@@ -10,7 +10,6 @@ abstract class AltriRuoli extends Giocatore
 	private byte abilitaDifesa;
 	private byte abilitaAttacco;
 	private byte abilitaCentrocampo;
-	//private float valoreDiMercato;
 
 
 	public AltriRuoli(String cognome,String squadra,String nazionalita,byte velocita,byte resistenza,
@@ -18,11 +17,12 @@ abstract class AltriRuoli extends Giocatore
 			byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,
 			boolean essenziale,byte mediaVoti,byte cross,byte dribling,byte colpoDiTesta,
 			byte passaggio, byte tiro, byte contrasto, byte movimento, byte abilitaDifesa,
-			byte abilitaAttacco,byte abilitaCentrocampo,byte valoreGenerale,double valoreMercato)
-	{
+			byte abilitaAttacco,byte abilitaCentrocampo,byte valoreGenerale,double valoreMercato){
+
 		super (cognome, squadra, nazionalita, velocita, resistenza, forza, morale, eta,condizione, 
 				tecnica, aggressivita, creativita, decisione, carisma, posizione, giocoDiSquadra,
 				essenziale,mediaVoti,valoreGenerale,valoreMercato);
+
 		this.cross = cross;
 		this.dribling = dribling;
 		this.colpoDiTesta = colpoDiTesta;
@@ -33,7 +33,6 @@ abstract class AltriRuoli extends Giocatore
 		this.abilitaDifesa = abilitaDifesa;
 		this.abilitaAttacco = abilitaAttacco;
 		this.abilitaCentrocampo = abilitaCentrocampo;
-		//	this.valoreDiMercato=valoreDiMercato;
 	}
 
 	//metodi di get()
@@ -184,11 +183,13 @@ abstract class AltriRuoli extends Giocatore
 	public void setValoreGenerale()
 	{
 		int media = 0;
+	
 		media = (getCross()+ getDribling()+ getColpoDiTesta() + getPassaggio() + getTiro() + 
 				getContrasto() + getMovimento() + getAbilitaDifesa() + getAbilitaAttacco() + 
 				getAbilitaCentrocampo()+ getVelocita() + getResistenza() + getForza() + getMorale() 
 				+ getCondizione() + getTecnica() + getAggressivita() + getCreativita() + getDecisione()
-				+ getCarisma() + getGiocoDiSquadra() );
+				+ getCarisma() + getGiocoDiSquadra());
+		
 		media = (byte)(media/21);
 
 	}
@@ -197,12 +198,11 @@ abstract class AltriRuoli extends Giocatore
 	public String toString()
 	{
 		return(super.toString() + "\n" + "Statistiche specifiche: " + "\n" + "Cross: " + getCross() + "\n" + "Dribling: " +
-				getDribling() + "\n" + "Colpo di testa: " + getColpoDiTesta() + "\n" + "Passaggio: " + getPassaggio() + "\n" + "Tiro" + 
+				getDribling() + "\n" + "Colpo di testa: " + getColpoDiTesta() + "\n" + "Passaggio: " + getPassaggio() + "\n" + "Tiro: " + 
 				getTiro() + "\n" + "contrasto: " + getContrasto() + "\n" + "Movimento: " + getMovimento() + "\n" + "abilita difesa: " + 
-				getAbilitaDifesa() + "\n" + "abilita attacco: " + getAbilitaAttacco() + "\n" + "abilita centrocampo: " + getAbilitaCentrocampo() + "\n");
+				getAbilitaDifesa() + "\n" + "abilita attacco: " + getAbilitaAttacco() + "\n" + 
+				"abilita centrocampo: " + getAbilitaCentrocampo() + "\n");
 	}
-
-
 	// altri metodi
 
 	abstract public void Crescita(byte valore);

@@ -38,5 +38,4 @@ class Attaccante extends AltriRuoli
 	public int getDotiRuolo(){
 		return (getDribling()+getColpoDiTesta()+getTiro()+getAbilitaAttacco());
 	}
-
 }

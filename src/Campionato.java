@@ -42,7 +42,7 @@ public class Campionato
 
 		case 3: 
 			//inserire un ciclo in maniera tale che le squadre avversarie facciano il calciomercato e controllino se è meglio effettuare uno
-			//scambio oppure un' acquisto
+			//scambio oppure un' acquisto (che fa..la facciamo a random ??)
 
 			System.out.println("1. acquista");
 			System.out.println("2.scambio");
@@ -59,29 +59,15 @@ public class Campionato
 				int scelta2 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
 				switch(scelta2){
 				case 1: 
-					giocatoridavisualizzare = VisualizzaGiocatori("Attaccante");
+					giocatoridavisualizzare = VisualizzaGiocatori("Attaccante", squadra.GetNomeSquadra());
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
 						System.out.println(i+". "+giocatoridavisualizzare[i]); 
 
 					Trasferimento();
-					//do{
-					// creare metodo
-					/*String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
-						String	giocatoresquadra [] = sceltagiocatore.split(",");
-						squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
-						System.out.println("Vuoi acquistare ancora? si o no: ");
-						System.out.print("inserisci offerta");
-						Scanner tastiera = new Scanner (System.in);
-						String ricontinua = tastiera.nextLine(); //continua ad acquistare
-						tastiera.close();
-						if(ricontinua.equalsIgnoreCase("si")) continua = true;
-					}
-					while(continua == true);*/
-
 					break;
 
 				case 2:
-					giocatoridavisualizzare = VisualizzaGiocatori("Centrocampista");
+					giocatoridavisualizzare = VisualizzaGiocatori("Centrocampista", squadra.GetNomeSquadra());
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
 						System.out.println(i+". "+giocatoridavisualizzare[i]); 
 
@@ -90,14 +76,14 @@ public class Campionato
 					break;
 
 				case 3:
-					giocatoridavisualizzare = VisualizzaGiocatori("Difensore");
+					giocatoridavisualizzare = VisualizzaGiocatori("Difensore", squadra.GetNomeSquadra());
 					for(int i = 0; i<giocatoridavisualizzare.length;i++)
 						System.out.println(i+". "+giocatoridavisualizzare[i]);
 
 					Trasferimento();
 					break;
 
-				case 4: giocatoridavisualizzare = VisualizzaGiocatori("Portiere");
+				case 4: giocatoridavisualizzare = VisualizzaGiocatori("Portiere", squadra.GetNomeSquadra());
 				for(int i = 0; i<giocatoridavisualizzare.length;i++)
 					System.out.println(i+". "+giocatoridavisualizzare[i]);
 				Trasferimento();
@@ -124,11 +110,12 @@ public class Campionato
 
 	}
 
-	private Giocatore [] VisualizzaGiocatori(String ruolo){
+	private Giocatore [] VisualizzaGiocatori(String ruolo, String squadrautente){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z = 0; z<squadre.length;z++)
 			for(Giocatore giocatore : squadre[z].GetSquadra())
-				if(giocatore.getRuolo().equalsIgnoreCase(ruolo))	giocatoridavisualizzare.add(giocatore);
+				if(giocatore.getRuolo().equalsIgnoreCase(ruolo) && (!(giocatore.getSquadra().equalsIgnoreCase(squadrautente))))	
+					giocatoridavisualizzare.add(giocatore);
 		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
 	}
 

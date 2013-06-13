@@ -1,13 +1,11 @@
 import java.util.*;
 
-
-
-
 abstract public class  Squadra{
 	private final int RandomNumber = 10;
 	private final int RandomNumber1 = 2;
 
 	static DatabaseGiocatori db = new DatabaseGiocatori();
+	
 	String nome;
 	private double budget;
 	private ArrayList <Giocatore> miasquadra = new ArrayList<Giocatore>();
@@ -33,19 +31,20 @@ abstract public class  Squadra{
 		/*non faccio altro che mettere nelle variabili abilita,  tutte le abilita specifiche di ogni giocatore alla fine le variabili abilita
 		 * avranno la somma di tutte le abilita dei giocatori (difensori attaccanti centrocampisi)
 		 * ciò è utile per il pronostico*/
-		int d = 0,c = 0,a = 0; 
+
+		int d = 0,c = 0,a = 0; //VARIABILI CONTATORI PER POI CREARE LE ABILITÀ RISPETTIVE
 		double b=0; // calcolare il budget
 		for(Giocatore i : miasquadra){
 			if(i instanceof Difensore) {
 				abilitaDifesa += ((Difensore)i).getAbilitaDifesa();
 				d++;
-				b+=((Difensore)i).getValoreMercato();
+				b += ((Difensore)i).getValoreMercato();
 			}
 			else{
 				if(i instanceof Portiere){
 					abilitaDifesa += ((Portiere)i).getValoreGenerale();
 					d++;
-					b+=((Portiere)i).getValoreMercato();
+					b += ((Portiere)i).getValoreMercato();
 				}
 			}
 
@@ -57,17 +56,19 @@ abstract public class  Squadra{
 			if(i instanceof Attaccante){
 				abilitaAttacco += ((Attaccante)i).getAbilitaAttacco();
 				a++;
-				b+=((Attaccante)i).getValoreMercato();
+				b += ((Attaccante)i).getValoreMercato();
 			}
 		}
 		if(abilitaDifesa == 0) abilitaDifesa = 0;
-		else abilitaDifesa/=d;
+		else abilitaDifesa /= d;
+
 		if(abilitaCentrocampo == 0)	abilitaCentrocampo = 0;
-		else abilitaCentrocampo/=c;
+		else abilitaCentrocampo /= c;
 
 		if(abilitaAttacco == 0) abilitaAttacco = 0;
-		else abilitaCentrocampo/=a;
-		this.budget = b + (double)(Math.random()*1000)+1;
+		else abilitaAttacco /= a;
+
+		this.budget = (float) b/ (d + c + a);
 
 	}
 
@@ -141,19 +142,12 @@ abstract public class  Squadra{
 	//CREDO CHE CREARE IL METODO VENDITA SIA INUTILE... DATO CHE ABBIAMO ACQUISTI CHE IN UN CERTO SENSO GUARDANDOLA DAL 
 	//PUNTO DI VISTA DELLA SQUADRAS1 È UNA VENDITA..
 
-	///////////////////////////////////////////////****************************************/////////////////////////////////////////////	
-
-	public void trasferimento(Class<? extends Squadra> clazz){
-
-	}
-	
-	
-	///////////////////////////////////////////////////************************************/////////////////////////////////////
-
+	///////////////////////////////////////////////****************************************/////////////////////////////////////////////
 
 	public ArrayList<Giocatore> GetSquadra(){
 		return miasquadra;
 	}
+	
 	public int GetTotaleDifensori(){
 		int d = 0;
 		for(Giocatore i : GetSquadra()) if (i instanceof Difensore) d++;
@@ -187,9 +181,7 @@ abstract public class  Squadra{
 		return budget-z;
 	}
 
-	//MODIFICTO  14 MAGGIO ORE 18:00
 
-	//////////////////che ve ne pare!!?!?!!?
 	public void Pronostico(Squadra a, SquadraAvversaria b){
 		if(a.getTotalePronostico() == 0){
 			if(b.getTotalePronostico() == 0){
@@ -224,5 +216,4 @@ abstract public class  Squadra{
 			else System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 		}
 	}
-
 }

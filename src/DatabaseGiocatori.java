@@ -13,7 +13,7 @@ public class DatabaseGiocatori {
 	Stack<String> squadreesistenti = new Stack<String>();
 
 
-	public Giocatore giocatori[];
+	private Giocatore giocatori[];
 
 	///////////////////////////////////////////////////****////////////////////////////////////////////////	
 	//crea il database
@@ -227,7 +227,9 @@ public class DatabaseGiocatori {
 			return squadra;
 		}
 		return null;
-
-
+	}
+	
+	public Giocatore [] GetDb(){
+		return giocatori;
 	}
 }

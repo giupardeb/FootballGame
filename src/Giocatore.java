@@ -267,7 +267,8 @@ abstract public class Giocatore
 
 	public String toString()
 	{
-		return("Giocatore \n" + "Cognome: " + GetAnagrafe().GetCognome() + "\n" + "velocita: " + getVelocita() + "\n" + "Resistenza: " + getResistenza() + "\n" + "Forza: " + getForza() + "\n" + "Morale: " + getMorale() + "\n" + "eta:" + GetAnagrafe().GetEta() + "\n" + "Condizione:" + getCondizione() + "\n" + "Tecnica:" + getTecnica() + "\n" + "aggressivita:" + getAggressivita() + "\n" + "creativita:" + getCreativita() + "\n" +"\n"+"Ruolo:"+getRuolo()+ "Decisione:" + getDecisione() + "\n"  + "Carisma:" + getCarisma() + "\n" + "\n" + "Gioco di squadra: " + getGiocoDiSquadra() +"\n" + "Valore generale: " + getValoreGenerale() + "\n"  + "Media voti: " + getMediaVoti()  );
+		return( "Cognome: " + GetAnagrafe().GetCognome() + " Squadra di appartenenza: "+ getSquadra()+ "\n"+"eta:" + GetAnagrafe().GetEta() + 
+				"\n"+"Valore generale: " + getValoreGenerale());
 	}
 
 	// Altri metodi

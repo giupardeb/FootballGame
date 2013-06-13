@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class SquadraAvversaria extends Squadra{
 
-	// NOTE - questi limiti non dovrebbero essere imposti anche alla squadra umana quando fa il mercato? risp, no, perché farò vedere all'utnte quanti giocatori ha
+	//NOTE METTERE I LIMITI ANCHE IN SQUADRA UMANO
 	private static final int MINCENTROCAMPISTI = 4;
 	private static final int MINPORTIERI = 2;
 	private static final int MINATTACCANTI = 4;
@@ -21,135 +21,123 @@ public class SquadraAvversaria extends Squadra{
 
 	public SquadraAvversaria(ArrayList<Giocatore> vett, String nome) {
 		super(vett, nome);
-		// TODO Auto-generated constructor stub
 	}
+	///////////////////////////////////////////////////////***************INIZIO DI SCAMBIO***********************//////////////////////////////	
 
-	// PARLARNE CON SIMO
-	public void scambio (SquadraAvversaria[] s1,SquadraUmano squadrautente){ 
-		int i = SearchIndiceGiocatoreNomeSquadra(this.GetNomeSquadra()); //indice del giocatore che vorrei dal database
-		int j = SearchIndiceGiocatoreMia(this.GetSquadra()); //indice giocatore che vorrei scambiare (è nella mia squadra)
+	public void scambio (SquadraAvversaria[] s1,SquadraUmano squadrautente){
+		//dato che lo scambio potrebbe essere richiamato quando si hanno i minimi giocatori per ogni ruolo, facciamo un controllo 
+		//per cercare di fare scambiare due giocatori con lo stesso ruolo, così da evitare sbilanciamenti.
+
+
+		int j = SearchIndiceGiocatoreMia(this.GetNomeSquadra()); //indice giocatore che vorrei scambiare (è nella mia squadra)
+		int i = SearchIndiceGiocatoreNomeSquadra(this.GetNomeSquadra(), db.GetDb()[j].getRuolo()); //indice del giocatore che vorrei dal database
+
 		int indicesquadraavversaria = SearchSquadra(s1,i);
 
-		// NOTE - Avevi indentato di 12 spazi, mentre è buon uso indentare sempre di 4 spazi alla volta (o 1 tab)
-		// Il codice sotto non lo controllo ma ti faccio notare una cosa: c'è lo stesso codice 4-5 volte. 
-		// usa un metodo e chiami il metodo.
-		/*
-                if(((RUOLO)db.giocatori[i]).getDotiRuolo()>((RUOLO)db.giocatori[j]).getDotiRuolo()){
-                    if((int)(Math.random()*5)+1<3){
-                        this.GetSquadra().add(db.giocatori[i]);
-                        s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-                        db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-                        db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
-
-                        this.GetSquadra().remove(db.giocatori[j]);
-                        s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);   
-                        System.out.println("Scambio effettuato con successo!");
-                    }
-                    else System.out.println("Il giocatore ha rifiutato l'offerta");
-                }
-                else System.out.println("La squadra ha rifiutato l'offerta");
-
-		 */	
-
-		/* puoi mettere il codice su in un metodo del tipo
-                    private void A (Class<? extends Giocatore> clazz, altri parametri) {
-                          if((clazz.cast(db.giocatori[i])).getDotiRuolo()>(clazz.cast(db.giocatori[j])).getDotiRuolo()){
-                            .....
-                            }
-                    }
-		 */
-		/*
-
-                Per capire un pò meglio questo esempio di polimorfismo ti metto di seguito del codice che ho appena scritto:
-
-                public static void main(String[] args) {
-                Gioc difensore = new Dif();
-                Gioc difensore1 = new Dif();
-                Gioc attaccante = new Attac();
-                Gioc attaccante1 = new Attac();
-
-                Gioc[] giocatori = new Gioc[4];
-                giocatori[0] = difensore;
-                giocatori[1] = difensore1;
-                giocatori[2] = attaccante;
-                giocatori[3] = attaccante1;
-
-                testArrayGiocatori(giocatori);
-            }
-
-            public static void testArrayGiocatori(Gioc[] giocatori) {
-                for(Gioc singleGiocatore:giocatori) {
-                    C(singleGiocatore.getClass(), singleGiocatore);
-                }
-            }
-
-            public static <T> void C(Class<? extends Gioc> clazz, Gioc singleGiocatore) {
-                // cast
-                singleGiocatore = clazz.cast(singleGiocatore);
-                singleGiocatore.print();
-
-            }
-
-            Dove Gio, Dif e Attac sono delle semplici classi che contengono un metodo chiamato print e che stampa il nome della classe
-
-            Quando si esegue il codice su il risultato è:
-                Difensore
-                Difensore
-                Attaccante
-                Attaccante
-
-            Questo a dimostrazione che l'operazione di cast è avvenuta con successo.
-		 */
-		if(db.giocatori[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra())){
+		if(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra())){
 			int dialogResult = JOptionPane.YES_NO_OPTION;
 			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"vuole scambiare un TUO giocatore, "+
-					db.giocatori[i].GetAnagrafe().GetCognome()+"con valore generale "+ 
-					db.giocatori[i].getValoreGenerale()+" con il ruolo: " +db.giocatori[i].getRuolo()+ 
-					"con il SUO giocatore: "+db.giocatori[j].GetAnagrafe().GetCognome()+ "con valore generale "+
-					db.giocatori[j].getValoreGenerale()+ " con il ruolo: "+db.giocatori[j].getRuolo() +"accetti?","Attenzione",dialogResult);
+					db.GetDb()[i].GetAnagrafe().GetCognome()+"con valore generale "+ 
+					db.GetDb()[i].getValoreGenerale()+" con il ruolo: " +db.GetDb()[i].getRuolo()+ 
+					"con il SUO giocatore: "+db.GetDb()[j].GetAnagrafe().GetCognome()+ "con valore generale "+
+					db.GetDb()[j].getValoreGenerale()+ " con il ruolo: "+db.GetDb()[j].getRuolo() +"accetti?","Attenzione",dialogResult);
 
 			if(dialogResult == JOptionPane.YES_OPTION) 			
-				TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
+				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,indicesquadraavversaria,s1);
 		}
 		else{
-			j = SearchIndiceGiocatoreMia(this.GetSquadra());
-			TrasferimentoPerScambio(db.giocatori[i].getClass(),i,j,indicesquadraavversaria,s1);
+			j = SearchIndiceGiocatoreMia(this.GetNomeSquadra());
+			TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,indicesquadraavversaria,s1);
 		}
 	}
-	///////////////////////////////////////////////****************************************/////////////////////////////////////////////	
+	///////////////////////////////////////////////////////*****************FINE DI SCAMBIO***********************//////////////////////////////
 
+	///////////////////////////////////////////////////////***************INIZIO METODI DI SCAMBIO*********************///////////////////////
 
-	// NOTE - lo stesso discorso di su. Hai tanto codice che è uguale tranne per poche cose. Riduci! 
+	//chiedere a simo se c'è una soluzione diversa da quelal adottata da me.
+	private int SearchIndiceGiocatoreNomeSquadra(String nomesquadra, String ruolo){
+		Random rand = new Random();
+		int casuale = 0;
+		boolean trovatoilruolo = true;
+		do{
+			do{
+				trovatoilruolo = true;
+				casuale = rand.nextInt(db.GetDb().length);
+				if(db.GetDb()[casuale].getRuolo().equalsIgnoreCase(ruolo)) trovatoilruolo = false;
+			}
+			while (trovatoilruolo); 
+		}
+		while(db.GetDb()[casuale].getSquadra().equalsIgnoreCase(nomesquadra));
+
+		return casuale;
+
+	}
+
+	private int SearchIndiceGiocatoreMia (String nomesquadra){ //serve per lo scambio per cercare il giocatore che voglio scambiare nella mia sq.
+		Random rand = new Random();
+		int casuale = 0;
+
+		casuale = rand.nextInt(this.GetSquadra().toArray().length);
+
+		for(int i = 0; i<db.GetDb().length; i++){
+			if(db.GetDb()[i].GetAnagrafe().GetCognome().equalsIgnoreCase(this.GetSquadra().get(casuale).GetAnagrafe().GetCognome()))
+				return i;
+		}
+		return -1;
+	}
+
+	private void TrasferimentoPerScambio (Class<? extends Giocatore> clazz, int i, int j, int indicesquadraavversaria,Squadra s1[]){
+		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>((clazz.cast(db.GetDb()[j])).getDotiRuolo())){
+			if((int)(Math.random()*5)+1<3){
+				this.GetSquadra().add(db.GetDb()[i]);
+				s1[indicesquadraavversaria].GetSquadra().add(db.GetDb()[j]);
+				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra());
+				db.GetDb()[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
+				this.GetSquadra().remove(db.GetDb()[j]);
+				s1[indicesquadraavversaria].GetSquadra().remove(db.GetDb()[i]);   
+			}
+		}
+	}
+
+	///////////////////////////////////////////////////////***************FINE METODI DI SCAMBIO***********************/////////////////////////
+
+	///////////////////////////////////////////////////****************INIZIO ACQUISTA***********************///////////////////////////////////	
+
+	//GetTotaleDifensori() metodo implementato nella super classe Squadra
 	public void acquisto(SquadraAvversaria[] s1,SquadraUmano squadrautente){ 
+
 		String ruolodaacquistare = new String ("");
 		if(GetTotaleDifensori()<MINDIFENSORI) ruolodaacquistare = "difensore";
 		else if(GetTotaleCentrocampisti()<MINCENTROCAMPISTI) ruolodaacquistare = "centrcampista";
 		else if(GetTotaleAttaccanti()<MINATTACCANTI) ruolodaacquistare = "attaccante";
 		else if(GetTotalePortieri()<MINPORTIERI) ruolodaacquistare = "portiere";
-		int i = -1;
+
+		int i = INITIALISE;
+
+
 		if(ruolodaacquistare != "")	 i = SearchIndiceGiocatore(ruolodaacquistare);
 		else i = SearchIndiceGiocatore();
 
-		if(db.giocatori[i].getSquadra().equals(squadrautente.GetNomeSquadra()))
+		if(db.GetDb()[i].getSquadra().equals(squadrautente.GetNomeSquadra()))
 		{
 			int dialogResult = JOptionPane.YES_NO_OPTION;
 			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"vuole acquistare un tuo giocatore, "+
-					db.giocatori[i].GetAnagrafe().GetCognome()+"con valore generale "+ 
-					db.giocatori[i].getValoreGenerale()+" con il ruolo: " +db.giocatori[i].getRuolo()+ 
+					db.GetDb()[i].GetAnagrafe().GetCognome()+"con valore generale "+ 
+					db.GetDb()[i].getValoreGenerale()+" con il ruolo: " +db.GetDb()[i].getRuolo()+ 
 					"vuoi contrattare? attenzione hai: "+squadrautente.GetTotaleAttaccanti()+" Attaccanti"+
 					squadrautente.GetTotaleCentrocampisti()+" Centrocampisti"+squadrautente.GetTotaleDifensori()+" Difensori"+
 					squadrautente.GetTotalePortieri()+" Portieri","Attenzione",dialogResult);
 			if(dialogResult == JOptionPane.YES_OPTION)
 			{
 				dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"ti propone "+ 
-						db.giocatori[i].getValoreMercato()+"€"+ "Accetti? ","Attenzione",dialogResult);
+						db.GetDb()[i].getValoreMercato()+"€"+ "Accetti? ","Attenzione",dialogResult);
 
 				if(dialogResult == JOptionPane.YES_OPTION)
-					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.giocatori[i].getValoreMercato());				
+					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.GetDb()[i].getValoreMercato());				
 				else
 				{
 					double offerta = 0;
-					offerta = Offerta(db.giocatori[i]);
+					offerta = Offerta(db.GetDb()[i]);
 					dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"ti propone "+ offerta+
 							" €, per l'acquisto del giocatore, Accetti?","Attenzione",dialogResult);
 					if(dialogResult == JOptionPane.YES_OPTION)
@@ -159,54 +147,56 @@ public class SquadraAvversaria extends Squadra{
 						JFrame  frame = new JFrame("Show Message Dialog");
 						JOptionPane.showMessageDialog(frame,"La trattativa non si è conclusa");
 						int indicesquadraavversaria = SearchSquadra(s1,i);
-						if(this.GetBudget()>db.giocatori[i].getValoreMercato())
-							if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
-							else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+						if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
+							if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
+								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+							else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
+								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-							else if(db.giocatori[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+							else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
+								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-							else if(db.giocatori[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+							else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
+								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 					}
 				}
 			}
 			else
 			{
 				int indicesquadraavversaria = SearchSquadra(s1,i);
-				if(this.GetBudget()>db.giocatori[i].getValoreMercato()) 
-					if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+				if(this.GetBudget()>db.GetDb()[i].getValoreMercato()) 
+					if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-					else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+					else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-					else if(db.giocatori[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+					else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-					else if(db.giocatori[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+					else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 			}
 		}
 		else
 		{
 			int indicesquadraavversaria = SearchSquadra(s1,i);
-			if(this.GetBudget()>db.giocatori[i].getValoreMercato())
-				if(db.giocatori[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+			if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
+				if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
+					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.giocatori[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+				else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
+					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.giocatori[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+				else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
+					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.giocatori[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI) 
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.giocatori[i].getValoreMercato());
+				else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI) 
+					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 		}
 	}
+	///////////////////////////////////////////////////****************FINE ACQUISTA***********************///////////////////////////////////////	
+	///////////////////////////////////////////////////****************INIZIO METODI DI ACQUISTA***********************//////////////////////////	
 
 	private double Offerta(Giocatore g){
 		double percent = 0;
@@ -228,6 +218,56 @@ public class SquadraAvversaria extends Squadra{
 		return percent;
 	}
 
+	private void TrasferimentoAcquistaDaUtente (SquadraAvversaria squadra,int i,SquadraUmano squadrautente,double denaro){
+		squadra.SetBudgetRemove(denaro); 
+		db.GetDb()[i].setNomeSquadra(squadra.GetNomeSquadra());
+		squadra.GetSquadra().add(db.GetDb()[i]);
+		squadrautente.SetBudgetAdd(denaro);
+		squadrautente.GetSquadra().remove(db.GetDb()[i]);
+	}
+	//chiedere a simo se questi due metodi posso unificarli, credi di si, ma nn sono sicuro per il casting delle squadre
+
+	private void TrasferimentoAcquista (SquadraAvversaria squadra,int i,SquadraAvversaria squadre[],int indice,double denaro){
+		squadra.SetBudgetRemove(denaro); 
+		db.GetDb()[i].setNomeSquadra(squadra.GetNomeSquadra());
+		squadra.GetSquadra().add(db.GetDb()[i]);
+		squadre[indice].SetBudgetAdd(denaro);
+		squadre[indice].GetSquadra().remove(db.GetDb()[i]);
+	}
+
+	private int SearchIndiceGiocatore(String ruolo){
+		ArrayList <Giocatore> tmp = new ArrayList <Giocatore>();
+		for(int i = 0; i<db.GetDb().length;i++){
+			if(ruolo.equalsIgnoreCase("Difensore") && db.GetDb()[i] instanceof Difensore){
+				tmp.add((Difensore)db.GetDb()[i]);
+			}
+			else if(ruolo.equalsIgnoreCase("Centrocampista") && db.GetDb()[i] instanceof Centrocampista){
+				tmp.add((Centrocampista)db.GetDb()[i]);
+			}
+			else if(ruolo.equalsIgnoreCase("Attaccante") && db.GetDb()[i] instanceof Attaccante){
+				tmp.add((Attaccante)db.GetDb()[i]);
+			}
+			else if(ruolo.equalsIgnoreCase("Portiere") && db.GetDb()[i] instanceof Portiere){
+				tmp.add((Portiere)db.GetDb()[i]);
+			}
+		}
+		Random rand = new Random();
+		int casuale = rand.nextInt(tmp.toArray().length);
+		for(int i = 0; i<db.GetDb().length ;i++){
+			Giocatore g = (Giocatore) tmp.toArray()[casuale];
+			if(db.GetDb()[i].GetAnagrafe().GetCognome().equals(g.GetAnagrafe().GetCognome())) return i;
+		}
+		return -1;
+	}
+
+	private int SearchIndiceGiocatore(){
+		Random rand = new Random();
+		int casuale = rand.nextInt(db.GetDb().length);
+		return casuale;
+	}
+	///////////////////////////////////////////////////////****************FINE METODI DI ACQUISTA***********************//////////////////////////////	
+	///////////////////////////////////////////////////////****************INIZIO ORGA.SQUADRA***********************//////////////////////////////	
+
 	public Giocatore[] OrganizzaSquadra(){
 		Giocatore array[] = new Giocatore [15];
 		int j = 0;
@@ -247,22 +287,22 @@ public class SquadraAvversaria extends Squadra{
 		}
 
 		for( z = 0; z<arrayausiliario.length;z++){
-			if(db.giocatori[arrayausiliario[z]] instanceof Portiere && portiere == false){
+			if(db.GetDb()[arrayausiliario[z]] instanceof Portiere && portiere == false){
 				indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Portiere");
 				portiere = true;
 			}
 			else{
-				if(db.giocatori[arrayausiliario[z]] instanceof Difensore && difensore == false){
+				if(db.GetDb()[arrayausiliario[z]] instanceof Difensore && difensore == false){
 					indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Difensore");
 					difensore = true;
 				}
 				else{
-					if(db.giocatori[arrayausiliario[z]] instanceof Centrocampista && centrocampista == false){
+					if(db.GetDb()[arrayausiliario[z]] instanceof Centrocampista && centrocampista == false){
 						indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Centrocampista");
 						portiere = true;
 					}
 					else{
-						if(db.giocatori[arrayausiliario[z]] instanceof Attaccante && attaccante == false){
+						if(db.GetDb()[arrayausiliario[z]] instanceof Attaccante && attaccante == false){
 							indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Attaccante");
 							attaccante = true;
 						}
@@ -270,134 +310,57 @@ public class SquadraAvversaria extends Squadra{
 					}
 				}
 			}
-			array[z] = db.giocatori[indicegiocatoremigliore];
+			array[z] = db.GetDb()[indicegiocatoremigliore];
 		}
 		return array;
 	}
-
-	//PARLARE CON SIMONE
+	///////////////////////////////////////////////////////****************FINE ORGA.SQUADRA***********************//////////////////////////////	
+	///////////////////////////////////////////////////////****************INIZIO METODI ORGA.SQUADRA***********************/////////////////////
 	private int SearchBestPlayer(int array[],String ruolo){
 		//array vettore degli indici che si riferiscono al database
 		int migliore = -1; //indice del migliore nel database
 
 		int j = 0;
 		for(int i = 0; i<array.length; i++){
-			if(db.giocatori[array[i]].getRuolo().equalsIgnoreCase(ruolo)){
+			if(db.GetDb()[array[i]].getRuolo().equalsIgnoreCase(ruolo)){
 				j++;
 			}
 		}
 		int vett [] = new int [j];
 		int z = 0;
 		for(int i = 0; i<array.length; i++){
-			if(db.giocatori[array[i]].getRuolo() == ruolo){
+			if(db.GetDb()[array[i]].getRuolo() == ruolo){
 				vett[z] = i;
 			}
 		}
 
 		for(int i = 0; i<vett.length-1;i++){
-			if(db.giocatori[vett[i]].getValoreGenerale() > db.giocatori[vett[i+1]].getValoreGenerale()
-					&& db.giocatori[vett[i]].getCondizione() > db.giocatori[vett[i+1]].getCondizione()){
+			if(db.GetDb()[vett[i]].getValoreGenerale() > db.GetDb()[vett[i+1]].getValoreGenerale()
+					&& db.GetDb()[vett[i]].getCondizione() > db.GetDb()[vett[i+1]].getCondizione()){
 				migliore = i;
 			}
 			else migliore = i+1;
 		}
 		return migliore;
-
-
 	}
 
-	private void TrasferimentoPerScambio (Class<? extends Giocatore> clazz, int i, int j, int indicesquadraavversaria,Squadra s1[]){
-		if(clazz.cast(db.giocatori[i]).getDotiRuolo()>((clazz.cast(db.giocatori[j])).getDotiRuolo())){
-			if((int)(Math.random()*5)+1<3){
-				this.GetSquadra().add(db.giocatori[i]);
-				s1[indicesquadraavversaria].GetSquadra().add(db.giocatori[j]);
-				db.giocatori[i].setNomeSquadra(this.GetNomeSquadra());
-				db.giocatori[j].setNomeSquadra(s1[indicesquadraavversaria].GetNomeSquadra());
-				this.GetSquadra().remove(db.giocatori[j]);
-				s1[indicesquadraavversaria].GetSquadra().remove(db.giocatori[i]);   
-			}
-		}
-	}
-
-	private void TrasferimentoAcquistaDaUtente (SquadraAvversaria squadra,int i,SquadraUmano squadrautente,double denaro){
-		squadra.SetBudgetRemove(denaro); 
-		db.giocatori[i].setNomeSquadra(squadra.GetNomeSquadra());
-		squadra.GetSquadra().add(db.giocatori[i]);
-		squadrautente.SetBudgetAdd(denaro);
-		squadrautente.GetSquadra().remove(db.giocatori[i]);
-	}
-	//chiedere a simo se questi due metodi posso unificarli, credi di si, ma nn sono sicuro per il casting delle squadre
-	private void TrasferimentoAcquista (SquadraAvversaria squadra,int i,SquadraAvversaria squadre[],int indice,double denaro){
-		squadra.SetBudgetRemove(denaro); 
-		db.giocatori[i].setNomeSquadra(squadra.GetNomeSquadra());
-		squadra.GetSquadra().add(db.giocatori[i]);
-		squadre[indice].SetBudgetAdd(denaro);
-		squadre[indice].GetSquadra().remove(db.giocatori[i]);
-	}
-
-
-	private int SearchIndiceGiocatore(String ruolo){
-		ArrayList <Giocatore> tmp = new ArrayList <Giocatore>();
-		for(int i = 0; i<db.giocatori.length;i++){
-			if(ruolo.equalsIgnoreCase("Difensore") && db.giocatori[i] instanceof Difensore){
-				tmp.add((Difensore)db.giocatori[i]);
-			}
-			else if(ruolo.equalsIgnoreCase("Centrocampista") && db.giocatori[i] instanceof Centrocampista){
-				tmp.add((Centrocampista)db.giocatori[i]);
-			}
-			else if(ruolo.equalsIgnoreCase("Attaccante") && db.giocatori[i] instanceof Attaccante){
-				tmp.add((Attaccante)db.giocatori[i]);
-			}
-			else if(ruolo.equalsIgnoreCase("Portiere") && db.giocatori[i] instanceof Portiere){
-				tmp.add((Portiere)db.giocatori[i]);
-			}
-		}
-		Random rand = new Random();
-		int casuale = rand.nextInt(tmp.toArray().length);
-		for(int i = 0; i<db.giocatori.length ;i++){
-			Giocatore g = (Giocatore) tmp.toArray()[casuale];
-			if(db.giocatori[i].GetAnagrafe().GetCognome().equals(g.GetAnagrafe().GetCognome())) return i;
-		}
-		return -1;
-	}
-
-	private int SearchIndiceGiocatore(){
-		Random rand = new Random();
-		int casuale = rand.nextInt(db.giocatori.length);
-		return casuale;
-	}
-
-	private int SearchIndiceGiocatoreMia (ArrayList <Giocatore> array){ //serve per lo scambio per cercare il giocatore che voglio scambiare.
-		Random rand = new Random();
-		int casuale = rand.nextInt(array.toArray().length);
-
-		return casuale;
-	}
 	private int SearchIndiceGiocatoreCognome (String Cognome){ 
-		for(int i = 0; i<db.giocatori.length; i++){
-			if(db.giocatori[i].GetAnagrafe().GetCognome().equalsIgnoreCase(Cognome)) return i;
+		for(int i = 0; i<db.GetDb().length; i++){
+			if(db.GetDb()[i].GetAnagrafe().GetCognome().equalsIgnoreCase(Cognome)) return i;
 		}
 		return -1;
 	}
 
+	///////////////////////////////////////////////////////****************FINE METODI ORGA.SQUADRA***********************///////////////////////
 
+	//////////////////////////////////////////////////////****************INIZIO METODI IN COMUNE************************///////////////////////
 	private int SearchSquadra(SquadraAvversaria[] s, int i){
 		for(int j = 0; j<s.length; j++){
-			if(db.giocatori[i].getSquadra().equalsIgnoreCase(s[j].GetNomeSquadra())) return j;
+			if(db.GetDb()[i].getSquadra().equalsIgnoreCase(s[j].GetNomeSquadra())) return j;
 		}
 		return -1;
 	}
-	//CON SIMO
-	private int SearchIndiceGiocatoreNomeSquadra(String squadra){
-		Random rand = new Random();
-		int casuale = rand.nextInt(db.giocatori.length);
-		if(db.giocatori[casuale].getSquadra().equalsIgnoreCase(squadra)){
-			casuale = rand.nextInt(db.giocatori.length);
-		}
-
-		return casuale;
-
-	}
+	//////////////////////////////////////////////////////****************FINE METODI IN COMUNE************************////////////////////////
 
 	public int GetMinDif(){
 		return MINDIFENSORI;
