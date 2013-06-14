@@ -123,10 +123,12 @@ public class Campionato
 		do{
 			String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
 			String	giocatoresquadra [] = sceltagiocatore.split(",");
-			squadra.acquisto(giocatoresquadra[0], squadre[SearchSquadra(giocatoresquadra[1])]);
+			squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
 			System.out.println("Vuoi acquistare ancora? si o no: ");
 			Scanner tastiera = new Scanner (System.in);
-			String ricontinua = tastiera.nextLine(); //continua ad acquistare
+			String ricontinua = "";
+			if (tastiera.hasNextLine())
+				ricontinua = tastiera.nextLine().trim(); //continua ad acquistare
 			tastiera.close();
 			if(ricontinua.equalsIgnoreCase("si")) continua = true;
 		}
