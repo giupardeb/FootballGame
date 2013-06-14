@@ -4,9 +4,6 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class SquadraUmano extends Squadra{
-	private final static int RandomNumber = 5;
-	private final static int MIN_GIOCATORY_PER_MERCATO = 15;
-	private final static int INITIALISE = -1;
 
 	public SquadraUmano(ArrayList<Giocatore> vett, String nome) {
 		super(vett, nome);
@@ -15,18 +12,25 @@ public class SquadraUmano extends Squadra{
 	///////////////////////////////////////////////////****************INIZIO SCAMBIO***********************//////////////////////////////////////
 
 	public void scambio (String Cognomes, String Cognomes1, SquadraAvversaria s1){ //Cognomes viene scambiato con Cognomes1 dalla squadra s1
-		int i = Search(Cognomes);
-		int j = Search(Cognomes1);
-
+		int i = Search(Cognomes); //giocatore della mia squadra
+		int j = Search(Cognomes1); //giocatere che voglio dell'altra squadra
+//CHECK WITH SIMONE 
 		if(i!=INITIALISE && j!=INITIALISE)
-			TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1);
+			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(db.GetDb()[j].getRuolo()))
+				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1);
+			else if(Controllo(s1,j))
+					if(Controllo(this,i))
+						TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1); 	
+					else System.out.println("Scambio non effettuato con successo poichè potresti andare in deficit di "+db.GetDb()[i].getRuolo());
+				  else System.out.println("Scambio non effettuato con successo poichè la squadra avversaria potrebbe" +
+					" andare in deficit di "+db.GetDb()[j].getRuolo());
 	}
 	///////////////////////////////////////////////////****************FINE SCAMBIO***********************///////////////////////////////////////
 
 	///////////////////////////////////////////////////****************INIZIO METODI SCAMBIO***********************//////////////////////////
 	private void TrasferimentoPerScambio(Class<? extends Giocatore>clazz, int i, int j, SquadraAvversaria s1){
 		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>clazz.cast(db.GetDb()[j]).getDotiRuolo()){
-			if((int)(Math.random()*RandomNumber)+1<3){
+			if((int)(Math.random()*RandomNumber2)+1<3){
 				this.GetSquadra().add(db.GetDb()[i]);
 				s1.GetSquadra().add(db.GetDb()[j]);
 				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra());
@@ -57,7 +61,7 @@ public class SquadraUmano extends Squadra{
 				offerta = tastiera.nextFloat(); //offerta immessa dall'utente
 				if(offerta > db.GetDb()[i].getValoreMercato() ){
 					if(db.GetDb()[i].getEssenziale() == false)
-						TrasferimentoAcquista(this, s1, i,offerta);
+						TrasferimentoAcquista(s1, i,offerta);
 					else{
 						double denaroBastardo = ((db.GetDb()[i].getValoreMercato()*75)/100)+db.GetDb()[i].getValoreMercato(); //+ OPZIONI
 
@@ -67,14 +71,14 @@ public class SquadraUmano extends Squadra{
 						String scelta = tastiera.nextLine();
 						if(scelta.equalsIgnoreCase("si"))
 							if(this.GetBudget()>denaroBastardo)
-								TrasferimentoAcquista(this, s1, i,denaroBastardo);
+								TrasferimentoAcquista(s1, i,denaroBastardo);
 							else System.out.print("Non hai il Budget sufficente per acquistare il giocatore!");
 						else System.out.print("Giocatore non Acquistato");
 					}
 				}
 				else {
 					if(offerta>CalcPercent(db.GetDb()[i].getValoreMercato()))
-						TrasferimentoAcquista(this, s1, i,offerta);
+						TrasferimentoAcquista( s1, i,offerta);
 					else System.out.print("Hai fatto un offerta troppo bassa rispetto al prezzo di mercato del giocatore ");
 				}
 			}
@@ -92,18 +96,23 @@ public class SquadraUmano extends Squadra{
 		sconto = valoremercato * 20 /100;
 		return valoremercato-sconto;
 	}
+	//CHECK WITH SIMONE
+	private void TrasferimentoAcquista(SquadraAvversaria s1,int i,double denaro){
 
-	private void TrasferimentoAcquista(SquadraUmano squadra,SquadraAvversaria s1,int i,double denaro){
-		if(((int)(Math.random()*10)+1)>4){
-
-			squadra.SetBudgetRemove(denaro);
-			db.GetDb()[i].setNomeSquadra(squadra.GetNomeSquadra());
-			squadra.GetSquadra().add(db.GetDb()[i]);
-			s1.SetBudgetAdd(denaro);
-			s1.GetSquadra().remove(db.GetDb()[i]); 
-			System.out.print("il giocatore ha accettato l'offerta!");
+		if(Controllo(s1,i)){
+			if(((int)(Math.random()*10)+1)>4){
+				this.SetBudgetRemove(denaro); //ok
+				s1.GetSquadra().remove(db.GetDb()[i]); //nn rimuove!!!! ora si, ma ho messo giocatori [] static
+				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra()); // non setta il nomesquadra
+				this.GetSquadra().add(db.GetDb()[i]); //ok
+				s1.SetBudgetAdd(denaro); //ok
+				System.out.print("il giocatore ha accettato l'offerta!");
+			}
+			else System.out.print("il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
 		}
-		else System.out.print("il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
+		else{
+			System.out.print("La squadra ha rifiutato poichè è al minimo di "+ db.GetDb()[i].getRuolo()+"/i");
+		}
 	}
 	///////////////////////////////////////////////////****************FINE METODI ACQUISTA***********************///////////////////////////	
 
@@ -117,7 +126,7 @@ public class SquadraUmano extends Squadra{
 
 		for(Giocatore giocatore : this.GetSquadra()){
 			System.out.println(giocatore.GetAnagrafe() + " "+ giocatore.getValoreGenerale() +" "+ giocatore.getRuolo());
-			arrayusiliario.add(db.GetDb()[Search(giocatore.GetAnagrafe().GetCognome())]); //chiedere a simo se si può fare
+			arrayusiliario.add(db.GetDb()[Search(giocatore.GetAnagrafe().GetCognome())]);
 		}
 
 		if(arrayusiliario.size()<MIN_GIOCATORY_PER_MERCATO) System.out.println("non puoi organizzarti la squadra poichè hai meno di 15 giocatori," +
@@ -141,5 +150,28 @@ public class SquadraUmano extends Squadra{
 			}
 		}
 		return -1;
+	}
+
+	private boolean Controllo(Squadra s1, int i){
+		boolean acquista = false;
+		if(db.GetDb()[i].getRuolo().equalsIgnoreCase("portiere")){
+			if(s1.GetTotalePortieri()>MINPORTIERI) acquista = true;
+		}
+		else{
+			if(db.GetDb()[i].getRuolo().equalsIgnoreCase("attaccante")){
+				if(s1.GetTotaleAttaccanti()>MINATTACCANTI) acquista = true;
+			}
+			else{
+				if(db.GetDb()[i].getRuolo().equalsIgnoreCase("difensore")){
+					if(s1.GetTotaleAttaccanti()>MINDIFENSORI) acquista = true;
+				}
+				else{
+					if(db.GetDb()[i].getRuolo().equalsIgnoreCase("centrocampista")){
+						if(s1.GetTotaleAttaccanti()>MINCENTROCAMPISTI) acquista = true;
+					}
+				}
+			}
+		}
+		return acquista;
 	}
 }

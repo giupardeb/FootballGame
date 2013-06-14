@@ -8,13 +8,6 @@ import java.util.Random;
 
 public class SquadraAvversaria extends Squadra{
 
-	//NOTE METTERE I LIMITI ANCHE IN SQUADRA UMANO
-	private static final int MINCENTROCAMPISTI = 4;
-	private static final int MINPORTIERI = 2;
-	private static final int MINATTACCANTI = 4;
-	private static final int MINDIFENSORI = 4;
-	private static final int INITIALISE = -1;
-
 	//Queste costanti li dobbiamo modificare credo, poichè non si effettuerebbe il calciomercato dato
 	//che tutte le squadre hanno il minimo di calciotori possibili
 
@@ -25,10 +18,7 @@ public class SquadraAvversaria extends Squadra{
 	///////////////////////////////////////////////////////***************INIZIO DI SCAMBIO***********************//////////////////////////////	
 
 	public void scambio (SquadraAvversaria[] s1,SquadraUmano squadrautente){
-		//dato che lo scambio potrebbe essere richiamato quando si hanno i minimi giocatori per ogni ruolo, facciamo un controllo 
-		//per cercare di fare scambiare due giocatori con lo stesso ruolo, così da evitare sbilanciamenti.
-
-
+	
 		int j = SearchIndiceGiocatoreMia(this.GetNomeSquadra()); //indice giocatore che vorrei scambiare (è nella mia squadra)
 		int i = SearchIndiceGiocatoreNomeSquadra(this.GetNomeSquadra(), db.GetDb()[j].getRuolo()); //indice del giocatore che vorrei dal database
 
@@ -54,20 +44,17 @@ public class SquadraAvversaria extends Squadra{
 
 	///////////////////////////////////////////////////////***************INIZIO METODI DI SCAMBIO*********************///////////////////////
 
-	//chiedere a simo se c'è una soluzione diversa da quelal adottata da me.
 	private int SearchIndiceGiocatoreNomeSquadra(String nomesquadra, String ruolo){
+		//dato che lo scambio potrebbe essere richiamato quando si hanno i minimi giocatori per ogni ruolo, facciamo un controllo 
+		//per cercare di fare scambiare due giocatori con lo stesso ruolo, così da evitare sbilanciamenti.
 		Random rand = new Random();
 		int casuale = 0;
-		boolean trovatoilruolo = true;
-		do{
-			do{
-				trovatoilruolo = true;
-				casuale = rand.nextInt(db.GetDb().length);
-				if(db.GetDb()[casuale].getRuolo().equalsIgnoreCase(ruolo)) trovatoilruolo = false;
-			}
-			while (trovatoilruolo); 
-		}
-		while(db.GetDb()[casuale].getSquadra().equalsIgnoreCase(nomesquadra));
+
+		ArrayList<Giocatore> array = new ArrayList<Giocatore>();
+		for(int i = 0; i<db.GetDb().length;i++)
+			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(ruolo) && !(db.GetDb()[i].getSquadra().equalsIgnoreCase(nomesquadra))) 
+				array.add(db.GetDb()[i]);
+		casuale = rand.nextInt(array.toArray().length);
 
 		return casuale;
 
@@ -362,16 +349,4 @@ public class SquadraAvversaria extends Squadra{
 	}
 	//////////////////////////////////////////////////////****************FINE METODI IN COMUNE************************////////////////////////
 
-	public int GetMinDif(){
-		return MINDIFENSORI;
-	}
-	public int GetMinAtt(){
-		return MINATTACCANTI;
-	}
-	public int GetMinCent(){
-		return MINCENTROCAMPISTI;
-	}
-	public int GetMinPor(){
-		return MINPORTIERI;
-	}
 }

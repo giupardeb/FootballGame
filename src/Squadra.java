@@ -3,11 +3,18 @@ import java.util.*;
 abstract public class  Squadra{
 	private final int RandomNumber = 10;
 	private final int RandomNumber1 = 2;
+	protected final static int RandomNumber2 = 5;
+	protected final static int MIN_GIOCATORY_PER_MERCATO = 15;
+	protected final static int INITIALISE = -1;
+	protected static final int MINCENTROCAMPISTI = 5;
+	protected static final int MINPORTIERI = 2;
+	protected static final int MINATTACCANTI = 5;
+	protected static final int MINDIFENSORI = 5;
 
 	static DatabaseGiocatori db = new DatabaseGiocatori();
-	
+
 	String nome;
-	private double budget;
+	private float budget;
 	private ArrayList <Giocatore> miasquadra = new ArrayList<Giocatore>();
 	int vittorie;
 	int pareggi;
@@ -33,7 +40,7 @@ abstract public class  Squadra{
 		 * ciò è utile per il pronostico*/
 
 		int d = 0,c = 0,a = 0; //VARIABILI CONTATORI PER POI CREARE LE ABILITÀ RISPETTIVE
-		double b=0; // calcolare il budget
+		double b = 0; // calcolare il budget
 		for(Giocatore i : miasquadra){
 			if(i instanceof Difensore) {
 				abilitaDifesa += ((Difensore)i).getAbilitaDifesa();
@@ -68,7 +75,7 @@ abstract public class  Squadra{
 		if(abilitaAttacco == 0) abilitaAttacco = 0;
 		else abilitaAttacco /= a;
 
-		this.budget = (float) b/ (d + c + a);
+		this.budget = (float) (b/ (d + c + a));
 
 	}
 
@@ -136,6 +143,19 @@ abstract public class  Squadra{
 		golsubiti++;
 	}
 
+	protected int GetMinDif(){
+		return MINDIFENSORI;
+	}
+	protected int GetMinAtt(){
+		return MINATTACCANTI;
+	}
+	protected int GetMinCent(){
+		return MINCENTROCAMPISTI;
+	}
+	protected int GetMinPor(){
+		return MINPORTIERI;
+	}
+
 	//	abstract public void scambio(String Cognomes, String Cognomes1, Squadra s1);
 	//	abstract public void acquisto(String Cognome,Squadra s1);
 	abstract public Giocatore[] OrganizzaSquadra();
@@ -147,7 +167,7 @@ abstract public class  Squadra{
 	public ArrayList<Giocatore> GetSquadra(){
 		return miasquadra;
 	}
-	
+
 	public int GetTotaleDifensori(){
 		int d = 0;
 		for(Giocatore i : GetSquadra()) if (i instanceof Difensore) d++;
@@ -174,11 +194,11 @@ abstract public class  Squadra{
 		return budget;
 	}
 
-	public double SetBudgetAdd(double z){
-		return budget+z;
+	public void SetBudgetAdd(double z){
+		budget+=z;
 	}
-	public double SetBudgetRemove(double z){
-		return budget-z;
+	public void SetBudgetRemove(double z){
+		budget-=z;
 	}
 
 

@@ -268,7 +268,7 @@ abstract public class Giocatore
 	public String toString()
 	{
 		return( "Cognome: " + GetAnagrafe().GetCognome() + " Squadra di appartenenza: "+ getSquadra()+ "\n"+"eta:" + GetAnagrafe().GetEta() + 
-				"\n"+"Valore generale: " + getValoreGenerale());
+				"\n"+"Valore generale: " + getValoreGenerale() + "\n" + "Valore Mercato: " + getValoreMercato());
 	}
 
 	// Altri metodi
