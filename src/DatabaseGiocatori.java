@@ -3,7 +3,6 @@ import java.util.Stack;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 public class DatabaseGiocatori {
 	private final static byte INITIALISE = -1;
 	private static final String CENTROCAMPISTA = "Centrocampista";

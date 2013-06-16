@@ -248,9 +248,9 @@ abstract public class Giocatore
 		essenziale = valore;
 	}
 
-	public void setMediaVoti(double mediaVoti, int contatore)
+	public void setMediaVoti(int contatore)
 	{
-		mediaVoti /= contatore;
+		this.mediaVoti /= contatore;
 
 	}
 

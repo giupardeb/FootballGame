@@ -14,7 +14,7 @@ public class SquadraUmano extends Squadra{
 	public void scambio (String Cognomes, String Cognomes1, SquadraAvversaria s1){ //Cognomes viene scambiato con Cognomes1 dalla squadra s1
 		int i = Search(Cognomes); //giocatore della mia squadra
 		int j = Search(Cognomes1); //giocatere che voglio dell'altra squadra
-//CHECK WITH SIMONE 
+
 		if(i!=INITIALISE && j!=INITIALISE)
 			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(db.GetDb()[j].getRuolo()))
 				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1);
@@ -96,7 +96,7 @@ public class SquadraUmano extends Squadra{
 		sconto = valoremercato * 20 /100;
 		return valoremercato-sconto;
 	}
-	//CHECK WITH SIMONE
+
 	private void TrasferimentoAcquista(SquadraAvversaria s1,int i,double denaro){
 
 		if(Controllo(s1,i)){

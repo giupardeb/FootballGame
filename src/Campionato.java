@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.text.DefaultCaret;
+import Graphic.FinestraScambio;
 
 public class Campionato 
 {
@@ -43,7 +47,6 @@ public class Campionato
 		case 3: 
 			//inserire un ciclo in maniera tale che le squadre avversarie facciano il calciomercato e controllino se è meglio effettuare uno
 			//scambio oppure un' acquisto (che fa..la facciamo a random ??)
-
 			System.out.println("1. acquista");
 			System.out.println("2.scambio");
 			Giocatore [] giocatoridavisualizzare = null;
@@ -59,10 +62,13 @@ public class Campionato
 				int scelta2 = Integer.parseInt(JOptionPane.showInputDialog("cosa vuoi fare?")); //input da finestra
 				switch(scelta2){
 				case 1: 
+					//fa visualizzare solo l'ultimo elemento inserito. CHECK!!!!
 					giocatoridavisualizzare = VisualizzaGiocatori("Attaccante", squadra.GetNomeSquadra());
-					for(int i = 0; i<giocatoridavisualizzare.length;i++)
-						System.out.println(i+". "+giocatoridavisualizzare[i]); 
-
+					for(int i = 0; i<giocatoridavisualizzare.length;i++){
+						//finestra.getAreaGiocMia().append(i+". "+giocatoridavisualizzare[i] + "\n");
+					}
+			//		finestra.Go();
+					//System.out.println(i+". "+giocatoridavisualizzare[i]); 
 					Trasferimento();
 					break;
 
@@ -92,11 +98,59 @@ public class Campionato
 				}
 
 			case 2: System.out.println("Metodo scambio");
-			//visualizzare in una parte della finestra i giocatori delle squadre avversarie e in un'altra parte delal finestra i tuoi  giocatori
-			//poi far partire il metodo.
-			System.out.print("inserisci il cognome del giocatore della tua squadra, il cognome dell'altra squadra e la relativa squadra il tutto " +
-					"separati da una virgola");
-			squadra.scambio(Cognomes, Cognomes1, s1);
+			FinestraScambio finestra = new FinestraScambio();
+			giocatoridavisualizzare = VisualizzaGiocatori(squadra.GetNomeSquadra());
+
+			for(int i = 0; i<giocatoridavisualizzare.length;i++)
+				finestra.getAreaGiocAvv().append(i+". "+giocatoridavisualizzare[i] + "\n");
+			
+			giocatoridavisualizzare = VisualizzaGiocatoriMiei();
+			finestra.getAreaGiocMia().append("\n\n");
+			for(int i = 0; i<giocatoridavisualizzare.length;i++)
+				finestra.getAreaGiocMia().append(i+". "+giocatoridavisualizzare[i] + "\n");
+			
+		//	finestra.Go();
+			
+			textField.addKeyListener(new KeyListener(){
+
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+					
+				}
+
+				@Override
+				public void keyReleased(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			finestra.getFinestrScambio().setVisible(true);
+			String sceltagiocatore = 
+			String	Scelta [] = sceltagiocatore.split(",");
+
+			squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
 			break;
 
 			}
@@ -123,10 +177,28 @@ public class Campionato
 					giocatoridavisualizzare.add(giocatore);
 		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
 	}
+	
+	//per lo scambio..
+	private Giocatore [] VisualizzaGiocatori(String squadrautente){
+		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
+		for(int z = 0; z<squadre.length;z++)
+			for(Giocatore giocatore : squadre[z].GetSquadra())
+				if(!(giocatore.getSquadra().equalsIgnoreCase(squadrautente)))
+					giocatoridavisualizzare.add(giocatore);
+		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
+	}
+	
+	private Giocatore [] VisualizzaGiocatoriMiei(){
+		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
+			for(Giocatore giocatore : squadra.GetSquadra())
+					giocatoridavisualizzare.add(giocatore);
+		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
+	}
 
 	private void Trasferimento(){
 		do{
-			String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
+			String sceltagiocatore = (JOptionPane.showInputDialog("Inserisci il COGNOME del giocatore che vorresti acquistare " +
+					"e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ")); //input da finestra
 			String	giocatoresquadra [] = sceltagiocatore.split(",");
 			squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
 			System.out.println("Vuoi acquistare ancora? si o no: ");
