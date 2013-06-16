@@ -120,11 +120,11 @@ public class FinestraScambio {
 		return frmCalciomercatoScambio;
 	}
 	
-	/*public void Go(){
+	public void Go(){
 		frmCalciomercatoScambio.setVisible(true);
 	}
 	public void stop(){
 		frmCalciomercatoScambio.setVisible(false);
-	}*/
+	}
 
 }

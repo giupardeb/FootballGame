@@ -109,44 +109,8 @@ public class Campionato
 			for(int i = 0; i<giocatoridavisualizzare.length;i++)
 				finestra.getAreaGiocMia().append(i+". "+giocatoridavisualizzare[i] + "\n");
 			
-		//	finestra.Go();
-			
-			textField.addKeyListener(new KeyListener(){
+			finestra.Go();
 
-				@Override
-				public void keyPressed(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-					
-					
-				}
-
-				@Override
-				public void keyReleased(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			finestra.getFinestrScambio().setVisible(true);
 			String sceltagiocatore = 
 			String	Scelta [] = sceltagiocatore.split(",");
 
