@@ -9,9 +9,9 @@ import Graphic.FinestraScambio;
 
 public class Campionato 
 {
-	SquadraUmano squadra;
+	public SquadraUmano squadra;
 
-	SquadraAvversaria squadre[] = new SquadraAvversaria [18];
+	public SquadraAvversaria squadre[] = new SquadraAvversaria [18];
 
 	DatabaseGiocatori db;
 
@@ -55,6 +55,7 @@ public class Campionato
 			switch(scelta1){
 
 			case 1:
+				
 				System.out.println("1.Attaccante");
 				System.out.println("2.Centrocampista");
 				System.out.println("3.Difensore");
@@ -98,8 +99,10 @@ public class Campionato
 				}
 
 			case 2: System.out.println("Metodo scambio");
+			
 			FinestraScambio finestra = new FinestraScambio();
 			giocatoridavisualizzare = VisualizzaGiocatori(squadra.GetNomeSquadra());
+			
 
 			for(int i = 0; i<giocatoridavisualizzare.length;i++)
 				finestra.getAreaGiocAvv().append(i+". "+giocatoridavisualizzare[i] + "\n");
@@ -111,10 +114,10 @@ public class Campionato
 			
 			finestra.Go();
 
-			String sceltagiocatore = 
-			String	Scelta [] = sceltagiocatore.split(",");
+			//String sceltagiocatore = 
+		//	String	Scelta [] = sceltagiocatore.split(",");
 
-			squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
+			//squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
 			break;
 
 			}

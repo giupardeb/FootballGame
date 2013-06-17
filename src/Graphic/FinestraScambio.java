@@ -3,6 +3,7 @@ package Graphic;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
@@ -11,10 +12,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.Dimension;
 
-public class FinestraScambio {
+public class FinestraScambio extends JPanel {
 
-	private JFrame frmCalciomercatoScambio;
+	//private JFrame frmCalciomercatoScambio;
+	private JPanel panel;
 	private TextArea AreaGiocMia = new TextArea();
 	private TextArea AreaGiocAvv = new TextArea();
 
@@ -23,7 +26,7 @@ public class FinestraScambio {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -34,25 +37,27 @@ public class FinestraScambio {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
 	 */
 	public FinestraScambio() {
 		initialize();
+		panel.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmCalciomercatoScambio = new JFrame();
-		frmCalciomercatoScambio.setTitle("CalcioMercato - Scambio");
-		frmCalciomercatoScambio.setSize(800,600);
-		frmCalciomercatoScambio.setResizable(false);
+		panel = new JPanel();
+	//	frmCalciomercatoScambio = new JFrame();
+	//	frmCalciomercatoScambio.setTitle("CalcioMercato - Scambio");
+	//	frmCalciomercatoScambio.setSize(1000,600);
+	//	frmCalciomercatoScambio.setResizable(false);
 		//	frmCalciomercatoScambio.setBounds(100, 100, 575, 395);
-		frmCalciomercatoScambio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	frmCalciomercatoScambio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		final JTextField textField = new JTextField("Inserisci il Cognome del giocatore della tua squadra che vuoi scambiare, il Cognome del giocatore" +
 						"che vorresti avere e la squadra di provenienza, separati da un virgola (ES. Totti,Bergessio,Catania)");
@@ -74,8 +79,6 @@ public class FinestraScambio {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
 				
 			}
 
@@ -94,11 +97,12 @@ public class FinestraScambio {
 		});
 
 		textField.setAutoscrolls(false);
-		frmCalciomercatoScambio.getContentPane().add(textField, BorderLayout.SOUTH);
-
+	//	frmCalciomercatoScambio.getContentPane().add(textField, BorderLayout.SOUTH);
+		panel.add(textField, BorderLayout.SOUTH);
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(0.48);
-		frmCalciomercatoScambio.getContentPane().add(splitPane, BorderLayout.CENTER);
+	//	frmCalciomercatoScambio.getContentPane().add(splitPane, BorderLayout.CENTER);
+		panel.add(splitPane, BorderLayout.CENTER);
 		AreaGiocMia.setText("I tuoi giocatori: ");
 		AreaGiocMia.setEditable(false);
 
@@ -106,6 +110,7 @@ public class FinestraScambio {
 
 		AreaGiocAvv.setEditable(false);
 		splitPane.setRightComponent(AreaGiocAvv);
+		
 	}
 
 	public TextArea getAreaGiocMia(){
@@ -116,15 +121,13 @@ public class FinestraScambio {
 		return AreaGiocAvv;
 	}
 	
-	public JFrame getFinestrScambio(){
+/*	public JFrame getFinestrScambio(){
 		return frmCalciomercatoScambio;
-	}
-	
-	public void Go(){
-		frmCalciomercatoScambio.setVisible(true);
-	}
+	}*/
+
 	public void stop(){
-		frmCalciomercatoScambio.setVisible(false);
+	//	frmCalciomercatoScambio.setVisible(false);
+		panel.setVisible(false);
 	}
 
 }
