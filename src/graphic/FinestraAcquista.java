@@ -22,8 +22,7 @@ import java.awt.event.MouseEvent;
 
 public class FinestraAcquista extends JFrame{
 
-	private JFrame frame;
-
+	private JFrame frame = this;
 	/**
 	 * Launch the application.
 	 */
@@ -49,18 +48,17 @@ public class FinestraAcquista extends JFrame{
 		this.setResizable(false);
 		initialize(c,s);
 		this.setVisible(true);
-
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final Campionato c, String s) {
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		this.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		TextArea giocatoriList = new TextArea();
 		giocatoriList.setEditable(false);
-		getContentPane().add(giocatoriList, BorderLayout.CENTER);
+		this.getContentPane().add(giocatoriList, BorderLayout.CENTER);
 
 		final TextField textField = new TextField();
 		
@@ -71,8 +69,8 @@ public class FinestraAcquista extends JFrame{
 					String sceltagiocatore = "";
 					sceltagiocatore = textField.getText();
 					String	giocatoresquadra [] = sceltagiocatore.split(",");
-					c.Trasferimento(giocatoresquadra);
 					frame.dispose();
+					c.Trasferimento(giocatoresquadra);
 				}
 			}
 		});
@@ -83,6 +81,7 @@ public class FinestraAcquista extends JFrame{
 				if(textField.getText() != "") textField.setText("");
 			}
 		});
+		
 		textField.setText("Inserisci il COGNOME del giocatore che vorresti acquistare " +
 				"e la SQUADRA appartenente separati da una virgola (es.Totti,roma): ");
 		getContentPane().add(textField, BorderLayout.SOUTH);
@@ -91,8 +90,7 @@ public class FinestraAcquista extends JFrame{
 		for(int i = 0; i<c.giocatoridavisualizzare.length;i++){
 			giocatoriList.append(i+". "+c.giocatoridavisualizzare[i] + "\n");
 		}
-		giocatoriList.setVisible(true);
-		//c.Trasferimento();
+		boolean visibile = true;
 	}
 
 }

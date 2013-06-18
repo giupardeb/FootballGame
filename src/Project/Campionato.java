@@ -70,14 +70,9 @@ public class Campionato
 	}
 
 	public void Trasferimento(String [] giocatoresquadra){
-		do{
-			squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
-			continua = JOptionPane.showInputDialog("Vuoi acquistare ancora? si o no: ");
+				squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
+				FinestraCampionato fc = new FinestraCampionato(this);
 		}
-		while(continua.equalsIgnoreCase("si"));
-		FinestraCampionato fc = new FinestraCampionato(this);
-		//far rispuntare il frame FinestraCampionato
-	}
 
 	public void Calciomercato(JFrame frame){
 		frame.dispose();
