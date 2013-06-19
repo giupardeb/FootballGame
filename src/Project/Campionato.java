@@ -1,13 +1,9 @@
 package Project;
 import graphic.*;
 
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 public class Campionato 
 {
@@ -30,13 +26,13 @@ public class Campionato
 			if(squadre[i] == null) i--;
 		}
 
-		
+
 		FinestraCampionato f = new FinestraCampionato(this);
 	}
 
 
 
-	private int SearchSquadra(String nome){
+	public int SearchSquadra(String nome){
 		for(int i = 0; i<squadre.length;i++)
 			if (squadre[i].GetNomeSquadra().equalsIgnoreCase(nome)) return i;
 		return -1;
@@ -53,7 +49,7 @@ public class Campionato
 	}
 
 	//per lo scambio..
-	private Giocatore [] VisualizzaGiocatori(String squadrautente){
+	public Giocatore [] VisualizzaGiocatori(String squadrautente){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z = 0; z<squadre.length;z++)
 			for(Giocatore giocatore : squadre[z].GetSquadra())
@@ -62,7 +58,7 @@ public class Campionato
 		return giocatoridavisualizzare.toArray(new Giocatore [giocatoridavisualizzare.size()]);
 	}
 
-	private Giocatore [] VisualizzaGiocatoriMiei(){
+	public Giocatore [] VisualizzaGiocatoriMiei(){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(Giocatore giocatore : squadra.GetSquadra())
 			giocatoridavisualizzare.add(giocatore);
@@ -70,45 +66,20 @@ public class Campionato
 	}
 
 	public void Trasferimento(String [] giocatoresquadra){
-				squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
-				FinestraCampionato fc = new FinestraCampionato(this);
-		}
+		squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
+		FinestraCampionato fc = new FinestraCampionato(this);
+	}
 
 	public void Calciomercato(JFrame frame){
 		frame.dispose();
 		SceltaScambioAcquista Scelta = new SceltaScambioAcquista(this); 
-		
-	//	System.out.println("1. acquista");
-		//System.out.println("2.scambio");
-
-		/*
-		case 2: System.out.println("Metodo scambio");
-
-		FinestraScambio finestra = new FinestraScambio();
-		giocatoridavisualizzare = VisualizzaGiocatori(squadra.GetNomeSquadra());
-
-
-		for(int i = 0; i<giocatoridavisualizzare.length;i++)
-			finestra.getAreaGiocAvv().append(i+". "+giocatoridavisualizzare[i] + "\n");
-
-		giocatoridavisualizzare = VisualizzaGiocatoriMiei();
-		finestra.getAreaGiocMia().append("\n\n");
-		for(int i = 0; i<giocatoridavisualizzare.length;i++)
-			finestra.getAreaGiocMia().append(i+". "+giocatoridavisualizzare[i] + "\n");
-
-		//String sceltagiocatore = 
-		//	String	Scelta [] = sceltagiocatore.split(",");
-
-		//squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
-		break;
-
-		}
-
-*/
 	}
-		
-		
-	/*public Squadra partita (Squadra a,Squadra b){
+
+
+}
+
+
+/*public Squadra partita (Squadra a,Squadra b){
 
 		boolean vinto;
 	   	Giocatore provvC = new Giocatore ();
@@ -253,5 +224,5 @@ public class Campionato
 				System.out.println("Parata del portiere della squadra 2");
 		}
 
-    }*/
-}
+    }
+}*/

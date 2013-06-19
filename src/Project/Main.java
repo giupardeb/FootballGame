@@ -1,8 +1,6 @@
 package Project;
 import graphic.*;
 
-import javax.swing.JButton;
-
 public class Main {
 	public static MainWindow F;
 	
