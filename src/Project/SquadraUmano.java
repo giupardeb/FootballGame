@@ -32,16 +32,16 @@ public class SquadraUmano extends Squadra{
 
 	///////////////////////////////////////////////////****************INIZIO METODI SCAMBIO***********************//////////////////////////
 	private void TrasferimentoPerScambio(Class<? extends Giocatore>clazz, int i, int j, SquadraAvversaria s1,Class<? extends Giocatore>clazz1){
-		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>clazz1.cast(db.GetDb()[j]).getDotiRuolo() && 
+		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>=clazz1.cast(db.GetDb()[j]).getDotiRuolo() && 
 				clazz.cast(db.GetDb()[i]).getValoreGenerale() >= clazz1.cast(db.GetDb()[j]).getValoreGenerale() ){
 
 			if((int)(Math.random()*RandomNumber2)+1<3){
-				this.GetSquadra().add(db.GetDb()[i]);
-				s1.GetSquadra().add(db.GetDb()[j]);
-				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra());
-				db.GetDb()[j].setNomeSquadra(s1.GetNomeSquadra());
-				this.GetSquadra().remove(db.GetDb()[j]);
-				s1.GetSquadra().remove(db.GetDb()[i]);	
+				this.GetSquadra().add(db.GetDb()[j]);
+				s1.GetSquadra().add(db.GetDb()[i]);
+				db.GetDb()[j].setNomeSquadra(this.GetNomeSquadra());
+				db.GetDb()[i].setNomeSquadra(s1.GetNomeSquadra());
+				this.GetSquadra().remove(db.GetDb()[i]);
+				s1.GetSquadra().remove(db.GetDb()[j]);	
 				JOptionPane.showMessageDialog(null, "scambio effettuato con successo");
 			}
 			else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
