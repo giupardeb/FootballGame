@@ -13,7 +13,7 @@ public class DatabaseGiocatori {
 	Stack<String> squadreesistenti = new Stack<String>();
 
 
-	private static Giocatore giocatori[];
+	/*private static*/ Giocatore giocatori[];
 
 	///////////////////////////////////////////////////****////////////////////////////////////////////////	
 	//crea il database
@@ -58,11 +58,10 @@ public class DatabaseGiocatori {
 
 
 	private  Giocatore[] read(String fileName)  throws IOException  {
-		// Ha più senso avere queste due linee dentro
 		ArrayList <Giocatore> players  = new ArrayList<Giocatore>();
-
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String currentLine;
+
 		while ((currentLine = br.readLine()) != null) {
 			Giocatore player = giocatore(currentLine);
 			players.add(player);
@@ -164,6 +163,7 @@ public class DatabaseGiocatori {
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 
 					abilitaCentrcampo, valoreGenerale, valoreMercato);
+
 		} else if(ruolo.equalsIgnoreCase(PORTIERE)) {
 			giocatore = new Portiere(nome, squadra, nazionalita, 
 					velocita, resistenza, forza, 
@@ -228,7 +228,7 @@ public class DatabaseGiocatori {
 		}
 		return null;
 	}
-	
+
 	public Giocatore [] GetDb(){
 		return giocatori;
 	}

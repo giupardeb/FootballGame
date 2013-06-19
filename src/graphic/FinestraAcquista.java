@@ -88,7 +88,6 @@ public class FinestraAcquista extends JFrame{
 		for(int i = 0; i<c.giocatoridavisualizzare.length;i++){
 			giocatoriList.append(i+". "+c.giocatoridavisualizzare[i] + "\n");
 		}
-		boolean visibile = true;
 	}
 
 }

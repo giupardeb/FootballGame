@@ -11,14 +11,14 @@ class Portiere extends Giocatore
 	private byte rimessa;
 	//private float valoreDiMercato;
 
-	public Portiere(String cognome,String nazionalita,String squadra,byte velocita,byte resistenza,
+	public Portiere(String nome,String squadra,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
 			byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,
 			boolean essenziale,byte mediaVoti,byte dotiAeree,byte agilita,byte comunicazione,
 			byte bloccareTiri,byte calciare,byte riflessi,byte rimessa,byte valoreGenerale,
 			double valoreMercato)
 	{
-		super(cognome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,
+		super(nome,squadra,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,
 				posizione,giocoDiSquadra,essenziale,mediaVoti, valoreGenerale,valoreMercato);
 
 		this.dotiAeree = dotiAeree;

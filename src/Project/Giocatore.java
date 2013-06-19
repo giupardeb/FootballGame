@@ -22,13 +22,13 @@ abstract public class Giocatore
 
 
 
-	Giocatore(String cognome,String squadra,String nazionalita,byte velocita,
+	Giocatore(String nome,String squadra,String nazionalita,byte velocita,
 			byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione,
 			byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
 			byte mediaVoti,byte valoreGenerale,double valoreMercato) 
 			{
-		anagrafe = new Anagrafe(cognome,eta,nazionalita);
+		anagrafe = new Anagrafe(nome,eta,nazionalita);
 		this.squadra = squadra;
 		this.velocita = velocita;
 		this.resistenza = resistenza;
@@ -268,7 +268,7 @@ abstract public class Giocatore
 
 	public String toString()
 	{
-		return( "Cognome: " + GetAnagrafe().GetCognome() + " Squadra di appartenenza: "+ getSquadra()+ "\n"+"eta:" + GetAnagrafe().GetEta() + 
+		return( "Cognome: " + GetAnagrafe().GetCognome() + " Squadra di appartenenza: "+ getSquadra()+ "\n"+"Ruolo: "+getRuolo()+"\n"+"eta:" + GetAnagrafe().GetEta() + 
 				"\n"+"Valore generale: " + getValoreGenerale() + "\n" + "Valore Mercato: " + getValoreMercato());
 	}
 

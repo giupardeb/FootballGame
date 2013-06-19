@@ -1,11 +1,13 @@
 package graphic;
 
 
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 
 import Project.Campionato;
+import Project.Squadra;
 
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -13,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 
 public class FinestraScambio extends JFrame {
 
@@ -20,7 +23,7 @@ public class FinestraScambio extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -2120793008315688634L;
-	//private JFrame frame;
+	private JFrame frame = this;
 	private TextArea AreaGiocMia;
 	private TextArea AreaGiocAvv;
 	private TextField textField;
@@ -46,15 +49,17 @@ public class FinestraScambio extends JFrame {
 	 */
 	public FinestraScambio(final Campionato c) {
 		super();
-		setVisible(true);
-		setResizable(false);
+		setSize(new Dimension(870, 600));
 		initialize(c);
+		this.setVisible(true);
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final Campionato c) {
+		this.setResizable(false);
 		textField = new TextField();
 		textField.setText("Inserisci il COGNOMETuoGiocatore, COGNOME SuoGiocatore e il NOME della " +
 				"squadra separati da una virgola (ES. Totti,Bergessio, Catania)");
@@ -66,8 +71,10 @@ public class FinestraScambio extends JFrame {
 				if(key == KeyEvent.VK_ENTER){
 					String sceltagiocatore = textField.getText();
 					String	Scelta [] = sceltagiocatore.split(",");
-
+					frame.dispose();
 					c.squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), c.squadre[c.SearchSquadra(Scelta[2].trim())]);
+					Squadra a[] = c.squadre;
+					Squadra b = c.squadra;
 				}
 			}
 		});

@@ -38,7 +38,7 @@ public class Campionato
 		return -1;
 
 	}
-
+//per l'acquista
 	public Giocatore [] VisualizzaGiocatori(String ruolo, String squadrautente){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z = 0; z<squadre.length;z++)
@@ -74,8 +74,6 @@ public class Campionato
 		frame.dispose();
 		SceltaScambioAcquista Scelta = new SceltaScambioAcquista(this); 
 	}
-
-
 }
 
 

@@ -1,11 +1,7 @@
 package Project;
-import java.awt.TextArea;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class SquadraUmano extends Squadra{
 
@@ -21,10 +17,10 @@ public class SquadraUmano extends Squadra{
 
 		if(i!=INITIALISE && j!=INITIALISE)
 			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(db.GetDb()[j].getRuolo()))
-				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1);
+				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1,db.GetDb()[j].getClass());
 			else if(Controllo(s1,j))
 				if(Controllo(this,i))
-					TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1); 
+					TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1, db.GetDb()[j].getClass()); 
 				else JOptionPane.showMessageDialog(null, "Scambio non effettuato con successo poichè potresti andare " +
 						"in deficit di "+db.GetDb()[i].getRuolo());
 
@@ -35,8 +31,10 @@ public class SquadraUmano extends Squadra{
 	///////////////////////////////////////////////////****************FINE SCAMBIO***********************///////////////////////////////////////
 
 	///////////////////////////////////////////////////****************INIZIO METODI SCAMBIO***********************//////////////////////////
-	private void TrasferimentoPerScambio(Class<? extends Giocatore>clazz, int i, int j, SquadraAvversaria s1){
-		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>clazz.cast(db.GetDb()[j]).getDotiRuolo()){
+	private void TrasferimentoPerScambio(Class<? extends Giocatore>clazz, int i, int j, SquadraAvversaria s1,Class<? extends Giocatore>clazz1){
+		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>clazz1.cast(db.GetDb()[j]).getDotiRuolo() && 
+				clazz.cast(db.GetDb()[i]).getValoreGenerale() >= clazz1.cast(db.GetDb()[j]).getValoreGenerale() ){
+
 			if((int)(Math.random()*RandomNumber2)+1<3){
 				this.GetSquadra().add(db.GetDb()[i]);
 				s1.GetSquadra().add(db.GetDb()[j]);
@@ -173,11 +171,11 @@ public class SquadraUmano extends Squadra{
 			}
 			else{
 				if(db.GetDb()[i].getRuolo().equalsIgnoreCase("difensore")){
-					if(s1.GetTotaleAttaccanti()>MINDIFENSORI) acquista = true;
+					if(s1.GetTotaleDifensori()>MINDIFENSORI) acquista = true;
 				}
 				else{
 					if(db.GetDb()[i].getRuolo().equalsIgnoreCase("centrocampista")){
-						if(s1.GetTotaleAttaccanti()>MINCENTROCAMPISTI) acquista = true;
+						if(s1.GetTotaleCentrocampisti()>MINCENTROCAMPISTI) acquista = true;
 					}
 				}
 			}
