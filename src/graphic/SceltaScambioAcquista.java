@@ -1,20 +1,20 @@
 package graphic;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 import Project.Campionato;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class SceltaScambioAcquista extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3046936363507453245L;
 	private JFrame frame = this;
 
 	/**
@@ -45,7 +45,6 @@ public class SceltaScambioAcquista extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final Campionato c) {
-	//	frame = new JFrame();
 		this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
@@ -60,8 +59,17 @@ public class SceltaScambioAcquista extends JFrame {
 		});
 		this.getContentPane().add(rdbtnAcquista);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Scambio");
-		this.getContentPane().add(rdbtnNewRadioButton);
+		JRadioButton rdbtnScambio = new JRadioButton("Scambio");
+		
+		rdbtnScambio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+				FinestraScambio FinestraScambio = new FinestraScambio(c);
+			}
+		});
+		
+		this.getContentPane().add(rdbtnScambio);
 	}
 
 }

@@ -1,20 +1,14 @@
 package graphic;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
 
 import Project.Campionato;
 
-import java.awt.Component;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -22,6 +16,10 @@ import java.awt.event.MouseEvent;
 
 public class FinestraAcquista extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3443854256216044101L;
 	private JFrame frame = this;
 	/**
 	 * Launch the application.

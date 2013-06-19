@@ -3,7 +3,6 @@ package graphic;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JButton;
-
 import Project.Campionato;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;

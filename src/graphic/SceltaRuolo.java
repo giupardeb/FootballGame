@@ -1,17 +1,20 @@
 package graphic;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
 
 import Project.Campionato;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class SceltaRuolo extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6948036084218256765L;
 	private JFrame frame = this;
 
 	/**
@@ -42,11 +45,11 @@ public class SceltaRuolo extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final Campionato c) {
-	//	frame = new JFrame();
+		//	frame = new JFrame();
 		this.setBounds(100, 100, 581, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JRadioButton rdbtnCentrocampista = new JRadioButton("Centrocampista");
 		rdbtnCentrocampista.addMouseListener(new MouseAdapter() {
 			@Override
@@ -57,9 +60,9 @@ public class SceltaRuolo extends JFrame {
 			}
 		});
 		this.getContentPane().add(rdbtnCentrocampista);
-		
+
 		JRadioButton rdbtnAttaccante = new JRadioButton("Attaccante");
-		
+
 		rdbtnAttaccante.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -68,11 +71,11 @@ public class SceltaRuolo extends JFrame {
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
 			}
 		});
-		
+
 		this.getContentPane().add(rdbtnAttaccante);
-		
+
 		JRadioButton rdbtnDifensore = new JRadioButton("Difensore");
-		
+
 		rdbtnDifensore.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,11 +84,11 @@ public class SceltaRuolo extends JFrame {
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
 			}
 		});
-		
+
 		this.getContentPane().add(rdbtnDifensore);
-		
+
 		JRadioButton rdbtnPortiere = new JRadioButton("Portiere");
-		
+
 		rdbtnPortiere.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -94,8 +97,7 @@ public class SceltaRuolo extends JFrame {
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
 			}
 		});
-		
+
 		this.getContentPane().add(rdbtnPortiere);
 	}
-
 }
