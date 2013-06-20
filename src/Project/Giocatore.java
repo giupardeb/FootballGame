@@ -274,9 +274,7 @@ abstract public class Giocatore
 
 	// Altri metodi
 
-	abstract public void Crescita(byte valore);
 	abstract public int getDotiRuolo();
-	//abstract public Giocatore SearchBestPlayer(Giocatore array[],int k);
 }
 
 

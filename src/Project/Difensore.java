@@ -12,12 +12,6 @@ class Difensore extends AltriRuoli
 				abilitaDifesa,abilitaAttacco,abilitaCentrocampo,valoreGenerale,valoreMercato);
 	}
 
-
-	public void Crescita(byte valore)
-	{
-		int a=0;
-	}
-
 	/*public Giocatore SearchBestPlayer(Giocatore array[],int k){
 
 		Difensore tmp = this; //oggetto chiamante è un difensore

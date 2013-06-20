@@ -11,11 +11,6 @@ class Attaccante extends AltriRuoli
 				abilitaAttacco,abilitaCentrocampo,valoreGenerale,valoreMercato);
 	}
 
-	public void Crescita(byte valore)
-	{
-		int a=0;
-	}
-
 	/*public Giocatore SearchBestPlayer(Giocatore array[],int k){
 
 		Attaccante tmp = this; //oggetto chiamante è un Attacante

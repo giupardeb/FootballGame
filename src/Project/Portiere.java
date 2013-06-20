@@ -141,13 +141,4 @@ class Portiere extends Giocatore
 
 
 	//METODI!
-
-	public void Crescita(byte prova)
-	{
-		int a=0;
-	}
-
-
-
-
 }

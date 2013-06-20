@@ -206,6 +206,4 @@ abstract class AltriRuoli extends Giocatore
 	}
 	// altri metodi
 
-	abstract public void Crescita(byte valore);
-
 }

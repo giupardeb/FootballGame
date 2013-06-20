@@ -35,7 +35,7 @@ public class SquadraUmano extends Squadra{
 		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>=clazz1.cast(db.GetDb()[j]).getDotiRuolo() && 
 				clazz.cast(db.GetDb()[i]).getValoreGenerale() >= clazz1.cast(db.GetDb()[j]).getValoreGenerale() ){
 
-			if((int)(Math.random()*RandomNumber2)+1<3){
+	//		if((int)(Math.random()*RandomNumber2)+1<3){
 				this.GetSquadra().add(db.GetDb()[j]);
 				s1.GetSquadra().add(db.GetDb()[i]);
 				db.GetDb()[j].setNomeSquadra(this.GetNomeSquadra());
@@ -43,8 +43,8 @@ public class SquadraUmano extends Squadra{
 				this.GetSquadra().remove(db.GetDb()[i]);
 				s1.GetSquadra().remove(db.GetDb()[j]);	
 				JOptionPane.showMessageDialog(null, "scambio effettuato con successo");
-			}
-			else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
+		//	}
+		//	else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
 		}
 		else JOptionPane.showMessageDialog(null, "la squadra ha rifiutato lo scambio");
 	}
@@ -55,11 +55,6 @@ public class SquadraUmano extends Squadra{
 	public void acquisto(String Cognome,SquadraAvversaria s1){ // miasquadra acquista Cognome da s1
 
 		int i = Search(Cognome); 
-
-		/*JFrame frame = new JFrame("Acquisto");
-		TextArea text = new TextArea();
-		frame.add(text);
-		frame.setVisible(true);*/
 
 		if(i!=INITIALISE){
 
@@ -118,9 +113,7 @@ public class SquadraUmano extends Squadra{
 			}
 			else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
 		}
-		else{
-			JOptionPane.showMessageDialog(null,"La squadra ha rifiutato poichè è al minimo di "+ db.GetDb()[i].getRuolo()+"/i");
-		}
+		else JOptionPane.showMessageDialog(null,"La squadra ha rifiutato poichè è al minimo di "+ db.GetDb()[i].getRuolo()+"/i");
 	}
 	///////////////////////////////////////////////////****************FINE METODI ACQUISTA***********************///////////////////////////	
 
@@ -161,25 +154,24 @@ public class SquadraUmano extends Squadra{
 	}
 
 	private boolean Controllo(Squadra s1, int i){
-		boolean acquista = false;
 		if(db.GetDb()[i].getRuolo().equalsIgnoreCase("portiere")){
-			if(s1.GetTotalePortieri()>MINPORTIERI) acquista = true;
+			if(s1.GetTotalePortieri()>MINPORTIERI) return true;
 		}
 		else{
 			if(db.GetDb()[i].getRuolo().equalsIgnoreCase("attaccante")){
-				if(s1.GetTotaleAttaccanti()>MINATTACCANTI) acquista = true;
+				if(s1.GetTotaleAttaccanti()>MINATTACCANTI) return true;
 			}
 			else{
 				if(db.GetDb()[i].getRuolo().equalsIgnoreCase("difensore")){
-					if(s1.GetTotaleDifensori()>MINDIFENSORI) acquista = true;
+					if(s1.GetTotaleDifensori()>MINDIFENSORI) return true;
 				}
 				else{
 					if(db.GetDb()[i].getRuolo().equalsIgnoreCase("centrocampista")){
-						if(s1.GetTotaleCentrocampisti()>MINCENTROCAMPISTI) acquista = true;
+						if(s1.GetTotaleCentrocampisti()>MINCENTROCAMPISTI) return true;
 					}
 				}
 			}
 		}
-		return acquista;
+		return false;
 	}
 }
