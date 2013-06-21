@@ -11,7 +11,7 @@ public class Campionato
 
 	public SquadraAvversaria squadre[] = new SquadraAvversaria [18];
 
-	DatabaseGiocatori db;
+	public DatabaseGiocatori db;
 
 	String continua = ""; //utile per i cicli
 
@@ -27,7 +27,7 @@ public class Campionato
 		}
 
 
-		RichiamaFinestraCampionato();
+		RichiamaFinestraCampionato(db);
 	}
 
 
@@ -67,12 +67,12 @@ public class Campionato
 
 	public void Trasferimento(String [] giocatoresquadra){
 		squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
-		RichiamaFinestraCampionato();
+		RichiamaFinestraCampionato(db);
 		}
 
 	public void TrasferimentoPerScambio(String [] Scelta){
 		squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
-		RichiamaFinestraCampionato();
+		RichiamaFinestraCampionato(db);
 	}
 
 	public void Calciomercato(JFrame frame){
@@ -80,9 +80,10 @@ public class Campionato
 		SceltaScambioAcquista Scelta = new SceltaScambioAcquista(this); 
 	}
 	
-	public void RichiamaFinestraCampionato(){
-		FinestraCampionato fc = new FinestraCampionato(this);
+	public void RichiamaFinestraCampionato(DatabaseGiocatori db){
+		FinestraCampionato fc = new FinestraCampionato(this,db);
 	}
+	
 }
 
 

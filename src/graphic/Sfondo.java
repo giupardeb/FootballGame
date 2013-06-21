@@ -1,26 +1,27 @@
 package graphic;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Sfondo extends JPanel {
+public class Sfondo extends JLabel {
     
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 7533349940834185551L;
-	private Image sfondoImage;
+	private Image img;
 
-    public Sfondo(Image sfondoImage) {
-        this.sfondoImage = sfondoImage;
-        this.setVisible(true);
+    /**
+     * @wbp.parser.constructor
+     */
+    public Sfondo() {
+    	setIcon(new ImageIcon(Sfondo.class.getResource("/scudetti/Football.jpg")));
+    	setSize(new Dimension(800, 400));
     }
-
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.setOpaque(false);
-        g.drawImage(sfondoImage, 0, 0, this);
-    }
+ 
 }

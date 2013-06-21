@@ -232,4 +232,11 @@ public class DatabaseGiocatori {
 	public Giocatore [] GetDb(){
 		return giocatori;
 	}
+	
+	
+	public int GetIndice(String cognome){
+		for(int i = 0; i<giocatori.length; i++)
+			if(giocatori[i].GetAnagrafe().GetCognome().equalsIgnoreCase(cognome)) return i;
+		return -1;
+	}
 }

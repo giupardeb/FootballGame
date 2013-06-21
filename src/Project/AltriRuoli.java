@@ -198,11 +198,11 @@ abstract class AltriRuoli extends Giocatore
 
 	public String toString()
 	{
-		return(super.toString() + "\n" + "Statistiche specifiche: " + "\n" + "Cross: " + getCross() + "\n" + "Dribling: " +
-				getDribling() + "\n" + "Colpo di testa: " + getColpoDiTesta() + "\n" + "Passaggio: " + getPassaggio() + "\n" + "Tiro: " + 
-				getTiro() + "\n" + "contrasto: " + getContrasto() + "\n" + "Movimento: " + getMovimento() + "\n" + "abilita difesa: " + 
-				getAbilitaDifesa() + "\n" + "abilita attacco: " + getAbilitaAttacco() + "\n" + 
-				"abilita centrocampo: " + getAbilitaCentrocampo() + "\n");
+		return(super.toString() + "\n" + " Statistiche specifiche: " + "\n" + " Cross: " + getCross() + "\n" + " Dribling: " +
+				getDribling() + "\n" + " Colpo di testa: " + getColpoDiTesta() + "\n" + " Passaggio: " + getPassaggio() + "\n" + " Tiro: " + 
+				getTiro() + "\n" + " contrasto: " + getContrasto() + "\n" + " Movimento: " + getMovimento() + "\n" + " abilita difesa: " + 
+				getAbilitaDifesa() + "\n" + " abilita attacco: " + getAbilitaAttacco() + "\n" + 
+				" abilita centrocampo: " + getAbilitaCentrocampo() + "\n");
 	}
 	// altri metodi
 
