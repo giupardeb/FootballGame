@@ -27,7 +27,7 @@ public class Campionato
 		}
 
 
-		FinestraCampionato f = new FinestraCampionato(this);
+		RichiamaFinestraCampionato();
 	}
 
 
@@ -38,7 +38,7 @@ public class Campionato
 		return -1;
 
 	}
-//per l'acquista
+	//per l'acquista
 	public Giocatore [] VisualizzaGiocatori(String ruolo, String squadrautente){
 		ArrayList <Giocatore> giocatoridavisualizzare = new ArrayList <Giocatore>();
 		for(int z = 0; z<squadre.length;z++)
@@ -67,14 +67,24 @@ public class Campionato
 
 	public void Trasferimento(String [] giocatoresquadra){
 		squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
-		FinestraCampionato fc = new FinestraCampionato(this);
+		RichiamaFinestraCampionato();
+		}
+
+	public void TrasferimentoPerScambio(String [] Scelta){
+		squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
+		RichiamaFinestraCampionato();
 	}
 
 	public void Calciomercato(JFrame frame){
 		frame.dispose();
 		SceltaScambioAcquista Scelta = new SceltaScambioAcquista(this); 
 	}
+	
+	public void RichiamaFinestraCampionato(){
+		FinestraCampionato fc = new FinestraCampionato(this);
+	}
 }
+
 
 
 /*public Squadra partita (Squadra a,Squadra b){
@@ -86,7 +96,8 @@ public class Campionato
 
 
 
-	    a.arrg[5].pallasi();
+	    a.arrg[5].pallasi();		FinestraCampionato f = new FinestraCampionato(this);
+
 	    provvC = a.arrg[5].cntrcaso(a.arrg[6],a.arrg[7]);
 	    //calcio d'inizio squadra A
 	  	a.arrg[5].calcioInizio(provvC);

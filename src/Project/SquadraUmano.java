@@ -16,17 +16,17 @@ public class SquadraUmano extends Squadra{
 		int j = Search(Cognomes1); //giocatere che voglio dell'altra squadra
 
 		if(i!=INITIALISE && j!=INITIALISE)
-			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(db.GetDb()[j].getRuolo()))
-				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1,db.GetDb()[j].getClass());
-			else if(Controllo(s1,j))
-				if(Controllo(this,i))
-					TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1, db.GetDb()[j].getClass()); 
-				else JOptionPane.showMessageDialog(null, "Scambio non effettuato con successo poichè potresti andare " +
-						"in deficit di "+db.GetDb()[i].getRuolo());
+			//			if(db.GetDb()[i].getRuolo().equalsIgnoreCase(db.GetDb()[j].getRuolo()))
+			TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1,db.GetDb()[j].getClass());
+		else if(Controllo(s1,j))
+			if(Controllo(this,i))
+				TrasferimentoPerScambio(db.GetDb()[i].getClass(),i,j,s1, db.GetDb()[j].getClass()); 
+			else JOptionPane.showMessageDialog(null, "Scambio non effettuato con successo poichè potresti andare " +
+					"in deficit di "+db.GetDb()[i].getRuolo());
 
 
-			else JOptionPane.showMessageDialog(null, "Scambio non effettuato con successo poichè la squadra avversaria potrebbe" +
-					" andare in deficit di "+db.GetDb()[j].getRuolo());
+		else JOptionPane.showMessageDialog(null, "Scambio non effettuato con successo poichè la squadra avversaria potrebbe" +
+				" andare in deficit di "+db.GetDb()[j].getRuolo());
 	}
 	///////////////////////////////////////////////////****************FINE SCAMBIO***********************///////////////////////////////////////
 
@@ -35,7 +35,7 @@ public class SquadraUmano extends Squadra{
 		if(clazz.cast(db.GetDb()[i]).getDotiRuolo()>=clazz1.cast(db.GetDb()[j]).getDotiRuolo() && 
 				clazz.cast(db.GetDb()[i]).getValoreGenerale() >= clazz1.cast(db.GetDb()[j]).getValoreGenerale() ){
 
-	//		if((int)(Math.random()*RandomNumber2)+1<3){
+			if((int)(Math.random()*RandomNumber2)+1<3){
 				this.GetSquadra().add(db.GetDb()[j]);
 				s1.GetSquadra().add(db.GetDb()[i]);
 				db.GetDb()[j].setNomeSquadra(this.GetNomeSquadra());
@@ -43,8 +43,8 @@ public class SquadraUmano extends Squadra{
 				this.GetSquadra().remove(db.GetDb()[i]);
 				s1.GetSquadra().remove(db.GetDb()[j]);	
 				JOptionPane.showMessageDialog(null, "scambio effettuato con successo");
-		//	}
-		//	else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
+			}
+			else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");
 		}
 		else JOptionPane.showMessageDialog(null, "la squadra ha rifiutato lo scambio");
 	}
@@ -69,7 +69,6 @@ public class SquadraUmano extends Squadra{
 					else{
 						double denaroBastardo = ((db.GetDb()[i].getValoreMercato()*75)/100)+db.GetDb()[i].getValoreMercato(); //+ OPZIONI
 						JOptionPane.showMessageDialog(null, "La squadra: " + db.GetDb()[i].getSquadra() + "non ha accettato l' offerta.");
-						//	System.out.println("La squadra: " + db.GetDb()[i].getSquadra() + "non ha accettato l' offerta.");
 						String scelta = "";
 						scelta = JOptionPane.showInputDialog("Ma ti ha proposto una controfferta: " + denaroBastardo + " accettare? si /no ");
 
@@ -104,11 +103,11 @@ public class SquadraUmano extends Squadra{
 
 		if(Controllo(s1,i)){
 			if(((int)(Math.random()*10)+1)>4){
-				this.SetBudgetRemove(denaro); //ok
-				s1.GetSquadra().remove(db.GetDb()[i]); //nn rimuove!!!! ora si, ma ho messo giocatori [] static
-				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra()); // non setta il nomesquadra
-				this.GetSquadra().add(db.GetDb()[i]); //ok
-				s1.SetBudgetAdd(denaro); //ok
+				this.SetBudgetRemove(denaro); 
+				s1.GetSquadra().remove(db.GetDb()[i]); 
+				db.GetDb()[i].setNomeSquadra(this.GetNomeSquadra()); 
+				this.GetSquadra().add(db.GetDb()[i]);
+				s1.SetBudgetAdd(denaro);
 				JOptionPane.showMessageDialog(null, "il giocatore ha accettato l'offerta");
 			}
 			else JOptionPane.showMessageDialog(null, "il giocatore ha rifiutato l'offerta, preferisce non cambiare squadra");

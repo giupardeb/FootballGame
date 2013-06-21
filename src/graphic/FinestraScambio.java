@@ -71,8 +71,8 @@ public class FinestraScambio extends JFrame {
 				if(key == KeyEvent.VK_ENTER){
 					String sceltagiocatore = textField.getText();
 					String	Scelta [] = sceltagiocatore.split(",");
-					c.squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), c.squadre[c.SearchSquadra(Scelta[2].trim())]);
 					frame.dispose();
+					c.TrasferimentoPerScambio(Scelta);
 				}
 			}
 		});
