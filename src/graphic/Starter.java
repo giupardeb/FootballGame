@@ -38,7 +38,7 @@ public class Starter extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setSize(800, 400);	
 		
-		lblNewLabel.setIcon(new ImageIcon(Starter.class.getResource("/scudetti/Football.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(Starter.class.getResource("/images/Football.jpg")));
 		getContentPane().add(lblNewLabel);
 		
 		JSplitPane splitPane = new JSplitPane();

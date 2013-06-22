@@ -21,9 +21,9 @@ public class Campionato
 	{
 		j.dispose();
 		db = new DatabaseGiocatori();
-		
+
 		squadra = db.CreaSquadra(miasquadra);
-		
+
 		for(int i = 0; i<squadre.length; i++){
 			squadre[i] = db.CreaSquadre(miasquadra);
 			if(squadre[i] == null) i--;
@@ -83,6 +83,11 @@ public class Campionato
 
 	public void RichiamaFinestraCampionato(DatabaseGiocatori db){
 		FinestraCampionato fc = new FinestraCampionato(this,db);
+	}
+
+
+	public void Partita(SquadraUmano umano, SquadraAvversaria computer){
+		System.out.print("Let's go!!");
 	}
 
 }

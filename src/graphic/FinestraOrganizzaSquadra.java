@@ -29,6 +29,10 @@ public class FinestraOrganizzaSquadra extends JFrame{
 	private static final long serialVersionUID = -4943380536225481189L;
 	private JFrame frame = this;
 	JButton btn = null;
+	final TextArea textArea = new TextArea();
+
+	
+	
 	//	ActionListener action = null;
 
 	public FinestraOrganizzaSquadra(Campionato c, DatabaseGiocatori db) {
@@ -56,8 +60,12 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FinestraFormazione f = new FinestraFormazione(array);
-				frame.dispose();
+//				if(cont == 15){
+					FinestraFormazione f = new FinestraFormazione(array);
+					frame.dispose();
+		//		}
+		//		else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
+				
 			}
 		});
 		panel.add(btnNewButton, BorderLayout.SOUTH);
@@ -69,7 +77,6 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		final JLabel output = new JLabel("");
 		panel.add(output, BorderLayout.NORTH);
 
-		final TextArea textArea = new TextArea();
 		textArea.setEditable(false);
 		splitPane.setRightComponent(textArea);
 
