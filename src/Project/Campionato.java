@@ -9,7 +9,7 @@ public class Campionato
 {
 	public SquadraUmano squadra;
 
-	public SquadraAvversaria squadre[] = new SquadraAvversaria [18];
+	public SquadraAvversaria squadre[] = new SquadraAvversaria [19];
 
 	public DatabaseGiocatori db;
 

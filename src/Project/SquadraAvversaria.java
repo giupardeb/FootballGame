@@ -96,7 +96,7 @@ public class SquadraAvversaria extends Squadra{
 
 		String ruolodaacquistare = new String ("");
 		if(GetTotaleDifensori()<MINDIFENSORI) ruolodaacquistare = "difensore";
-		else if(GetTotaleCentrocampisti()<MINCENTROCAMPISTI) ruolodaacquistare = "centrcampista";
+		else if(GetTotaleCentrocampisti()<MINCENTROCAMPISTI) ruolodaacquistare = "centrocampista";
 		else if(GetTotaleAttaccanti()<MINATTACCANTI) ruolodaacquistare = "attaccante";
 		else if(GetTotalePortieri()<MINPORTIERI) ruolodaacquistare = "portiere";
 
@@ -172,11 +172,13 @@ public class SquadraAvversaria extends Squadra{
 		{
 			int indicesquadraavversaria = SearchSquadra(s1,i);
 			if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
-				if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				if(db.GetDb()[i] instanceof Difensore ) 
+					if (s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				else if(db.GetDb()[i] instanceof Centrocampista) 
+						if (s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
+							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
 				else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
 					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
