@@ -17,21 +17,6 @@ public class SceltaScambioAcquista extends JFrame {
 	private static final long serialVersionUID = 3046936363507453245L;
 	private JFrame frame = this;
 
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SceltaScambioAcquista window = new SceltaScambioAcquista();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.
@@ -48,7 +33,8 @@ public class SceltaScambioAcquista extends JFrame {
 		this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
-		
+		this.setLocationRelativeTo(null);
+
 		JRadioButton rdbtnAcquista = new JRadioButton("Acquista");
 		rdbtnAcquista.addMouseListener(new MouseAdapter() {
 			@Override

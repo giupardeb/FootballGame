@@ -11,6 +11,7 @@ import Project.Squadra;
 
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -28,21 +29,6 @@ public class FinestraScambio extends JFrame {
 	private TextArea AreaGiocAvv;
 	private TextField textField;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraScambio window = new FinestraScambio();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.
@@ -50,6 +36,9 @@ public class FinestraScambio extends JFrame {
 	public FinestraScambio(final Campionato c) {
 		super();
 		setSize(new Dimension(870, 600));
+		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
+		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );	
 		initialize(c);
 		this.setVisible(true);
 

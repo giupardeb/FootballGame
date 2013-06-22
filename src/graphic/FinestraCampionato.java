@@ -2,6 +2,8 @@ package graphic;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import Project.Campionato;
 import Project.DatabaseGiocatori;
@@ -16,7 +18,7 @@ public class FinestraCampionato extends JFrame{
 
 
 	public FinestraCampionato(final Campionato c, final DatabaseGiocatori db) {
-		setSize(new Dimension(600, 300));
+			
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][]", "[][][][][][][][]"));
 
@@ -68,8 +70,11 @@ public class FinestraCampionato extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
+		this.setSize(new Dimension(600, 300));
+		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );
 	}
 
 }

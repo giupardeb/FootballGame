@@ -12,10 +12,14 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JSplitPane;
+
+import java.awt.Dimension;
 import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
+import javax.swing.JLabel;
 
 public class FinestraOrganizzaSquadra extends JFrame{
 
@@ -30,9 +34,9 @@ public class FinestraOrganizzaSquadra extends JFrame{
 	public FinestraOrganizzaSquadra(Campionato c, DatabaseGiocatori db) {
 		setResizable(false);
 		this.setSize(900, 400);
-
-
-		initialize(c,db);
+		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
+		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );			initialize(c,db);
 		this.setVisible(true);
 	}
 
@@ -52,16 +56,18 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				System.out.print("RICHIAMA FINESTRA SCELTA FORMAZIONE (VEDI FOGLIO)!");
+				FinestraFormazione f = new FinestraFormazione(array);
+				frame.dispose();
 			}
 		});
 		panel.add(btnNewButton, BorderLayout.SOUTH);
 		
-		JPanel panel_1 = new JPanel();
+		final JPanel panel_1 = new JPanel();
 		panel_1.setOpaque(false);
 		panel.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		final JLabel output = new JLabel("");
+		panel.add(output, BorderLayout.NORTH);
 
 		final TextArea textArea = new TextArea();
 		textArea.setEditable(false);
@@ -72,11 +78,17 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		MouseListener action = new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				JButton j = (JButton) e.getSource();
 
-				int i = dbGiocatori.GetIndice(j.getText());
-				array[cont++] = dbGiocatori.GetDb()[i];
+					JButton j = (JButton) e.getSource();
+					int i = dbGiocatori.GetIndice(j.getText());
+					if(cont<15){
+						array[cont++] = dbGiocatori.GetDb()[i];
+						output.setText("Hai inserito "+ cont+"Giocatori, l'ultimo è stato: "+dbGiocatori.GetDb()[i].GetAnagrafe().GetCognome());
+						panel_1.remove(j);
+					}
+					else textArea.setText("HAI SCELTO GIÀ 15 GIOCATORI, NON PUOI SCEGLIERNE ALTRI!");
+
+				
 
 			}
 
@@ -96,7 +108,7 @@ public class FinestraOrganizzaSquadra extends JFrame{
 			public void mouseEntered(MouseEvent e) {
 		
 				JButton j = (JButton) e.getSource();
-
+				
 				if(textArea.getText()!="") textArea.setText("");
 
 				int i = dbGiocatori.GetIndice(j.getText());
@@ -107,7 +119,6 @@ public class FinestraOrganizzaSquadra extends JFrame{
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-
 			}
 		};
 

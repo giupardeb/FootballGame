@@ -103,7 +103,9 @@ public class SquadraAvversaria extends Squadra{
 		int i = INITIALISE;
 
 
-		if(ruolodaacquistare != "")	 i = SearchIndiceGiocatore(ruolodaacquistare);
+		if(!(ruolodaacquistare.equalsIgnoreCase(""))) {
+			i = SearchIndiceGiocatore(ruolodaacquistare);
+		}
 		else i = SearchIndiceGiocatore();
 
 		if(db.GetDb()[i].getSquadra().equals(squadrautente.GetNomeSquadra()))
@@ -240,7 +242,7 @@ public class SquadraAvversaria extends Squadra{
 			}
 		}
 		Random rand = new Random();
-		int casuale = rand.nextInt(tmp.toArray().length);
+		int casuale = rand.nextInt(tmp.size());
 		for(int i = 0; i<db.GetDb().length ;i++){
 			Giocatore g = (Giocatore) tmp.toArray()[casuale];
 			if(db.GetDb()[i].GetAnagrafe().GetCognome().equals(g.GetAnagrafe().GetCognome())) return i;

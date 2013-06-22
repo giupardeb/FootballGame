@@ -13,23 +13,24 @@ public class Campionato
 
 	public DatabaseGiocatori db;
 
-	String continua = ""; //utile per i cicli
+	private String continua = ""; //utile per i cicli
 
 	public Giocatore [] giocatoridavisualizzare = null;
 
-	public Campionato(String miasquadra) //la squadra che l'utente sceglie viene decisa nel main.. tanto per fargli fare qualcosa dal main.. 
+	public Campionato(String miasquadra, JFrame j) //la squadra che l'utente sceglie viene decisa nel main.. tanto per fargli fare qualcosa dal main.. 
 	{
+		j.dispose();
 		db = new DatabaseGiocatori();
+		
 		squadra = db.CreaSquadra(miasquadra);
+		
 		for(int i = 0; i<squadre.length; i++){
 			squadre[i] = db.CreaSquadre(miasquadra);
 			if(squadre[i] == null) i--;
 		}
 
-
 		RichiamaFinestraCampionato(db);
 	}
-
 
 
 	public int SearchSquadra(String nome){
@@ -68,7 +69,7 @@ public class Campionato
 	public void Trasferimento(String [] giocatoresquadra){
 		squadra.acquisto(giocatoresquadra[0].trim(), squadre[SearchSquadra(giocatoresquadra[1].trim())]);
 		RichiamaFinestraCampionato(db);
-		}
+	}
 
 	public void TrasferimentoPerScambio(String [] Scelta){
 		squadra.scambio(Scelta[0].trim(), Scelta[1].trim(), squadre[SearchSquadra(Scelta[2].trim())]);
@@ -79,11 +80,11 @@ public class Campionato
 		frame.dispose();
 		SceltaScambioAcquista Scelta = new SceltaScambioAcquista(this); 
 	}
-	
+
 	public void RichiamaFinestraCampionato(DatabaseGiocatori db){
 		FinestraCampionato fc = new FinestraCampionato(this,db);
 	}
-	
+
 }
 
 

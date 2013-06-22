@@ -2,6 +2,8 @@ package graphic;
 
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 
 import Project.Campionato;
@@ -9,6 +11,7 @@ import Project.Campionato;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,21 +24,6 @@ public class FinestraAcquista extends JFrame{
 	 */
 	private static final long serialVersionUID = 3443854256216044101L;
 	private JFrame frame = this;
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraAcquista window = new FinestraAcquista();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.
@@ -43,6 +31,10 @@ public class FinestraAcquista extends JFrame{
 	public FinestraAcquista(Campionato c,String s) {
 		super();
 		this.setSize(new Dimension(800, 600));
+		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
+		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );		
+		AcquistiAvversari(c);
 		this.setResizable(false);
 		initialize(c,s);
 		this.setVisible(true);
@@ -88,6 +80,14 @@ public class FinestraAcquista extends JFrame{
 		for(int i = 0; i<c.giocatoridavisualizzare.length;i++){
 			giocatoriList.append(i+". "+c.giocatoridavisualizzare[i] + "\n");
 		}
+	}
+	
+	
+	
+	private void AcquistiAvversari(Campionato c){
+		JOptionPane.showMessageDialog(this, "Le altre squadre stanno provvedendo all'acquisto..");
+		for(int i = 0; i<c.squadre.length;i++)
+			c.squadre[i].acquisto(c.squadre, c.squadra);
 	}
 
 }

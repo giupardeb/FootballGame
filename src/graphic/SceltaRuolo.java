@@ -17,21 +17,6 @@ public class SceltaRuolo extends JFrame {
 	private static final long serialVersionUID = -6948036084218256765L;
 	private JFrame frame = this;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SceltaRuolo window = new SceltaRuolo();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.
@@ -49,6 +34,7 @@ public class SceltaRuolo extends JFrame {
 		this.setBounds(100, 100, 581, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
+		this.setLocationRelativeTo(null);
 
 		JRadioButton rdbtnCentrocampista = new JRadioButton("Centrocampista");
 		rdbtnCentrocampista.addMouseListener(new MouseAdapter() {
