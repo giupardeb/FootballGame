@@ -1,4 +1,7 @@
 package Project;
+
+import java.awt.Point;
+
 abstract class AltriRuoli extends Giocatore
 {
 	private byte cross;
@@ -11,7 +14,15 @@ abstract class AltriRuoli extends Giocatore
 	private byte abilitaDifesa;
 	private byte abilitaAttacco;
 	private byte abilitaCentrocampo;
-
+	
+	private final int NUMrIUSCITAsCARSO = 7;
+	private final int NUMrIUSCITAmEDIO = 5;
+	private final int NUMrIUSCITAbRAVO = 3;
+	
+	private final int NUMEQUO = 4;
+	private final int CONTRASTO = 1;
+	private final int NIENTECONTRASTO = 2;
+	private final int CONTRASTOPERSO = 3; 
 
 	public AltriRuoli(String cognome,String squadra,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
@@ -184,17 +195,97 @@ abstract class AltriRuoli extends Giocatore
 	public void setValoreGenerale()
 	{
 		int media = 0;
-	
+
 		media = (getCross()+ getDribling()+ getColpoDiTesta() + getPassaggio() + getTiro() + 
 				getContrasto() + getMovimento() + getAbilitaDifesa() + getAbilitaAttacco() + 
 				getAbilitaCentrocampo()+ getVelocita() + getResistenza() + getForza() + getMorale() 
 				+ getCondizione() + getTecnica() + getAggressivita() + getCreativita() + getDecisione()
 				+ getCarisma() + getGiocoDiSquadra());
-		
+
 		media = (byte)(media/21);
 
 	}
 
+//NON DOVREBBERO ESSERCI PROBLEMI.. KMQ BISOGNEREBBE PROVARLO
+	public Point Passaggio(Giocatore campo [][]){ //int così capisco se la palla è andata fuori così posso darla alla squadra avversaria + versatile
+		Point p = this.posizione.getLocation();
+		Point newp = ControllaPosGioc(p,campo);
+		
+		if(this.getPassaggio()<50)
+			if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSO) return newp;
+		else
+			if(this.getPassaggio()<70)
+				if((int)(Math.random()*10)+1>NUMrIUSCITAmEDIO) return newp;
+			else if((int)(Math.random()*10)+1>NUMrIUSCITAbRAVO) return newp;
+		
+		return null;
+	}
+
+
+	public Point ControllaPosGioc(Point p,Giocatore campo [][]){
+		Point p1 = new Point();
+		if((int)Math.random()*2 == 0){
+			p1.setLocation(p.getX(), p.getY()-1);
+			if(campo[(int) p1.getX()][(int) p1.getY()] == null){
+				if((int)Math.random()*2 == 0){
+					p1.setLocation(p.getX(), p.getY()+1);
+				}
+				else{
+					p1.setLocation(p.getX()+2, p.getY());
+					if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+						p1.setLocation(p.getX(), p.getY()+1);
+					}
+				}
+			}
+		}
+		else{
+			p1.setLocation(p.getX()+2, p.getY());
+			if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+				p1.setLocation(p.getX(), p.getY()+1);
+				if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+					p1.setLocation(p.getX(), p.getY()+1);
+				}
+			}
+				
+		}
+		return p1;
+		
+	}
+	
+	
+	public int Contrasto(Giocatore campo[][]){
+		Point p = this.posizione.getLocation();
+		Point pavv = new Point((int)p.getX()+1,(int)p.getY()); // posizione giocatore avversario
+		
+		if(campo[(int) pavv.getX()][(int) p.getY()] != null){
+			if(this.getDotiRuolo() >= campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo()){
+				if(((int)Math.random()*10)+1>NUMrIUSCITAbRAVO){
+					return CONTRASTO;
+				}
+				else return CONTRASTOPERSO;
+			}
+			else if(this.getDotiRuolo()>=CalcolaDotiIntermedie(campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo())){
+				if(((int)Math.random()*10)+1>NUMrIUSCITAmEDIO){
+					return CONTRASTO;
+				}
+				else return CONTRASTOPERSO;
+			}
+			else if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSO){
+				return CONTRASTO;
+			}
+			else return CONTRASTOPERSO;
+			
+		}
+	else return NIENTECONTRASTO;
+		
+	}
+	
+	public int CalcolaDotiIntermedie(int DotiPiuForte){
+		int tmp = DotiPiuForte*30/100;
+		return DotiPiuForte - tmp;
+	}
+
+	
 
 	public String toString()
 	{

@@ -15,16 +15,16 @@ import javax.swing.JSplitPane;
 
 import java.awt.Dimension;
 import java.awt.TextArea;
-import java.awt.Button;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 
 public class FinestraOrganizzaSquadra extends JFrame{
 
 	
-	private  Giocatore array[] = new Giocatore[15]; //array che conterrà i giocatori x iniziare la partita
+	private  ArrayList <Giocatore> array = new ArrayList <Giocatore>(15); //array che conterrà i giocatori x iniziare la partita
 	private static int cont = 0; //utile per aumentare l'array
 	private static final long serialVersionUID = -4943380536225481189L;
 	private JFrame frame = this;
@@ -60,11 +60,11 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				if(cont == 15){
+				if(cont == 15){
 					FinestraFormazione f = new FinestraFormazione(array);
 					frame.dispose();
-		//		}
-		//		else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
+				}
+				else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
 				
 			}
 		});
@@ -89,7 +89,8 @@ public class FinestraOrganizzaSquadra extends JFrame{
 					JButton j = (JButton) e.getSource();
 					int i = dbGiocatori.GetIndice(j.getText());
 					if(cont<15){
-						array[cont++] = dbGiocatori.GetDb()[i];
+						cont++;
+						array.add(dbGiocatori.GetDb()[i]);
 						output.setText("Hai inserito "+ cont+"Giocatori, l'ultimo è stato: "+dbGiocatori.GetDb()[i].GetAnagrafe().GetCognome());
 						panel_1.remove(j);
 					}

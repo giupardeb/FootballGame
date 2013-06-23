@@ -1,7 +1,6 @@
 package Project;
-import java.util.ArrayList;
-import static java.lang.System.*;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.Random;

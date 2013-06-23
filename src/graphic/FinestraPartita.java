@@ -8,15 +8,21 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 
+import Project.Giocatore;
+
 public class FinestraPartita extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6555644770549918991L;
 	private JFrame frame;
 
 
 	/**
 	 * Create the application.
 	 */
-	public FinestraPartita() {
+	public FinestraPartita(Giocatore campo [][]) {
 		initialize();
 	}
 

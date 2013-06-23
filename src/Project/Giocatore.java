@@ -1,4 +1,7 @@
 package Project;
+
+import java.awt.Point;
+
 abstract public class Giocatore
 {
 	private Anagrafe anagrafe;
@@ -19,13 +22,12 @@ abstract public class Giocatore
 	private byte mediaVoti;
 	private double valoreMercato;
 	private byte valoreGenerale;
+	Point posizione;
+	boolean pallasi;
+	private final int INITIALISE = -1;
 
-
-
-	Giocatore(String nome,String squadra,String nazionalita,byte velocita,
-			byte resistenza,byte forza,byte morale,byte eta,byte condizione,
-			byte tecnica,byte aggressivita,byte creativita,byte decisione,
-			byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
+	Giocatore(String nome,String squadra,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
+			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
 			byte mediaVoti,byte valoreGenerale,double valoreMercato) 
 			{
 		anagrafe = new Anagrafe(nome,eta,nazionalita);
@@ -46,6 +48,8 @@ abstract public class Giocatore
 		this.mediaVoti = mediaVoti;
 		this.valoreMercato = valoreMercato;
 		this.valoreGenerale = valoreGenerale;
+		posizione = new Point();
+		pallasi = false;
 			}
 
 
@@ -54,7 +58,7 @@ abstract public class Giocatore
 	public Anagrafe GetAnagrafe(){
 		return anagrafe;
 	}
-
+	
 	public byte getVelocita()
 	{
 		return(velocita);
@@ -142,7 +146,15 @@ abstract public class Giocatore
 
 
 	//metodi di set()
+	
+	public void setPalla(boolean a){
+		pallasi = a;
+	}
 
+	public void setPosizione(int x, int y){
+		posizione.setLocation(x, y);
+	}
+	
 	public void setNomeSquadra(String parola)
 	{
 		squadra = parola;
