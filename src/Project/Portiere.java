@@ -32,6 +32,10 @@ class Portiere extends Giocatore
 
 
 	//metodi di get()
+	
+	public int getAbilita(){
+		return dotiAeree+agilita+comunicazione+bloccareTiri+calciare+riflessi+rimessa;
+	}
 
 
 	public int getDotiRuolo(){ //ritorna le doti caratterizzanti del ruolo. utile x il calciomercato.

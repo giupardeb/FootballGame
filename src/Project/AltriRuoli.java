@@ -15,14 +15,43 @@ abstract class AltriRuoli extends Giocatore
 	private byte abilitaAttacco;
 	private byte abilitaCentrocampo;
 	
-	private final int NUMrIUSCITAsCARSO = 7;
-	private final int NUMrIUSCITAmEDIO = 5;
-	private final int NUMrIUSCITAbRAVO = 3;
-	
-	private final int NUMEQUO = 4;
+	//metodi per metodo constrasto
 	private final int CONTRASTO = 1;
 	private final int NIENTECONTRASTO = 2;
-	private final int CONTRASTOPERSO = 3; 
+	private final int CONTRASTOPERSO = 4; 
+	private final int NUMrIUSCITAsCARSOcONaBILITÀ = 6;
+	private final int NUMrIUSCITAsCARSO = 8;
+	private final int NUMrIUSCITAmEDIO = 7;
+	private final int NUMrIUSCITAbRAVO = 3;
+	private final int MINABILITAPERBONUS = 70;
+	//FINE
+
+	private final int ABILITAPASSAGGIOSCARSO = 50;
+	private final int ABILITAPASSAGGIOBUONE = 70;
+	
+	private final int PERCENTUALE = 100;
+	
+	//Costanti per il metodo tiro
+	private final int GOAL = 7;
+	private final int PARATA = 9;
+	private final int FUORI = 10;
+	private final int INTERCETTATA = 11;
+	private final int ABILITADITIROBUONE = 80; 
+	private final int ABILITADITIRODISCRETE = 70; 
+	private final int ABILITADITIROSCARSE = 60;
+	private final int COSTANTEPERRIUSCITATIROBUONE = 3; 
+	private final int COSTANTEPERRIUSCITATIROMEDIE = 5; 
+	private final int COSTANTEPERRIUSCITATIROSCARSE = 7;
+	private final int ABILITADIATTACCOMINIME = 65;
+	private final int ABILITADIATTACCOMASSIME = 75;
+	private final int ABILITADIDIFESAMINIME = 65;
+	private final int ABILITADIDIFESAMASSIME = 75;
+	private final int ABILITADIPARATABUONE = 80; 
+	private final int ABILITADIPARATADISCRETE = 70; 
+	private final int ABILITADIPARATASCARSE = 60;
+	//FINE
+	
+
 
 	public AltriRuoli(String cognome,String squadra,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
@@ -211,10 +240,10 @@ abstract class AltriRuoli extends Giocatore
 		Point p = this.posizione.getLocation();
 		Point newp = ControllaPosGioc(p,campo);
 		
-		if(this.getPassaggio()<50)
+		if(this.getPassaggio()<ABILITAPASSAGGIOSCARSO)
 			if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSO) return newp;
 		else
-			if(this.getPassaggio()<70)
+			if(this.getPassaggio()<ABILITAPASSAGGIOBUONE)
 				if((int)(Math.random()*10)+1>NUMrIUSCITAmEDIO) return newp;
 			else if((int)(Math.random()*10)+1>NUMrIUSCITAbRAVO) return newp;
 		
@@ -253,7 +282,10 @@ abstract class AltriRuoli extends Giocatore
 	}
 	
 	
-	public int Contrasto(Giocatore campo[][]){
+	////////****METODO CONTRASTO///*/*/*/*////***
+	
+	public int Contrasto(Giocatore campo[][], byte abilita){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
+																//vincerà un contrasto
 		Point p = this.posizione.getLocation();
 		Point pavv = new Point((int)p.getX()+1,(int)p.getY()); // posizione giocatore avversario
 		
@@ -270,23 +302,193 @@ abstract class AltriRuoli extends Giocatore
 				}
 				else return CONTRASTOPERSO;
 			}
-			else if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSO){
-				return CONTRASTO;
+			else if(abilita>MINABILITAPERBONUS){
+				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSOcONaBILITÀ){
+					return CONTRASTO;
+				}
+				else return CONTRASTOPERSO;
 			}
-			else return CONTRASTOPERSO;
-			
+			else{
+				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSO){
+					return CONTRASTO;
+				}
+				else return CONTRASTOPERSO;
+			}			
 		}
 	else return NIENTECONTRASTO;
 		
 	}
 	
 	public int CalcolaDotiIntermedie(int DotiPiuForte){
-		int tmp = DotiPiuForte*30/100;
+		int tmp = DotiPiuForte*30/PERCENTUALE; // VOGLIO CALCOLARE IL 30% DELLE DOTI DEL GIOCATORE PIÙ FORTE
 		return DotiPiuForte - tmp;
 	}
 
 	
+	//abilità di attacco della squadra attaccante, abilita difesa della squadra che difende 
+	public int Tiro(byte abilitaattacco, Portiere portiere, byte abilitadifesa){	 
+		if (abilitaattacco>ABILITADIATTACCOMASSIME){
+			if(abilitadifesa>ABILITADIDIFESAMASSIME){
+				//probabilità di tirare pari è 1/4 per att, 1/5 per centracmp, 1/6 difensore
+				
+				ControllaChiTira( portiere,4,5,6);
+				
+			}
+			else {
+				if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){ //ATTACCO MASSIMO DIFESA MEDIA
+					//probabilità di tirare pari è 1/3 per attaccante, 1/4 percentrcampista, 1/5 difensore
+					
+					ControllaChiTira( portiere,3,4,5);
 
+				}
+				else{ //ATTACCO MASSIMO DIFESA SCARSA 
+					//probabilità di tirare 1/2 per attaccante, 1/3 centrocampista, 1/4 difensore
+					
+					ControllaChiTira( portiere,2,3,4);
+
+				}
+			}
+			
+		}
+		else {
+			if(abilitaattacco>ABILITADIATTACCOMINIME && abilitaattacco<ABILITADIATTACCOMASSIME){				
+				if(abilitadifesa>ABILITADIDIFESAMASSIME){ //ATTACCO MEDIO DIFESA MASSIMA
+					//probabilità di tirare pari è 1/5 per att, 1/6 per centracmp, 1/7 difensore
+					
+					ControllaChiTira( portiere,5,6,7);
+					
+				}
+				else { //ATTACCO MEDIO DIFESA MEDIA
+					if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){
+						//probabilità di tirare pari è 1/4 per attaccante, 1/5 percentrcampista, 1/6 difensore
+						
+						ControllaChiTira( portiere,4,5,6);
+
+					}
+					else{ //ATTACCO MEDIO DIFESA SCARSA
+						//probabilità di tirare 1/2 per attaccante, 1/3 centrocampista, 1/4 difensore
+						
+						ControllaChiTira( portiere,2,3,4);
+
+					}
+				}
+				
+			}
+			else{ //ATTACCO SCARSO DIFESA MASSIMA
+				if(abilitadifesa>ABILITADIDIFESAMASSIME){
+					//probabilità di tirare pari è 1/7 per att, 1/8 per centracmp, 1/9 difensore
+					
+					ControllaChiTira( portiere,7,8,9);
+
+				}
+				else { //ATTACCO SCARSO DIFESA MEDIA
+					if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){
+						//probabilità di tirare pari è 1/5 per attaccante, 1/6 percentrcampista, 1/7 difensore
+						
+						ControllaChiTira( portiere,5,6,7);
+
+					}
+					else{ //ATTACCO SCARCO DIFESA SCARSA
+						//probabilità di tirare 1/3 per attaccante, 1/4 centrocampista, 1/5 difensore
+						
+						ControllaChiTira( portiere,3,4,5);
+					}
+				}
+			}
+		}
+		return -1;
+	}
+	
+	
+	private int EsecuzioneTiro(int j, int k, int i){
+		
+		if(this.getTiro() >= ABILITADITIROBUONE){
+			if((int)Math.random()*10 >= j) return GOAL;
+			else return FUORI;
+		}
+		else{
+			if(this.getTiro() >= ABILITADITIRODISCRETE){
+				if((int)Math.random()*10 >= k) return GOAL;
+				else return FUORI;
+			}
+			else{
+				if(this.getTiro() >= ABILITADITIROSCARSE){
+					if((int)Math.random()*10 >= i) return GOAL;
+					else return FUORI;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	private int EsecuzioneParata(int j, int k, int i, Portiere portiere){
+		
+		
+		if(portiere.getBloccareTiri() >= ABILITADIPARATABUONE){
+			if((int)Math.random()*10 >= j) return PARATA;
+			else return GOAL;
+		}
+		else{
+			if(portiere.getBloccareTiri() >= ABILITADIPARATADISCRETE){
+				if((int)Math.random()*10 >= k) return PARATA;
+				else return GOAL;
+			}
+			else{
+				if(portiere.getBloccareTiri() >= ABILITADIPARATASCARSE){
+					if((int)Math.random()*10 >= i) return PARATA;
+					else return GOAL;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	
+	private int ControllaChiTira(Portiere portiere, int probabilitatiroatt, int probabilitatirocentro,int probabilitatirodif){
+		if(this instanceof Attaccante){
+			if((int)(Math.random()*probabilitatiroatt) == 2){ //probabilità che l'attacante tiri
+				if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
+				portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()){
+					 return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
+				}
+				else{
+					return EsecuzioneParata(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE
+							,portiere);
+				}
+			}
+			else return INTERCETTATA;
+		}
+		else{
+			if(this instanceof Centrocampista){
+				if((int)(Math.random()*probabilitatirocentro) == 2){ //probabilità che il centrcampista tiri
+					if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
+						portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()){
+						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
+					}
+					else {
+						return EsecuzioneParata(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE
+								,portiere);
+					}
+				}
+				else return INTERCETTATA;
+			}
+			if(this instanceof Difensore){
+				if((int)(Math.random()*probabilitatirocentro) == 2){ //probabilità che il difensore tiri
+					if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
+						portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()) {
+						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
+					}
+					else {
+						return EsecuzioneParata(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE
+								,portiere);
+					}
+				}
+				else return INTERCETTATA;
+			}
+		}
+		return -1;
+	}
+	
 	public String toString()
 	{
 		return(super.toString() + "\n" + " Statistiche specifiche: " + "\n" + " Cross: " + getCross() + "\n" + " Dribling: " +
