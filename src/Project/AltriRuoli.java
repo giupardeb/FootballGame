@@ -316,8 +316,7 @@ abstract class AltriRuoli extends Giocatore
 			}			
 		}
 	else return NIENTECONTRASTO;
-		
-	}
+}
 	
 	public int CalcolaDotiIntermedie(int DotiPiuForte){
 		int tmp = DotiPiuForte*30/PERCENTUALE; // VOGLIO CALCOLARE IL 30% DELLE DOTI DEL GIOCATORE PIÙ FORTE
@@ -331,20 +330,20 @@ abstract class AltriRuoli extends Giocatore
 			if(abilitadifesa>ABILITADIDIFESAMASSIME){
 				//probabilità di tirare pari è 1/4 per att, 1/5 per centracmp, 1/6 difensore
 				
-				ControllaChiTira( portiere,4,5,6);
+				return ControllaChiTira( portiere,4,5,6);
 				
 			}
 			else {
 				if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){ //ATTACCO MASSIMO DIFESA MEDIA
 					//probabilità di tirare pari è 1/3 per attaccante, 1/4 percentrcampista, 1/5 difensore
 					
-					ControllaChiTira( portiere,3,4,5);
+					return ControllaChiTira( portiere,3,4,5);
 
 				}
 				else{ //ATTACCO MASSIMO DIFESA SCARSA 
 					//probabilità di tirare 1/2 per attaccante, 1/3 centrocampista, 1/4 difensore
 					
-					ControllaChiTira( portiere,2,3,4);
+					return ControllaChiTira( portiere,2,3,4);
 
 				}
 			}
@@ -355,20 +354,20 @@ abstract class AltriRuoli extends Giocatore
 				if(abilitadifesa>ABILITADIDIFESAMASSIME){ //ATTACCO MEDIO DIFESA MASSIMA
 					//probabilità di tirare pari è 1/5 per att, 1/6 per centracmp, 1/7 difensore
 					
-					ControllaChiTira( portiere,5,6,7);
+					return ControllaChiTira( portiere,5,6,7);
 					
 				}
 				else { //ATTACCO MEDIO DIFESA MEDIA
 					if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){
 						//probabilità di tirare pari è 1/4 per attaccante, 1/5 percentrcampista, 1/6 difensore
 						
-						ControllaChiTira( portiere,4,5,6);
+						return ControllaChiTira( portiere,4,5,6);
 
 					}
 					else{ //ATTACCO MEDIO DIFESA SCARSA
 						//probabilità di tirare 1/2 per attaccante, 1/3 centrocampista, 1/4 difensore
 						
-						ControllaChiTira( portiere,2,3,4);
+						return ControllaChiTira( portiere,2,3,4);
 
 					}
 				}
@@ -378,25 +377,24 @@ abstract class AltriRuoli extends Giocatore
 				if(abilitadifesa>ABILITADIDIFESAMASSIME){
 					//probabilità di tirare pari è 1/7 per att, 1/8 per centracmp, 1/9 difensore
 					
-					ControllaChiTira( portiere,7,8,9);
+					return ControllaChiTira( portiere,7,8,9);
 
 				}
 				else { //ATTACCO SCARSO DIFESA MEDIA
 					if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){
 						//probabilità di tirare pari è 1/5 per attaccante, 1/6 percentrcampista, 1/7 difensore
 						
-						ControllaChiTira( portiere,5,6,7);
+						return ControllaChiTira( portiere,5,6,7);
 
 					}
 					else{ //ATTACCO SCARCO DIFESA SCARSA
 						//probabilità di tirare 1/3 per attaccante, 1/4 centrocampista, 1/5 difensore
 						
-						ControllaChiTira( portiere,3,4,5);
+						return ControllaChiTira( portiere,3,4,5);
 					}
 				}
 			}
 		}
-		return -1;
 	}
 	
 	
