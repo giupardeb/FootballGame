@@ -182,6 +182,7 @@ public class MainWindow extends JFrame{
 	ActionListener action = new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			JButton j = (JButton) e.getSource();
+			frame.dispose();
 			Campionato c = new Campionato(j.getName(),frame);
 			
 		}
