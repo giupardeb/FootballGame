@@ -81,7 +81,7 @@ public class DatabaseGiocatori {
 		String ruolo = giocatoreString[0]; // Difensore, Centrocampista, Attaccante o Portiere
 
 		String nome = giocatoreString[1];
-		String squadra = giocatoreString[2];
+		String NomeSquadraAppartenente = giocatoreString[2];
 		String nazionalita = giocatoreString[3];
 		byte velocita = Byte.parseByte(giocatoreString[4]);
 		byte resistenza = Byte.parseByte(giocatoreString[5]);
@@ -148,50 +148,49 @@ public class DatabaseGiocatori {
 			valoreMercato = Double.parseDouble(giocatoreString[27]);
 		}
 
-		// NOTE devi definire il giocatore, altrimenti non lo puoi ritornare.
-		// Inoltre ti ho aggiustato un pò gli else if, così il codice è + leggibile
+		// IL VALORE NULL NEL COSTRUTTORE DI GIOCATORE SI RIFERISCE ALL'OGGETTO SQUADRA AL QUALE APPARTIENE
 
 		Giocatore giocatore = null;
 		if (ruolo.equalsIgnoreCase(CENTROCAMPISTA)) {
-			giocatore = new Centrocampista(nome, squadra, nazionalita, 
+			giocatore = new Centrocampista(nome, NomeSquadraAppartenente, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
 					tecnica, aggressivita, creativita, 
 					decisione, carisma, posizione, 
-					giocoDiSquadra, essenziale, mediaVoti, 
+					giocoDiSquadra, essenziale, mediaVoti,null, 
 					cross, dribling, colpoDiTesta, 
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 
 					abilitaCentrcampo, valoreGenerale, valoreMercato);
 
 		} else if(ruolo.equalsIgnoreCase(PORTIERE)) {
-			giocatore = new Portiere(nome, squadra, nazionalita, 
+			giocatore = new Portiere(nome, NomeSquadraAppartenente, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
 					tecnica, aggressivita, creativita, 
 					decisione, carisma, posizione, 
-					giocoDiSquadra, essenziale, mediaVoti, 
+					giocoDiSquadra, essenziale, mediaVoti,null, 
 					dotiAeree, agilita, comunicazione, 
 					bloccareTiro, calciare, riflessi, 
 					rimessa, valoreGenerale, valoreMercato);
 		} else if (ruolo.equalsIgnoreCase(ATTACCANTE)) {
-			giocatore = new Attaccante(nome, squadra, nazionalita, 
+			giocatore = new Attaccante(nome, NomeSquadraAppartenente, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
 					tecnica, aggressivita, creativita, 
 					decisione, carisma, posizione, 
-					giocoDiSquadra, essenziale, mediaVoti, 
+					giocoDiSquadra, essenziale, mediaVoti,null,
 					cross, dribling, colpoDiTesta, 
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 
 					abilitaCentrcampo, valoreGenerale, valoreMercato);
 		} else if(ruolo.equalsIgnoreCase(DIFENSORE)) {
-			giocatore = new Difensore(nome, squadra, nazionalita, 
+			giocatore = new Difensore(nome, NomeSquadraAppartenente, nazionalita, 
 					velocita, resistenza, forza, 
 					morale, eta, condizione, 
 					tecnica, aggressivita, creativita, 
 					decisione, carisma, posizione, 
-					giocoDiSquadra, essenziale, mediaVoti, 
+					giocoDiSquadra, essenziale, mediaVoti,null, 
 					cross, dribling, colpoDiTesta, 
 					passaggio, tiro, contrasto, 
 					movimento, abilitaDifesa, abilitaAttacco, 

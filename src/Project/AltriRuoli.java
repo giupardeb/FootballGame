@@ -53,16 +53,16 @@ abstract class AltriRuoli extends Giocatore
 	
 
 
-	public AltriRuoli(String cognome,String squadra,String nazionalita,byte velocita,byte resistenza,
+	public AltriRuoli(String cognome,String NomeSquadraAppartenente,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
 			byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,
-			boolean essenziale,byte mediaVoti,byte cross,byte dribling,byte colpoDiTesta,
+			boolean essenziale,byte mediaVoti,Squadra squadra,byte cross,byte dribling,byte colpoDiTesta,
 			byte passaggio, byte tiro, byte contrasto, byte movimento, byte abilitaDifesa,
 			byte abilitaAttacco,byte abilitaCentrocampo,byte valoreGenerale,double valoreMercato){
 
-		super (cognome, squadra, nazionalita, velocita, resistenza, forza, morale, eta,condizione, 
+		super (cognome, NomeSquadraAppartenente, nazionalita, velocita, resistenza, forza, morale, eta,condizione, 
 				tecnica, aggressivita, creativita, decisione, carisma, posizione, giocoDiSquadra,
-				essenziale,mediaVoti,valoreGenerale,valoreMercato);
+				essenziale,mediaVoti,squadra,valoreGenerale,valoreMercato);
 
 		this.cross = cross;
 		this.dribling = dribling;
@@ -236,9 +236,9 @@ abstract class AltriRuoli extends Giocatore
 	}
 
 //NON DOVREBBERO ESSERCI PROBLEMI.. KMQ BISOGNEREBBE PROVARLO
-	public Point Passaggio(Giocatore campo [][]){ //int così capisco se la palla è andata fuori così posso darla alla squadra avversaria + versatile
+	public Point Passaggio(Giocatore campo [][],SquadraAvversaria squadra){ //int così capisco se la palla è andata fuori così posso darla alla squadra avversaria + versatile
 		Point p = this.posizione.getLocation();
-		Point newp = ControllaPosGioc(p,campo);
+		Point newp = ControllaPosGioc(p,campo,squadra);
 		
 		if(this.getPassaggio()<ABILITAPASSAGGIOSCARSO)
 			if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSO) return newp;
@@ -251,29 +251,61 @@ abstract class AltriRuoli extends Giocatore
 	}
 
 
-	public Point ControllaPosGioc(Point p,Giocatore campo [][]){
+	public Point ControllaPosGioc(Point p,Giocatore campo [][],SquadraAvversaria squadra){
 		Point p1 = new Point();
-		if((int)Math.random()*2 == 0){
+		
+		if((int)Math.random()*2 == 0){ //cpntrollo a scendere
 			p1.setLocation(p.getX(), p.getY()-1);
 			if(campo[(int) p1.getX()][(int) p1.getY()] == null){
 				if((int)Math.random()*2 == 0){
 					p1.setLocation(p.getX(), p.getY()+1);
 				}
 				else{
-					p1.setLocation(p.getX()+2, p.getY());
-					if(campo[(int)p1.getX()][(int)p1.getY()] == null){
-						p1.setLocation(p.getX(), p.getY()+1);
+					//controllo se il giocatore appartiene alla squadra o alla squadraAvversaria
+					
+					if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){	//il giocatore appartiene alla squadra Avversaria?
+						p1.setLocation(p.getX()-2, p.getY());
+						if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+							p1.setLocation(p.getX(), p.getY()+1);
+						}
+						else {
+						//  controllo se il giocatore che ho trovato fà parte della mia squadra o no x evitare di passare palla a gioc Avversario
+
+							if(!(this.getSquadra().equalsIgnoreCase(campo[(int)p1.getX()][(int)p1.getY()].getSquadra())))
+								p1.setLocation(p.getX(), p.getY()+1);
+						}
 					}
 				}
 			}
 		}
-		else{
+		else{ //controllo verso destra 
+			if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){ 	//il giocatore appartiene alla squadra Avversaria?
+				p1.setLocation(p.getX()-2, p.getY());
+				if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+					p1.setLocation(p.getX(), p.getY()+1);
+					if(campo[(int)p1.getX()][(int)p1.getY()] == null){
+						p1.setLocation(p.getX(), p.getY()+1);
+					}
+					else {
+						//  controllo se il giocatore che ho trovato fà parte della mia squadra o no
+
+							if(!(this.getSquadra().equalsIgnoreCase(campo[(int)p1.getX()][(int)p1.getY()].getSquadra())))
+								p1.setLocation(p.getX(), p.getY()+1);
+						}
+				}
+			}
 			p1.setLocation(p.getX()+2, p.getY());
 			if(campo[(int)p1.getX()][(int)p1.getY()] == null){
 				p1.setLocation(p.getX(), p.getY()+1);
 				if(campo[(int)p1.getX()][(int)p1.getY()] == null){
 					p1.setLocation(p.getX(), p.getY()+1);
 				}
+				else {
+					//  controllo se il giocatore che ho trovato fà parte della mia squadra o no
+
+						if(!(this.getSquadra().equalsIgnoreCase(campo[(int)p1.getX()][(int)p1.getY()].getSquadra())))
+							p1.setLocation(p.getX(), p.getY()+1);
+					}
 			}
 				
 		}
@@ -284,10 +316,18 @@ abstract class AltriRuoli extends Giocatore
 	
 	////////****METODO CONTRASTO///*/*/*/*////***
 	
-	public int Contrasto(Giocatore campo[][], byte abilita){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
+	public int Contrasto(Giocatore campo[][], byte abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
 																//vincerà un contrasto
 		Point p = this.posizione.getLocation();
-		Point pavv = new Point((int)p.getX()+1,(int)p.getY()); // posizione giocatore avversario
+		Point pavv;
+		if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){  				//il giocatore appartiene alla squadra Avversaria?
+			
+			 pavv = new Point((int)p.getX()-1,(int)p.getY()); 
+		}
+		else{
+			 pavv = new Point((int)p.getX()+1,(int)p.getY()); 
+
+		}
 		
 		if(campo[(int) pavv.getX()][(int) p.getY()] != null){
 			if(this.getDotiRuolo() >= campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo()){
@@ -296,13 +336,13 @@ abstract class AltriRuoli extends Giocatore
 				}
 				else return CONTRASTOPERSO;
 			}
-			else if(this.getDotiRuolo()>=CalcolaDotiIntermedie(campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo())){
+			else if(this.getDotiRuolo() >= CalcolaDotiIntermedie(campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo())){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAmEDIO){
 					return CONTRASTO;
 				}
 				else return CONTRASTOPERSO;
 			}
-			else if(abilita>MINABILITAPERBONUS){
+			else if(abilita > MINABILITAPERBONUS){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSOcONaBILITÀ){
 					return CONTRASTO;
 				}
@@ -330,7 +370,9 @@ abstract class AltriRuoli extends Giocatore
 			if(abilitadifesa>ABILITADIDIFESAMASSIME){
 				//probabilità di tirare pari è 1/4 per att, 1/5 per centracmp, 1/6 difensore
 				
-				return ControllaChiTira( portiere,4,5,6);
+				return ControllaChiTira( portiere,4,5,6); //X simo :D M'BARE non posso mettere 5 costanti diverse x questi numeri :D kmq sia la 
+														  //spiegazione dei numeri è riportata sopra ogni chiamata  del metodo ControllaChiTira
+														 // grazie per la comprensione :D :D :D
 				
 			}
 			else {

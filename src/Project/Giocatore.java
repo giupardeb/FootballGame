@@ -5,7 +5,7 @@ import java.awt.Point;
 abstract public class Giocatore
 {
 	private Anagrafe anagrafe;
-	private String squadra;
+	private String nomeSquadraAppartenente;
 	private byte velocita;
 	private byte resistenza;
 	private byte forza;
@@ -24,14 +24,15 @@ abstract public class Giocatore
 	private byte valoreGenerale;
 	Point posizione;
 	boolean pallasi;
+	Squadra squadra;
 	private final int INITIALISE = -1;
 
-	Giocatore(String nome,String squadra,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
+	Giocatore(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
-			byte mediaVoti,byte valoreGenerale,double valoreMercato) 
+			byte mediaVoti,Squadra squadra,byte valoreGenerale,double valoreMercato) 
 			{
 		anagrafe = new Anagrafe(nome,eta,nazionalita);
-		this.squadra = squadra;
+		this.nomeSquadraAppartenente = nomeSquadraAppartenente;
 		this.velocita = velocita;
 		this.resistenza = resistenza;
 		this.forza = forza;
@@ -50,11 +51,16 @@ abstract public class Giocatore
 		this.valoreGenerale = valoreGenerale;
 		posizione = new Point();
 		pallasi = false;
+		squadra = null;
 			}
 
 
 	//metodi di get()
-
+	
+/*	public Squadra getSquadra(){
+		return squadra;
+	}
+*/
 	public Anagrafe GetAnagrafe(){
 		return anagrafe;
 	}
@@ -100,7 +106,7 @@ abstract public class Giocatore
 	}
 
 	public String getSquadra(){
-		return squadra;
+		return nomeSquadraAppartenente;
 	}
 
 	public byte getCreativita()
@@ -157,7 +163,7 @@ abstract public class Giocatore
 	
 	public void setNomeSquadra(String parola)
 	{
-		squadra = parola;
+		nomeSquadraAppartenente = parola;
 	}
 
 	public void setvelocita(byte valore)
