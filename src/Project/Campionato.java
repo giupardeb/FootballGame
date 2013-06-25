@@ -1,9 +1,14 @@
 package Project;
 import graphic.*;
 
+import java.awt.Component;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Campionato 
 {
@@ -12,8 +17,9 @@ public class Campionato
 	public SquadraAvversaria squadre[] = new SquadraAvversaria [19];
 
 	public DatabaseGiocatori db;
-
+	public Stack<SquadraAvversaria> Incontri = new Stack<SquadraAvversaria>(); //contiene le squadre con cui l'utente dovrà scontrarsi
 	private String continua = ""; //utile per i cicli
+	private boolean ferma = false;
 
 	public Giocatore [] giocatoridavisualizzare = null;
 
@@ -26,6 +32,7 @@ public class Campionato
 
 		for(int i = 0; i<squadre.length; i++){
 			squadre[i] = db.CreaSquadre(miasquadra);
+			Incontri.push(squadre[i]);
 			if(squadre[i] == null) i--;
 		}
 
@@ -86,8 +93,19 @@ public class Campionato
 	}
 
 
-	public void Partita(SquadraUmano umano, SquadraAvversaria computer){
-		System.out.print("Let's go!!");
+	public void partita(SquadraUmano umano, SquadraAvversaria computer,JPanel panel){
+		int i = 0;
+		if(Math.random()*10 >5){
+			panel.
+		}
+	}
+	
+	public void CreaAssociazioniSquadre(){
+		
+	}
+	
+	public void setFerma(boolean a){
+		ferma = a;
 	}
 
 }

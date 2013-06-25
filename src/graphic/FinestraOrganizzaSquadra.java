@@ -1,8 +1,9 @@
 package graphic;
-
+import Project.Campionato;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import Project.Campionato;
 import Project.DatabaseGiocatori;
@@ -40,14 +41,16 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		this.setSize(900, 400);
 		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
-		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );			initialize(c,db);
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );			
+		initialize(c,db);
+		JOptionPane.showMessageDialog(null, "ATTEZIONE, DEVI SCEGLIERE IN ORDINE 1P,4DIFENSORI,4CENTROCAMPISTI,2ATTACCANTI");
 		this.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Campionato c, final DatabaseGiocatori dbGiocatori) {
+	private void initialize(final Campionato c, final DatabaseGiocatori dbGiocatori) {
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1.0);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
@@ -60,9 +63,10 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(cont == 15){
-					FinestraFormazione f = new FinestraFormazione(array);
+				if(cont == 11 ){
+					Giocatore giocatori[] = array.toArray(new Giocatore[array.size()]);
 					frame.dispose();
+					FinestraFormazione f = new FinestraFormazione(giocatori,c);
 				}
 				else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
 				
@@ -88,13 +92,13 @@ public class FinestraOrganizzaSquadra extends JFrame{
 
 					JButton j = (JButton) e.getSource();
 					int i = dbGiocatori.GetIndice(j.getText());
-					if(cont<15){
+					if(cont<11){
 						cont++;
 						array.add(dbGiocatori.GetDb()[i]);
 						output.setText("Hai inserito "+ cont+"Giocatori, l'ultimo è stato: "+dbGiocatori.GetDb()[i].GetAnagrafe().GetCognome());
 						panel_1.remove(j);
 					}
-					else textArea.setText("HAI SCELTO GIÀ 15 GIOCATORI, NON PUOI SCEGLIERNE ALTRI!");
+					else textArea.setText("HAI SCELTO GIÀ 11 GIOCATORI, NON PUOI SCEGLIERNE ALTRI!");
 
 				
 

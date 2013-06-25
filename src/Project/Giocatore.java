@@ -2,8 +2,14 @@ package Project;
 
 import java.awt.Point;
 
-abstract public class Giocatore
+import javax.swing.JLabel;
+
+abstract public class Giocatore extends JLabel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4291322821943770822L;
 	private Anagrafe anagrafe;
 	private String nomeSquadraAppartenente;
 	private byte velocita;
@@ -24,8 +30,7 @@ abstract public class Giocatore
 	private byte valoreGenerale;
 	Point posizione;
 	boolean pallasi;
-	Squadra squadra;
-	private final int INITIALISE = -1;
+	Squadra squadra; 
 
 	Giocatore(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
@@ -293,6 +298,7 @@ abstract public class Giocatore
 	// Altri metodi
 
 	abstract public int getDotiRuolo();
+	
 }
 
 
