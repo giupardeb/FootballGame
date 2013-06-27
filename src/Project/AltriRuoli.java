@@ -237,7 +237,7 @@ abstract class AltriRuoli extends Giocatore
 
 //NON DOVREBBERO ESSERCI PROBLEMI.. KMQ BISOGNEREBBE PROVARLO
 	public Point Passaggio(Giocatore campo [][],SquadraAvversaria squadra){ //int così capisco se la palla è andata fuori così posso darla alla squadra avversaria + versatile
-		Point p = this.posizione.getLocation();
+		Point p = this.getPosizione().getLocation();
 		Point newp = ControllaPosGioc(p,campo,squadra);
 		
 		if(this.getPassaggio()<ABILITAPASSAGGIOSCARSO)
@@ -318,11 +318,12 @@ abstract class AltriRuoli extends Giocatore
 	
 	public int Contrasto(Giocatore campo[][], byte abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
 																//vincerà un contrasto
-		Point p = this.posizione.getLocation();
+		Point p = this.getPosizione().getLocation();
 		Point pavv;
-		if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){  				//il giocatore appartiene alla squadra Avversaria?
+		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//il giocatore appartiene alla squadra Avversaria?
 			
 			 pavv = new Point((int)p.getX()-1,(int)p.getY()); 
+			 
 		}
 		else{
 			 pavv = new Point((int)p.getX()+1,(int)p.getY()); 

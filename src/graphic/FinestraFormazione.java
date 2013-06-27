@@ -53,12 +53,11 @@ public class FinestraFormazione extends JFrame{
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			//	Giocatore campo[][] = new Giocatore[6][8];
 
 				JPanel	panel_2 = new JPanel();
 				panel_2.setBackground(new Color(0, 128, 0));
 				GridBagLayout gbl_panel_2 = new GridBagLayout();
-				gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+				gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 				gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 				gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -110,7 +109,7 @@ public class FinestraFormazione extends JFrame{
 				gbc_Centrocampista.insets = new Insets(0, 0, 0, 5);
 				gbc_Centrocampista.gridx = 3;
 				gbc_Centrocampista.gridy = 1;
-				array[5].setPosizione(3, 1);
+				array[5].setPosizione(3,1);
 				panel_2.add(array[5], gbc_Centrocampista);
 				
 				array[6].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
@@ -152,20 +151,21 @@ public class FinestraFormazione extends JFrame{
 				gbc_Attaccante1.gridy = 3;
 				array[10].setPosizione(5, 3);
 				panel_2.add(array[10], gbc_Attaccante1);
-				array[10].setVisible(false);
-				array[9].setVisible(false);
-				array[8].setVisible(false);
-				array[7].setVisible(false);
-				array[6].setVisible(false);
-				array[5].setVisible(false);
-				array[4].setVisible(false);
-				array[3].setVisible(false);
-				array[2].setVisible(false);
-				array[1].setVisible(false);
-				array[0].setVisible(false);
+				
+				array[10].setVisible(true);
+				array[9].setVisible(true);
+				array[8].setVisible(true);
+				array[7].setVisible(true);
+				array[6].setVisible(true);
+				array[5].setVisible(true);
+				array[4].setVisible(true);
+				array[3].setVisible(true);
+				array[2].setVisible(true);
+				array[1].setVisible(true);
+				array[0].setVisible(true);
 				
 				frame.dispose();
-				FinestraPartita fp = new FinestraPartita(panel_2,c); 
+				FinestraPartita fp = new FinestraPartita(panel_2,c,array); 
 
 			}
 		});
@@ -180,7 +180,7 @@ public class FinestraFormazione extends JFrame{
 
 	}
 
-	private int SearchGiocatore (String ruolo, ArrayList<Giocatore> array){
+/*	private int SearchGiocatore (String ruolo, ArrayList<Giocatore> array){
 
 		for(Giocatore giocatore : array)
 			if(giocatore.getRuolo().equalsIgnoreCase(ruolo)) {
@@ -189,6 +189,6 @@ public class FinestraFormazione extends JFrame{
 				return i;
 			}
 		return -1;
-	}
+	}*/
 
 }

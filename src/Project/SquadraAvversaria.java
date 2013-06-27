@@ -1,5 +1,6 @@
 package Project;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,6 +12,13 @@ public class SquadraAvversaria extends Squadra{
 	//Queste costanti li dobbiamo modificare credo, poichè non si effettuerebbe il calciomercato dato
 	//che tutte le squadre hanno il minimo di calciotori possibili
 
+	//Servono per l'organizzazione della squadra
+
+	final int PORTIERI = 1;
+	final int DIFENSORI = 4;
+	final int CENTROCAMPISTI = 4;
+	final int ATTACCANTI = 2;
+
 
 	public SquadraAvversaria(ArrayList<Giocatore> vett, String nome) {
 		super(vett, nome);
@@ -18,7 +26,7 @@ public class SquadraAvversaria extends Squadra{
 	///////////////////////////////////////////////////////***************INIZIO DI SCAMBIO***********************//////////////////////////////	
 
 	public void scambio (SquadraAvversaria[] s1,SquadraUmano squadrautente){
-	
+
 		int j = SearchIndiceGiocatoreMia(this.GetNomeSquadra()); //indice giocatore che vorrei scambiare (è nella mia squadra)
 		int i = SearchIndiceGiocatoreNomeSquadra(this.GetNomeSquadra(), db.GetDb()[j].getRuolo()); //indice del giocatore che vorrei dal database
 
@@ -175,15 +183,15 @@ public class SquadraAvversaria extends Squadra{
 					if (s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.GetDb()[i] instanceof Centrocampista) 
+					else if(db.GetDb()[i] instanceof Centrocampista) 
 						if (s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
 							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+						else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
+							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
-				else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI) 
-					TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+						else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI) 
+							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 		}
 	}
 	///////////////////////////////////////////////////****************FINE ACQUISTA***********************///////////////////////////////////////	
@@ -260,77 +268,112 @@ public class SquadraAvversaria extends Squadra{
 	///////////////////////////////////////////////////////****************INIZIO ORGA.SQUADRA***********************//////////////////////////////	
 
 	public Giocatore[] OrganizzaSquadra(){
-		Giocatore array[] = new Giocatore [15];
+		Giocatore array[] = new Giocatore [11];
 		int j = 0;
-		int indicegiocatoremigliore = INITIALISE ;
-		boolean portiere = false;
-		boolean attaccante = false;
-		boolean difensore = false;
-		boolean centrocampista = false;
+		Integer indicegiocatoremigliore = INITIALISE ;
 
 		for(Giocatore i : this.GetSquadra()) j++; //conta i giocatori
 
-		int arrayausiliario [] = new int[j]; //conterrà gli indici del database dei giocatori della squadra
-		int z = 0;
-		for(Giocatore i : this.GetSquadra()) {
-			arrayausiliario[z] = SearchIndiceGiocatoreCognome(i.GetAnagrafe().GetCognome()); //dire a gianmaroc se nel database ci sono omonimi
-			z++;
+	//	int arrayausiliario [] = new int[j]; //conterrà gli indici del database dei giocatori della squadra
+	//	int z = 0;
+		ArrayList<Integer> arrayausiliario = new ArrayList <Integer>(j);
+		
+		for(Giocatore i : this.GetSquadra()) arrayausiliario.add(SearchIndiceGiocatoreCognome(i.GetAnagrafe().GetCognome()));
+		
+		//	arrayausiliario[z] = SearchIndiceGiocatoreCognome(i.GetAnagrafe().GetCognome()); 
+	//		z++;
+		
+		boolean finito = false;
+		
+		int portieri = 0,centrocampisti = 0,attaccanti = 0, difensori = 0;
+		
+		
+		int f = 0;
+		int arrayausiliario1 [] = new int[arrayausiliario.size()];
+		for(Integer indice : arrayausiliario){
+			arrayausiliario1[f] = indice;
+			f++;
 		}
+		
+		int k = 0;
 
-		for( z = 0; z<arrayausiliario.length;z++){
-			if(db.GetDb()[arrayausiliario[z]] instanceof Portiere && portiere == false){
+		for( int z = 0; z<arrayausiliario1.length && !finito;z++){
+	//	for(Integer i : arrayausiliario){
+			finito = false;
+
+			if(db.GetDb()[arrayausiliario1[z]] instanceof Portiere && portieri != PORTIERI ){
 				indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Portiere");
-				portiere = true;
-			}
-			else{
-				if(db.GetDb()[arrayausiliario[z]] instanceof Difensore && difensore == false){
-					indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Difensore");
-					difensore = true;
+				portieri++;
+				arrayausiliario.remove(indicegiocatoremigliore);
+				if(k<11){
+					array[k] = db.GetDb()[indicegiocatoremigliore];
+					k++;
 				}
-				else{
-					if(db.GetDb()[arrayausiliario[z]] instanceof Centrocampista && centrocampista == false){
-						indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Centrocampista");
-						portiere = true;
-					}
-					else{
-						if(db.GetDb()[arrayausiliario[z]] instanceof Attaccante && attaccante == false){
-							indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Attaccante");
-							attaccante = true;
-						}
+				else finito = true;
+			}
+			else if(db.GetDb()[arrayausiliario1[z]] instanceof Difensore && difensori != DIFENSORI ){
+				indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Difensore");
+				difensori++;
+				arrayausiliario.remove(indicegiocatoremigliore);
+				if(k<11){
+					array[k] = db.GetDb()[indicegiocatoremigliore];
+					k++;
+				}
+				else finito = true;
+			}
+			else if(db.GetDb()[arrayausiliario1[z]] instanceof Centrocampista && centrocampisti != CENTROCAMPISTI ){
+				indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Centrocampista");
+				centrocampisti++;
+				arrayausiliario.remove(indicegiocatoremigliore);
+				if(k<11){
+					array[k] = db.GetDb()[indicegiocatoremigliore];
+					k++;
+				}
+				else finito = true;
+			}
+			else if(db.GetDb()[arrayausiliario1[z]] instanceof Attaccante && attaccanti != ATTACCANTI){
+				indicegiocatoremigliore = SearchBestPlayer(arrayausiliario,"Attaccante");
+				attaccanti++;
+				arrayausiliario.remove(indicegiocatoremigliore);
 
-					}
+				if(k<11){
+					array[k] = db.GetDb()[indicegiocatoremigliore];
+					k++;
 				}
+				else finito = true;
 			}
-			array[z] = db.GetDb()[indicegiocatoremigliore];
+			if(k == 11) finito = true;
 		}
 		return array;
 	}
 	///////////////////////////////////////////////////////****************FINE ORGA.SQUADRA***********************//////////////////////////////	
 	///////////////////////////////////////////////////////****************INIZIO METODI ORGA.SQUADRA***********************/////////////////////
-	private int SearchBestPlayer(int array[],String ruolo){
+	private int SearchBestPlayer(/*int array[]*/ ArrayList <Integer>array,String ruolo){
 		//array vettore degli indici che si riferiscono al database
-		int migliore = -1; //indice del migliore nel database
-
+		int migliore = INITIALISE; //indice del migliore nel database
+		
 		int j = 0;
-		for(int i = 0; i<array.length; i++){
-			if(db.GetDb()[array[i]].getRuolo().equalsIgnoreCase(ruolo)){
-				j++;
-			}
-		}
+	//	for(int i = 0; i<array.length; i++){
+		for (Integer i : array)
+			if(db.GetDb()[/*array[*/i.intValue()/*]*/].getRuolo().equalsIgnoreCase(ruolo)) j++;
+		
 		int vett [] = new int [j];
+		for (int i=0; i<vett.length; i++) vett[i] = -1;
 		int z = 0;
-		for(int i = 0; i<array.length; i++){
-			if(db.GetDb()[array[i]].getRuolo() == ruolo){
-				vett[z] = i;
-			}
+	//	for(int i = 0; i<array.length; i++){ 
+		for(Integer i : array){
+				if(db.GetDb()[/*array[*/i.intValue()/*]*/].getRuolo().equalsIgnoreCase(ruolo)){
+					vett[z] = /*array[*/i.intValue()/*]*/;
+					z++;
+				}
 		}
 
 		for(int i = 0; i<vett.length-1;i++){
 			if(db.GetDb()[vett[i]].getValoreGenerale() > db.GetDb()[vett[i+1]].getValoreGenerale()
 					&& db.GetDb()[vett[i]].getCondizione() > db.GetDb()[vett[i+1]].getCondizione()){
-				migliore = i;
+				migliore = vett[i];
 			}
-			else migliore = i+1;
+			else migliore = vett[i+1];
 		}
 		return migliore;
 	}
@@ -352,5 +395,6 @@ public class SquadraAvversaria extends Squadra{
 		return -1;
 	}
 	//////////////////////////////////////////////////////****************FINE METODI IN COMUNE************************////////////////////////
+
 
 }

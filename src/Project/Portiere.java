@@ -28,6 +28,7 @@ class Portiere extends Giocatore
 		this.calciare = calciare;
 		this.riflessi = riflessi;
 		this.rimessa = rimessa;
+		this.tipoRuolo = 0;
 	}
 
 

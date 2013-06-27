@@ -28,9 +28,10 @@ abstract public class Giocatore extends JLabel
 	private byte mediaVoti;
 	private double valoreMercato;
 	private byte valoreGenerale;
-	Point posizione;
-	boolean pallasi;
-	Squadra squadra; 
+	protected int tipoRuolo; //per l'ordinamento di un array, 0 = portiere, 1 = difensore, 2 = centrocampista, 3 = attaccante
+	private Point posizione;
+	private boolean pallasi;
+	private Squadra squadra; 
 
 	Giocatore(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
@@ -154,7 +155,10 @@ abstract public class Giocatore extends JLabel
 	{
 		return(valoreMercato);
 	}
-
+	
+	public Point getPosizione(){
+		return posizione.getLocation();
+	}
 
 	//metodi di set()
 	
@@ -298,6 +302,10 @@ abstract public class Giocatore extends JLabel
 	// Altri metodi
 
 	abstract public int getDotiRuolo();
+	
+	public int getTipoRuolo(){
+		return tipoRuolo;
+	}
 	
 }
 

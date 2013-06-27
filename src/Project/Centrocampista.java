@@ -10,6 +10,7 @@ class Centrocampista extends AltriRuoli
 		super(cognome,NomeSquadraAppartenente,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,posizione,
 				giocoDiSquadra,essenziale,mediaVoti,squadra,cross,dribling,colpoDiTesta,passaggio,tiro,contrasto,movimento,abilitaDifesa,abilitaAttacco,
 				abilitaCentrocampo,valoreGenerale,valoreMercato);
+		this.tipoRuolo = 2;
 	}
 
 	/*public Giocatore SearchBestPlayer(Giocatore array[],int k){

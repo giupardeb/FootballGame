@@ -93,11 +93,28 @@ public class Campionato
 	}
 
 
-	public void partita(SquadraUmano umano, SquadraAvversaria computer,JPanel panel){
-		int i = 0;
-		if(Math.random()*10 >5){
-			panel.
+	public void partita(SquadraUmano umano, SquadraAvversaria computer,JPanel panel,Component arrayMio[], Component arrayAvv[]){
+		
+		if(Math.random()*10>5){
+			Component a = Search(0,2,arrayMio);
+			((Giocatore) a).setPalla(true);
+			a.setVisible(true);
 		}
+		else{
+			Component a = Search(7,2,arrayAvv);
+			((Giocatore) a).setPalla(true);
+			a.setVisible(true);
+		}
+		
+		//continuare. . . . . 
+		
+	}
+	
+	public Component Search(int x, int y,Component array[]){
+		for (int i=0; i<array.length;i++)
+			if(((Giocatore)array[i]).getPosizione().getX() == x && ((Giocatore)array[i]).getPosizione().getY() == y)
+				return array[i];
+		return null;
 	}
 	
 	public void CreaAssociazioniSquadre(){
