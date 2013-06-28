@@ -107,6 +107,39 @@ public class Campionato
 		}
 		
 		//continuare. . . . . 
+
+		/*
+		Giocatore giocatore = (Giocatore) a;
+		do {
+			int azione;
+			if (giocatore is in umano)	{
+				// Chiedi all'utente
+				azione = assegna azione
+			} else {
+				// computer
+				azione = genera azione
+			}			
+
+			switch(azione)
+			{
+				case TIRA:
+					giocatore.tira();
+					// fare qualcosa in base al tiro
+				break;
+				case PASSA:
+					giocatore.passa();
+					// fare qualcosa di simile
+				break;
+				default:
+					giocatore.mangiaLaCarneDiCavallo();
+				break;	
+			} // end switch
+	
+			giocatore = // calcola in base al punto tornato da passa o non so come.
+		} while (CONDIZIONE (tipo 100 istruzioni o clock che va in pausa quando l'utente deve entrare istruzioni ))
+
+
+		*/
 		
 	}
 	
