@@ -274,31 +274,31 @@ public class SquadraAvversaria extends Squadra{
 
 		for(Giocatore i : this.GetSquadra()) j++; //conta i giocatori
 
-	//	int arrayausiliario [] = new int[j]; //conterrà gli indici del database dei giocatori della squadra
-	//	int z = 0;
+		//	int arrayausiliario [] = new int[j]; //conterrà gli indici del database dei giocatori della squadra
+		//	int z = 0;
 		ArrayList<Integer> arrayausiliario = new ArrayList <Integer>(j);
-		
+
 		for(Giocatore i : this.GetSquadra()) arrayausiliario.add(SearchIndiceGiocatoreCognome(i.GetAnagrafe().GetCognome()));
-		
+
 		//	arrayausiliario[z] = SearchIndiceGiocatoreCognome(i.GetAnagrafe().GetCognome()); 
-	//		z++;
-		
+		//		z++;
+
 		boolean finito = false;
-		
+
 		int portieri = 0,centrocampisti = 0,attaccanti = 0, difensori = 0;
-		
-		
+
+
 		int f = 0;
 		int arrayausiliario1 [] = new int[arrayausiliario.size()];
 		for(Integer indice : arrayausiliario){
 			arrayausiliario1[f] = indice;
 			f++;
 		}
-		
+
 		int k = 0;
 
 		for( int z = 0; z<arrayausiliario1.length && !finito;z++){
-	//	for(Integer i : arrayausiliario){
+			//	for(Integer i : arrayausiliario){
 			finito = false;
 
 			if(db.GetDb()[arrayausiliario1[z]] instanceof Portiere && portieri != PORTIERI ){
@@ -351,25 +351,25 @@ public class SquadraAvversaria extends Squadra{
 	private int SearchBestPlayer(/*int array[]*/ ArrayList <Integer>array,String ruolo){
 		//array vettore degli indici che si riferiscono al database
 		int migliore = INITIALISE; //indice del migliore nel database
-		
+
 		int j = 0;
-	//	for(int i = 0; i<array.length; i++){
+		//	for(int i = 0; i<array.length; i++){
 		for (Integer i : array)
 			if(db.GetDb()[/*array[*/i.intValue()/*]*/].getRuolo().equalsIgnoreCase(ruolo)) j++;
-		
+
 		int vett [] = new int [j];
 		for (int i=0; i<vett.length; i++) vett[i] = -1;
 		int z = 0;
-	//	for(int i = 0; i<array.length; i++){ 
+		//	for(int i = 0; i<array.length; i++){ 
 		for(Integer i : array){
-				if(db.GetDb()[/*array[*/i.intValue()/*]*/].getRuolo().equalsIgnoreCase(ruolo)){
-					vett[z] = /*array[*/i.intValue()/*]*/;
-					z++;
-				}
+			if(db.GetDb()[/*array[*/i.intValue()/*]*/].getRuolo().equalsIgnoreCase(ruolo)){
+				vett[z] = /*array[*/i.intValue()/*]*/;
+				z++;
+			}
 		}
 
 		for(int i = 0; i<vett.length-1;i++){
-			if(db.GetDb()[vett[i]].getValoreGenerale() > db.GetDb()[vett[i+1]].getValoreGenerale()
+			if(db.GetDb()[vett[i]].getMorale() > db.GetDb()[vett[i+1]].getMorale()
 					&& db.GetDb()[vett[i]].getCondizione() > db.GetDb()[vett[i+1]].getCondizione()){
 				migliore = vett[i];
 			}

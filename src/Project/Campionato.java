@@ -103,7 +103,7 @@ public class Campionato
 		else{
 			Component a = Search(7,2,arrayAvv);
 			((Giocatore) a).setPalla(true);
-			a.setVisible(true);
+			a.setVisible(false);
 		}
 		
 		//continuare. . . . . 

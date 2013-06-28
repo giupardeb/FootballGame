@@ -85,6 +85,10 @@ abstract public class  Squadra{
 		totalepronostico = (getVittorie()+ getPareggi()-getSconfitte()+getGolFatti()-getGolSubiti() + getAbilitaCentrocampo()+getAbilitaAttacco()+getAbilitaDifesa());
 	}
 
+	public int getPunti(){
+		return punti;
+	}
+	
 	public int getAbilitaDifesa() {
 		return abilitaDifesa;
 	}
@@ -132,11 +136,16 @@ abstract public class  Squadra{
 	public int getTotalePronostico(){
 		return totalepronostico;
 	}
-	//FINE MODIFICA
+
 	public String GetNomeSquadra(){
 		return nome;
 	}
 
+	
+	public void setPunti(int a){
+		punti += a;
+	}
+	
 	public void SetGolfatti(){
 		golfatti++;
 	}
@@ -236,5 +245,9 @@ abstract public class  Squadra{
 			if(rdm <=3) System.out.println("Il pronostico è a favore della squadra "+a.GetNomeSquadra());
 			else System.out.println("Il pronostico è a favore della squadra "+b.GetNomeSquadra());
 		}
+	}
+	
+	public String toString(){
+		return GetNomeSquadra();
 	}
 }

@@ -31,11 +31,10 @@ abstract public class Giocatore extends JLabel
 	protected int tipoRuolo; //per l'ordinamento di un array, 0 = portiere, 1 = difensore, 2 = centrocampista, 3 = attaccante
 	private Point posizione;
 	private boolean pallasi;
-	private Squadra squadra; 
 
 	Giocatore(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
-			byte mediaVoti,Squadra squadra,byte valoreGenerale,double valoreMercato) 
+			byte mediaVoti,byte valoreGenerale,double valoreMercato) 
 			{
 		anagrafe = new Anagrafe(nome,eta,nazionalita);
 		this.nomeSquadraAppartenente = nomeSquadraAppartenente;
@@ -57,7 +56,6 @@ abstract public class Giocatore extends JLabel
 		this.valoreGenerale = valoreGenerale;
 		posizione = new Point();
 		pallasi = false;
-		squadra = null;
 			}
 
 

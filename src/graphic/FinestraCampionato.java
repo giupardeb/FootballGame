@@ -10,6 +10,8 @@ import Project.DatabaseGiocatori;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FinestraCampionato extends JFrame{
 
@@ -23,6 +25,14 @@ public class FinestraCampionato extends JFrame{
 		getContentPane().setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][]", "[][][][][][][][]"));
 
 		JButton btnNewButton = new JButton("Classifica Attuale");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.hide();
+				FinestraClassifica f = new FinestraClassifica(c,frame);
+			}
+		});
+		
 		getContentPane().add(btnNewButton, "cell 17 1");
 
 		

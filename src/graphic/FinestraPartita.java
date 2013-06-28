@@ -77,7 +77,7 @@ public class FinestraPartita extends JFrame {
 		panel.add(panelScelte, BorderLayout.SOUTH);
 		panelScelte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnStop = new JButton("Stop");
+		JButton btnStop = new JButton("stop");
 		btnStop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

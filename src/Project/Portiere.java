@@ -14,12 +14,12 @@ class Portiere extends Giocatore
 	public Portiere(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
 			byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,
-			boolean essenziale,byte mediaVoti,Squadra squadra,byte dotiAeree,byte agilita,byte comunicazione,
+			boolean essenziale,byte mediaVoti,byte dotiAeree,byte agilita,byte comunicazione,
 			byte bloccareTiri,byte calciare,byte riflessi,byte rimessa,byte valoreGenerale,
 			double valoreMercato)
 	{
 		super(nome,nomeSquadraAppartenente,nazionalita,velocita,resistenza,forza,morale,eta,condizione,tecnica,aggressivita,creativita,decisione,carisma,
-				posizione,giocoDiSquadra,essenziale,mediaVoti,squadra, valoreGenerale,valoreMercato);
+				posizione,giocoDiSquadra,essenziale,mediaVoti,valoreGenerale,valoreMercato);
 
 		this.dotiAeree = dotiAeree;
 		this.agilita = agilita;

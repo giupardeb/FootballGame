@@ -16,9 +16,9 @@ abstract class AltriRuoli extends Giocatore
 	private byte abilitaCentrocampo;
 	
 	//metodi per metodo constrasto
-	private final int CONTRASTO = 1;
-	private final int NIENTECONTRASTO = 2;
-	private final int CONTRASTOPERSO = 4; 
+//	private final int CONTRASTO = 1;
+//	private final int NIENTECONTRASTO = 2;
+//	private final int CONTRASTOPERSO = 4; 
 	private final int NUMrIUSCITAsCARSOcONaBILITÀ = 6;
 	private final int NUMrIUSCITAsCARSO = 8;
 	private final int NUMrIUSCITAmEDIO = 7;
@@ -56,13 +56,13 @@ abstract class AltriRuoli extends Giocatore
 	public AltriRuoli(String cognome,String NomeSquadraAppartenente,String nazionalita,byte velocita,byte resistenza,
 			byte forza,byte morale,byte eta,byte condizione,byte tecnica,byte aggressivita,
 			byte creativita,byte decisione,byte carisma,String posizione,byte giocoDiSquadra,
-			boolean essenziale,byte mediaVoti,Squadra squadra,byte cross,byte dribling,byte colpoDiTesta,
+			boolean essenziale,byte mediaVoti,byte cross,byte dribling,byte colpoDiTesta,
 			byte passaggio, byte tiro, byte contrasto, byte movimento, byte abilitaDifesa,
 			byte abilitaAttacco,byte abilitaCentrocampo,byte valoreGenerale,double valoreMercato){
 
 		super (cognome, NomeSquadraAppartenente, nazionalita, velocita, resistenza, forza, morale, eta,condizione, 
 				tecnica, aggressivita, creativita, decisione, carisma, posizione, giocoDiSquadra,
-				essenziale,mediaVoti,squadra,valoreGenerale,valoreMercato);
+				essenziale,mediaVoti,valoreGenerale,valoreMercato);
 
 		this.cross = cross;
 		this.dribling = dribling;
@@ -316,11 +316,11 @@ abstract class AltriRuoli extends Giocatore
 	
 	////////****METODO CONTRASTO///*/*/*/*////***
 	
-	public int Contrasto(Giocatore campo[][], byte abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
+	public Point Contrasto(Giocatore campo[][], byte abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
 																//vincerà un contrasto
 		Point p = this.getPosizione().getLocation();
 		Point pavv;
-		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//il giocatore appartiene alla squadra Avversaria?
+		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//chi ha chiamato il metodo è  un umano o un cmputer
 			
 			 pavv = new Point((int)p.getX()-1,(int)p.getY()); 
 			 
@@ -333,30 +333,35 @@ abstract class AltriRuoli extends Giocatore
 		if(campo[(int) pavv.getX()][(int) p.getY()] != null){
 			if(this.getDotiRuolo() >= campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo()){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAbRAVO){
-					return CONTRASTO;
+				//	return CONTRASTO;
+					return this.getLocation();
 				}
-				else return CONTRASTOPERSO;
+				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}
 			else if(this.getDotiRuolo() >= CalcolaDotiIntermedie(campo[(int) pavv.getX()][(int) p.getY()].getDotiRuolo())){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAmEDIO){
-					return CONTRASTO;
+				//	return CONTRASTO;
+					return this.getLocation();
+
 				}
-				else return CONTRASTOPERSO;
+				else return pavv.getLocation(); //return CONTRASTOPERSO;
 			}
 			else if(abilita > MINABILITAPERBONUS){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSOcONaBILITÀ){
-					return CONTRASTO;
+					//return CONTRASTO;
+					return this.getLocation();
 				}
-				else return CONTRASTOPERSO;
+				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}
 			else{
 				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSO){
-					return CONTRASTO;
+					//return CONTRASTO;
+					return this.getLocation();
 				}
-				else return CONTRASTOPERSO;
+				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}			
 		}
-	else return NIENTECONTRASTO;
+	else return null;
 }
 	
 	public int CalcolaDotiIntermedie(int DotiPiuForte){
