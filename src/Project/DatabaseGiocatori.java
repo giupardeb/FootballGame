@@ -10,16 +10,24 @@ public class DatabaseGiocatori {
 	private static final String PORTIERE = "Portiere";
 	private static final String ATTACCANTE = "Attaccante";
 	private static final String DIFENSORE = "Difensore";
-	Stack<String> squadreesistenti = new Stack<String>();
+	/**
+	 * @uml.property  name="squadreesistenti"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="java.lang.String"
+	 */
+	Stack<String> squadreesistenti;
 
 
 	private static Giocatore giocatori[];
+	private static ArrayList <Giocatore> giocatoriInVendita;
 
 	///////////////////////////////////////////////////****////////////////////////////////////////////////	
 	//crea il database
 
 	public DatabaseGiocatori(){
-
+		
+		squadreesistenti = new Stack<String>();
+		giocatoriInVendita = new ArrayList<Giocatore>();
+		
 		//Sto creando una pila, in maniera tale da facilitarmi il compito di creare le squadre avversarie.
 
 		squadreesistenti.push("Atalanta");
@@ -237,5 +245,17 @@ public class DatabaseGiocatori {
 		for(int i = 0; i<giocatori.length; i++)
 			if(giocatori[i].GetAnagrafe().GetCognome().equalsIgnoreCase(cognome)) return i;
 		return -1;
+	}
+	
+	public void setGiocatoriInVendita(Giocatore giocatore){
+		
+		giocatoriInVendita.add(giocatore);
+		
+	}
+	
+public ArrayList<Giocatore> getGiocatoriInVendita(){
+		
+	return giocatoriInVendita;
+		
 	}
 }

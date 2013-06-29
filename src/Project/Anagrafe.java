@@ -1,7 +1,16 @@
 package Project;
 public class Anagrafe{
+	/**
+	 * @uml.property  name="cognome"
+	 */
 	private String cognome;
+	/**
+	 * @uml.property  name="eta"
+	 */
 	private byte eta;
+	/**
+	 * @uml.property  name="provenienza"
+	 */
 	private String provenienza;
 
 	public Anagrafe (String cognome, byte eta, String provenienza){

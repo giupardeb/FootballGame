@@ -1,8 +1,17 @@
 package Project;
 import java.util.*;
 
-abstract public class  Squadra{
+/**
+ * @uml.dependency   supplier="Project.DatabaseGiocatori"
+ */
+abstract public class  Squadra {
+	/**
+	 * @uml.property  name="randomNumber"
+	 */
 	private final int RandomNumber = 10;
+	/**
+	 * @uml.property  name="randomNumber1"
+	 */
 	private final int RandomNumber1 = 2;
 	protected final static int RandomNumber2 = 5;
 	protected final static int MIN_GIOCATORY_PER_MERCATO = 15;
@@ -14,20 +23,60 @@ abstract public class  Squadra{
 
 	static DatabaseGiocatori db = new DatabaseGiocatori();
 
+	/**
+	 * @uml.property  name="nome"
+	 */
 	String nome;
+	/**
+	 * @uml.property  name="budget"
+	 */
 	private float budget;
+	/**
+	 * @uml.property  name="miasquadra"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="Project.Giocatore"
+	 */
 	private ArrayList <Giocatore> miasquadra = new ArrayList<Giocatore>();
+	/**
+	 * @uml.property  name="vittorie"
+	 */
 	int vittorie;
+	/**
+	 * @uml.property  name="pareggi"
+	 */
 	int pareggi;
+	/**
+	 * @uml.property  name="sconfitte"
+	 */
 	int sconfitte;
+	/**
+	 * @uml.property  name="golfatti"
+	 */
 	int golfatti;
+	/**
+	 * @uml.property  name="golsubiti"
+	 */
 	int golsubiti;
+	/**
+	 * @uml.property  name="punti"
+	 */
 	int punti;
 
+	/**
+	 * @uml.property  name="totalepronostico"
+	 */
 	int totalepronostico; //serve per il pronostico, sara la somma dei gol fatti, subiti, vittorie sconfitte, pareggi + le abilita totali di difesa,attacco,centrocampo
-	int abilitaDifesa; //serve per il pronostico
-	int abilitaCentrocampo; //serve per il pronostico
-	int abilitaAttacco; //serve per il pronostico
+	/**
+	 * @uml.property  name="abilitaDifesa"
+	 */
+	int abilitaDifesa;
+	/**
+	 * @uml.property  name="abilitaCentrocampo"
+	 */
+	int abilitaCentrocampo; 
+	/**
+	 * @uml.property  name="abilitaAttacco"
+	 */
+	int abilitaAttacco; 
 
 	//Costruttore di Squadra!!!
 	public Squadra(ArrayList <Giocatore> vett, String nome){
@@ -35,10 +84,6 @@ abstract public class  Squadra{
 		this.nome = nome;
 		totalepronostico = 0;
 
-
-		/*non faccio altro che mettere nelle variabili abilita,  tutte le abilita specifiche di ogni giocatore alla fine le variabili abilita
-		 * avranno la somma di tutte le abilita dei giocatori (difensori attaccanti centrocampisi)
-		 * ciò è utile per il pronostico*/
 
 		int d = 0,c = 0,a = 0; //VARIABILI CONTATORI PER POI CREARE LE ABILITÀ RISPETTIVE
 		double b = 0; // calcolare il budget
@@ -85,16 +130,32 @@ abstract public class  Squadra{
 		totalepronostico = (getVittorie()+ getPareggi()-getSconfitte()+getGolFatti()-getGolSubiti() + getAbilitaCentrocampo()+getAbilitaAttacco()+getAbilitaDifesa());
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="punti"
+	 */
 	public int getPunti(){
 		return punti;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="abilitaDifesa"
+	 */
 	public int getAbilitaDifesa() {
 		return abilitaDifesa;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="abilitaAttacco"
+	 */
 	public int getAbilitaAttacco() {
 		return abilitaAttacco;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="abilitaCentrocampo"
+	 */
 	public int getAbilitaCentrocampo() {
 		return abilitaCentrocampo;
 	}
@@ -107,15 +168,27 @@ abstract public class  Squadra{
 		return golfatti;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sconfitte"
+	 */
 	public int getSconfitte() {
 		return sconfitte;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="pareggi"
+	 */
 	public int getPareggi() {
 		return pareggi;
 	}
 
 
+	/**
+	 * @return
+	 * @uml.property  name="vittorie"
+	 */
 	public int getVittorie() {
 		return vittorie;
 	}
@@ -142,6 +215,10 @@ abstract public class  Squadra{
 	}
 
 	
+	/**
+	 * @param a
+	 * @uml.property  name="punti"
+	 */
 	public void setPunti(int a){
 		punti += a;
 	}

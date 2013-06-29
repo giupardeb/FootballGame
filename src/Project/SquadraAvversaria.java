@@ -14,9 +14,21 @@ public class SquadraAvversaria extends Squadra{
 
 	//Servono per l'organizzazione della squadra
 
+	/**
+	 * @uml.property  name="pORTIERI"
+	 */
 	final int PORTIERI = 1;
+	/**
+	 * @uml.property  name="dIFENSORI"
+	 */
 	final int DIFENSORI = 4;
+	/**
+	 * @uml.property  name="cENTROCAMPISTI"
+	 */
 	final int CENTROCAMPISTI = 4;
+	/**
+	 * @uml.property  name="aTTACCANTI"
+	 */
 	final int ATTACCANTI = 2;
 
 
@@ -111,9 +123,13 @@ public class SquadraAvversaria extends Squadra{
 
 
 		if(!(ruolodaacquistare.equalsIgnoreCase(""))) {
-			i = SearchIndiceGiocatore(ruolodaacquistare);
+			i = SearchIndiceGiocatore(ruolodaacquistare,db.getGiocatoriInVendita());
+			if(i == -1) i = SearchIndiceGiocatore(ruolodaacquistare);
 		}
-		else i = SearchIndiceGiocatore();
+		else {
+			i = SearchIndiceGiocatore(db.getGiocatoriInVendita());
+			if(i == -1) i = SearchIndiceGiocatore();
+		}
 
 		if(db.GetDb()[i].getSquadra().equals(squadrautente.GetNomeSquadra()))
 		{
@@ -196,6 +212,52 @@ public class SquadraAvversaria extends Squadra{
 	}
 	///////////////////////////////////////////////////****************FINE ACQUISTA***********************///////////////////////////////////////	
 	///////////////////////////////////////////////////****************INIZIO METODI DI ACQUISTA***********************//////////////////////////	
+
+	private int SearchIndiceGiocatore(ArrayList<Giocatore> giocatoriInVendita) {
+		Giocatore tmp1[] =  giocatoriInVendita.toArray(new Giocatore[giocatoriInVendita.size()]);
+		if(tmp1.length != 0){
+			Random rand = new Random();
+			int casuale = rand.nextInt(tmp1.length);
+			Giocatore g = tmp1[casuale];
+
+			for(int i = 0; i<db.GetDb().length ;i++)
+				if(db.GetDb()[i].GetAnagrafe().GetCognome().equals(g.GetAnagrafe().GetCognome()))
+					return i;
+			return -1;
+		}
+		else return -1;
+	}
+
+	private int  SearchIndiceGiocatore(String ruolo,ArrayList<Giocatore> giocatoriInVendita) {
+
+		ArrayList <Giocatore> tmp = new ArrayList <Giocatore>();
+
+		Giocatore tmp1[] =  giocatoriInVendita.toArray(new Giocatore[giocatoriInVendita.size()]);
+		if(tmp1.length != 0){
+			for(int i = 0; i<tmp1.length;i++){
+				if(ruolo.equalsIgnoreCase("Difensore") && tmp1[i] instanceof Difensore){
+					tmp.add((Difensore)tmp1[i]);
+				}
+				else if(ruolo.equalsIgnoreCase("Centrocampista") && tmp1[i] instanceof Centrocampista){
+					tmp.add((Centrocampista)tmp1[i]);
+				}
+				else if(ruolo.equalsIgnoreCase("Attaccante") && tmp1[i] instanceof Attaccante){
+					tmp.add((Attaccante)tmp1[i]);
+				}
+				else if(ruolo.equalsIgnoreCase("Portiere") && tmp1[i] instanceof Portiere){
+					tmp.add((Portiere)tmp1[i]);
+				}
+			}
+			Random rand = new Random();
+			int casuale = rand.nextInt(tmp.size());
+			for(int i = 0; i<db.GetDb().length ;i++){
+				Giocatore g =  (Giocatore) tmp.toArray()[casuale];
+				if(db.GetDb()[i].GetAnagrafe().GetCognome().equals(g.GetAnagrafe().GetCognome())) return i;
+			}
+		}
+
+		return -1;
+	}
 
 	private double Offerta(Giocatore g){
 		double percent = 0;

@@ -2,8 +2,6 @@ package graphic;
 import Project.Campionato;
 import Project.SquadraAvversaria;
 
-import javax.swing.AbstractButton;
-import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -13,22 +11,15 @@ import javax.swing.JButton;
 
 import Project.Giocatore;
 import javax.swing.JSplitPane;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.SwingConstants;
 
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.GridLayout;
-import java.awt.Color;
-import java.awt.TextArea;
 import java.awt.Label;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FinestraPartita extends JFrame {
 
@@ -53,7 +44,7 @@ public class FinestraPartita extends JFrame {
 		Thread t  = new Thread (new Runnable () {
 			public void run () {
 				//qui ci metti tutte le istruzioni che il thread deve eseguire
-				c.partita(c.squadra, squadraAvv,panel_2,arrayMio,arrayAvv);
+				c.partita(c.squadra, squadraAvv,frame,arrayMio,arrayAvv);
 			}
 		});
 
@@ -77,27 +68,48 @@ public class FinestraPartita extends JFrame {
 		panel.add(panelScelte, BorderLayout.SOUTH);
 		panelScelte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnStop = new JButton("stop");
-		btnStop.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//ferma la partita
-				c.setFerma(true);
-			}
-		});
-		panelScelte.add(btnStop);
 
 		JButton btnRilancia = new JButton("Rilancia");
-		btnRilancia.setEnabled(false);
+		btnRilancia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.rilancia++;
+			}
+		});
+		btnRilancia.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
 		panelScelte.add(btnRilancia);
 
 		JButton btnTira = new JButton("Tira");
+		btnTira.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				c.tira++;
+				
+			}
+		});
 		panelScelte.add(btnTira);
 
 		JButton btnPassaggio = new JButton("Passaggio");
+		btnPassaggio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				c.passa++;
+			}
+		});
 		panelScelte.add(btnPassaggio);
 
 		JButton btnContrasto = new JButton("Contrasto");
+		btnContrasto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				c.contrasto++;
+			}
+		});
 		panelScelte.add(btnContrasto);
 		
 		JSplitPane splitPane = new JSplitPane();
@@ -109,12 +121,12 @@ public class FinestraPartita extends JFrame {
 		splitPane.setRightComponent(VisualizzaInfo);
 		
 		arrayAvv[0].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_PortiereAvv = new GridBagConstraints();
-		gbc_PortiereAvv.insets = new Insets(0, 0, 0, 5);
-		gbc_PortiereAvv.gridx = 7;
-		gbc_PortiereAvv.gridy = 2;
-		arrayAvv[0].setPosizione(7, 2);
-		panel_2.add(arrayAvv[0], gbc_PortiereAvv);
+		GridBagConstraints gbc_CentrocampistaAvv = new GridBagConstraints();
+		gbc_CentrocampistaAvv.insets = new Insets(0, 0, 0, 5);
+		gbc_CentrocampistaAvv.gridx = 4;
+		gbc_CentrocampistaAvv.gridy = 1;
+		arrayAvv[0].setPosizione(4, 1);
+		panel_2.add(arrayAvv[0], gbc_CentrocampistaAvv);
 		
 		arrayAvv[1].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		GridBagConstraints gbc_DifensoreAvv = new GridBagConstraints();
@@ -125,44 +137,44 @@ public class FinestraPartita extends JFrame {
 		panel_2.add(arrayAvv[1], gbc_DifensoreAvv);
 		
 		arrayAvv[2].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_DifensoreAvv1 = new GridBagConstraints();
-		gbc_DifensoreAvv1.insets = new Insets(0, 0, 0, 5);
-		gbc_DifensoreAvv1.gridx = 6;
-		gbc_DifensoreAvv1.gridy = 2;
-		arrayAvv[2].setPosizione(6, 2);
-		panel_2.add(arrayAvv[2], gbc_DifensoreAvv1);
+		GridBagConstraints gbc_AttaccanteAvv = new GridBagConstraints();
+		gbc_AttaccanteAvv.insets = new Insets(0, 0, 0, 5);
+		gbc_AttaccanteAvv.gridx = 2;
+		gbc_AttaccanteAvv.gridy = 2;
+		arrayAvv[2].setPosizione(2, 2);
+		panel_2.add(arrayAvv[2], gbc_AttaccanteAvv);
 		
 		arrayAvv[3].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_DifensoreAvv2 = new GridBagConstraints();
-		gbc_DifensoreAvv2.insets = new Insets(0, 0, 0, 5);
-		gbc_DifensoreAvv2.gridx = 6;
-		gbc_DifensoreAvv2.gridy = 3;
-		arrayAvv[3].setPosizione(6,3);
-		panel_2.add(arrayAvv[3], gbc_DifensoreAvv2);
-		
-		arrayAvv[4].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_DifensoreAvv3 = new GridBagConstraints();
-		gbc_DifensoreAvv3.insets = new Insets(0, 0, 0, 5);
-		gbc_DifensoreAvv3.gridx = 6;
-		gbc_DifensoreAvv3.gridy = 4;
-		arrayAvv[4].setPosizione(6, 4);
-		panel_2.add(arrayAvv[4], gbc_DifensoreAvv3);
-		
-		arrayAvv[5].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_CentrocampistaAvv = new GridBagConstraints();
-		gbc_CentrocampistaAvv.insets = new Insets(0, 0, 0, 5);
-		gbc_CentrocampistaAvv.gridx = 4;
-		gbc_CentrocampistaAvv.gridy = 1;
-		arrayAvv[5].setPosizione(4, 1);
-		panel_2.add(arrayAvv[5], gbc_CentrocampistaAvv);
-		
-		arrayAvv[6].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		GridBagConstraints gbc_CentrocampistaAvv1 = new GridBagConstraints();
 		gbc_CentrocampistaAvv1.insets = new Insets(0, 0, 0, 5);
 		gbc_CentrocampistaAvv1.gridx = 4;
 		gbc_CentrocampistaAvv1.gridy = 2;
-		arrayAvv[6].setPosizione(4, 2);
-		panel_2.add(arrayAvv[6], gbc_CentrocampistaAvv1);
+		arrayAvv[3].setPosizione(4,2);
+		panel_2.add(arrayAvv[3], gbc_CentrocampistaAvv1);
+		
+		arrayAvv[4].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
+		GridBagConstraints gbc_DifensoreAvv1 = new GridBagConstraints();
+		gbc_DifensoreAvv1.insets = new Insets(0, 0, 0, 5);
+		gbc_DifensoreAvv1.gridx = 6;
+		gbc_DifensoreAvv1.gridy = 2;
+		arrayAvv[4].setPosizione(6, 2);
+		panel_2.add(arrayAvv[4], gbc_DifensoreAvv1);
+		
+		arrayAvv[5].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/portiereavv.gif")));
+		GridBagConstraints gbc_PortiereAvv = new GridBagConstraints();
+		gbc_PortiereAvv.insets = new Insets(0, 0, 0, 5);
+		gbc_PortiereAvv.gridx = 7;
+		gbc_PortiereAvv.gridy = 2;
+		arrayAvv[5].setPosizione(7, 2);
+		panel_2.add(arrayAvv[5], gbc_PortiereAvv);
+		
+		arrayAvv[6].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
+		GridBagConstraints gbc_AttaccanteAvv1 = new GridBagConstraints();
+		gbc_AttaccanteAvv1.insets = new Insets(0, 0, 0, 5);
+		gbc_AttaccanteAvv1.gridx = 2;
+		gbc_AttaccanteAvv1.gridy = 3;
+		arrayAvv[6].setPosizione(2, 3);
+		panel_2.add(arrayAvv[6], gbc_AttaccanteAvv1);
 		
 		arrayAvv[7].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		GridBagConstraints gbc_CentrocampistaAvv2 = new GridBagConstraints();
@@ -173,40 +185,40 @@ public class FinestraPartita extends JFrame {
 		panel_2.add(arrayAvv[7], gbc_CentrocampistaAvv2);
 		
 		arrayAvv[8].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
+		GridBagConstraints gbc_DifensoreAvv2 = new GridBagConstraints();
+		gbc_DifensoreAvv2.insets = new Insets(0, 0, 0, 5);
+		gbc_DifensoreAvv2.gridx = 6;
+		gbc_DifensoreAvv2.gridy = 3;
+		arrayAvv[8].setPosizione(6, 3);
+		panel_2.add(arrayAvv[8], gbc_DifensoreAvv2);
+		
+		arrayAvv[9].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		GridBagConstraints gbc_CentrocampistaAvv3 = new GridBagConstraints();
 		gbc_CentrocampistaAvv3.insets = new Insets(0, 0, 0, 5);
 		gbc_CentrocampistaAvv3.gridx = 4;
 		gbc_CentrocampistaAvv3.gridy = 4;
-		arrayAvv[8].setPosizione(4, 4);
-		panel_2.add(arrayAvv[8], gbc_CentrocampistaAvv3);
-		
-		arrayAvv[9].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_AttaccanteAvv = new GridBagConstraints();
-		gbc_AttaccanteAvv.insets = new Insets(0, 0, 0, 5);
-		gbc_AttaccanteAvv.gridx = 2;
-		gbc_AttaccanteAvv.gridy = 2;
-		arrayAvv[9].setPosizione(2, 2);
-		panel_2.add(arrayAvv[9], gbc_AttaccanteAvv);
+		arrayAvv[9].setPosizione(4, 4);
+		panel_2.add(arrayAvv[9], gbc_CentrocampistaAvv3);
 		
 		arrayAvv[10].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
-		GridBagConstraints gbc_AttaccanteAvv1 = new GridBagConstraints();
-		gbc_AttaccanteAvv1.insets = new Insets(0, 0, 0, 5);
-		gbc_AttaccanteAvv1.gridx = 2;
-		gbc_AttaccanteAvv1.gridy = 3;
-		arrayAvv[10].setPosizione(2, 3);
-		panel_2.add(arrayAvv[10], gbc_AttaccanteAvv1);
+		GridBagConstraints gbc_DifensoreAvv3 = new GridBagConstraints();
+		gbc_DifensoreAvv3.insets = new Insets(0, 0, 0, 5);
+		gbc_DifensoreAvv3.gridx = 6;
+		gbc_DifensoreAvv3.gridy = 4;
+		arrayAvv[10].setPosizione(6, 4);
+		panel_2.add(arrayAvv[10], gbc_DifensoreAvv3);
 		
-		arrayAvv[10].setVisible(true);
-		arrayAvv[9].setVisible(true);
-		arrayAvv[8].setVisible(true);
-		arrayAvv[7].setVisible(true);
-		arrayAvv[6].setVisible(true);
-		arrayAvv[5].setVisible(true);
-		arrayAvv[4].setVisible(true);
-		arrayAvv[3].setVisible(true);
-		arrayAvv[2].setVisible(true);
-		arrayAvv[1].setVisible(true);
-		arrayAvv[0].setVisible(true);
+		arrayAvv[10].setVisible(false);
+		arrayAvv[9].setVisible(false);
+		arrayAvv[8].setVisible(false);
+		arrayAvv[7].setVisible(false);
+		arrayAvv[6].setVisible(false);
+		arrayAvv[5].setVisible(false);
+		arrayAvv[4].setVisible(false);
+		arrayAvv[3].setVisible(false);
+		arrayAvv[2].setVisible(false);
+		arrayAvv[1].setVisible(false);
+		arrayAvv[0].setVisible(false);
 		
 		
 		splitPane.setLeftComponent(panel_2);

@@ -19,7 +19,7 @@ public class FinestraCampionato extends JFrame{
 	private  JFrame frame = this;
 
 
-	public FinestraCampionato(final Campionato c, final DatabaseGiocatori db) {
+	public FinestraCampionato(final Campionato c) {
 			
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][]", "[][][][][][][][]"));
@@ -42,7 +42,7 @@ public class FinestraCampionato extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				FinestraOrganizzaSquadra o = new FinestraOrganizzaSquadra(c,db);
+				FinestraOrganizzaSquadra o = new FinestraOrganizzaSquadra(c);
 			}
 		});
 		getContentPane().add(btnNewButton_1, "cell 17 3");

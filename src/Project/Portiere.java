@@ -1,13 +1,41 @@
 package Project;
+
+import java.awt.Point;
+
 class Portiere extends Giocatore
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7774987130855878995L;
+	/**
+	 * @uml.property  name="dotiAeree"
+	 */
 	private byte dotiAeree;
+	/**
+	 * @uml.property  name="agilita"
+	 */
 	private byte agilita;
+	/**
+	 * @uml.property  name="comunicazione"
+	 */
 	private byte comunicazione;
+	/**
+	 * @uml.property  name="bloccareTiri"
+	 */
 	private byte bloccareTiri;
+	/**
+	 * @uml.property  name="calciare"
+	 */
 	private byte calciare;
+	/**
+	 * @uml.property  name="riflessi"
+	 */
 	private byte riflessi;
+	/**
+	 * @uml.property  name="rimessa"
+	 */
 	private byte rimessa;
 	//private float valoreDiMercato;
 
@@ -33,7 +61,7 @@ class Portiere extends Giocatore
 
 
 	//metodi di get()
-	
+
 	public int getAbilita(){
 		return dotiAeree+agilita+comunicazione+bloccareTiri+calciare+riflessi+rimessa;
 	}
@@ -45,36 +73,64 @@ class Portiere extends Giocatore
 
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="dotiAeree"
+	 */
 	public byte getDotiAeree()
 	{
 		return(dotiAeree);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="agilita"
+	 */
 	public byte getAgilita ()
 	{
 		return(agilita);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="comunicazione"
+	 */
 	public byte getComunicazione()
 	{
 		return(comunicazione);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="bloccareTiri"
+	 */
 	public byte getBloccareTiri()
 	{
 		return(bloccareTiri);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="calciare"
+	 */
 	public byte getCalciare()
 	{
 		return(calciare);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="riflessi"
+	 */
 	public byte getRiflessi()
 	{
 		return(riflessi);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="rimessa"
+	 */
 	public byte getRimessa()
 	{
 		return(rimessa);
@@ -84,6 +140,10 @@ class Portiere extends Giocatore
 
 	//metodi di set()
 
+	/**
+	 * @param valore
+	 * @uml.property  name="dotiAeree"
+	 */
 	public void setDotiAeree(byte valore)
 	{
 		dotiAeree += valore;
@@ -96,30 +156,50 @@ class Portiere extends Giocatore
 
 	}
 
+	/**
+	 * @param valore
+	 * @uml.property  name="comunicazione"
+	 */
 	public void setComunicazione(byte valore)
 	{
 		comunicazione += valore;
 
 	}
 
+	/**
+	 * @param valore
+	 * @uml.property  name="bloccareTiri"
+	 */
 	public void setBloccareTiri(byte valore)
 	{
 		bloccareTiri += valore;
 
 	}
 
+	/**
+	 * @param valore
+	 * @uml.property  name="calciare"
+	 */
 	public void setCalciare(byte valore)
 	{
 		calciare += valore;
 
 	}
 
+	/**
+	 * @param valore
+	 * @uml.property  name="riflessi"
+	 */
 	public void setRiflessi(byte valore)
 	{
 		riflessi += valore;
 
 	}
 
+	/**
+	 * @param valore
+	 * @uml.property  name="rimessa"
+	 */
 	public void setRimessa(byte valore)
 	{
 		rimessa += valore;
@@ -146,4 +226,35 @@ class Portiere extends Giocatore
 
 
 	//METODI!
+
+	public Point rilancia(String Nomesquadra){
+		Point p = this.getLocation();
+		Point pavv = new Point();
+		int random = (int)(Math.random()*4);
+
+
+		if (this.getSquadra().equalsIgnoreCase(Nomesquadra)){
+			if(random == 0) pavv.setLocation(p.getX()-1, p.getY());
+			else if(random == 1) pavv.setLocation(p.getX()-1, p.getY()-1);
+			else if(random == 2) pavv.setLocation(p.getX()-1, p.getY()+1);
+			else if(random == 3) pavv.setLocation(p.getX()-1, p.getY()+2);
+		}
+		else{
+			if(random == 0) pavv.setLocation(p.getX()+1, p.getY());
+			else if(random == 1) pavv.setLocation(p.getX()+1, p.getY()-1);
+			else if(random == 2) pavv.setLocation(p.getX()+1, p.getY()+1);
+			else if(random == 3) pavv.setLocation(p.getX()+1, p.getY()+2);
+		}
+		return pavv;
+	}
+
+
+
+
+
+
+
+
+
+
 }

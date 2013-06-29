@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1475,1698" id="Project" metadata="uml2-1.0" initialized="true" scrolledY="464" tag="10" key="32303037303533312D313020466F6F7442616C6C4D616E61676572">
+  <children xsi:type="editmodel:ClassEditModel" name="Main" location="761,1376" size="91,86" id="Project/Main" runTimeClassModel="main([Ljava.lang.String;),f">
+    <children xsi:type="editmodel:CompartmentEditModel" size="68,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="f" id="Project/Main#f"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="57,18">
+      <children xsi:type="editmodel:MethodEditModel" name="main" id="Project/Main#main([Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Campionato" location="50,1376" size="240,302" id="Project/Campionato" runTimeClassModel="RichiamaFinestraCampionato(LProject.DatabaseGiocatori;),VisualizzaGiocatori(Ljava.lang.String;),SearchSquadra(Ljava.lang.String;),Calciomercato(Ljavax.swing.JFrame;),incontri,partita(LProject.SquadraUmano;LProject.SquadraAvversaria;Ljavax.swing.JPanel;[Ljava.awt.Component;[Ljava.awt.Component;),CreaAssociazioniSquadre(),Trasferimento([Ljava.lang.String;),TrasferimentoPerScambio([Ljava.lang.String;),Campionato(Ljava.lang.String;Ljavax.swing.JFrame;),Search(II[Ljava.awt.Component;),ferma,VisualizzaGiocatoriMiei(),VisualizzaGiocatori(Ljava.lang.String;Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="217,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="ferma" id="Project/Campionato#ferma"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="incontri" id="Project/Campionato#incontri"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="189,216">
+      <children xsi:type="editmodel:MethodEditModel" name="Calciomercato" id="Project/Campionato#Calciomercato(Ljavax.swing.JFrame;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Campionato" id="Project/Campionato#Campionato(Ljava.lang.String;Ljavax.swing.JFrame;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CreaAssociazioniSquadre" id="Project/Campionato#CreaAssociazioniSquadre()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="RichiamaFinestraCampionato" id="Project/Campionato#RichiamaFinestraCampionato(LProject.DatabaseGiocatori;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Search" id="Project/Campionato#Search(II[Ljava.awt.Component;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SearchSquadra" id="Project/Campionato#SearchSquadra(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Trasferimento" id="Project/Campionato#Trasferimento([Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="TrasferimentoPerScambio" id="Project/Campionato#TrasferimentoPerScambio([Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="VisualizzaGiocatori" id="Project/Campionato#VisualizzaGiocatori(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="VisualizzaGiocatori" id="Project/Campionato#VisualizzaGiocatori(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="VisualizzaGiocatoriMiei" id="Project/Campionato#VisualizzaGiocatoriMiei()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="partita" id="Project/Campionato#partita(LProject.SquadraUmano;LProject.SquadraAvversaria;Ljavax.swing.JPanel;[Ljava.awt.Component;[Ljava.awt.Component;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Anagrafe" location="572,1376" size="139,140" id="Project/Anagrafe" runTimeClassModel="GetEta(),GetCognome(),Anagrafe(Ljava.lang.String;BLjava.lang.String;),toString(),GetProvenienza()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,90">
+      <children xsi:type="editmodel:MethodEditModel" name="Anagrafe" id="Project/Anagrafe#Anagrafe(Ljava.lang.String;BLjava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetCognome" id="Project/Anagrafe#GetCognome()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetEta" id="Project/Anagrafe#GetEta()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetProvenienza" id="Project/Anagrafe#GetProvenienza()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="Project/Anagrafe#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="DatabaseGiocatori" location="340,1376" size="182,176" id="Project/DatabaseGiocatori" runTimeClassModel="GetIndice(Ljava.lang.String;),DatabaseGiocatori(),GetDb(),getGiocatoriInVendita(),CreaSquadra(Ljava.lang.String;),setGiocatoriInVendita(LProject.Giocatore;),CreaSquadre(Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="148,126">
+      <children xsi:type="editmodel:MethodEditModel" name="CreaSquadra" id="Project/DatabaseGiocatori#CreaSquadra(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CreaSquadre" id="Project/DatabaseGiocatori#CreaSquadre(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="DatabaseGiocatori" id="Project/DatabaseGiocatori#DatabaseGiocatori()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetDb" id="Project/DatabaseGiocatori#GetDb()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetIndice" id="Project/DatabaseGiocatori#GetIndice(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGiocatoriInVendita" id="Project/DatabaseGiocatori#getGiocatoriInVendita()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGiocatoriInVendita" id="Project/DatabaseGiocatori#setGiocatoriInVendita(LProject.Giocatore;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="SquadraAvversaria" location="569,762" size="188,194" id="Project/SquadraAvversaria" runTimeClassModel="acquisto([LProject.SquadraAvversaria;LProject.SquadraUmano;),cENTROCAMPISTI,aTTACCANTI,pORTIERI,OrganizzaSquadra(),scambio([LProject.SquadraAvversaria;LProject.SquadraUmano;),SquadraAvversaria(Ljava.util.ArrayList;Ljava.lang.String;),dIFENSORI">
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="aTTACCANTI" id="Project/SquadraAvversaria#aTTACCANTI"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="cENTROCAMPISTI" id="Project/SquadraAvversaria#cENTROCAMPISTI"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="dIFENSORI" id="Project/SquadraAvversaria#dIFENSORI"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="pORTIERI" id="Project/SquadraAvversaria#pORTIERI"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,72">
+      <children xsi:type="editmodel:MethodEditModel" name="OrganizzaSquadra" id="Project/SquadraAvversaria#OrganizzaSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SquadraAvversaria" id="Project/SquadraAvversaria#SquadraAvversaria(Ljava.util.ArrayList;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="acquisto" id="Project/SquadraAvversaria#acquisto([LProject.SquadraAvversaria;LProject.SquadraUmano;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="scambio" id="Project/SquadraAvversaria#scambio([LProject.SquadraAvversaria;LProject.SquadraUmano;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.5/@sourceConnections.0" autoLocated="true" id="Project/Squadra&lt;-Project/SquadraAvversaria" source="//@children.4" target="//@children.6" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="94,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="93,662" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="SquadraUmano" location="787,762" size="158,122" id="Project/SquadraUmano" runTimeClassModel="scambio(Ljava.lang.String;Ljava.lang.String;LProject.SquadraAvversaria;),SquadraUmano(Ljava.util.ArrayList;Ljava.lang.String;),acquisto(Ljava.lang.String;LProject.SquadraAvversaria;),OrganizzaSquadra()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="131,72">
+      <children xsi:type="editmodel:MethodEditModel" name="OrganizzaSquadra" id="Project/SquadraUmano#OrganizzaSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SquadraUmano" id="Project/SquadraUmano#SquadraUmano(Ljava.util.ArrayList;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="acquisto" id="Project/SquadraUmano#acquisto(Ljava.lang.String;LProject.SquadraAvversaria;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="scambio" id="Project/SquadraUmano#scambio(Ljava.lang.String;Ljava.lang.String;LProject.SquadraAvversaria;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Project/Squadra&lt;-Project/SquadraUmano" source="//@children.5" target="//@children.4/@sourceConnections.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="79,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="Squadra" location="671,50" size="187,662" id="Project/Squadra" runTimeClassModel="GetNomeSquadra(),golfatti,SetVittorie(),abilitaCentrocampo,Pronostico(LProject.Squadra;LProject.SquadraAvversaria;),SetGolfatti(),setTotalePronostico(),setGolSubiti(),GetTotaleCentrocampisti(),toString(),punti,GetBudget(),abilitaAttacco,Squadra(Ljava.util.ArrayList;Ljava.lang.String;),GetTotalePortieri(),golsubiti,getGolFatti(),getGolSubiti(),db,SetBudgetAdd(D),GetSquadra(),pareggi,getTotalePronostico(),OrganizzaSquadra(),totalepronostico,abilitaDifesa,SetSconfitte(),GetTotaleAttaccanti(),sconfitte,vittorie,nome,GetTotaleDifensori(),SetPareggi(I),SetBudgetRemove(D)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,216">
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaAttacco" id="Project/Squadra#abilitaAttacco"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaCentrocampo" id="Project/Squadra#abilitaCentrocampo"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaDifesa" id="Project/Squadra#abilitaDifesa"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="db" id="Project/Squadra#db"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="golfatti" id="Project/Squadra#golfatti"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="golsubiti" id="Project/Squadra#golsubiti"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nome" id="Project/Squadra#nome"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="pareggi" id="Project/Squadra#pareggi"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="punti" id="Project/Squadra#punti"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sconfitte" id="Project/Squadra#sconfitte"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="totalepronostico" id="Project/Squadra#totalepronostico"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="vittorie" id="Project/Squadra#vittorie"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="164,396">
+      <children xsi:type="editmodel:MethodEditModel" name="GetBudget" id="Project/Squadra#GetBudget()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetNomeSquadra" id="Project/Squadra#GetNomeSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetSquadra" id="Project/Squadra#GetSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetTotaleAttaccanti" id="Project/Squadra#GetTotaleAttaccanti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetTotaleCentrocampisti" id="Project/Squadra#GetTotaleCentrocampisti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetTotaleDifensori" id="Project/Squadra#GetTotaleDifensori()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="GetTotalePortieri" id="Project/Squadra#GetTotalePortieri()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="OrganizzaSquadra" id="Project/Squadra#OrganizzaSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Pronostico" id="Project/Squadra#Pronostico(LProject.Squadra;LProject.SquadraAvversaria;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetBudgetAdd" id="Project/Squadra#SetBudgetAdd(D)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetBudgetRemove" id="Project/Squadra#SetBudgetRemove(D)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetGolfatti" id="Project/Squadra#SetGolfatti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetPareggi" id="Project/Squadra#SetPareggi(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetSconfitte" id="Project/Squadra#SetSconfitte()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SetVittorie" id="Project/Squadra#SetVittorie()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Squadra" id="Project/Squadra#Squadra(Ljava.util.ArrayList;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGolFatti" id="Project/Squadra#getGolFatti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGolSubiti" id="Project/Squadra#getGolSubiti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getTotalePronostico" id="Project/Squadra#getTotalePronostico()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGolSubiti" id="Project/Squadra#setGolSubiti()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setTotalePronostico" id="Project/Squadra#setTotalePronostico()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="Project/Squadra#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0" name="Giocatore" location="156,50" size="165,644" id="Project/Giocatore" runTimeClassModel="velocita,mediaVoti,GetAnagrafe(),getEssenziale(),setPosizione(II),getDotiRuolo(),posizione,setNomeSquadra(Ljava.lang.String;),getSquadra(),toString(),carisma,setaggressivita(B),aggressivita,setPalla(Z),setvelocita(B),creativita,giocoDiSquadra,forza,tecnica,Giocatore(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBD),resistenza,condizione,decisione,tipoRuolo,morale,valoreMercato,setPosizione(B),getPosizione(),ruolo,valoreGenerale,setMediaVoti(I),essenziale,setcreativita(B)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="142,324">
+      <children xsi:type="editmodel:AttributeEditModel" name="aggressivita" id="Project/Giocatore#aggressivita"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="carisma" id="Project/Giocatore#carisma"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="condizione" id="Project/Giocatore#condizione"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="creativita" id="Project/Giocatore#creativita"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="decisione" id="Project/Giocatore#decisione"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="essenziale" id="Project/Giocatore#essenziale"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="forza" id="Project/Giocatore#forza"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="giocoDiSquadra" id="Project/Giocatore#giocoDiSquadra"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mediaVoti" id="Project/Giocatore#mediaVoti"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="morale" id="Project/Giocatore#morale"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="posizione" id="Project/Giocatore#posizione"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="resistenza" id="Project/Giocatore#resistenza"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ruolo" id="Project/Giocatore#ruolo"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tecnica" id="Project/Giocatore#tecnica"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tipoRuolo" id="Project/Giocatore#tipoRuolo"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="valoreGenerale" id="Project/Giocatore#valoreGenerale"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="valoreMercato" id="Project/Giocatore#valoreMercato"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="velocita" id="Project/Giocatore#velocita"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="125,270">
+      <children xsi:type="editmodel:MethodEditModel" name="GetAnagrafe" id="Project/Giocatore#GetAnagrafe()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Giocatore" id="Project/Giocatore#Giocatore(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDotiRuolo" id="Project/Giocatore#getDotiRuolo()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getEssenziale" id="Project/Giocatore#getEssenziale()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPosizione" id="Project/Giocatore#getPosizione()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSquadra" id="Project/Giocatore#getSquadra()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setMediaVoti" id="Project/Giocatore#setMediaVoti(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setNomeSquadra" id="Project/Giocatore#setNomeSquadra(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setPalla" id="Project/Giocatore#setPalla(Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setPosizione" id="Project/Giocatore#setPosizione(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setPosizione" id="Project/Giocatore#setPosizione(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setaggressivita" id="Project/Giocatore#setaggressivita(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setcreativita" id="Project/Giocatore#setcreativita(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setvelocita" id="Project/Giocatore#setvelocita(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="Project/Giocatore#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Portiere" location="260,744" size="156,284" id="Project/Portiere" runTimeClassModel="rimessa,agilita,Portiere(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBD),getDotiRuolo(),getAbilita(),toString(),bloccareTiri,dotiAeree,comunicazione,setValoreGenerale(),riflessi,calciare,setagilita(B)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="133,126">
+      <children xsi:type="editmodel:AttributeEditModel" name="agilita" id="Project/Portiere#agilita"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bloccareTiri" id="Project/Portiere#bloccareTiri"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="calciare" id="Project/Portiere#calciare"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="comunicazione" id="Project/Portiere#comunicazione"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="dotiAeree" id="Project/Portiere#dotiAeree"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="riflessi" id="Project/Portiere#riflessi"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rimessa" id="Project/Portiere#rimessa"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="131,108">
+      <children xsi:type="editmodel:MethodEditModel" name="Portiere" id="Project/Portiere#Portiere(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAbilita" id="Project/Portiere#getAbilita()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDotiRuolo" id="Project/Portiere#getDotiRuolo()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setValoreGenerale" id="Project/Portiere#setValoreGenerale()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setagilita" id="Project/Portiere#setagilita(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="Project/Portiere#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Project/Giocatore&lt;-Project/Portiere" source="//@children.8" target="//@children.11/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="78,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Centrocampista" location="358,1240" size="161,86" id="Project/Centrocampista" runTimeClassModel="Centrocampista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD),getDotiRuolo()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,36">
+      <children xsi:type="editmodel:MethodEditModel" name="Centrocampista" id="Project/Centrocampista#Centrocampista(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDotiRuolo" id="Project/Centrocampista#getDotiRuolo()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Project/AltriRuoli&lt;-Project/Centrocampista" source="//@children.9" target="//@children.10/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Attaccante" location="50,1240" size="124,86" id="Project/Attaccante" runTimeClassModel="Attaccante(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD),getDotiRuolo()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,36">
+      <children xsi:type="editmodel:MethodEditModel" name="Attaccante" id="Project/Attaccante#Attaccante(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDotiRuolo" id="Project/Attaccante#getDotiRuolo()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.12/@sourceConnections.0 //@children.9/@sourceConnections.0" autoLocated="true" id="Project/AltriRuoli&lt;-Project/Attaccante" source="//@children.10" target="//@children.11" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="62,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="90,446" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.10/@sourceConnections.0" name="AltriRuoli" location="50,744" size="180,446" id="Project/AltriRuoli" runTimeClassModel="colpoDiTesta,abilitaCentrocampo,movimento,passaggio,dribling,contrasto,Passaggio([[LProject.Giocatore;LProject.SquadraAvversaria;),abilitaDifesa,toString(),setabilitaCentrocampo(B),Contrasto([[LProject.Giocatore;BLProject.SquadraAvversaria;),tiro,setabilitaDifesa(B),setValoreGenerale(),abilitaAttacco,ControllaPosGioc(Ljava.awt.Point;[[LProject.Giocatore;LProject.SquadraAvversaria;),Tiro(BLProject.Portiere;B),CalcolaDotiIntermedie(I),setabilitaAttacco(B),AltriRuoli(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD),setcontrasto(B),cross">
+    <children xsi:type="editmodel:CompartmentEditModel" size="157,180">
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaAttacco" id="Project/AltriRuoli#abilitaAttacco"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaCentrocampo" id="Project/AltriRuoli#abilitaCentrocampo"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="abilitaDifesa" id="Project/AltriRuoli#abilitaDifesa"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="colpoDiTesta" id="Project/AltriRuoli#colpoDiTesta"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="contrasto" id="Project/AltriRuoli#contrasto"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="cross" id="Project/AltriRuoli#cross"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="dribling" id="Project/AltriRuoli#dribling"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="movimento" id="Project/AltriRuoli#movimento"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="passaggio" id="Project/AltriRuoli#passaggio"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tiro" id="Project/AltriRuoli#tiro"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="154,216">
+      <children xsi:type="editmodel:MethodEditModel" name="AltriRuoli" id="Project/AltriRuoli#AltriRuoli(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CalcolaDotiIntermedie" id="Project/AltriRuoli#CalcolaDotiIntermedie(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Contrasto" id="Project/AltriRuoli#Contrasto([[LProject.Giocatore;BLProject.SquadraAvversaria;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ControllaPosGioc" id="Project/AltriRuoli#ControllaPosGioc(Ljava.awt.Point;[[LProject.Giocatore;LProject.SquadraAvversaria;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Passaggio" id="Project/AltriRuoli#Passaggio([[LProject.Giocatore;LProject.SquadraAvversaria;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Tiro" id="Project/AltriRuoli#Tiro(BLProject.Portiere;B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setValoreGenerale" id="Project/AltriRuoli#setValoreGenerale()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setabilitaAttacco" id="Project/AltriRuoli#setabilitaAttacco(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setabilitaCentrocampo" id="Project/AltriRuoli#setabilitaCentrocampo(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setabilitaDifesa" id="Project/AltriRuoli#setabilitaDifesa(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setcontrasto" id="Project/AltriRuoli#setcontrasto(B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="Project/AltriRuoli#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.8/@sourceConnections.0" autoLocated="true" id="Project/Giocatore&lt;-Project/AltriRuoli" source="//@children.11" target="//@children.7" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="90,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="82,644" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Difensore" location="204,1240" size="124,86" id="Project/Difensore" runTimeClassModel="Difensore(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD),getDotiRuolo()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,36">
+      <children xsi:type="editmodel:MethodEditModel" name="Difensore" id="Project/Difensore#Difensore(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;BBBBBBBBBBBLjava.lang.String;BZBBBBBBBBBBBBD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDotiRuolo" id="Project/Difensore#getDotiRuolo()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="Project/AltriRuoli&lt;-Project/Difensore" source="//@children.12" target="//@children.10/@sourceConnections.0" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="62,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="-1" showScope="InPackage" properties="wireOptions=1;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

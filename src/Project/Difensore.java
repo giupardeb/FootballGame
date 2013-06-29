@@ -1,4 +1,7 @@
 package Project;
+/**
+ * @uml.dependency   supplier="Project.AltriRuoli"
+ */
 class Difensore extends AltriRuoli
 {
 	public Difensore(String cognome,String NomeSquadraAppartenente,String nazionalita,byte velocita,byte resistenza,byte forza,byte morale,

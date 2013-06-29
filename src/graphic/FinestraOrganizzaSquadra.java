@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import Project.Campionato;
 import Project.DatabaseGiocatori;
 import Project.Giocatore;
 
@@ -29,20 +28,20 @@ public class FinestraOrganizzaSquadra extends JFrame{
 	private static int cont = 0; //utile per aumentare l'array
 	private static final long serialVersionUID = -4943380536225481189L;
 	private JFrame frame = this;
-	JButton btn = null;
+	JButton btn = new JButton();
 	final TextArea textArea = new TextArea();
 
 	
 	
 	//	ActionListener action = null;
 
-	public FinestraOrganizzaSquadra(Campionato c, DatabaseGiocatori db) {
+	public FinestraOrganizzaSquadra(Campionato c) {
 		setResizable(false);
 		this.setSize(900, 400);
 		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
 		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );			
-		initialize(c,db);
+		initialize(c);
 		JOptionPane.showMessageDialog(null, "ATTEZIONE, DEVI SCEGLIERE IN ORDINE 1P,4DIFENSORI,4CENTROCAMPISTI,2ATTACCANTI");
 		this.setVisible(true);
 	}
@@ -50,7 +49,7 @@ public class FinestraOrganizzaSquadra extends JFrame{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(final Campionato c, final DatabaseGiocatori dbGiocatori) {
+	private void initialize(final Campionato c) {
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1.0);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
@@ -85,17 +84,16 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		splitPane.setRightComponent(textArea);
 
 
-
 		MouseListener action = new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 					JButton j = (JButton) e.getSource();
-					int i = dbGiocatori.GetIndice(j.getText());
+					int i = c.db.GetIndice(j.getText());
 					if(cont<11){
 						cont++;
-						array.add(dbGiocatori.GetDb()[i]);
-						output.setText("Hai inserito "+ cont+"Giocatori, l'ultimo è stato: "+dbGiocatori.GetDb()[i].GetAnagrafe().GetCognome());
+						array.add(c.db.GetDb()[i]);
+						output.setText("Hai inserito "+ cont+"Giocatori, l'ultimo è stato: "+c.db.GetDb()[i].GetAnagrafe().GetCognome());
 						panel_1.remove(j);
 					}
 					else textArea.setText("HAI SCELTO GIÀ 11 GIOCATORI, NON PUOI SCEGLIERNE ALTRI!");
@@ -123,9 +121,9 @@ public class FinestraOrganizzaSquadra extends JFrame{
 				
 				if(textArea.getText()!="") textArea.setText("");
 
-				int i = dbGiocatori.GetIndice(j.getText());
+				int i = c.db.GetIndice(j.getText());
 
-				textArea.setText(dbGiocatori.GetDb()[i].toString());
+				textArea.setText(c.db.GetDb()[i].toString());
 
 			}
 
@@ -141,8 +139,6 @@ public class FinestraOrganizzaSquadra extends JFrame{
 			btn.addMouseListener(action);
 			panel_1.add(btn);
 		}
-
-
 	}
 }
 
