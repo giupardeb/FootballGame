@@ -426,66 +426,129 @@ abstract class AltriRuoli extends Giocatore
 
 	public Point ControllaPosGioc(Point p,SquadraAvversaria squadra,Giocatore []arrayMio,Giocatore arrayAvv[]){
 		Point p1 = new Point();
-
 		Giocatore b;
+		if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){
+			 b = Search((int)p.getX(),(int)p.getY(),arrayAvv);
+		}
+		else{
+			 b = Search((int)p.getX(),(int)p.getY(),arrayMio);
+		}
+		
 
 		if((int)Math.random()*2 == 0){ //cpntrollo a scendere
-			p1.setLocation(p.getX(), p.getY()-1);
+			p1.setLocation(p.getX(), p.getY()+100);
 			b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
 			if(b == null) b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
 
-			if(b.getLocation() == null){
+			if(b == null){
 				if((int)Math.random()*2 == 0){
-					p1.setLocation(p.getX(), p.getY()+1);
+					p1.setLocation(p.getX(), p.getY()-100);
 				}
 				else{
-					//controllo se il giocatore chiamante appartiene alla squadra o alla squadraAvversaria, poichè faccio uno spostamnte 
-					//orrizzontale
+					//controllo se il giocatore chiamante appartiene alla squadra o alla squadraAvversaria, poichè faccio uno spostamento
+					//orrizzontale. controllare se il giocatore è un centrocampista, xke passarla all'attaccante costa di uno spostamento di 180
 
 					if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){	
-						p1.setLocation(p.getX()-2, p.getY());
-						b.setLocation(p1);
-						if(b.getLocation() == null){
-							p1.setLocation(p.getX(), p.getY()+1);
-							b.setLocation(p1);
-							if(b.getLocation() == null) p1.setLocation(p.getX(), p.getY()-1);
+						if(b instanceof Difensore){
+							p1.setLocation(p.getX()-200, p.getY());
+						}
+						else if(b instanceof Centrocampista){
+							p1.setLocation(p.getX()-187, p.getY());
+							b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()-100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+							}
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()+100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+							}
+						}
+						else if (b instanceof Attaccante){
+							p1.setLocation(p.getX(), p.getY()+100);
+							b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()-100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+							}
 						}
 					}
 					else{
-						p1.setLocation(p.getX()+2, p.getY());
-						b.setLocation(p1);
-						if(b.getLocation() == null){
-							p1.setLocation(p.getX(), p.getY()+1);
-							b.setLocation(p1);
-							if(b.getLocation() == null) p1.setLocation(p.getX(), p.getY()-1);
+						if(b instanceof Difensore){
+							p1.setLocation(p.getX()+167, p.getY());
+						}
+						else if(b instanceof Centrocampista){
+							p1.setLocation(p.getX()+180, p.getY());
+							b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()-100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+							}
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()+100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+							}
+						}
+						else if (b instanceof Attaccante){
+							p1.setLocation(p.getX(), p.getY()+100);
+							b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+							if(b == null){
+								p1.setLocation(p.getX(), p.getY()-100);
+								b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+							}
 						}
 					}
 				}
 			}
 		}
-		else{ //controllo verso destra 
-
-			if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){ 	//il giocatore appartiene alla squadra Avversaria?
-				p1.setLocation(p.getX()-2, p.getY());
-				b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
-				if(b == null) b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
-				b.setLocation(p1);
-				if(b.getLocation() == null){
-					p1.setLocation(p.getX(), p.getY()+1);
-					b.setLocation(p1);
-					if(b.getLocation() == null) 	p1.setLocation(p.getX(), p.getY()+1);
+		else{
+			if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){	
+				if(b instanceof Difensore){
+					p1.setLocation(p.getX()-200, p.getY());
+				}
+				else if(b instanceof Centrocampista){
+					p1.setLocation(p.getX()-187, p.getY());
+					b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()-100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+					}
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()+100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+					}
+				}
+				else if (b instanceof Attaccante){
+					p1.setLocation(p.getX(), p.getY()+100);
+					b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()-100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+					}
 				}
 			}
 			else{
-				p1.setLocation(p.getX()+2, p.getY());
-				b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
-				if(b == null) b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
-				b.setLocation(p1);
-				if(b.getLocation() == null){
-					p1.setLocation(p.getX(), p.getY()+1);
-					b.setLocation(p1);
-					if(b.getLocation() == null){
-						p1.setLocation(p.getX(), p.getY()+1);
+				if(b instanceof Difensore){
+					p1.setLocation(p.getX()+167, p.getY());
+				}
+				else if(b instanceof Centrocampista){
+					p1.setLocation(p.getX()+180, p.getY());
+					b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()-100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+					}
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()+100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+					}
+				}
+				else if (b instanceof Attaccante){
+					p1.setLocation(p.getX(), p.getY()+100);
+					b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+					if(b == null){
+						p1.setLocation(p.getX(), p.getY()-100);
+						b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
 					}
 				}
 			}
@@ -499,22 +562,41 @@ abstract class AltriRuoli extends Giocatore
 	public Point Contrasto(Giocatore arrayMio[],Giocatore arrayAvv[], int abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
 		//vincerà un contrasto
 		Point p = this.getPosizione().getLocation();
-		Point pavv;
-		Giocatore b;
-		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//chi ha chiamato il metodo è  un umano o un cmputer
-
-			pavv = new Point((int)p.getX()-1,(int)p.getY()); 
-			b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
+		Point pavv = new Point();
+		Giocatore b = null;
+		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//chi ha chiamato il metodo è  un umano o un computer
+			
+			if(this instanceof Difensore){
+				pavv = new Point((int)p.getX()-91,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
+			}
+			else if(this instanceof Centrocampista){
+				pavv = new Point((int)p.getX()-103,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
+			}
+			else if(this instanceof Attaccante){
+				pavv = new Point((int)p.getX()-83,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
+			}
+			
 		}
 		else{
-			pavv = new Point((int)p.getX()+1,(int)p.getY());
-			b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
+			if(this instanceof Difensore){
+				pavv = new Point((int)p.getX()+83,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
+			}
+			else if(this instanceof Centrocampista){
+				pavv = new Point((int)p.getX()+103,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
+			}
+			else if(this instanceof Attaccante){
+				pavv = new Point((int)p.getX()+83,(int)p.getY()); 
+				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
+			}
 
 		}
 
-
-
-		if(/*campo[(int) pavv.getX()][(int) p.getY()]*/ b.getLocation()!= null){
+		if(b != null){
 			if(this.getDotiRuolo() >= b.getDotiRuolo()){
 				if(((int)Math.random()*10)+1>NUMrIUSCITAbRAVO){
 					//	return CONTRASTO;

@@ -120,18 +120,18 @@ public class Campionato
 
 	public void partita(SquadraUmano umano, SquadraAvversaria computer,JFrame frame,Giocatore arrayMio[], Giocatore arrayAvv[]){
 		Giocatore giocatore;
-		
+		int j = 0;
 		long init  = System.currentTimeMillis();
 		int puntiUmano = 0;
 		int puntiComputer = 0;
 
 		if(Math.random()*10>5){
-			giocatore = (Portiere) Search(0,2,arrayMio);
+			giocatore = (Portiere) Search(12,168,arrayMio);
 			((Portiere) giocatore).setPalla(true);
 			giocatore.setVisible(true);
 		}
 		else{
-			giocatore = (Portiere) Search(7,2,arrayAvv);
+			giocatore = (Portiere) Search(638,168,arrayAvv);
 			((Portiere) giocatore).setPalla(true);
 			giocatore.setVisible(true);
 		}
@@ -140,7 +140,7 @@ public class Campionato
 		// continuare. . . . . 
 
 		do {
-			int azione; //Serve per il tiro
+			int azione = 0; //Serve per il tiro
 			Point punto = new Point(); // serve per il passaggio  per il contrasto i rilancio
 			int esito = 0;
 
@@ -154,66 +154,66 @@ public class Campionato
 				contrasto = 0;
 				if(giocatore instanceof Portiere){
 					//disattiva i bottoni tira passaggio contrasto
+
 					do{
-						
-					}
-					while(rilancia == 0);
-					if(rilancia != 0) punto.setLocation(((Portiere) giocatore).rilancia(computer.GetNomeSquadra()));
+						if(rilancia != 0) {
+							giocatore.setVisible(false);
+							punto.setLocation(((Portiere) giocatore).rilancia(umano.GetNomeSquadra()));
+							giocatore = Search((int)punto.getX(),(int)punto.getY(),arrayMio);
+							giocatore.setVisible(true);
+						}
+					} while(rilancia == 0);
 				}
-				else
+				else{
 					//attiva gli altri bottoni
 					do{
-						try {
-							wait(1000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+
+
+						if(passa != 0){
+							giocatore.setVisible(false);
+							punto.setLocation(((AltriRuoli) giocatore).Passaggio(computer,arrayMio,arrayAvv));
+							giocatore = Search((int)punto.getX(),(int)punto.getY(),arrayMio);
+							giocatore.setVisible(true);
+
 						}
-					}
-					while(tira == 0 || passa == 0 || contrasto == 0);
-				if(passa != 0){
-					giocatore.setVisible(false);
-					punto.setLocation(((AltriRuoli) giocatore).Passaggio(computer,arrayMio,arrayAvv));
-					giocatore = Search((int)punto.getX(),(int)punto.getY(),arrayMio);
-					giocatore.setVisible(true);
+						else if(contrasto != 0){
+							giocatore.setVisible(false);
+							punto.setLocation(((AltriRuoli) giocatore).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer));
+							giocatore = Search((int)punto.getX(),(int)punto.getY(),arrayMio);
+							giocatore.setVisible(true);
+						}
+						else if(tira != 0){
+							Portiere portiere = (Portiere)Search(638,168,arrayAvv);
+							esito = ((AltriRuoli) giocatore).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa());
+							if(esito == PARATA) {
+								giocatore.setVisible(false);
+								giocatore = (Portiere)Search(638,168,arrayAvv);
+								giocatore.setVisible(true);
+								//nella text area far spuntara parata
+							}
+							else if(esito == FUORI){
+								portiere.setVisible(true);
+								giocatore = (Portiere)Search(638,168,arrayAvv);
+								giocatore.setVisible(true);
+								//nella text area far spuntara FUORI
+							}
+							else {
+								giocatore = (Portiere)Search(638,168,arrayAvv);
+								giocatore.setVisible(true);
+								puntiUmano++;
+								umano.SetGolfatti();
+								computer.setGolSubiti();
+								//nella text area far spuntara GOOOOOOOL
+							}
+						}
 
+					}while(tira == 0 || passa == 0 || contrasto == 0);
 				}
-				else if(contrasto != 0){
-					giocatore.setVisible(false);
-					punto.setLocation(((AltriRuoli) giocatore).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer));
-					giocatore = Search((int)punto.getX(),(int)punto.getY(),arrayMio);
-					giocatore.setVisible(true);
-				}
-				else if(tira != 0){
-					Portiere portiere = (Portiere)Search(7,2,arrayAvv);
-					esito = ((AltriRuoli) giocatore).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa());
-					if(esito == PARATA) {
-						giocatore.setVisible(false);
-						giocatore = (Portiere)Search(7,2,arrayAvv);
-						giocatore.setVisible(true);
-						//nella text area far spuntara parata
-					}
-					else if(esito == FUORI){
-						portiere.setVisible(true);
-						giocatore = (Portiere)Search(7,2,arrayAvv);
-						giocatore.setVisible(true);
-						//nella text area far spuntara FUORI
-					}
-					else {
-						giocatore = (Portiere)Search(7,2,arrayAvv);
-						giocatore.setVisible(true);
-						puntiUmano++;
-						umano.SetGolfatti();
-						computer.setGolSubiti();
-						//nella text area far spuntara GOOOOOOOL
-					}
-				}
-
 			}
 			else {
 				// computer
 
-				if(giocatore instanceof Portiere)	punto.setLocation(((Portiere) giocatore).rilancia(computer.GetNomeSquadra()));
+				if(giocatore instanceof Portiere)	punto.setLocation(((Portiere) giocatore).rilancia(umano.GetNomeSquadra()));
 				else{
 					if(giocatore instanceof Difensore) 
 						punto.setLocation(((Difensore) giocatore).Contrasto(arrayMio,arrayAvv,umano.getAbilitaDifesa(),computer));
@@ -244,22 +244,22 @@ public class Campionato
 						{
 						//SE FA ERRORE NEL CASTING ALTRI RUOLI.. ALLORA DEVI GESTIRE CASO X CASO
 						case TIRA:
-							Portiere portiere = (Portiere)Search(0,2,arrayMio);
+							Portiere portiere = (Portiere)Search(12,168,arrayMio);
 							esito = ((AltriRuoli) giocatore).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa());
 							if(esito == PARATA) {
 								giocatore.setVisible(false);
-								giocatore = (Portiere)Search(0,2,arrayMio);
+								giocatore = (Portiere)Search(12,168,arrayMio);
 								giocatore.setVisible(true);
 								//nella text area far spuntara parata
 							}
 							else if(esito == FUORI){
 								portiere.setVisible(true);
-								giocatore = (Portiere)Search(0,2,arrayMio);
+								giocatore = (Portiere)Search(12,168,arrayMio);
 								giocatore.setVisible(true);
 								//nella text area far spuntara FUORI
 							}
 							else {
-								giocatore = (Portiere)Search(0,2,arrayMio);
+								giocatore = (Portiere)Search(12,168,arrayMio);
 								giocatore.setVisible(true);
 								puntiComputer++;
 								computer.SetGolfatti();
@@ -280,8 +280,8 @@ public class Campionato
 					}
 				}
 			}
-
-		} while (System.currentTimeMillis() + init < TEMPO_PARTITA);
+			j++;
+		} while (j != 1000000/*System.currentTimeMillis() + init < TEMPO_PARTITA*/);
 
 
 		if(puntiUmano > puntiComputer){

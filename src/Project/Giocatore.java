@@ -458,7 +458,8 @@ abstract public class Giocatore extends JLabel
 	public String toString()
 	{
 		return( "Cognome: " + GetAnagrafe().GetCognome() + " Squadra di appartenenza: "+ getSquadra()+ "\n"+" Ruolo: "+getRuolo()+"\n"+" eta:" 
-				+ GetAnagrafe().GetEta() +"\n"+" Valore generale: " + getValoreGenerale() + "\n" + " alore Mercato: " + getValoreMercato());
+				+ GetAnagrafe().GetEta() +"\n"+" Valore generale: " + getValoreGenerale() + "\n" + " alore Mercato: " + getValoreMercato() + 
+				"\n" + posizione.getLocation());
 	}
 
 	// Altri metodi
