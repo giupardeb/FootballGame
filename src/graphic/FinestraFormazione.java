@@ -6,9 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.JButton;
 
@@ -64,53 +61,53 @@ public class FinestraFormazione extends JFrame{
 				array[0].setPosizione(12, 168);
 				panel_2.add(array[0]);
 				
-				array[1].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[1].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallD.png")));
 				array[1].setBounds(110, 26, 48, 48);
 				array[1].setPosizione(110, 26);
 				panel_2.add(array[1]);
 
-				array[2].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[2].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallD.png")));
 				array[2].setBounds(110, 126, 48, 48);
 				array[2].setPosizione(110, 126);
 				panel_2.add(array[2]);
 
 
-				array[3].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[3].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallD.png")));
 				array[3].setBounds(110, 226, 48, 48);
 				array[3].setPosizione(110, 226);
 				panel_2.add(array[3]);
 				
-				array[4].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[4].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallD.png")));
 				array[4].setBounds(110, 326, 48, 48);
 				array[4].setPosizione(110, 326);
 				panel_2.add(array[4]);
 
-				array[5].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[5].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallC.png")));
 				array[5].setBounds(277, 26, 48, 48);
 				array[5].setPosizione(277, 26);
 				panel_2.add(array[5]);
 
-				array[6].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[6].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallC.png")));
 				array[6].setBounds(277, 126, 48, 48);
 				array[6].setPosizione(277, 126);
 				panel_2.add(array[6]);
 
-				array[7].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[7].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallC.png")));
 				array[7].setBounds(277, 226, 48, 48);
 				array[7].setPosizione(277, 226);
 				panel_2.add(array[7]);
 
-				array[8].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[8].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallC.png")));
 				array[8].setBounds(277, 326, 48, 48);
 				array[8].setPosizione(277, 326);
 				panel_2.add(array[8]);
 
-				array[9].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[9].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallA.png")));
 				array[9].setBounds(457, 126, 48, 48);
 				array[9].setPosizione(457, 126);
 				panel_2.add(array[9]);
 
-				array[10].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmall.png")));
+				array[10].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/soccerSmallA.png")));
 				array[10].setBounds(457, 226, 48, 48);
 				array[10].setPosizione(457,226);
 				panel_2.add(array[10]);

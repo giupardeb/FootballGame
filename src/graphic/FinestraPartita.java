@@ -3,25 +3,20 @@ import Project.Campionato;
 import Project.SquadraAvversaria;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Point;
 
 import javax.swing.JButton;
 
 import Project.Giocatore;
 import javax.swing.JSplitPane;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 
-import java.awt.Label;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
 
 public class FinestraPartita extends JFrame {
 
@@ -30,89 +25,115 @@ public class FinestraPartita extends JFrame {
 	 */
 	private static final long serialVersionUID = 6555644770549918991L;
 	private JFrame frame = this;
-	/**
-	 * Create the application.
-	 */
+	private JPanel panelScelte;
+	private MyTextAreaInfo txtInfo;
+	private SquadraAvversaria squadraAvv = null;
+	private Giocatore arrayAvv[] = null;
+	private int azione = 0; //Serve per il tiro
+	private Point punto = new Point(); // serve per il passaggio  per il contrasto e rilancio
+	private int esito = 0;
+	private Giocatore giocatore = null;
+	private int puntiUmano = 0;
+	private int puntiComputer = 0;
+
+
 	public FinestraPartita(final JPanel panel_2, final Campionato c,final Giocatore arrayMio[]) {
 		setResizable(false);
-		
-		JPanel panelScelte = new JPanel();
+
+		panelScelte = new JPanel();
+		panelScelte.setName("panelScelte");
 		getContentPane().add(panelScelte, BorderLayout.SOUTH);
-		
+
 		JButton btnRilancia = new JButton("Rilancia");
 		btnRilancia.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.rilancia = 1;
+				c.Rilancia(frame, c.squadra, arrayMio);
 			}
 		});
-		panelScelte.add(btnRilancia);
+		btnRilancia.setName("Rilancia");
 		
+		panelScelte.add(btnRilancia);
+
 		JButton btnTira = new JButton("Tira");
 		btnTira.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.tira = 1;
+				c.Tira(frame, arrayAvv, squadraAvv, c.squadra);
 			}
 		});
+		btnTira.setName("Tira");
 		panelScelte.add(btnTira);
-		
-		JButton btnNewButton_1 = new JButton("Passaggio");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+
+		JButton btnPassaggio = new JButton("Passaggio");
+		btnPassaggio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.passa = 1;
+				c.Passa(frame, squadraAvv, arrayMio, arrayAvv);
 			}
 		});
-		
-		panelScelte.add(btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("Contrasto");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnPassaggio.setName("Passaggio");
+
+		panelScelte.add(btnPassaggio);
+
+		JButton btnContrasto = new JButton("Contrasto");
+		btnContrasto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.contrasto = 1;
+				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
 			}
 		});
-		panelScelte.add(btnNewButton);
+		btnContrasto.setName("Contrasto");
 		
+		panelScelte.add(btnContrasto);
+
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setContinuousLayout(true);
-		splitPane.setResizeWeight(0.8);
+		splitPane.setResizeWeight(0.5);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
-		JLabel lblNewLabel = new JLabel("");
-		splitPane.setRightComponent(lblNewLabel);
+		txtInfo = new MyTextAreaInfo();
+		txtInfo.setMinimumSize(new Dimension(1000, 75));
+		txtInfo.setEditable(false);
+
+
+		splitPane.setRightComponent(txtInfo);
 		
-		final SquadraAvversaria squadraAvv = c.Incontri.pop();
-		final Giocatore arrayAvv[] = squadraAvv.OrganizzaSquadra();
+		squadraAvv = c.Incontri.pop();
+		arrayAvv = squadraAvv.OrganizzaSquadra();
+		this.setTitle(c.squadra.GetNomeSquadra()+" "+getPuntiUmano()+ " "+squadraAvv.GetNomeSquadra()+" "+ getPuntiComputer());
 		initialize(panel_2,c,arrayAvv);
 		splitPane.setLeftComponent(panel_2);
-		
+
 		Thread t  = new Thread (new Runnable () {
 			public void run () {
 				//qui ci metti tutte le istruzioni che il thread deve eseguire
+				setAzione(0);
+				setEsito(0);
+				setGiocatoreCorrente(null);
+				Point reset = new Point();
+				setPoint(reset);
 				c.partita(c.squadra, squadraAvv,frame,arrayMio,arrayAvv);
 			}
 		});
 
 		//per avviare il Thread fai così:
 		t.start ();
-
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final JPanel panel_2,final Campionato c,Giocatore arrayAvv[]) {
-		this.setSize(900, 500);
+		this.setSize(1000, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		arrayAvv[0].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/portiereavv.gif")));
 		arrayAvv[0].setBounds(638, 168, 48, 48);
 		arrayAvv[0].setPosizione(638, 168);
 		panel_2.add(arrayAvv[0]);
-		
+
 		arrayAvv[1].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		arrayAvv[1].setBounds(548, 26, 48, 48);
 		arrayAvv[1].setPosizione(548, 26);
@@ -128,7 +149,7 @@ public class FinestraPartita extends JFrame {
 		arrayAvv[3].setBounds(548, 226, 48, 48);
 		arrayAvv[3].setPosizione(548, 226);
 		panel_2.add(arrayAvv[3]);
-		
+
 		arrayAvv[4].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/pallaAvv.png")));
 		arrayAvv[4].setBounds(548, 326, 48, 48);
 		arrayAvv[4].setPosizione(548, 326);
@@ -163,7 +184,7 @@ public class FinestraPartita extends JFrame {
 		arrayAvv[10].setBounds(193, 226, 48, 48);
 		arrayAvv[10].setPosizione(193,226);
 		panel_2.add(arrayAvv[10]);
-		
+
 		arrayAvv[10].setVisible(false);
 		arrayAvv[9].setVisible(false);
 		arrayAvv[8].setVisible(false);
@@ -176,11 +197,58 @@ public class FinestraPartita extends JFrame {
 		arrayAvv[1].setVisible(false);
 		arrayAvv[0].setVisible(false);
 
-
 		this.setVisible(true);
 	}
 
+	public JPanel getPanelScelta(){
+		return panelScelte;
+	}
+	
+	public MyTextAreaInfo getPanelInfo(){
+		return txtInfo;
+	}
 
+	public int getAzione(){
+		return azione;
+	}
+	public void setAzione(int val){
+		azione = val;
+	}
 
+	public Point getPoint(){
+		return punto;
+	}
 
+	public void setPoint(Point p){
+		punto.setLocation(p);
+	}
+
+	public int getEsito(){
+		return esito;
+	}
+	public void setEsito(int val){
+		esito = val;
+	}
+
+	public int getPuntiUmano(){
+		return puntiUmano;
+	}
+	public void setPuntiUmano(){
+		puntiUmano++;
+
+	}
+
+	public int getPuntiComputer(){
+		return puntiComputer;
+	}
+	public void setPuntiComputer(){
+		puntiComputer++;
+	}
+
+	public Giocatore getGiocatoreCorrente(){
+		return giocatore;
+	}
+	public void setGiocatoreCorrente(Giocatore g){
+		giocatore = g;
+	}
 }

@@ -60,11 +60,11 @@ abstract class AltriRuoli extends Giocatore
 	/**
 	 * @uml.property  name="nUMrIUSCITAsCARSO"
 	 */
-	private final int NUMrIUSCITAsCARSO = 8;
+	private final int NUMrIUSCITAsCARSO = 5;
 	/**
 	 * @uml.property  name="nUMrIUSCITAmEDIO"
 	 */
-	private final int NUMrIUSCITAmEDIO = 7;
+	private final int NUMrIUSCITAmEDIO = 4;
 	/**
 	 * @uml.property  name="nUMrIUSCITAbRAVO"
 	 */
@@ -78,7 +78,7 @@ abstract class AltriRuoli extends Giocatore
 	/**
 	 * @uml.property  name="aBILITAPASSAGGIOSCARSO"
 	 */
-	private final int ABILITAPASSAGGIOSCARSO = 50;
+	private final int ABILITAPASSAGGIOSCARSO = 65;
 	/**
 	 * @uml.property  name="aBILITAPASSAGGIOBUONE"
 	 */
@@ -409,39 +409,51 @@ abstract class AltriRuoli extends Giocatore
 	}
 
 	//NON DOVREBBERO ESSERCI PROBLEMI.. KMQ BISOGNEREBBE PROVARLO
-	public Point Passaggio(SquadraAvversaria squadra,Giocatore arrayMio[], Giocatore arrayAvv[]){ //int così capisco se la palla è andata fuori così posso darla alla squadra avversaria + versatile
+	public Point Passaggio(Squadra squadra,Giocatore arrayMio[], Giocatore arrayAvv[]){ //int così capisco se la palla è andata fuori 
+		//così posso darla alla squadra avversaria + versatile
 		Point p = this.getPosizione().getLocation();
 		Point newp = ControllaPosGioc(p,squadra,arrayMio,arrayAvv);
 
-		if(this.getPassaggio()<ABILITAPASSAGGIOSCARSO)
+		if(this.getPassaggio() <= ABILITAPASSAGGIOSCARSO){
 			if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSO) return newp;
-			else
-				if(this.getPassaggio()<ABILITAPASSAGGIOBUONE)
-					if((int)(Math.random()*10)+1>NUMrIUSCITAmEDIO) return newp;
-					else if((int)(Math.random()*10)+1>NUMrIUSCITAbRAVO) return newp;
-
-		return null;
+			else{
+				newp.setLocation(0,0);
+				return newp;
+			}
+		}
+		else{
+			if(this.getPassaggio() >= ABILITAPASSAGGIOBUONE){
+				if((int)(Math.random()*10)+1>NUMrIUSCITAbRAVO) return newp;
+				else if((int)(Math.random()*10)+1>NUMrIUSCITAmEDIO) return newp;
+				else {
+					newp.setLocation(0,0);
+					return newp;
+				}
+			}
+		}
+		newp.setLocation(0,0);
+		return newp;
 	}
 
 
-	public Point ControllaPosGioc(Point p,SquadraAvversaria squadra,Giocatore []arrayMio,Giocatore arrayAvv[]){
+	public Point ControllaPosGioc(Point p,Squadra squadra,Giocatore []arrayMio,Giocatore arrayAvv[]){
 		Point p1 = new Point();
 		Giocatore b;
 		if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){
-			 b = Search((int)p.getX(),(int)p.getY(),arrayAvv);
+			b = Search((int)p.getX(),(int)p.getY(),arrayAvv);
 		}
 		else{
-			 b = Search((int)p.getX(),(int)p.getY(),arrayMio);
+			b = Search((int)p.getX(),(int)p.getY(),arrayMio);
 		}
-		
+		Giocatore c = null;
 
-		if((int)Math.random()*2 == 0){ //cpntrollo a scendere
+		if((int)(Math.random()*2) == 0){ //controllo a scendere
 			p1.setLocation(p.getX(), p.getY()+100);
-			b = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
-			if(b == null) b = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
+			c = Search((int)p1.getX(),(int)p1.getY(),arrayMio);
+			if(c == null) c = Search((int)p1.getX(),(int)p1.getY(),arrayAvv);
 
-			if(b == null){
-				if((int)Math.random()*2 == 0){
+			if(c == null){
+				if((int)(Math.random()*2) == 0){
 					p1.setLocation(p.getX(), p.getY()-100);
 				}
 				else{
@@ -501,7 +513,7 @@ abstract class AltriRuoli extends Giocatore
 				}
 			}
 		}
-		else{
+		else{ // controllo orizzontale
 			if(this.getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra())){	
 				if(b instanceof Difensore){
 					p1.setLocation(p.getX()-200, p.getY());
@@ -559,13 +571,13 @@ abstract class AltriRuoli extends Giocatore
 
 	////////****METODO CONTRASTO///*/*/*/*////***
 
-	public Point Contrasto(Giocatore arrayMio[],Giocatore arrayAvv[], int abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una squadra ha più abilità difensive è più probabile che 
-		//vincerà un contrasto
+	public Point Contrasto(Giocatore arrayMio[],Giocatore arrayAvv[], int abilita,SquadraAvversaria squadraAvv){ //in maniera tale che se una 
+		//squadra ha più abilità difensive è più probabile che vincerà un contrasto
 		Point p = this.getPosizione().getLocation();
 		Point pavv = new Point();
 		Giocatore b = null;
-		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  				//chi ha chiamato il metodo è  un umano o un computer
-			
+		if(this.getSquadra().equalsIgnoreCase(squadraAvv.GetNomeSquadra())){  		//chi ha chiamato il metodo è  un umano o un computer
+
 			if(this instanceof Difensore){
 				pavv = new Point((int)p.getX()-91,(int)p.getY()); 
 				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
@@ -578,7 +590,7 @@ abstract class AltriRuoli extends Giocatore
 				pavv = new Point((int)p.getX()-83,(int)p.getY()); 
 				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayMio);
 			}
-			
+
 		}
 		else{
 			if(this instanceof Difensore){
@@ -590,7 +602,7 @@ abstract class AltriRuoli extends Giocatore
 				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
 			}
 			else if(this instanceof Attaccante){
-				pavv = new Point((int)p.getX()+83,(int)p.getY()); 
+				pavv = new Point((int)p.getX()+91,(int)p.getY()); 
 				b = Search((int)pavv.getX(),(int)pavv.getY(),arrayAvv);
 			}
 
@@ -598,14 +610,14 @@ abstract class AltriRuoli extends Giocatore
 
 		if(b != null){
 			if(this.getDotiRuolo() >= b.getDotiRuolo()){
-				if(((int)Math.random()*10)+1>NUMrIUSCITAbRAVO){
+				if((int)(Math.random()*10)+1>NUMrIUSCITAbRAVO){
 					//	return CONTRASTO;
 					return this.getLocation();
 				}
 				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}
 			else if(this.getDotiRuolo() >= CalcolaDotiIntermedie(b.getDotiRuolo())){
-				if(((int)Math.random()*10)+1>NUMrIUSCITAmEDIO){
+				if((int)(Math.random()*10)+1>NUMrIUSCITAmEDIO){
 					//	return CONTRASTO;
 					return this.getLocation();
 
@@ -613,21 +625,24 @@ abstract class AltriRuoli extends Giocatore
 				else return pavv.getLocation(); //return CONTRASTOPERSO;
 			}
 			else if(abilita > MINABILITAPERBONUS){
-				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSOcONaBILITÀ){
+				if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSOcONaBILITÀ){
 					//return CONTRASTO;
 					return this.getLocation();
 				}
 				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}
 			else{
-				if(((int)Math.random()*10)+1>NUMrIUSCITAsCARSO){
+				if((int)(Math.random()*10)+1>NUMrIUSCITAsCARSO){
 					//return CONTRASTO;
 					return this.getLocation();
 				}
 				else return pavv.getLocation();//return CONTRASTOPERSO;
 			}			
 		}
-		else return null;
+		else {
+			Point newp = new Point();
+			return newp;
+		}
 	}
 
 	private int CalcolaDotiIntermedie(int DotiPiuForte){
@@ -650,8 +665,8 @@ abstract class AltriRuoli extends Giocatore
 
 	//abilità di attacco della squadra attaccante, abilita difesa della squadra che difende 
 	public int Tiro(int abilitaattacco, Portiere portiere, int abilitadifesa){	 
-		if (abilitaattacco>ABILITADIATTACCOMASSIME){
-			if(abilitadifesa>ABILITADIDIFESAMASSIME){
+		if (abilitaattacco > ABILITADIATTACCOMASSIME){
+			if(abilitadifesa > ABILITADIDIFESAMASSIME){
 				//probabilità di tirare pari è 1/4 per att, 1/5 per centracmp, 1/6 difensore
 
 				return ControllaChiTira( portiere,4,5,6); //X simo :D M'BARE non posso mettere 5 costanti diverse x questi numeri :D kmq sia la 
@@ -660,7 +675,7 @@ abstract class AltriRuoli extends Giocatore
 
 			}
 			else {
-				if (abilitadifesa>ABILITADIDIFESAMINIME && abilitadifesa<ABILITADIDIFESAMASSIME){ //ATTACCO MASSIMO DIFESA MEDIA
+				if (abilitadifesa > ABILITADIDIFESAMINIME && abilitadifesa < ABILITADIDIFESAMASSIME){ //ATTACCO MASSIMO DIFESA MEDIA
 					//probabilità di tirare pari è 1/3 per attaccante, 1/4 percentrcampista, 1/5 difensore
 
 					return ControllaChiTira( portiere,3,4,5);
@@ -727,17 +742,17 @@ abstract class AltriRuoli extends Giocatore
 	private int EsecuzioneTiro(int j, int k, int i){
 
 		if(this.getTiro() >= ABILITADITIROBUONE){
-			if((int)Math.random()*10 >= j) return GOAL;
+			if((int)(Math.random()*10) >= j) return GOAL;
 			else return FUORI;
 		}
 		else{
 			if(this.getTiro() >= ABILITADITIRODISCRETE){
-				if((int)Math.random()*10 >= k) return GOAL;
+				if((int)(Math.random()*10) >= k) return GOAL;
 				else return FUORI;
 			}
 			else{
 				if(this.getTiro() >= ABILITADITIROSCARSE){
-					if((int)Math.random()*10 >= i) return GOAL;
+					if((int)(Math.random()*10) >= i) return GOAL;
 					else return FUORI;
 				}
 			}
@@ -749,17 +764,17 @@ abstract class AltriRuoli extends Giocatore
 
 
 		if(portiere.getBloccareTiri() >= ABILITADIPARATABUONE){
-			if((int)Math.random()*10 >= j) return PARATA;
+			if((int)(Math.random()*10) >= j) return PARATA;
 			else return GOAL;
 		}
 		else{
 			if(portiere.getBloccareTiri() >= ABILITADIPARATADISCRETE){
-				if((int)Math.random()*10 >= k) return PARATA;
+				if((int)(Math.random()*10) >= k) return PARATA;
 				else return GOAL;
 			}
 			else{
 				if(portiere.getBloccareTiri() >= ABILITADIPARATASCARSE){
-					if((int)Math.random()*10 >= i) return PARATA;
+					if((int)(Math.random()*10) >= i) return PARATA;
 					else return GOAL;
 				}
 			}
@@ -790,8 +805,7 @@ abstract class AltriRuoli extends Giocatore
 						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
 					}
 					else {
-						return EsecuzioneParata(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE
-								,portiere);
+						return EsecuzioneParata(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE	,portiere);
 					}
 				}
 				else return INTERCETTATA;

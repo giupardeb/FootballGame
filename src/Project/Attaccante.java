@@ -18,26 +18,6 @@ class Attaccante extends AltriRuoli
 		this.tipoRuolo = 3;
 	}
 
-	/*public Giocatore SearchBestPlayer(Giocatore array[],int k){
-
-		Attaccante tmp = this; //oggetto chiamante è un Attacante
-		double sommatmp= this.getValoreGenerale();
-		double somma = 0;
-	//	boolean trovato = false;
-
-		for(int i=k+1; i<array.length /*&& trovato !=true;i++){
-			if(array[i] instanceof Attaccante ){
-				 somma = ((Attaccante)array[i]).getValoreGenerale();
-				if((sommatmp<somma) && (this.getCondizione()<array[i].getCondizione())) {
-					tmp = (Attaccante)array[i];
-				//	trovato = true;
-				}
-			}
-		}
-		return tmp;
-
-	}*/
-
 	public int getDotiRuolo(){
 		return (getDribling()+getColpoDiTesta()+getTiro()+getAbilitaAttacco());
 	}

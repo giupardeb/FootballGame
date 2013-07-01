@@ -234,16 +234,16 @@ class Portiere extends Giocatore
 
 
 		if (this.getSquadra().equalsIgnoreCase(Nomesquadra)){
+			if(random == 0)pavv.setLocation(p.getX()+98, p.getY()-142);
+			else if(random == 1) pavv.setLocation(p.getX()+98, p.getY()-42);
+			else if(random == 2) pavv.setLocation(p.getX()+98, p.getY()+58);
+			else if(random == 3) pavv.setLocation(p.getX()+98, p.getY()+158);
+		}
+	else{
 			if(random == 0) pavv.setLocation(p.getX()-90, p.getY()-142);
 			else if(random == 1) pavv.setLocation(p.getX()-90, p.getY()-42);
 			else if(random == 2) pavv.setLocation(p.getX()-90, p.getY()+58);
 			else if(random == 3) pavv.setLocation(p.getX()-90, p.getY()+158);
-		}
-		else{
-			if(random == 0) pavv.setLocation(p.getX()+98, p.getY()-142);
-			else if(random == 1) pavv.setLocation(p.getX()+98, p.getY()-42);
-			else if(random == 2) pavv.setLocation(p.getX()+98, p.getY()+58);
-			else if(random == 3) pavv.setLocation(p.getX()+98, p.getY()+158);
 		}
 		return pavv;
 	}
