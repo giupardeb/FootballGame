@@ -3,7 +3,6 @@ import Project.Campionato;
 import Project.SquadraAvversaria;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Point;
@@ -51,6 +50,16 @@ public class FinestraPartita extends JFrame {
 				c.Rilancia(frame, c.squadra, arrayMio);
 			}
 		});
+		
+		JButton btnEsci = new JButton("Esci");
+		btnEsci.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+				FinestraCampionato f = new FinestraCampionato(c);
+			}
+		});
+		panelScelte.add(btnEsci);
 		btnRilancia.setName("Rilancia");
 		
 		panelScelte.add(btnRilancia);
@@ -120,6 +129,7 @@ public class FinestraPartita extends JFrame {
 
 		//per avviare il Thread fai così:
 		t.start ();
+		
 	}
 
 	/**
