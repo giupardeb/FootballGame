@@ -1,16 +1,10 @@
 package Project;
 import graphic.*;
 
-import java.awt.Component;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Campionato extends Thread
@@ -20,7 +14,6 @@ public class Campionato extends Thread
 	private static final int ABILITÀMINATTACCO = 70;
 	private static final int PARATA = 9;
 	private static final int FUORI = 10;
-	private static final long TEMPO_PARTITA = 300000;
 
 	/**
 	 * @uml.property  name="squadra"
@@ -121,29 +114,24 @@ public class Campionato extends Thread
 
 
 	public void partita(SquadraUmano umano, SquadraAvversaria computer,JFrame frame, Giocatore arrayMio[], Giocatore arrayAvv[]){
-		Component[] bottoni = ((FinestraPartita) frame).getPanelScelta().getComponents(); 
 		int j = 0;
 		if((int)(Math.random()*10)>5){
 			((FinestraPartita) frame).setGiocatoreCorrente((Portiere) Search(12,168,arrayMio));
-			((Portiere)((FinestraPartita) frame).getGiocatoreCorrente()).setPalla(true); // può essere omesso
 			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
 		}
 		else{
 			((FinestraPartita) frame).setGiocatoreCorrente((Portiere) Search(638,168,arrayAvv));
-			((Portiere) ((FinestraPartita) frame).getGiocatoreCorrente()).setPalla(true);
 			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
 		}
-
 
 		// continuare. . . . . 
 
 		do {
 			if (((FinestraPartita) frame).getGiocatoreCorrente().getSquadra().equalsIgnoreCase(squadra.GetNomeSquadra()))	{
 				// Chiedi all'utente
-				//chiedere a simone se va bene x dAre all'utente il tempo di decidere
-						((FinestraPartita) frame).getPanelInfo().append("Cosa vuoi fare ?\n");
+				((FinestraPartita) frame).getPanelInfo().append("Cosa vuoi fare ?\n");
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -155,116 +143,154 @@ public class Campionato extends Thread
 				// computer
 
 				if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere){
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
 					((FinestraPartita) frame).setPoint((((Portiere) ((FinestraPartita) frame).getGiocatoreCorrente()).rilancia(umano.GetNomeSquadra())));
 					((FinestraPartita) frame).getPanelInfo().append("Il portiere avversario rilancia la palla \n");
+					((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+
 				}
 				else{
 					if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore) {
-						((FinestraPartita) frame).setPoint(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaDifesa(),computer));
-						((FinestraPartita) frame).getPanelInfo().append("Il difensore avversario passa la palla\n");
-					}
-					else if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista){
-						((FinestraPartita) frame).setPoint(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer));
-						((FinestraPartita) frame).getPanelInfo().append("Il centrocampista avversario passa la palla\n");
-
-					}
-					else if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante){
-						((FinestraPartita) frame).setPoint(((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaAttacco(),computer));
-						((FinestraPartita) frame).getPanelInfo().append("L'attaccante avversario passa la palla\n");
-					}
-				}
-				if(((FinestraPartita) frame).getPoint().getX() != 0 && ((FinestraPartita) frame).getPoint().getY() != 0){
-
-					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-					((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
-					if(((FinestraPartita) frame).getGiocatoreCorrente() == null) 
-						((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
-					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-				}
-				else //nessun contrasto da fare
-					PassaggioComputer( (FinestraPartita) frame, umano, arrayMio, arrayAvv);
-
-
-				if(((FinestraPartita) frame).getGiocatoreCorrente().getSquadra().equalsIgnoreCase(computer.GetNomeSquadra())){
-					//il giocatore è ancora il computer
-
-					//scegliere il tipo di azione
-
-					if(computer.getAbilitaAttacco() >= ABILITÀMINATTACCO){
-						if((int)(Math.random()*2) == 0) ((FinestraPartita) frame).setAzione(TIRA);
-						else ((FinestraPartita) frame).setAzione(PASSAGGIO);
-					}
-					else if((int)(Math.random()*4) == 0) ((FinestraPartita) frame).setAzione(TIRA);
-					else ((FinestraPartita) frame).setAzione(PASSAGGIO);
-
-					switch(((FinestraPartita) frame).getAzione())
-					{
-					case TIRA:
-						Portiere portiere = (Portiere)Search(12,168,arrayMio);
-						if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
-							((FinestraPartita) frame).setEsito(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa()));
-						else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
-							((FinestraPartita) frame).setEsito(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa()));
-						else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
-							((FinestraPartita) frame).setEsito(((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa()));
-
-						if(((FinestraPartita) frame).getEsito() == PARATA) {
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-							((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-							((FinestraPartita) frame).getPanelInfo().append("Il tuo portiere ha parato il tiro\n");
+						if((int)(Math.random()*2) == 0){
+							((FinestraPartita) frame).setPoint(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer));
+							((FinestraPartita) frame).getPanelInfo().append("Contrasto Avversario\n");
 						}
-						else if(((FinestraPartita) frame).getEsito() == FUORI){
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-							((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-							((FinestraPartita) frame).getPanelInfo().append("La palla è andata fuori\n");
+						else PassaggioComputer( (FinestraPartita) frame, computer, arrayMio, arrayAvv);
+					}
+					else {
+						if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista){
+							if((int)(Math.random()*2) == 0){
+								((FinestraPartita) frame).setPoint(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer));
+								((FinestraPartita) frame).getPanelInfo().append("Contrasto Avversario\n");
+							}
+							else PassaggioComputer( (FinestraPartita) frame, computer, arrayMio, arrayAvv);
+
 						}
 						else {
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-							((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
-							((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-							((FinestraPartita) frame).setPuntiComputer();
-							computer.SetGolfatti();
-							umano.setGolSubiti();
-							((FinestraPartita) frame).getPanelInfo().append("GOOOOL "+computer.GetNomeSquadra()+"\n");
-							frame.setTitle(squadra.GetNomeSquadra()+" "+((FinestraPartita) frame).getPuntiUmano()+ " "+computer.GetNomeSquadra()+" "+ ((FinestraPartita) frame).getPuntiComputer());
+							if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante){
+								if((int)(Math.random()*2) == 0){
+									((FinestraPartita) frame).setPoint(((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer));
+									((FinestraPartita) frame).getPanelInfo().append("Contrasto Avversario\n");
+								}
+								else PassaggioComputer( (FinestraPartita) frame, computer, arrayMio, arrayAvv);
+							}
+						}
+					}
 
+					if(((FinestraPartita) frame).getPoint().getX() != 0 && ((FinestraPartita) frame).getPoint().getY() != 0){
+
+						((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+						((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
+						if(((FinestraPartita) frame).getGiocatoreCorrente() == null) 
+							((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
+						((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+					}
+					else //nessun contrasto da fare
+						PassaggioComputer( (FinestraPartita) frame, umano, arrayMio, arrayAvv);
+
+					if(((FinestraPartita) frame).getGiocatoreCorrente().getSquadra().equalsIgnoreCase(computer.GetNomeSquadra())){
+						//il giocatore è ancora il computer
+
+						//scegliere il tipo di azione
+						if(((FinestraPartita) frame).getPunteggioComputer() < ((FinestraPartita) frame).getPunteggioUmano()){
+							if((int)(Math.random()*3) == 0) ((FinestraPartita) frame).setAzione(PASSAGGIO);
+							else ((FinestraPartita) frame).setAzione(TIRA);
+						}
+						else{
+							if(computer.getAbilitaAttacco() >= ABILITÀMINATTACCO){
+								if((int)(Math.random()*2) == 0) ((FinestraPartita) frame).setAzione(TIRA);
+								else ((FinestraPartita) frame).setAzione(PASSAGGIO);
+							}
+							else if((int)(Math.random()*3) == 0) ((FinestraPartita) frame).setAzione(TIRA);
+							else ((FinestraPartita) frame).setAzione(PASSAGGIO);
 						}
 
+						switch(((FinestraPartita) frame).getAzione())
+						{
+						case TIRA:
+							Portiere portiere = (Portiere)Search(12,168,arrayMio);
+							if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore){
+								((FinestraPartita) frame).setEsito(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).
+										Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa(),
+												((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),
+												umano.GetNomeSquadra()));
 
-						break;
+								((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
+										" TIRA\n");
+							}
+							else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista){
+								((FinestraPartita) frame).setEsito(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),
+										portiere,umano.getAbilitaDifesa(),((FinestraPartita) frame).getPunteggioUmano(),
+										((FinestraPartita) frame).getPunteggioComputer(),umano.GetNomeSquadra()));
 
-					case PASSAGGIO:
-						PassaggioComputer( (FinestraPartita) frame, umano, arrayMio, arrayAvv);
-						break;
-					}
-				} // end switch
+								((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
+										" TIRA\n");
+							}
+							else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante){
+								((FinestraPartita) frame).setEsito(((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa(),
+										((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),umano.GetNomeSquadra()));
+
+								((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
+										" TIRA\n");
+							}
+							if(((FinestraPartita) frame).getEsito() == PARATA) {
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+								((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+								((FinestraPartita) frame).getPanelInfo().append("Il tuo portiere ha parato il tiro\n");
+							}
+							else if(((FinestraPartita) frame).getEsito() == FUORI){
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+								((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+								((FinestraPartita) frame).getPanelInfo().append("La palla è andata fuori\n");
+							}
+							else {
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+								((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(12,168,arrayMio));
+								((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+								((FinestraPartita) frame).setPunteggioComputer();
+								computer.SetGolfatti();
+								umano.setGolSubiti();
+								((FinestraPartita) frame).getPanelInfo().append("GOOOOL "+computer.GetNomeSquadra()+"\n");
+								frame.setTitle(squadra.GetNomeSquadra()+" "+((FinestraPartita) frame).getPunteggioUmano()+ " "+computer.GetNomeSquadra()+" "+ ((FinestraPartita) frame).getPunteggioComputer());
+
+							}
+
+
+							break;
+
+						case PASSAGGIO:
+							PassaggioComputer( (FinestraPartita) frame, umano, arrayMio, arrayAvv);
+							break;
+						}
+					} // end switch
+				}
 			}
 			try {
-				sleep(2000);
+				sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			j++;
-		} while (j < 10/*System.currentTimeMillis() + init < TEMPO_PARTITA*/);
+		} while (j < 20);
 
 
-		if(((FinestraPartita) frame).getPuntiUmano() > ((FinestraPartita) frame).getPuntiComputer()){
+		if(((FinestraPartita) frame).getPunteggioUmano() > ((FinestraPartita) frame).getPunteggioComputer()){
 			//far spuntare nella textarea che ha vinto il giovatore umano
-			((FinestraPartita) frame).getPanelInfo().append("HAI VINTOOOO "+ ((FinestraPartita) frame).getPuntiUmano() +" A "+((FinestraPartita) frame).getPuntiComputer());
+			((FinestraPartita) frame).getPanelInfo().append("HAI VINTOOOO "+ ((FinestraPartita) frame).getPunteggioUmano() +" A "+((FinestraPartita) frame).getPunteggioComputer()+"\n");
 			umano.setPunti(3);
 		}
-		else if(((FinestraPartita) frame).getPuntiUmano() < ((FinestraPartita) frame).getPuntiComputer()){
+		else if(((FinestraPartita) frame).getPunteggioUmano() < ((FinestraPartita) frame).getPunteggioComputer()){
 			//far spuntare nella textarea che ha vinto il giovatore computer
-			((FinestraPartita) frame).getPanelInfo().append("HAI PERSO "+ ((FinestraPartita) frame).getPuntiUmano() +" A "+((FinestraPartita) frame).getPuntiComputer());
+			((FinestraPartita) frame).getPanelInfo().append("HAI PERSO "+ ((FinestraPartita) frame).getPunteggioUmano() +" A "+((FinestraPartita) frame).getPunteggioComputer()+"\n");
 
 			computer.setPunti(3);
 		}
 		else{
 			//far spuntare nella textarea che è finita in parità
-			((FinestraPartita) frame).getPanelInfo().append("È FINITA IN PARITÀ "+ ((FinestraPartita) frame).getPuntiUmano() +" A "+((FinestraPartita) frame).getPuntiComputer());
+			((FinestraPartita) frame).getPanelInfo().append("È FINITA IN PARITÀ "+ ((FinestraPartita) frame).getPunteggioUmano() +" A "+((FinestraPartita) frame).getPunteggioComputer()+"\n");
 			computer.setPunti(1);
 			umano.setPunti(1);
 		}
@@ -306,18 +332,24 @@ public class Campionato extends Thread
 
 	public void Rilancia(JFrame frame,SquadraUmano umano, Giocatore[] arrayMio){
 		//	this.resume();
-		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-		((FinestraPartita) frame).setPoint((((Portiere) ((FinestraPartita) frame).getGiocatoreCorrente()).rilancia(umano.GetNomeSquadra())));
-		((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
-		((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+" "
-				+"Ha ricevuto la palla\n");
+		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere){
 
-		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+			((FinestraPartita) frame).setPoint((((Portiere) ((FinestraPartita) frame).getGiocatoreCorrente()).rilancia(umano.GetNomeSquadra())));
+			((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
+			((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+" "
+					+"Ha ricevuto la palla\n");
+			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+		}
+		else ((FinestraPartita) frame).getPanelInfo().append("PREMI PASSA \n");
 	}
 
 	public void Passa(JFrame frame, SquadraAvversaria computer, Giocatore[] arrayMio, Giocatore[] arrayAvv){
-		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere){
+			Rilancia(frame,squadra,arrayMio);
+		}
 
+		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
 		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
 			((FinestraPartita) frame).setPoint((((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(computer,arrayMio,arrayAvv)));
 		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
@@ -375,122 +407,155 @@ public class Campionato extends Thread
 	}
 
 	public void Contrasta(JFrame frame, Giocatore[] arrayMio, Giocatore[] arrayAvv, SquadraUmano umano, SquadraAvversaria computer){
-		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-
-		Point puntoGiocatoreChiamante = new Point(((FinestraPartita) frame).getPoint());
-
-		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
-			((FinestraPartita) frame).setPoint((((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer)));
-		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
-			((FinestraPartita) frame).setPoint((((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer)));
-		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
-			((FinestraPartita) frame).setPoint((((Attaccante)((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,umano.getAbilitaCentrocampo(),computer)));
-
-		if(((FinestraPartita) frame).getPoint().getX() != 0  && ((FinestraPartita) frame).getPoint().getY() != 0){
-			if(puntoGiocatoreChiamante.getX() == ((FinestraPartita) frame).getPoint().getX() &&
-					puntoGiocatoreChiamante.getY() == ((FinestraPartita) frame).getPoint().getY()){
-				((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
-				((FinestraPartita) frame).getPanelInfo().append("Hai vinto il contrasto\n");
-				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-			}
-			else{
-				((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
-				((FinestraPartita) frame).getPanelInfo().append("Hai perso il contrasto\nla palla è di "
-						+((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome());
-
-				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-			}
+		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere){
+			((FinestraPartita) frame).getPanelInfo().append("IL portiere non contrasta.\n PREMI RILANCIA");
 		}
 		else{
-			//visualizzare nella textarea che non c'è nessun contrasto dA FARE
-			((FinestraPartita) frame).getPanelInfo().append("non c'è nessun contrasto da FARE\n");
+			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+
+			Point puntoGiocatoreChiamante = new Point(((FinestraPartita) frame).getGiocatoreCorrente().getLocation());
+
+			if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
+				((FinestraPartita) frame).setPoint((((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer)));
+			else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
+				((FinestraPartita) frame).setPoint((((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer)));
+			else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
+				((FinestraPartita) frame).setPoint((((Attaccante)((FinestraPartita) frame).getGiocatoreCorrente()).Contrasto(arrayMio,arrayAvv,computer)));
+
+			if(((FinestraPartita) frame).getPoint().getX() != 0  && ((FinestraPartita) frame).getPoint().getY() != 0){
+				if(puntoGiocatoreChiamante.getX() == ((FinestraPartita) frame).getPoint().getX() &&
+						puntoGiocatoreChiamante.getY() == ((FinestraPartita) frame).getPoint().getY()){
+					((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
+					((FinestraPartita) frame).getPanelInfo().append("Hai vinto il contrasto\n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
+				else{
+					((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
+					((FinestraPartita) frame).getPanelInfo().append("Hai perso il contrasto\nla palla è di "
+							+((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome());
+
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
+			}
+			else{
+				//visualizzare nella textarea che non c'è nessun contrasto dA FARE
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				((FinestraPartita) frame).getPanelInfo().append("non c'è nessun contrasto da FARE\n");
+			}
 		}
 	}
 
 	public void Tira(JFrame frame, Giocatore[] arrayAvv, SquadraAvversaria computer, SquadraUmano umano){
-		Portiere portiere = (Portiere)Search(638,168,arrayAvv);
 
-		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
-			((FinestraPartita) frame).setEsito(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa()));
-		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
-			((FinestraPartita) frame).setEsito(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa()));
-		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
-			((FinestraPartita) frame).setEsito(((Attaccante)((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa()));
-
-		if(((FinestraPartita) frame).getEsito() == PARATA) {
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-			((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-			((FinestraPartita) frame).getPanelInfo().append("Tiro parato\n");
-			//nella text area far spuntara parata
+		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere){
+			((FinestraPartita) frame).getPanelInfo().append("IL portiere non Tira.\n PREMI RILANCIA");
 		}
-		else if(((FinestraPartita) frame).getEsito() == FUORI){
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-			((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-			((FinestraPartita) frame).getPanelInfo().append("Fuori!!!\n");
+		else{
+			Portiere portiere = (Portiere)Search(638,168,arrayAvv);
+			if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
+				((FinestraPartita) frame).setEsito(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,
+						computer.getAbilitaDifesa(),((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),
+						computer.GetNomeSquadra()));
 
-			//nella text area far spuntara FUORI
-		}
-		else {
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
-			((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
-			((FinestraPartita) frame).setPuntiUmano();
-			umano.SetGolfatti();
-			computer.setGolSubiti();
-			frame.setTitle(squadra.GetNomeSquadra()+" "+((FinestraPartita) frame).getPuntiUmano()+ " "+computer.GetNomeSquadra()+" "+ ((FinestraPartita) frame).getPuntiComputer());
-			((FinestraPartita) frame).getPanelInfo().append("GOOOOOOOAL!!!\n");
+			else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
+				((FinestraPartita) frame).setEsito(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa(),
+						((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),computer.GetNomeSquadra()));
 
-			//nella text area far spuntara GOOOOOOOL
+			else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
+				((FinestraPartita) frame).setEsito(((Attaccante)((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(umano.getAbilitaAttacco(),portiere,computer.getAbilitaDifesa(),
+						((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),computer.GetNomeSquadra()));
+
+			if(((FinestraPartita) frame).getEsito() == PARATA) {
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+				((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				((FinestraPartita) frame).getPanelInfo().append("Tiro parato\n");
+				//nella text area far spuntara parata
+			}
+			else if(((FinestraPartita) frame).getEsito() == FUORI){
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+				((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				((FinestraPartita) frame).getPanelInfo().append("Fuori!!!\n");
+
+				//nella text area far spuntara FUORI
+			}
+			else {
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
+				((FinestraPartita) frame).setGiocatoreCorrente((Portiere)Search(638,168,arrayAvv));
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				((FinestraPartita) frame).setPunteggioUmano();
+				umano.SetGolfatti();
+				computer.setGolSubiti();
+				frame.setTitle(squadra.GetNomeSquadra()+" "+((FinestraPartita) frame).getPunteggioUmano()+ " "+computer.GetNomeSquadra()+" "+ ((FinestraPartita) frame).getPunteggioComputer());
+				((FinestraPartita) frame).getPanelInfo().append("GOOOOOOOAL!!!\n");
+
+				//nella text area far spuntara GOOOOOOOL
+			}
 		}
 	}
 
-	private void PassaggioComputer(FinestraPartita frame, Squadra umano, Giocatore[] arrayMio, Giocatore[] arrayAvv){
+	private void PassaggioComputer(FinestraPartita frame, Squadra computer, Giocatore[] arrayMio, Giocatore[] arrayAvv){
 		if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore)
-			((FinestraPartita) frame).setPoint((((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(umano, arrayMio,arrayAvv)));
+			((FinestraPartita) frame).setPoint((((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(computer, arrayMio,arrayAvv)));
 		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista)
-			((FinestraPartita) frame).setPoint((((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(umano, arrayMio,arrayAvv)));
+			((FinestraPartita) frame).setPoint((((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(computer, arrayMio,arrayAvv)));
 		else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante)
-			((FinestraPartita) frame).setPoint((((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(umano, arrayMio,arrayAvv)));
+			((FinestraPartita) frame).setPoint((((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Passaggio(computer, arrayMio,arrayAvv)));
 
 
 		((FinestraPartita) frame).getGiocatoreCorrente().setVisible(false);
 
 		if(((FinestraPartita) frame).getPoint().getX() != 0 && ((FinestraPartita) frame).getPoint().getY() != 0){
 			((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayAvv));
-			((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-					"Ha ricevuto la palla\n");
-			((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+			if(((FinestraPartita) frame).getGiocatoreCorrente() == null){
+				((FinestraPartita) frame).setGiocatoreCorrente(Search((int)((FinestraPartita) frame).getPoint().getX(),(int)((FinestraPartita) frame).getPoint().getY(),arrayMio));
+				((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
+						" Ha intercettato la palla\n");
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+			}
+			else{
+				((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
+						" Ha ricevuto la palla\n");
+				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+			}
 		}
 		else{
 			if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista){
 				((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Centrocampista"));
-				if((int)(Math.random()*2) == 0)
-					((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-							"Ha intercettato la palla\n");
-				else
-					((FinestraPartita) frame).getPanelInfo().setText("palla fuori\n");
-
-				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				if((int)(Math.random()*2) == 0){
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n " + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla\n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
+				else{
+					((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Difensore"));
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n " + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla\n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
 			}
 			else if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore){
 				((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Attaccante"));
-				if((int)(Math.random()*2) == 0)
-					((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-							"Ha intercettato la palla\n");
-				else
-					((FinestraPartita) frame).getPanelInfo().append("palla fuori\n");
-				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				if((int)(Math.random()*2) == 0){
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n " + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla\n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
+				else{
+					((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Centrocampista"));
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n " + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla\n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
 			}
 			else if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante){
 				((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Difensore"));
-				if((int)(Math.random()*2) == 0)
-					((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-							"Ha intercettato la palla\n");
-				else
-					((FinestraPartita) frame).getPanelInfo().append("palla fuori \n");
-				((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				if((int)(Math.random()*2) == 0){
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n " + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla \n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
+				else{
+					((FinestraPartita) frame).setGiocatoreCorrente(SearchGiocatoreACaso(arrayMio,"Centrocampista"));
+					((FinestraPartita) frame).getPanelInfo().append("palla fuori,\n" + ((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+ " ha la palla \n");
+					((FinestraPartita) frame).getGiocatoreCorrente().setVisible(true);
+				}
 			}
 		}
 	}

@@ -110,7 +110,7 @@ public class FinestraClassifica extends JFrame {
 
 		for ( int pass = 1;pass < array.length; pass++ ) 
 			for ( int i = 0;i < array.length-1; i++ )   
-				if ( array[i].getPunti() > array[i+1].getPunti() )    
+				if ( array[i].getPunti() < array[i+1].getPunti() )    
 					swap( array, i, i + 1 ); 
 
 	}

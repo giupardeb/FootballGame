@@ -37,6 +37,8 @@ class Portiere extends Giocatore
 	 * @uml.property  name="rimessa"
 	 */
 	private byte rimessa;
+	
+	private int numeroParate; 
 	//private float valoreDiMercato;
 
 	public Portiere(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita,byte resistenza,
@@ -57,6 +59,7 @@ class Portiere extends Giocatore
 		this.riflessi = riflessi;
 		this.rimessa = rimessa;
 		this.tipoRuolo = 0;
+		this.numeroParate = 0;
 	}
 
 
@@ -205,6 +208,14 @@ class Portiere extends Giocatore
 		rimessa += valore;
 
 	}
+	
+	public void setNumeroParate(){
+		numeroParate++;
+	}
+	
+	public int getNumeroParate(){
+		return numeroParate;
+	}
 
 	public void setValoreGenerale()
 	{
@@ -247,14 +258,5 @@ class Portiere extends Giocatore
 		}
 		return pavv;
 	}
-
-
-
-
-
-
-
-
-
-
+	
 }

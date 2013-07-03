@@ -32,9 +32,12 @@ public class FinestraPartita extends JFrame {
 	private Point punto = new Point(); // serve per il passaggio  per il contrasto e rilancio
 	private int esito = 0;
 	private Giocatore giocatore = null;
-	private int puntiUmano = 0;
-	private int puntiComputer = 0;
-
+	private int punteggioUmano = 0;
+	private int punteggioComputer = 0;
+	private JButton btnRilancia;
+	private JButton btnTira;
+	private JButton btnPassaggio;
+	private JButton btnContrasto;
 
 	public FinestraPartita(final JPanel panel_2, final Campionato c,final Giocatore arrayMio[]) {
 		setResizable(false);
@@ -43,49 +46,57 @@ public class FinestraPartita extends JFrame {
 		panelScelte.setName("panelScelte");
 		getContentPane().add(panelScelte, BorderLayout.SOUTH);
 
-		JButton btnRilancia = new JButton("Rilancia");
+		btnRilancia = new JButton("Rilancia");
 		btnRilancia.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.Rilancia(frame, c.squadra, arrayMio);
 			}
 		});
-		
+		btnRilancia.setName("Rilancia");
+		panelScelte.add(btnRilancia);
+
 		JButton btnEsci = new JButton("Esci");
 		btnEsci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
+				arrayAvv = null;
+				for (int i=0;i<arrayMio.length;i++) arrayMio[i] = null;
 				FinestraCampionato f = new FinestraCampionato(c);
 			}
 		});
 		panelScelte.add(btnEsci);
-		btnRilancia.setName("Rilancia");
-		
-		panelScelte.add(btnRilancia);
+		btnEsci.setName("Esci");
 
-		JButton btnTira = new JButton("Tira");
+
+
+		btnTira = new JButton("Tira");
 		btnTira.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				c.Tira(frame, arrayAvv, squadraAvv, c.squadra);
+				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
+				if(getGiocatoreCorrente().getSquadra().equalsIgnoreCase(c.squadra.GetNomeSquadra()))
+					c.Tira(frame, arrayAvv, squadraAvv, c.squadra);
 			}
 		});
 		btnTira.setName("Tira");
 		panelScelte.add(btnTira);
 
-		JButton btnPassaggio = new JButton("Passaggio");
+		btnPassaggio = new JButton("Passaggio");
 		btnPassaggio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
+				if(getGiocatoreCorrente().getSquadra().equalsIgnoreCase(c.squadra.GetNomeSquadra()))
+
 				c.Passa(frame, squadraAvv, arrayMio, arrayAvv);
 			}
 		});
 		btnPassaggio.setName("Passaggio");
-
 		panelScelte.add(btnPassaggio);
 
-		JButton btnContrasto = new JButton("Contrasto");
+		btnContrasto = new JButton("Contrasto");
 		btnContrasto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -93,7 +104,7 @@ public class FinestraPartita extends JFrame {
 			}
 		});
 		btnContrasto.setName("Contrasto");
-		
+		btnContrasto.setEnabled(false);
 		panelScelte.add(btnContrasto);
 
 		JSplitPane splitPane = new JSplitPane();
@@ -101,17 +112,17 @@ public class FinestraPartita extends JFrame {
 		splitPane.setContinuousLayout(true);
 		splitPane.setResizeWeight(0.5);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
-		
+
 		txtInfo = new MyTextAreaInfo();
 		txtInfo.setMinimumSize(new Dimension(1000, 75));
 		txtInfo.setEditable(false);
 
 
 		splitPane.setRightComponent(txtInfo);
-		
+
 		squadraAvv = c.Incontri.pop();
 		arrayAvv = squadraAvv.OrganizzaSquadra();
-		this.setTitle(c.squadra.GetNomeSquadra()+" "+getPuntiUmano()+ " "+squadraAvv.GetNomeSquadra()+" "+ getPuntiComputer());
+		this.setTitle(c.squadra.GetNomeSquadra()+" "+getPunteggioUmano()+ " "+squadraAvv.GetNomeSquadra()+" "+ getPunteggioComputer());
 		initialize(panel_2,c,arrayAvv);
 		splitPane.setLeftComponent(panel_2);
 
@@ -129,7 +140,7 @@ public class FinestraPartita extends JFrame {
 
 		//per avviare il Thread fai così:
 		t.start ();
-		
+
 	}
 
 	/**
@@ -213,7 +224,7 @@ public class FinestraPartita extends JFrame {
 	public JPanel getPanelScelta(){
 		return panelScelte;
 	}
-	
+
 	public MyTextAreaInfo getPanelInfo(){
 		return txtInfo;
 	}
@@ -240,19 +251,19 @@ public class FinestraPartita extends JFrame {
 		esito = val;
 	}
 
-	public int getPuntiUmano(){
-		return puntiUmano;
+	public int getPunteggioUmano(){
+		return punteggioUmano;
 	}
-	public void setPuntiUmano(){
-		puntiUmano++;
+	public void setPunteggioUmano(){
+		punteggioUmano++;
 
 	}
 
-	public int getPuntiComputer(){
-		return puntiComputer;
+	public int getPunteggioComputer(){
+		return punteggioComputer;
 	}
-	public void setPuntiComputer(){
-		puntiComputer++;
+	public void setPunteggioComputer(){
+		punteggioComputer++;
 	}
 
 	public Giocatore getGiocatoreCorrente(){
@@ -260,5 +271,21 @@ public class FinestraPartita extends JFrame {
 	}
 	public void setGiocatoreCorrente(Giocatore g){
 		giocatore = g;
+	}
+
+	public JButton getBtnContrasto(){
+		return btnContrasto;
+	}
+
+	public JButton getBtnRilancia(){
+		return btnRilancia;
+	}
+
+	public JButton getBtnPassaggio(){
+		return btnPassaggio;
+	}
+
+	public JButton getBtnTira(){
+		return btnTira;
 	}
 }

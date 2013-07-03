@@ -94,7 +94,10 @@ abstract public class Giocatore extends JLabel
 	/**
 	 * @uml.property  name="pallasi"
 	 */
-	private boolean pallasi;
+	
+	private int contrastiFatti; //serve per rendere più competitivo il contrasto
+	private int tiriFatti;
+	private int passaggiFatti;
 
 	Giocatore(String nome,String nomeSquadraAppartenente,String nazionalita,byte velocita, byte resistenza,byte forza,byte morale,byte eta,byte condizione,
 			byte tecnica,byte aggressivita,byte creativita,byte decisione, byte carisma,String ruolo,byte giocoDiSquadra,boolean essenziale,
@@ -119,7 +122,6 @@ abstract public class Giocatore extends JLabel
 		this.valoreMercato = valoreMercato;
 		this.valoreGenerale = valoreGenerale;
 		posizione = new Point();
-		pallasi = false;
 			}
 
 
@@ -283,10 +285,6 @@ abstract public class Giocatore extends JLabel
 	}
 
 	//metodi di set()
-	
-	public void setPalla(boolean a){
-		pallasi = a;
-	}
 
 	public void setPosizione(int x, int y){
 		posizione.setLocation(x, y);
@@ -474,6 +472,30 @@ abstract public class Giocatore extends JLabel
 		return tipoRuolo;
 	}
 	
+	public void setPassaggiFatti(){
+		passaggiFatti++;
+	}
+	
+	public void setContrastiFatti(){
+		contrastiFatti++;
+	}
+	
+	public void setTiriFatti(){
+		tiriFatti++;
+	}
+	
+	
+	public int getPassaggiFatti(){
+		return passaggiFatti;
+	}
+	
+	public int getContrastiFatti(){
+		return contrastiFatti;
+	}
+	
+	public int getTiriFatti(){
+		return tiriFatti;
+	}
 }
 
 
