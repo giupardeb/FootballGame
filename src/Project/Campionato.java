@@ -11,7 +11,7 @@ public class Campionato extends Thread
 {
 	private static final int TIRA = 1;
 	private static final int PASSAGGIO = 2;
-	private static final int ABILITÀMINATTACCO = 70;
+	private static final int ABILITAMINATTACCO = 70; // non usare accenti o roba simile
 	private static final int PARATA = 9;
 	private static final int FUORI = 10;
 
@@ -198,7 +198,7 @@ public class Campionato extends Thread
 							else ((FinestraPartita) frame).setAzione(TIRA);
 						}
 						else{
-							if(computer.getAbilitaAttacco() >= ABILITÀMINATTACCO){
+							if(computer.getAbilitaAttacco() >= ABILITAMINATTACCO){ 
 								if((int)(Math.random()*2) == 0) ((FinestraPartita) frame).setAzione(TIRA);
 								else ((FinestraPartita) frame).setAzione(PASSAGGIO);
 							}
