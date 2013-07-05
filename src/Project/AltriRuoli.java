@@ -12,6 +12,44 @@ abstract class AltriRuoli extends Giocatore
 	 * @uml.property  name="cross"
 	 */
 	private byte cross;
+	//I DUE SUFFISSI INDICANO IL LIVELLO DI ATTACCO E DI DIFESA DELLE SQUADRE
+	private final int SOGLIAATTMAXMAX = 50;
+	private final int SOGLIACENMAXMAX = 60;
+	private final int SOGLIADIFMAXMAX = 70;
+	private final int SOGLIAATTMAXMED = 40;
+	private final int SOGLIACENMAXMED = 50;
+	private final int SOGLIADIFMAXMED = 60;
+	private final int SOGLIAATTMAXSCA = 30;
+	private final int SOGLIACENMAXSCA = 40;
+	private final int SOGLIADIFMAXSCA = 50;
+
+	private final int SOGLIAATTMEDMAX = 60;
+	private final int SOGLIACENMEDMAX = 70;
+	private final int SOGLIADIFMEDMAX = 80;
+	private final int SOGLIAATTMEDMED = 50;
+	private final int SOGLIACENMEDMED = 60;
+	private final int SOGLIADIFMEDMED = 70;
+	private final int SOGLIAATTMEDSCA = 30;
+	private final int SOGLIACENMEDSCA = 40;
+	private final int SOGLIADIFMEDSCA = 50;
+	
+	private final int SOGLIAATTSCAMAX = 50;
+	private final int SOGLIACENSCAMAX = 60;
+	private final int SOGLIADIFSCAMAX = 70;
+	private final int SOGLIAATTSCAMED = 40;
+	private final int SOGLIACENSCAMED = 50;
+	private final int SOGLIADIFSCAMED = 60;
+	private final int SOGLIAATTSCASCA = 30;
+	private final int SOGLIACENSCASCA = 40;
+	private final int SOGLIADIFSCASCA = 50;
+	
+	
+	
+	private final int PROBABILITAATT = 100;
+	private final int PROBABILITACEN = 50;
+	private final int PROBABILITADIF = 25;
+
+	
 	/**
 	 * @uml.property  name="dribling"
 	 */
@@ -644,24 +682,19 @@ abstract class AltriRuoli extends Giocatore
 	public int Tiro(int abilitaattacco, Portiere portiere, int abilitadifesa,int PunteggioUmano, int PunteggioComputer,String SquadraAvv){	 
 		if (abilitaattacco > ABILITADIATTACCOMASSIME){
 			if(abilitadifesa > ABILITADIDIFESAMASSIME){
-				//probabilità di tirare pari è 1/4 per att, 1/5 per centracmp, 1/6 difensore
 
-				return ControllaChiTira( portiere,4,5,6, PunteggioUmano, PunteggioComputer,SquadraAvv); //X simo :D M'BARE non posso mettere 5 costanti diverse x questi numeri :D kmq sia la 
-				//spiegazione dei numeri è riportata sopra ogni chiamata  del metodo ControllaChiTira
-				// grazie per la comprensione :D :D :D
+				return ControllaChiTira( portiere,SOGLIAATTMAXMAX,SOGLIACENMAXMAX,SOGLIADIFMAXMAX, PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 			}
 			else {
 				if (abilitadifesa >= ABILITADIDIFESAMINIME && abilitadifesa <= ABILITADIDIFESAMASSIME){ //ATTACCO MASSIMO DIFESA MEDIA
-					//probabilità di tirare pari è 1/4 per attaccante, 1/4 percentrcampista, 1/5 difensore
 
-					return ControllaChiTira( portiere,3,4,5,PunteggioUmano, PunteggioComputer,SquadraAvv);
+					return ControllaChiTira( portiere,SOGLIAATTMAXMED,SOGLIACENMAXMED,SOGLIADIFMAXMED,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 				}
 				else{ //ATTACCO MASSIMO DIFESA SCARSA 
-					//probabilità di tirare 1/3 per attaccante, 1/3 centrocampista, 1/4 difensore
 
-					return ControllaChiTira( portiere,2,3,4,PunteggioUmano, PunteggioComputer,SquadraAvv);
+					return ControllaChiTira( portiere,SOGLIAATTMAXSCA,SOGLIACENMAXSCA,SOGLIADIFMAXSCA,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 				}
 			}
@@ -670,22 +703,19 @@ abstract class AltriRuoli extends Giocatore
 		else {
 			if(abilitaattacco >= ABILITADIATTACCOMINIME && abilitaattacco <= ABILITADIATTACCOMASSIME){				
 				if(abilitadifesa >= ABILITADIDIFESAMASSIME){ //ATTACCO MEDIO DIFESA MASSIMA
-					//probabilità di tirare pari è 1/5 per att, 1/6 per centracmp, 1/7 difensore
 
-					return ControllaChiTira( portiere,3,4,5,PunteggioUmano, PunteggioComputer,SquadraAvv);
+					return ControllaChiTira(portiere,SOGLIAATTMEDMAX,SOGLIACENMEDMAX,SOGLIADIFMEDMAX,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 				}
 				else { //ATTACCO MEDIO DIFESA MEDIA
 					if (abilitadifesa >= ABILITADIDIFESAMINIME && abilitadifesa <= ABILITADIDIFESAMASSIME){
-						//probabilità di tirare pari è 1/4 per attaccante, 1/5 percentrcampista, 1/6 difensore
 
-						return ControllaChiTira( portiere,2,3,4,PunteggioUmano, PunteggioComputer,SquadraAvv);
+						return ControllaChiTira( portiere,SOGLIAATTMEDMED,SOGLIACENMEDMED,SOGLIADIFMEDMED,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 					}
 					else{ //ATTACCO MEDIO DIFESA SCARSA
-						//probabilità di tirare 1/2 per attaccante, 1/3 centrocampista, 1/4 difensore
 
-						return ControllaChiTira( portiere,1,2,3,PunteggioUmano, PunteggioComputer,SquadraAvv);
+						return ControllaChiTira( portiere,SOGLIAATTMEDSCA,SOGLIACENMEDSCA,SOGLIADIFMEDSCA,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 					}
 				}
@@ -693,22 +723,19 @@ abstract class AltriRuoli extends Giocatore
 			}
 			else{ //ATTACCO SCARSO DIFESA MASSIMA
 				if(abilitadifesa > ABILITADIDIFESAMASSIME){
-					//probabilità di tirare pari è 1/7 per att, 1/8 per centracmp, 1/9 difensore
 
-					return ControllaChiTira( portiere,4,5,6,PunteggioUmano, PunteggioComputer,SquadraAvv);
+					return ControllaChiTira( portiere,SOGLIAATTSCAMAX,SOGLIACENSCAMAX,SOGLIADIFSCAMAX,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 				}
 				else { //ATTACCO SCARSO DIFESA MEDIA
 					if (abilitadifesa >= ABILITADIDIFESAMINIME && abilitadifesa <= ABILITADIDIFESAMASSIME){
-						//probabilità di tirare pari è 1/5 per attaccante, 1/6 percentrcampista, 1/7 difensore
 
-						return ControllaChiTira( portiere,3,4,5,PunteggioUmano, PunteggioComputer,SquadraAvv);
+						return ControllaChiTira( portiere,SOGLIAATTSCAMED,SOGLIACENSCAMED,SOGLIADIFSCAMED,PunteggioUmano, PunteggioComputer,SquadraAvv);
 
 					}
 					else{ //ATTACCO SCARCO DIFESA SCARSA
-						//probabilità di tirare 1/3 per attaccante, 1/4 centrocampista, 1/5 difensore
 
-						return ControllaChiTira( portiere,2,3,4,PunteggioUmano, PunteggioComputer,SquadraAvv);
+						return ControllaChiTira( portiere,SOGLIAATTSCASCA,SOGLIACENSCASCA,SOGLIADIFSCASCA,PunteggioUmano, PunteggioComputer,SquadraAvv);
 					}
 				}
 			}
@@ -717,16 +744,11 @@ abstract class AltriRuoli extends Giocatore
 
 	
 	
-	private int ControllaChiTira(Portiere portiere, int probabilitatiroatt, int probabilitatirocentro,int probabilitatirodif,int PunteggioUmano, int PunteggioComputer, String SquadraAvv){
-		
+	private int ControllaChiTira(Portiere portiere, int sogliaMinAtt, int sogliaMinCen,int sogliaMinDif,int PunteggioUmano, int PunteggioComputer, String SquadraAvv){
 		
 		if(this instanceof Attaccante){
-			if (this.getTiriFatti() != ZEROEFFETTUATI){
-				probabilitatiroatt--;
-			}
-			else this.getTiriFatti();
 			
-				if((int)(Math.random()*probabilitatiroatt) == 0){//probabilità che l'attacante tiri
+				if((Math.random()*PROBABILITAATT) > sogliaMinAtt){//probabilità che l'attacante tiri
 					if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
 					portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()){
 						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
@@ -741,12 +763,7 @@ abstract class AltriRuoli extends Giocatore
 		else{
 			if(this instanceof Centrocampista){
 				
-				if (this.getTiriFatti() != ZEROEFFETTUATI){
-					probabilitatirocentro--;
-				}
-				else this.getTiriFatti();
-				
-				if((int)(Math.random()*probabilitatirocentro) == 1){ //probabilità che il centrcampista tiri
+				if((Math.random()*PROBABILITACEN) > sogliaMinCen){ //probabilità che il centrcampista tiri
 					if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
 					portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()){
 						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
@@ -759,13 +776,9 @@ abstract class AltriRuoli extends Giocatore
 				else return INTERCETTATA;
 			}
 			if(this instanceof Difensore){
+
 				
-				if (this.getTiriFatti() != ZEROEFFETTUATI){
-					probabilitatirodif--;
-				}
-				else this.getTiriFatti();
-				
-				if((int)(Math.random()*probabilitatirodif) == 1){ //probabilità che il difensore tiri
+				if((Math.random()*PROBABILITADIF) > sogliaMinDif){ //probabilità che il difensore tiri
 					if(this.getTiro()+this.getColpoDiTesta()+this.getDribling() > 
 					portiere.getBloccareTiri()+portiere.getAgilita()+portiere.getRiflessi()) {
 						return EsecuzioneTiro(COSTANTEPERRIUSCITATIROBUONE,COSTANTEPERRIUSCITATIROMEDIE,COSTANTEPERRIUSCITATIROSCARSE);
@@ -1036,5 +1049,4 @@ abstract class AltriRuoli extends Giocatore
 			}
 		}
 	}
-
 }
