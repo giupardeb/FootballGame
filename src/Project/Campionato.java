@@ -12,14 +12,8 @@ public class Campionato extends Thread
 {
 	private static final int TIRA = 1;
 	private static final int PASSAGGIO = 2;
-<<<<<<< HEAD
 	private static final int ABILITÀMINATTACCO = 80;
 	private static final int ABILITÀMINATTACCOSVANTAGGIO = 70;
-=======
-	private static final int ABILITAMINATTACCO = 70; // non usare accenti o roba simile
-	private static final int PARATA = 9;
-	private static final int FUORI = 10;
->>>>>>> 2fc67736a1143af04d46e4b10e6aed71a4847873
 
 	public static int durataPartita = 0;
 	/**
@@ -169,53 +163,13 @@ public class Campionato extends Thread
 					}
 					else JOptionPane.showMessageDialog(null, "Il portiere non Tira, premi RILANCIA!");
 
-<<<<<<< HEAD
 					break;
-=======
-						//scegliere il tipo di azione
-						if(((FinestraPartita) frame).getPunteggioComputer() < ((FinestraPartita) frame).getPunteggioUmano()){
-							if((int)(Math.random()*3) == 0) ((FinestraPartita) frame).setAzione(PASSAGGIO);
-							else ((FinestraPartita) frame).setAzione(TIRA);
-						}
-						else{
-							if(computer.getAbilitaAttacco() >= ABILITAMINATTACCO){ 
-								if((int)(Math.random()*2) == 0) ((FinestraPartita) frame).setAzione(TIRA);
-								else ((FinestraPartita) frame).setAzione(PASSAGGIO);
-							}
-							else if((int)(Math.random()*3) == 0) ((FinestraPartita) frame).setAzione(TIRA);
-							else ((FinestraPartita) frame).setAzione(PASSAGGIO);
-						}
-
-						switch(((FinestraPartita) frame).getAzione())
-						{
-						case TIRA:
-							Portiere portiere = (Portiere)Search(12,168,arrayMio);
-							if(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Difensore){
-								((FinestraPartita) frame).setEsito(((Difensore) ((FinestraPartita) frame).getGiocatoreCorrente()).
-										Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa(),
-												((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),
-												umano.GetNomeSquadra()));
-
-								((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-										" TIRA\n");
-							}
-							else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Centrocampista){
-								((FinestraPartita) frame).setEsito(((Centrocampista) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),
-										portiere,umano.getAbilitaDifesa(),((FinestraPartita) frame).getPunteggioUmano(),
-										((FinestraPartita) frame).getPunteggioComputer(),umano.GetNomeSquadra()));
-
-								((FinestraPartita) frame).getPanelInfo().append(((FinestraPartita) frame).getGiocatoreCorrente().GetAnagrafe().GetCognome()+
-										" TIRA\n");
-							}
-							else if (((FinestraPartita) frame).getGiocatoreCorrente() instanceof Attaccante){
-								((FinestraPartita) frame).setEsito(((Attaccante) ((FinestraPartita) frame).getGiocatoreCorrente()).Tiro(computer.getAbilitaAttacco(),portiere,umano.getAbilitaDifesa(),
-										((FinestraPartita) frame).getPunteggioUmano(),((FinestraPartita) frame).getPunteggioComputer(),umano.GetNomeSquadra()));
->>>>>>> 2fc67736a1143af04d46e4b10e6aed71a4847873
 
 				case 2: 
 					if(!(((FinestraPartita) frame).getGiocatoreCorrente() instanceof Portiere)){
 						durataPartita++;
-						umano.Contrasta(frame, umano.getGiocatori(), computer.getGiocatori(), (SquadraUmano)umano.getSquadra(), (SquadraAvversaria)computer.getSquadra());
+						if(Math.random()*2 > 1)
+							umano.Contrasta(frame, umano.getGiocatori(), computer.getGiocatori(), (SquadraUmano)umano.getSquadra(), (SquadraAvversaria)computer.getSquadra());
 						if(((FinestraPartita) frame).getGiocatoreCorrente().getSquadra().equalsIgnoreCase(umano.getSquadra().GetNomeSquadra()))
 							umano.Passa(frame, (SquadraAvversaria)computer.getSquadra(), umano.getGiocatori(), computer.getGiocatori());
 					}
@@ -226,7 +180,6 @@ public class Campionato extends Thread
 			else{
 				//computer
 				TurnoComputer(frame, computer, umano);
-
 			}
 		}
 		((FinestraPartita) frame).getPanelInfo().setText("");
@@ -404,10 +357,22 @@ public class Campionato extends Thread
 					{
 					case TIRA:
 						computer.TiraComputer((FinestraPartita)frame,umano);
+						try {
+							sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 
 					case PASSAGGIO:
 						computer.PassaggioComputer((FinestraPartita) frame, umano);
+						try {
+							sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					}
 				} // end switch
