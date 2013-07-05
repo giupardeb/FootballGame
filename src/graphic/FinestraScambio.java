@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 
 import Project.Campionato;
-import Project.Squadra;
 
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -40,7 +39,6 @@ public class FinestraScambio extends JFrame {
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
 		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );	
 		initialize(c);
-		this.setVisible(true);
 
 	}
 

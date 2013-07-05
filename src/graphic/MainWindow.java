@@ -21,7 +21,6 @@ public class MainWindow extends JFrame{
 
 	public MainWindow() {
 		getContentPane().setBackground(Color.LIGHT_GRAY);
-		setVisible(true);
 
 		setTitle("FootBallManager \t\t\tScegli la tua squadra");
 		setResizable(false);
@@ -29,9 +28,9 @@ public class MainWindow extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setForeground(Color.WHITE);
 		this.setSize(800, 400);
-	/*	Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
+		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
-		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );	*/
+		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );	
 		
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -183,6 +182,7 @@ public class MainWindow extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			JButton j = (JButton) e.getSource();
 			frame.dispose();
+			@SuppressWarnings("unused")
 			Campionato c = new Campionato(j.getName(),frame);
 			
 		}

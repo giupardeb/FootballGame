@@ -37,7 +37,6 @@ public class FinestraAcquista extends JFrame{
 		AcquistiAvversari(c);
 		this.setResizable(false);
 		initialize(c,s);
-		this.setVisible(true);
 	}
 
 	/**

@@ -37,7 +37,6 @@ public class FinestraVendita extends JFrame{
 		setSize(new Dimension(800, 600));
 		setResizable(false);
 		initialize(c);
-		this.setVisible(true);
 	}
 
 	/**
@@ -64,6 +63,7 @@ public class FinestraVendita extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				FinestraCampionato f = new FinestraCampionato(c);
+				f.setVisible(true);
 			}
 		});
 		panel.add(btnNewButton, BorderLayout.SOUTH);

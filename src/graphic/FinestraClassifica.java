@@ -86,7 +86,6 @@ public class FinestraClassifica extends JFrame {
 	private void initialize() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
-		this.setVisible(true);
 	}
 
 

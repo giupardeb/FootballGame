@@ -1,8 +1,10 @@
 package Project;
 
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 import java.util.Random;
 
 
@@ -130,19 +132,19 @@ public class SquadraAvversaria extends Squadra{
 			if(i == -1) i = SearchIndiceGiocatore();
 		}
 
-		if(db.GetDb()[i].getSquadra().equals(squadrautente.GetNomeSquadra()))
+		if(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra()))
 		{
 			int dialogResult = JOptionPane.YES_NO_OPTION;
-			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"vuole acquistare un tuo giocatore, "+
-					db.GetDb()[i].GetAnagrafe().GetCognome()+"con valore generale "+ 
+			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" vuole acquistare un tuo giocatore, "+
+					db.GetDb()[i].GetAnagrafe().GetCognome()+" con valore generale "+ 
 					db.GetDb()[i].getValoreGenerale()+" con il ruolo: " +db.GetDb()[i].getRuolo()+ 
-					"vuoi contrattare? attenzione hai: "+squadrautente.GetTotaleAttaccanti()+" Attaccanti"+
-					squadrautente.GetTotaleCentrocampisti()+" Centrocampisti"+squadrautente.GetTotaleDifensori()+" Difensori"+
-					squadrautente.GetTotalePortieri()+" Portieri","Attenzione",dialogResult);
+					". vuoi contrattare? attenzione hai: "+squadrautente.GetTotaleAttaccanti()+" Attaccanti "+
+					squadrautente.GetTotaleCentrocampisti()+" Centrocampisti "+squadrautente.GetTotaleDifensori()+" Difensori "+
+					squadrautente.GetTotalePortieri()+" Portieri ","Attenzione",dialogResult);
 			if(dialogResult == JOptionPane.YES_OPTION)
 			{
-				dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"ti propone "+ 
-						db.GetDb()[i].getValoreMercato()+"€"+ "Accetti? ","Attenzione",dialogResult);
+				dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti propone "+ 
+						db.GetDb()[i].getValoreMercato()+"€"+ " Accetti? ","Attenzione",dialogResult);
 
 				if(dialogResult == JOptionPane.YES_OPTION)
 					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.GetDb()[i].getValoreMercato());				
@@ -150,7 +152,7 @@ public class SquadraAvversaria extends Squadra{
 				{
 					double offerta = 0;
 					offerta = Offerta(db.GetDb()[i]);
-					dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+"ti propone "+ offerta+
+					dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti propone "+ offerta+
 							" €, per l'acquisto del giocatore, Accetti?","Attenzione",dialogResult);
 					if(dialogResult == JOptionPane.YES_OPTION)
 						TrasferimentoAcquistaDaUtente(this,i,squadrautente,offerta);
@@ -194,19 +196,22 @@ public class SquadraAvversaria extends Squadra{
 		{
 			int indicesquadraavversaria = SearchSquadra(s1,i);
 			if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
-				if(db.GetDb()[i] instanceof Difensore ) 
+				if(db.GetDb()[i] instanceof Difensore ) {
 					if (s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
-					else if(db.GetDb()[i] instanceof Centrocampista) 
-						if (s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
-						else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
-						else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI) 
-							TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				}
+				else if(db.GetDb()[i] instanceof Centrocampista){ 
+					if (s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				}
+				else if(db.GetDb()[i] instanceof Attaccante){
+					if(s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				}
+				else if(db.GetDb()[i] instanceof Portiere){
+					if(s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
+						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				}
 		}
 	}
 	///////////////////////////////////////////////////****************FINE ACQUISTA***********************///////////////////////////////////////	
@@ -333,7 +338,7 @@ public class SquadraAvversaria extends Squadra{
 		int j = 0;
 		Integer indicegiocatoremigliore = INITIALISE ;
 
-		for(Giocatore i : this.GetSquadra()) j++; //conta i giocatori
+		for(@SuppressWarnings("unused") Giocatore i : this.GetSquadra()) j++; //conta i giocatori
 
 		//	int arrayausiliario [] = new int[j]; //conterrà gli indici del database dei giocatori della squadra
 		//	int z = 0;

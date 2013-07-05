@@ -1,6 +1,8 @@
 package graphic;
 import Project.Campionato;
+import Project.IA;
 import Project.SquadraAvversaria;
+import Project.Uman;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,83 +36,36 @@ public class FinestraPartita extends JFrame {
 	private Giocatore giocatore = null;
 	private int punteggioUmano = 0;
 	private int punteggioComputer = 0;
-	private JButton btnRilancia;
-	private JButton btnTira;
-	private JButton btnPassaggio;
 	private JButton btnContrasto;
+	private Uman umano;
+	private IA computer;
 
 	public FinestraPartita(final JPanel panel_2, final Campionato c,final Giocatore arrayMio[]) {
 		setResizable(false);
-
+		
+		umano = new Uman (c.squadra, arrayMio);
+		
 		panelScelte = new JPanel();
 		panelScelte.setName("panelScelte");
 		getContentPane().add(panelScelte, BorderLayout.SOUTH);
-
-		btnRilancia = new JButton("Rilancia");
-		btnRilancia.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				c.Rilancia(frame, c.squadra, arrayMio);
-			}
-		});
-		btnRilancia.setName("Rilancia");
-		panelScelte.add(btnRilancia);
-
+		
 		JButton btnEsci = new JButton("Esci");
 		btnEsci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				arrayAvv = null;
-				for (int i=0;i<arrayMio.length;i++) arrayMio[i] = null;
 				FinestraCampionato f = new FinestraCampionato(c);
+				f.setVisible(true);
 			}
 		});
 		panelScelte.add(btnEsci);
 		btnEsci.setName("Esci");
 
-
-
-		btnTira = new JButton("Tira");
-		btnTira.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
-				if(getGiocatoreCorrente().getSquadra().equalsIgnoreCase(c.squadra.GetNomeSquadra()))
-					c.Tira(frame, arrayAvv, squadraAvv, c.squadra);
-			}
-		});
-		btnTira.setName("Tira");
-		panelScelte.add(btnTira);
-
-		btnPassaggio = new JButton("Passaggio");
-		btnPassaggio.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
-				if(getGiocatoreCorrente().getSquadra().equalsIgnoreCase(c.squadra.GetNomeSquadra()))
-
-				c.Passa(frame, squadraAvv, arrayMio, arrayAvv);
-			}
-		});
-		btnPassaggio.setName("Passaggio");
-		panelScelte.add(btnPassaggio);
-
-		btnContrasto = new JButton("Contrasto");
-		btnContrasto.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				c.Contrasta(frame, arrayMio, arrayAvv, c.squadra, squadraAvv);
-			}
-		});
-		btnContrasto.setName("Contrasto");
-		btnContrasto.setEnabled(false);
-		panelScelte.add(btnContrasto);
-
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPane.setContinuousLayout(true);
-		splitPane.setResizeWeight(0.5);
+		splitPane.setResizeWeight(1.0);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 
 		txtInfo = new MyTextAreaInfo();
@@ -122,6 +77,7 @@ public class FinestraPartita extends JFrame {
 
 		squadraAvv = c.Incontri.pop();
 		arrayAvv = squadraAvv.OrganizzaSquadra();
+		computer = new IA(squadraAvv,arrayAvv);
 		this.setTitle(c.squadra.GetNomeSquadra()+" "+getPunteggioUmano()+ " "+squadraAvv.GetNomeSquadra()+" "+ getPunteggioComputer());
 		initialize(panel_2,c,arrayAvv);
 		splitPane.setLeftComponent(panel_2);
@@ -134,7 +90,7 @@ public class FinestraPartita extends JFrame {
 				setGiocatoreCorrente(null);
 				Point reset = new Point();
 				setPoint(reset);
-				c.partita(c.squadra, squadraAvv,frame,arrayMio,arrayAvv);
+				c.partita(umano, computer,frame);
 			}
 		});
 
@@ -147,7 +103,7 @@ public class FinestraPartita extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(final JPanel panel_2,final Campionato c,Giocatore arrayAvv[]) {
-		this.setSize(1000, 600);
+		this.setSize(810, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		arrayAvv[0].setIcon(new ImageIcon(FinestraFormazione.class.getResource("/images/portiereavv.gif")));
@@ -206,19 +162,18 @@ public class FinestraPartita extends JFrame {
 		arrayAvv[10].setPosizione(193,226);
 		panel_2.add(arrayAvv[10]);
 
-		arrayAvv[10].setVisible(false);
-		arrayAvv[9].setVisible(false);
-		arrayAvv[8].setVisible(false);
-		arrayAvv[7].setVisible(false);
-		arrayAvv[6].setVisible(false);
-		arrayAvv[5].setVisible(false);
-		arrayAvv[4].setVisible(false);
-		arrayAvv[3].setVisible(false);
-		arrayAvv[2].setVisible(false);
-		arrayAvv[1].setVisible(false);
-		arrayAvv[0].setVisible(false);
+		arrayAvv[10].setEnabled(false);
+		arrayAvv[9].setEnabled(false);
+		arrayAvv[8].setEnabled(false);
+		arrayAvv[7].setEnabled(false);
+		arrayAvv[6].setEnabled(false);
+		arrayAvv[5].setEnabled(false);
+		arrayAvv[4].setEnabled(false);
+		arrayAvv[3].setEnabled(false);
+		arrayAvv[2].setEnabled(false);
+		arrayAvv[1].setEnabled(false);
+		arrayAvv[0].setEnabled(false);
 
-		this.setVisible(true);
 	}
 
 	public JPanel getPanelScelta(){
@@ -277,15 +232,4 @@ public class FinestraPartita extends JFrame {
 		return btnContrasto;
 	}
 
-	public JButton getBtnRilancia(){
-		return btnRilancia;
-	}
-
-	public JButton getBtnPassaggio(){
-		return btnPassaggio;
-	}
-
-	public JButton getBtnTira(){
-		return btnTira;
-	}
 }

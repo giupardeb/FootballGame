@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import javax.swing.JSplitPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 public class Starter extends JFrame {
 
 /**
@@ -24,6 +23,7 @@ public class Starter extends JFrame {
 	
 	public Starter() {
 		initialize();
+	//	new Thread(new Music.tempo("/sounds/FIFA2000.mp3")).start();
 		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
 		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );	
@@ -51,7 +51,7 @@ public class Starter extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				MainWindow F = new MainWindow();
-				
+				F.setVisible(true);
 			}
 		});
 		splitPane.setLeftComponent(btnNewButton);

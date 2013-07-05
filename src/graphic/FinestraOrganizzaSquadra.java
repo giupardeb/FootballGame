@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import Project.DatabaseGiocatori;
 import Project.Giocatore;
 
 import java.awt.BorderLayout;
@@ -25,7 +24,7 @@ public class FinestraOrganizzaSquadra extends JFrame{
 
 
 	private  ArrayList <Giocatore> array = new ArrayList <Giocatore>(11); //array che conterrà i giocatori x iniziare la partita
-	private static int cont = 0; //utile per aumentare l'array
+	private static int cont; //utile per aumentare l'array
 	private static final long serialVersionUID = -4943380536225481189L;
 	private JFrame frame = this;
 	JButton btn = new JButton();
@@ -43,7 +42,6 @@ public class FinestraOrganizzaSquadra extends JFrame{
 				screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );			
 		initialize(c);
 		JOptionPane.showMessageDialog(null, "ATTEZIONE, DEVI SCEGLIERE IN ORDINE 1P,4DIFENSORI,4CENTROCAMPISTI,2ATTACCANTI");
-		this.setVisible(true);
 	}
 
 	/**
@@ -53,20 +51,23 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1.0);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
-
+		
+		array.removeAll(array);
+		cont = 0;
 		JPanel panel = new JPanel();
 		splitPane.setLeftComponent(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-
 		JButton btnNewButton = new JButton("Fatto? continua con la selezione della formazione");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(cont == 11 ){
-					Giocatore giocatori[] = array.toArray(new Giocatore[array.size()]);
+					 Giocatore giocatori[] = array.toArray(new Giocatore[array.size()]);
 					
 					frame.dispose();
 					FinestraFormazione f = new FinestraFormazione(giocatori,c);
+					f.setVisible(true);
+
 				}
 				else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
 

@@ -1,17 +1,17 @@
 package graphic;
 
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+
 import Project.Campionato;
-import Project.DatabaseGiocatori;
 import net.miginfocom.swing.MigLayout;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class FinestraCampionato extends JFrame{
 
@@ -26,10 +26,13 @@ public class FinestraCampionato extends JFrame{
 
 		JButton btnNewButton = new JButton("Classifica Attuale");
 		btnNewButton.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.hide();
 				FinestraClassifica f = new FinestraClassifica(c,frame);
+				f.setVisible(true);
+
 			}
 		});
 		
@@ -43,6 +46,8 @@ public class FinestraCampionato extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				FinestraOrganizzaSquadra o = new FinestraOrganizzaSquadra(c);
+				o.setVisible(true);
+
 			}
 		});
 		getContentPane().add(btnNewButton_1, "cell 17 3");
@@ -73,7 +78,6 @@ public class FinestraCampionato extends JFrame{
 		getContentPane().add(btnNewButton_3, "cell 17 7");
 
 		initialize();
-		this.setVisible(true);
 	}
 
 	/**

@@ -112,26 +112,27 @@ public class FinestraFormazione extends JFrame{
 				array[10].setPosizione(457,226);
 				panel_2.add(array[10]);
 								
-				array[10].setVisible(false);
-				array[9].setVisible(false);
-				array[8].setVisible(false);
-				array[7].setVisible(false);
-				array[6].setVisible(false);
-				array[5].setVisible(false);
-				array[4].setVisible(false);
-				array[3].setVisible(false);
-				array[2].setVisible(false);
-				array[1].setVisible(false);
-				array[0].setVisible(false);
+				array[10].setEnabled(false);
+				array[9].setEnabled(false);
+				array[8].setEnabled(false);
+				array[7].setEnabled(false);
+				array[6].setEnabled(false);
+				array[5].setEnabled(false);
+				array[4].setEnabled(false);
+				array[3].setEnabled(false);
+				array[2].setEnabled(false);
+				array[1].setEnabled(false);
+				array[0].setEnabled(false);
 				
 				frame.dispose();
 				FinestraPartita fp = new FinestraPartita(panel_2,c,array); 
+				fp.setVisible(true);
+
 
 			}
 		});
 		button.setBounds(139, 61, 117, 25);
 		panel.add(button);
-		this.setVisible(true);
 
 	}
 

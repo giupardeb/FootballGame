@@ -23,7 +23,6 @@ public class SceltaScambioAcquistaVendita extends JFrame {
 	 */
 	public SceltaScambioAcquistaVendita(Campionato c) {
 		initialize(c);
-		this.setVisible(true);
 	}
 
 	/**
@@ -41,6 +40,8 @@ public class SceltaScambioAcquistaVendita extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				SceltaRuolo FinestraSceltaRuolo = new SceltaRuolo(c);
+				FinestraSceltaRuolo.setVisible(true);
+
 			}
 		});
 		this.getContentPane().add(rdbtnAcquista);
@@ -52,6 +53,8 @@ public class SceltaScambioAcquistaVendita extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				FinestraScambio FinestraScambio = new FinestraScambio(c);
+				FinestraScambio.setVisible(true);
+
 			}
 		});
 		
@@ -61,6 +64,8 @@ public class SceltaScambioAcquistaVendita extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				FinestraVendita f = new FinestraVendita(c);
+				f.setVisible(true);
+
 			}
 		});
 		getContentPane().add(rdbtnVendita);

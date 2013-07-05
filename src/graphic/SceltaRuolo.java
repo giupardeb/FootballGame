@@ -23,7 +23,6 @@ public class SceltaRuolo extends JFrame {
 	 */
 	public SceltaRuolo(Campionato c) {
 		initialize(c);
-		this.setVisible(true);
 	}
 
 	/**
@@ -43,6 +42,7 @@ public class SceltaRuolo extends JFrame {
 				frame.dispose();
 				JRadioButton j = (JRadioButton) e.getSource();
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
+				Finestracquista.setVisible(true);
 			}
 		});
 		this.getContentPane().add(rdbtnCentrocampista);
@@ -55,6 +55,8 @@ public class SceltaRuolo extends JFrame {
 				frame.dispose();
 				JRadioButton j = (JRadioButton) e.getSource();
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
+				Finestracquista.setVisible(true);
+
 			}
 		});
 
@@ -68,6 +70,8 @@ public class SceltaRuolo extends JFrame {
 				frame.dispose();
 				JRadioButton j = (JRadioButton) e.getSource();
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
+				Finestracquista.setVisible(true);
+
 			}
 		});
 
@@ -81,6 +85,8 @@ public class SceltaRuolo extends JFrame {
 				frame.dispose();
 				JRadioButton j = (JRadioButton) e.getSource();
 				FinestraAcquista Finestracquista = new FinestraAcquista(c,j.getText());
+				Finestracquista.setVisible(true);
+
 			}
 		});
 
