@@ -131,57 +131,18 @@ public class SquadraAvversaria extends Squadra{
 			i = SearchIndiceGiocatore(db.getGiocatoriInVendita());
 			if(i == -1) i = SearchIndiceGiocatore();
 		}
+		boolean acquistofatto = false;
 
-		if(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra()))
+		while(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra()) && acquistofatto != true)
 		{
-			int dialogResult = JOptionPane.YES_NO_OPTION;
-			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" vuole acquistare un tuo giocatore, "+
-					db.GetDb()[i].GetAnagrafe().GetCognome()+" con valore generale "+ 
-					db.GetDb()[i].getValoreGenerale()+" con il ruolo: " +db.GetDb()[i].getRuolo()+ 
-					". vuoi contrattare? attenzione hai: "+squadrautente.GetTotaleAttaccanti()+" Attaccanti "+
-					squadrautente.GetTotaleCentrocampisti()+" Centrocampisti "+squadrautente.GetTotaleDifensori()+" Difensori "+
-					squadrautente.GetTotalePortieri()+" Portieri ","Attenzione",dialogResult);
-			if(dialogResult == JOptionPane.YES_OPTION)
-			{
-				dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti propone "+ 
-						db.GetDb()[i].getValoreMercato()+"€"+ " Accetti? ","Attenzione",dialogResult);
-
-				if(dialogResult == JOptionPane.YES_OPTION)
-					TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.GetDb()[i].getValoreMercato());				
-				else
-				{
-					double offerta = 0;
-					offerta = Offerta(db.GetDb()[i]);
-					dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti propone "+ offerta+
-							" €, per l'acquisto del giocatore, Accetti?","Attenzione",dialogResult);
-					if(dialogResult == JOptionPane.YES_OPTION)
-						TrasferimentoAcquistaDaUtente(this,i,squadrautente,offerta);
-					else
-					{
-						JFrame  frame = new JFrame("Show Message Dialog");
-						JOptionPane.showMessageDialog(frame,"La trattativa non si è conclusa");
-						int indicesquadraavversaria = SearchSquadra(s1,i);
-						if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
-							if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-							else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
-							else if(db.GetDb()[i] instanceof Attaccante && s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
-							else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
-								TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-					}
-				}
+			if(AcquistaDaUtente(squadrautente,i)){
+				acquistofatto = true;
 			}
-			else
-			{
+			else{
 				int indicesquadraavversaria = SearchSquadra(s1,i);
-				if(this.GetBudget()>db.GetDb()[i].getValoreMercato()) 
+				if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
 					if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-
 					else if(db.GetDb()[i] instanceof Centrocampista && s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
 
@@ -190,32 +151,55 @@ public class SquadraAvversaria extends Squadra{
 
 					else if(db.GetDb()[i] instanceof Portiere && s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
+				acquistofatto = true;
 			}
-		}
-		else
-		{
-			int indicesquadraavversaria = SearchSquadra(s1,i);
-			if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
-				if(db.GetDb()[i] instanceof Difensore ) {
-					if (s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-				}
-				else if(db.GetDb()[i] instanceof Centrocampista){ 
-					if (s1[indicesquadraavversaria].GetTotaleCentrocampisti()>MINCENTROCAMPISTI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-				}
-				else if(db.GetDb()[i] instanceof Attaccante){
-					if(s1[indicesquadraavversaria].GetTotaleAttaccanti()>MINATTACCANTI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-				}
-				else if(db.GetDb()[i] instanceof Portiere){
-					if(s1[indicesquadraavversaria].GetTotalePortieri()>MINPORTIERI)
-						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());
-				}
+
 		}
 	}
 	///////////////////////////////////////////////////****************FINE ACQUISTA***********************///////////////////////////////////////	
 	///////////////////////////////////////////////////****************INIZIO METODI DI ACQUISTA***********************//////////////////////////	
+
+
+	private boolean AcquistaDaUtente(SquadraUmano squadrautente, int i){
+		int dialogResult = JOptionPane.YES_NO_OPTION;
+		dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" vuole acquistare un tuo giocatore, "+
+				db.GetDb()[i].GetAnagrafe().GetCognome()+" con valore generale "+ 
+				db.GetDb()[i].getValoreGenerale()+" con il ruolo: " +db.GetDb()[i].getRuolo()+ 
+				". vuoi contrattare? attenzione hai: "+squadrautente.GetTotaleAttaccanti()+" Attaccanti "+
+				squadrautente.GetTotaleCentrocampisti()+" Centrocampisti "+squadrautente.GetTotaleDifensori()+" Difensori "+
+				squadrautente.GetTotalePortieri()+" Portieri ","Attenzione",dialogResult);
+		if(dialogResult == JOptionPane.YES_OPTION)
+		{
+			dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti propone "+ 
+					db.GetDb()[i].getValoreMercato()+"€"+ " Accetti? ","Attenzione",dialogResult);
+
+			if(dialogResult == JOptionPane.YES_OPTION){
+				TrasferimentoAcquistaDaUtente(this,i,squadrautente,db.GetDb()[i].getValoreMercato());
+				return true;
+			}
+			else
+			{
+				double offerta = 0;
+				offerta = Offerta(db.GetDb()[i]);
+				dialogResult = JOptionPane.showConfirmDialog (null,  this.GetNomeSquadra()+" ti ripropone "+ offerta+
+						" €, per l'acquisto del giocatore, Accetti?","Attenzione",dialogResult);
+				if(dialogResult == JOptionPane.YES_OPTION){
+					TrasferimentoAcquistaDaUtente(this,i,squadrautente,offerta);
+					return true;
+				}
+				else
+				{
+					JFrame  frame = new JFrame("Show Message Dialog");
+					JOptionPane.showMessageDialog(frame,"La trattativa non si è conclusa");
+					return false;
+				}
+			}
+		}
+		else return false;
+	}
+
+
+
 
 	private int SearchIndiceGiocatore(ArrayList<Giocatore> giocatoriInVendita) {
 		Giocatore tmp1[] =  giocatoriInVendita.toArray(new Giocatore[giocatoriInVendita.size()]);

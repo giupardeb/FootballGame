@@ -5,14 +5,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import Project.Giocatore;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JSplitPane;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -29,10 +32,6 @@ public class FinestraOrganizzaSquadra extends JFrame{
 	private JFrame frame = this;
 	JButton btn = new JButton();
 	final TextArea textArea = new TextArea();
-
-
-
-	//	ActionListener action = null;
 
 	public FinestraOrganizzaSquadra(Campionato c) {
 		setResizable(false);
@@ -51,29 +50,55 @@ public class FinestraOrganizzaSquadra extends JFrame{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setResizeWeight(1.0);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
-		
+
 		array.removeAll(array);
 		cont = 0;
 		JPanel panel = new JPanel();
 		splitPane.setLeftComponent(panel);
+		FlowLayout experimentLayout = new FlowLayout();
+		JPanel panelBtn = new JPanel();
+		panelBtn.setLayout(experimentLayout);
 		panel.setLayout(new BorderLayout(0, 0));
-		JButton btnNewButton = new JButton("Fatto? continua con la selezione della formazione");
+		JButton btnSquadraDefault = new JButton("Formazione Default");
+		btnSquadraDefault.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Giocatore giocatori[] = c.db.GetIndiceRuolo(c.squadra.GetNomeSquadra());
+				if( giocatori!= null){
+					frame.dispose();
+					FinestraFormazione f = new FinestraFormazione(giocatori,c);
+					f.setVisible(true);
+				}
+
+			}
+		});
+		
+		JButton btnNewButton = new JButton("Fatto");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(cont == 11 ){
-					 Giocatore giocatori[] = array.toArray(new Giocatore[array.size()]);
-					
-					frame.dispose();
-					FinestraFormazione f = new FinestraFormazione(giocatori,c);
-					f.setVisible(true);
-
+					Giocatore giocatori[] = array.toArray(new Giocatore[array.size()]);
+					if(ControlloArray(giocatori)){
+						frame.dispose();
+						FinestraFormazione f = new FinestraFormazione(giocatori,c);
+						f.setVisible(true);
+					}
+					else{
+						array.removeAll(array);
+						cont = 0;
+						frame.dispose();
+						FinestraOrganizzaSquadra o = new FinestraOrganizzaSquadra(c);
+						o.setVisible(true);
+					}
 				}
 				else textArea.setText("NON PUOI GIOCARE CON "+cont+"GIOCATORI!");
 
 			}
 		});
-		panel.add(btnNewButton, BorderLayout.SOUTH);
+		panelBtn.add(btnNewButton);
+		panelBtn.add(btnSquadraDefault);
+		panel.add(panelBtn, BorderLayout.SOUTH);
 
 		final JPanel panel_1 = new JPanel();
 		panel_1.setOpaque(false);
@@ -141,6 +166,18 @@ public class FinestraOrganizzaSquadra extends JFrame{
 			btn.addMouseListener(action);
 			panel_1.add(btn);
 		}
+	}
+
+	private boolean ControlloArray(Giocatore[] giocatori) {
+
+		String tmp[] ={"Portiere","Difensore","Difensore","Difensore","Difensore",
+				"Centrocampista","Centrocampista","Centrocampista","Centrocampista","Attaccante","Attaccante"};
+		int ok = 0;
+		for(int i=0; i<giocatori.length;i++)
+			if(giocatori[i].getRuolo().equalsIgnoreCase(tmp[i]))
+				ok++;
+		if(ok == giocatori.length) return true;
+		else return false;
 	}
 }
 

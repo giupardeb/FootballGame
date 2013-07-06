@@ -247,6 +247,19 @@ public class DatabaseGiocatori {
 		return -1;
 	}
 	
+	public Giocatore[] GetIndiceRuolo(String squadra){
+		Giocatore players[] = new Giocatore[11];
+		String tmp[] ={"Portiere","Difensore","Difensore","Difensore","Difensore",
+				"Centrocampista","Centrocampista","Centrocampista","Centrocampista","Attaccante","Attaccante"};
+		int j = 0;
+		for(int i = 0; i<giocatori.length && j<11; i++)
+			if(giocatori[i].getSquadra().equalsIgnoreCase(squadra) && giocatori[i].getRuolo().equalsIgnoreCase(tmp[j])){
+				players[j] = giocatori[i];
+				j++;
+			}
+		 return players;
+	}
+	
 	public void setGiocatoriInVendita(Giocatore giocatore){
 		
 		giocatoriInVendita.add(giocatore);

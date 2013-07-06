@@ -1,6 +1,7 @@
 package graphic;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -59,6 +60,7 @@ public class FinestraCampionato extends JFrame{
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				AcquistiAvversari(c);
 				c.Calciomercato(frame);
 			}
 		});
@@ -89,6 +91,12 @@ public class FinestraCampionato extends JFrame{
 		this.setSize(new Dimension(600, 300));
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
 		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );
+	}
+	
+	private void AcquistiAvversari(Campionato c){
+		JOptionPane.showMessageDialog(this, "Le altre squadre stanno provvedendo all'acquisto..");
+		for(int i = 0; i<c.squadre.length;i++)
+			c.squadre[i].acquisto(c.squadre, c.squadra);
 	}
 
 }

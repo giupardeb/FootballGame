@@ -2,7 +2,6 @@ package graphic;
 
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 
@@ -34,7 +33,6 @@ public class FinestraAcquista extends JFrame{
 		Dimension screenSize = Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 		this.setLocation ( ( screenSize.width / 2 ) - ( this.getWidth ( ) / 2 ), (
 		screenSize.height / 2 ) - ( this.getHeight ( ) / 2 ) );		
-		AcquistiAvversari(c);
 		this.setResizable(false);
 		initialize(c,s);
 	}
@@ -80,13 +78,4 @@ public class FinestraAcquista extends JFrame{
 			giocatoriList.append(i+". "+c.giocatoridavisualizzare[i] + "\n");
 		}
 	}
-	
-	
-	
-	private void AcquistiAvversari(Campionato c){
-		JOptionPane.showMessageDialog(this, "Le altre squadre stanno provvedendo all'acquisto..");
-		for(int i = 0; i<c.squadre.length;i++)
-			c.squadre[i].acquisto(c.squadre, c.squadra);
-	}
-
 }
