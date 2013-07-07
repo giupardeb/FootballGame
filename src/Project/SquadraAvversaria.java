@@ -132,14 +132,16 @@ public class SquadraAvversaria extends Squadra{
 			if(i == -1) i = SearchIndiceGiocatore();
 		}
 		boolean acquistofatto = false;
-
+		int indicesquadraavversaria = 0;
 		while(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra()) && acquistofatto != true)
 		{
 			if(AcquistaDaUtente(squadrautente,i)){
 				acquistofatto = true;
 			}
 			else{
-				int indicesquadraavversaria = SearchSquadra(s1,i);
+				while(db.GetDb()[i].getSquadra().equalsIgnoreCase(squadrautente.GetNomeSquadra())){
+					indicesquadraavversaria = SearchSquadra(s1,i);
+				}
 				if(this.GetBudget()>db.GetDb()[i].getValoreMercato())
 					if(db.GetDb()[i] instanceof Difensore && s1[indicesquadraavversaria].GetTotaleDifensori()>MINDIFENSORI)
 						TrasferimentoAcquista (this,i,s1,indicesquadraavversaria,db.GetDb()[i].getValoreMercato());

@@ -46,8 +46,8 @@ abstract class AltriRuoli extends Giocatore
 
 
 	private final int PROBABILITAATT = 100;
-	private final int PROBABILITACEN = 100;
-	private final int PROBABILITADIF = 100;
+//	private final int PROBABILITACEN = 100;
+//	private final int PROBABILITADIF = 100;
 
 
 	/**
